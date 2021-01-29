@@ -13,6 +13,8 @@ RUN cp /root/$LIST_FILE_NAME /etc/apt/sources.list.d/upmpdcli.list
 
 RUN cat /etc/apt/sources.list.d/upmpdcli.list
 
+RUN rm /root/*.list
+
 RUN apt-get update
 RUN apt-get install upmpdcli -y
 RUN rm -rf /var/lib/apt/lists/*
