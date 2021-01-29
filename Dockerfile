@@ -4,8 +4,14 @@ RUN apt-get update
 RUN apt-get install curl -y
 
 RUN curl https://www.lesbonscomptes.com/pages/lesbonscomptes.gpg -o /usr/share/keyrings/lesbonscomptes.gpg
+RUN curl https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-buster.list -o /root/amd64.list
+RUN curl https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-rbuster.list -o /root/arm.list
 
-RUN curl https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-buster.list -o /etc/apt/sources.list.d/upmpdcli.list
+ARG LIST_FILE_NAME=amd64.list
+
+RUN cp /root/$LIST_FILE_NAME /etc/apt/sources.list.d/upmpdcli.list
+
+RUN cat /etc/apt/sources.list.d/upmpdcli.list
 
 RUN apt-get update
 RUN apt-get install upmpdcli -y
