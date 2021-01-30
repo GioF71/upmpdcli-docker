@@ -53,6 +53,8 @@ ENV QOBUZ_USERNAME qobuz_username
 ENV QOBUZ_PASSWORD qobuz_password
 ENV QOBUZ_FORMAT_ID 5
 
+ENV STARTUP_DELAY_SEC 0
+
 VOLUME /var/cache/upmpdcli
 
 COPY upmpdcli.conf /etc/upmpdcli.conf
