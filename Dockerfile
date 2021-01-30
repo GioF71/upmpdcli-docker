@@ -8,25 +8,19 @@ RUN apt-get install dirmngr -y
 RUN apt-get --no-install-recommends install -y ca-certificates
 
 RUN mkdir -p /root/.gnupg
-RUN chmod 755 /root/.gnupg
-
-#RUN curl https://www.lesbonscomptes.com/pages/lesbonscomptes.gpg -o /usr/share/keyrings/lesbonscomptes.gpg
+RUN chmod 700 /root/.gnupg
 
 RUN gpg --no-default-keyring --keyring /root/lesbonscomptes.gpg --keyserver pool.sks-keyservers.net --recv-key F8E3347256922A8AE767605B7808CE96D38B9201
 RUN echo "gpg completed"
 RUN mv /root/lesbonscomptes.gpg /usr/share/keyrings/
 
-COPY upmpdcli-buster.list /root
-COPY upmpdcli-rbuster.list /root
-
-
 RUN /bin/bash -c 'set -ex && \
     ARCH=`uname -m` && \
     echo $ARCH && \
     if [ "$ARCH" == "armv7l" ]; then \
-       mv /root/upmpdcli-rbuster.list /etc/apt/sources.list.d/upmpdcli.list; \
+        curl https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-rbuster.list -o /etc/apt/sources.list.d/upmpdcli.list; \
     else \
-       mv /root/upmpdcli-buster.list /etc/apt/sources.list.d/upmpdcli.list; \
+        curl https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-buster.list -o /etc/apt/sources.list.d/upmpdcli.list; \
     fi'
 
 RUN cat /etc/apt/sources.list.d/upmpdcli.list
