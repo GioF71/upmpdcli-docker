@@ -1,0 +1,3 @@
+https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-buster.list
+https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-rbuster.list
+

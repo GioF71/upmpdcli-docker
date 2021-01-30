@@ -5,7 +5,10 @@ RUN apt-get install curl -y
 
 RUN apt-get --no-install-recommends install -y ca-certificates
 
-RUN curl https://www.lesbonscomptes.com/pages/lesbonscomptes.gpg -o /usr/share/keyrings/lesbonscomptes.gpg
+#RUN curl https://www.lesbonscomptes.com/pages/lesbonscomptes.gpg -o /usr/share/keyrings/lesbonscomptes.gpg
+
+RUN gpg --no-default-keyring --keyring /root/lesbonscomptes.gpg --keyserver pool.sks-keyservers.net --recv-key F8E3347256922A8AE767605B7808CE96D38B9201
+RUN mv /root/lesbonscomptes.gpg /usr/share/keyrings/
 
 COPY upmpdcli-buster.list /root
 COPY upmpdcli-rbuster.list /root
