@@ -3,6 +3,8 @@ from debian:buster-slim
 RUN apt-get update
 RUN apt-get install curl -y
 
+RUN apt-get --no-install-recommends install -y ca-certificates
+
 RUN curl https://www.lesbonscomptes.com/pages/lesbonscomptes.gpg -o /usr/share/keyrings/lesbonscomptes.gpg
 
 COPY upmpdcli-buster.list /root
