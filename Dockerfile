@@ -3,8 +3,7 @@ from debian:buster-slim
 RUN apt-get update
 RUN apt-get install curl -y
 
-RUN curl https://www.lesbonscomptes.com/pages/lesbonscomptes.gpg \
-         -o /usr/share/keyrings/lesbonscomptes.gpg
+RUN curl https://www.lesbonscomptes.com/pages/lesbonscomptes.gpg -o /usr/share/keyrings/lesbonscomptes.gpg
 
 RUN /bin/bash -c 'set -ex && \
     ARCH=`uname -m` && \
