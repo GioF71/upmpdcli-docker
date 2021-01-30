@@ -9,10 +9,10 @@ RUN curl https://www.lesbonscomptes.com/pages/lesbonscomptes.gpg \
 RUN /bin/bash -c 'set -ex && \
     ARCH=`uname -m` && \
     echo $ARCH && \
-    if [ "$ARCH" == "x86_64" ]; then \
-       curl https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-buster.list -o /etc/apt/sources.list.d/upmpdcli.list; \
+    if [ "$ARCH" == "armv7l" ]; then \
+       curl https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-rbuster.list -o /etc/apt/sources.list.d/upmpdcli.list; \
     else \
-        curl https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-rbuster.list -o /etc/apt/sources.list.d/upmpdcli.list; \
+       curl https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-buster.list -o /etc/apt/sources.list.d/upmpdcli.list; \
     fi'
 
 RUN cat /etc/apt/sources.list.d/upmpdcli.list
