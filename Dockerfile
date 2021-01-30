@@ -47,4 +47,6 @@ ENV QOBUZ_USERNAME username
 ENV QOBUZ_PASSWORD password
 ENV QOBUZ_FORMAT_ID 5
 
+VOLUME /var/cache/upmpdcli
+
 ENTRYPOINT ["/run-upmpdcli.sh"]
