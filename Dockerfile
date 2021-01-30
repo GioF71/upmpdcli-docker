@@ -2,12 +2,18 @@ from debian:buster-slim
 
 RUN apt-get update
 RUN apt-get install curl -y
+RUN apt-get install gpg -y
+RUN apt-get install dirmngr -y
 
 RUN apt-get --no-install-recommends install -y ca-certificates
+
+RUN mkdir -p /root/.gnupg
+RUN chmod 755 /root/.gnupg
 
 #RUN curl https://www.lesbonscomptes.com/pages/lesbonscomptes.gpg -o /usr/share/keyrings/lesbonscomptes.gpg
 
 RUN gpg --no-default-keyring --keyring /root/lesbonscomptes.gpg --keyserver pool.sks-keyservers.net --recv-key F8E3347256922A8AE767605B7808CE96D38B9201
+RUN echo "gpg completed"
 RUN mv /root/lesbonscomptes.gpg /usr/share/keyrings/
 
 COPY upmpdcli-buster.list /root
