@@ -8,7 +8,7 @@ sed -i 's/MPD_PORT/'"$MPD_PORT"'/g' /etc/upmpdcli.conf
 
 echo "Tidal Enable: $TIDAL_ENABLE"
 if [ "$TIDAL_ENABLE" == "yes" ]; then \
-    echo "Tidal settings processing"; \
+    echo "Processing Tidal settings"; \
     sed -i 's/\#tidaluser/tidaluser/g' /etc/upmpdcli.conf; \
     sed -i 's/\#tidalpass/tidalpass/g' /etc/upmpdcli.conf; \
     sed -i 's/\#tidalapitoken/tidalapitoken/g' /etc/upmpdcli.conf; \
@@ -21,7 +21,7 @@ fi
 
 echo "Qobuz Enable: $QOBUZ_ENABLE"
 if [ "$QOBUZ_ENABLE" == "yes" ]; then \
-    echo "Qobuz settings processing"; \
+    echo "Processing Qobuz settings"; \
     sed -i 's/\#qobuzuser/qobuzuser/g' /etc/upmpdcli.conf; \
     sed -i 's/\#qobuzpass/qobuzpass/g' /etc/upmpdcli.conf; \
     sed -i 's/\#qobuzformatid/qobuzformatid/g' /etc/upmpdcli.conf; \
