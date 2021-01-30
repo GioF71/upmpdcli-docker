@@ -5,13 +5,17 @@ RUN apt-get install curl -y
 
 RUN curl https://www.lesbonscomptes.com/pages/lesbonscomptes.gpg -o /usr/share/keyrings/lesbonscomptes.gpg
 
+COPY upmpdcli-buster.list /root
+COPY upmpdcli-rbuster.list /root
+
+
 RUN /bin/bash -c 'set -ex && \
     ARCH=`uname -m` && \
     echo $ARCH && \
     if [ "$ARCH" == "armv7l" ]; then \
-       curl https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-rbuster.list -o /etc/apt/sources.list.d/upmpdcli.list; \
+       mv /root/upmpdcli-rbuster.list /etc/apt/sources.list.d/upmpdcli.list; \
     else \
-       curl https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-buster.list -o /etc/apt/sources.list.d/upmpdcli.list; \
+       mv /root/upmpdcli-buster.list /etc/apt/sources.list.d/upmpdcli.list; \
     fi'
 
 RUN cat /etc/apt/sources.list.d/upmpdcli.list
