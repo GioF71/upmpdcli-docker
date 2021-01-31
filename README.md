@@ -8,8 +8,7 @@ First and foremost, the reference to the awesome project:
 
 ## Why
 
-Not all distros have a Upplay package available. For Arch and derived, there is an AUR package, but the application does not look good at least on my Gnome desktop: borders are missing.
-Or, you might simply not be comfortable installing an AUR package.
+I prepared this Dockerfile Because I wanted to be able to install upmpdcli easily on any machine (provided the architecture is amd64 or arm). Also I wanted to be able to configure and govern the parameter easily, maybe through a webapp like Portainer.
 
 ## Prerequisites
 
@@ -26,9 +25,15 @@ The Dockerfile and the incluted scripts have been tested on the following distro
 
 - Manjaro Linux with Gnome (amd64)
 - Asus Tinkerboard
-- Raspberry Pi 3
+- Raspberry Pi 3 (but I have no reason to doubt it will also work on a Raspberry Pi 4/400)
 
 As I test the Dockerfile on more platforms, I will update this list.
+
+## Get the image
+
+Getting the image from dockerhub is as simple as typing:
+
+`docker pull giof71/upmpdcli`
 
 ## Usage
 
