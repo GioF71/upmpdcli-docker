@@ -31,17 +31,21 @@ As I test the Dockerfile on more platforms, I will update this list.
 
 ## Get the image
 
-Getting the image from dockerhub is as simple as typing:
+Here is the [repository](https://hub.docker.com/repository/docker/giof71/upmpdcli) on DockerHub.
+
+Getting the image from DockerHub is as simple as typing:
 
 `docker pull giof71/upmpdcli`
 
-## Usage
+## Build
 
 You can build (or rebuild) the image by opening a terminal from the root of the repository and issuing the following command:
 
-`docker build . -t upmpdcli`
+`docker build . -t giof71/upmpdcli`
 
 It will take a while. When it's finished, you can run the container.
+
+## Usage
 
 Say your mpd host is "mpd.local", you can start upmpdcli by typing
 
@@ -57,8 +61,8 @@ The following tables reports all the currently supported environment variables.
 | ------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | MPD_HOST            | localhost       | The host where mpd runs                                                                                                                                                                                                                                                                                                                                       |
 | MPD_PORT            | 6600            | The port used by mpd                                                                                                                                                                                                                                                                                                                                          |
-| UPMPD_FRIENDLY_NAME | upmpd           |                                                                                                                                                                                                                                                                                                                                                               |
-| AV_FRIENDLY_NAME    | upmpd-av        |                                                                                                                                                                                                                                                                                                                                                               |
+| UPMPD_FRIENDLY_NAME | upmpd           | Name of the upnpd renderer                                                                                                                                                                                                                                                                                                                                    |
+| AV_FRIENDLY_NAME    | upmpd-av        | Name of the upnpd renderer (av mode)                                                                                                                                                                                                                                                                                                                          |
 | TIDAL_ENABLE        | no              | Set to yes to enable Tidal support                                                                                                                                                                                                                                                                                                                            |
 | TIDAL_USERNAME      | tidal_username  | Your Tidal account username                                                                                                                                                                                                                                                                                                                                   |
 | TIDAL_PASSWORD      | tidal_password  | Your Tidal account password                                                                                                                                                                                                                                                                                                                                   |
