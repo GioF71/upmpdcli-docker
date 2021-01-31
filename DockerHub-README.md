@@ -1,4 +1,4 @@
-# upmpdcli-docker
+# upmpdcli - a docker image for UpMpdCli
 
 ## Reference
 
@@ -12,16 +12,9 @@ I prepared this Dockerfile Because I wanted to be able to install upmpdcli easil
 
 ## Prerequisites
 
-You need to have Docker up and running on a Linux machine, and the current user must be allowed to run containers (this usually means that the current user belongs to the "docker" group).
+You will  need a running instance mpd server (Music Player Daemon) on your network.
 
-You will also need a running instance mpd server (Music Player Daemon) on your network.
-You can verify whether your user belongs to the "docker" group with the following command:
-
-`getent group | grep docker`
-
-This command will output one line if the current user does belong to the "docker" group, otherwise there will be no output.
-
-The Dockerfile and the incluted scripts have been tested on the following distros:
+The Dockerfile and the included scripts have been tested on the following distros:
 
 - Manjaro Linux with Gnome (amd64)
 - Asus Tinkerboard
@@ -56,6 +49,6 @@ The following tables reports all the currently supported environment variables.
 | QOBUZ_USERNAME      | qobuz_username  | Your Qobuz account username                                                                                                                                                                                                                                                                                                                                   |
 | QOBUZ_PASSWORD      | qobuz_password  | Your Qobuz account password                                                                                                                                                                                                                                                                                                                                   |
 | QOBUZ_FORMAT_ID     | 5               | Qobuz format id: 5 for mp3, 7 for FLAC, 27 for hi-res                                                                                                                                                                                                                                                                                                         |
-| STARTUP_DELAY_SEC   | 0               | Delay before starting the application. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience. |
+| STARTUP_DELAY_SEC   | 0               | Delay before starting the application. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite if all those services run on the same audio device. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience. |
 
 ## 
