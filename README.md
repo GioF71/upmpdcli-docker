@@ -18,7 +18,11 @@ I prepared this Dockerfile Because I wanted to be able to install upmpdcli easil
 
 You need to have Docker up and running on a Linux machine, and the current user must be allowed to run containers (this usually means that the current user belongs to the "docker" group).
 
-You will also need a running instance mpd server (Music Player Daemon) on your network.
+You will also need a running instance mpd server (Music Player Daemon) on your network.  
+You might consider using my mpd-alsa docker image, at the following links:  
+mpd-alsa-docker Source: [GitHub](https://github.com/giof71/mpd-alsa-docker)<br />
+mpd-alsa Images: [DockerHub](https://hub.docker.com/r/giof71/mpd-alsa)
+
 You can verify whether your user belongs to the "docker" group with the following command:
 
 `getent group | grep docker`
