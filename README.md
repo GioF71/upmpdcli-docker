@@ -76,7 +76,7 @@ The following tables reports all the currently supported environment variables.
 
 You can build (or rebuild) the image by opening a terminal from the root of the repository and issuing the following command:
 
-`docker build . -t giof71/upmpdcli`
+`docker build . -t giof71/upmpdcli:stable`
 
 It will take very little time even on a Raspberry Pi. When it's finished, you can run the container following the previous instructions.<br />
 Just be careful to use the tag you have built.
