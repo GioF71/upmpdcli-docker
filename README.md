@@ -41,15 +41,7 @@ Getting the image from DockerHub is as simple as typing:
 
 `docker pull giof71/upmpdcli`<br />
 
-You may want to pull the "stable" tag as opposed to the "latest.
-
-## Build
-
-You can build (or rebuild) the image by opening a terminal from the root of the repository and issuing the following command:
-
-`docker build . -t giof71/upmpdcli`
-
-It will take a while. When it's finished, you can run the container.
+You may want to pull the "stable" image as opposed to the "latest".
 
 ## Usage
 
@@ -79,5 +71,15 @@ The following tables reports all the currently supported environment variables.
 | QOBUZ_PASSWORD      | qobuz_password  | Your Qobuz account password                                                                                                                                                                                                                                                                                                                                   |
 | QOBUZ_FORMAT_ID     | 5               | Qobuz format id: 5 for mp3, 7 for FLAC, 27 for hi-res                                                                                                                                                                                                                                                                                                         |
 | STARTUP_DELAY_SEC   | 0               | Delay before starting the application. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite if all those services run on the same audio device. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience. |
+
+## Build
+
+You can build (or rebuild) the image by opening a terminal from the root of the repository and issuing the following command:
+
+`docker build . -t giof71/upmpdcli`
+
+It will take very little time even on a Raspberry Pi. When it's finished, you can run the container following the previous instructions.<br />
+Just be careful to use the tag you have built.
+
 
 ## 
