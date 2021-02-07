@@ -39,7 +39,7 @@ Here is the [repository](https://hub.docker.com/repository/docker/giof71/upmpdcl
 
 Getting the image from DockerHub is as simple as typing:
 
-`docker pull giof71/upmpdcli`<br />
+`docker pull giof71/upmpdcli:stable`<br />
 
 You may want to pull the "stable" image as opposed to the "latest".
 
@@ -47,7 +47,7 @@ You may want to pull the "stable" image as opposed to the "latest".
 
 Say your mpd host is "mpd.local", you can start upmpdcli by typing
 
-`docker run -d --rm --net host -e MPD_HOST:mpd.local giof71/upmpdcli`
+`docker run -d --rm --net host -e MPD_HOST:mpd.local giof71/upmpdcli:stable`
 
 Note that we have used the *MPD_HOST* environment variable so that upmpdcli can use the mpd instance running on *mpd.local*.
 
@@ -76,7 +76,7 @@ The following tables reports all the currently supported environment variables.
 
 You can build (or rebuild) the image by opening a terminal from the root of the repository and issuing the following command:
 
-`docker build . -t giof71/upmpdcli:stable`
+`docker build . -t giof71/upmpdcli`
 
 It will take very little time even on a Raspberry Pi. When it's finished, you can run the container following the previous instructions.<br />
 Just be careful to use the tag you have built.
