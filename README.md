@@ -39,7 +39,9 @@ Here is the [repository](https://hub.docker.com/repository/docker/giof71/upmpdcl
 
 Getting the image from DockerHub is as simple as typing:
 
-`docker pull giof71/upmpdcli`
+`docker pull giof71/upmpdcli`<br />
+
+You may want to pull the "stable" tag as opposed to the "latest.
 
 ## Build
 
