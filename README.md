@@ -7,7 +7,7 @@ First and foremost, the reference to the awesome project:
 [An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/)
 
 ## Links
-Source: [GitHub](https://github.com/giof71/upmpdcli-docker)
+Source: [GitHub](https://github.com/giof71/upmpdcli-docker)<br />
 Images: [DockerHub](https://hub.docker.com/r/giof71/upmpdcli)
 
 ## Why
