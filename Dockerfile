@@ -15,16 +15,16 @@ RUN echo "gpg completed"
 RUN mv /root/lesbonscomptes.gpg /usr/share/keyrings/
 
 COPY upmpdcli-buster.list /root
-#COPY upmpdcli-rbuster.list /root
+COPY upmpdcli-rbuster.list /root
 
 
 RUN /bin/bash -c 'set -ex && \
     ARCH=`uname -m` && \
     echo $ARCH && \
-    if [ "$ARCH" == "armv7l" ]; then \
-       mv /root/upmpdcli-rbuster.list /etc/apt/sources.list.d/upmpdcli.list; \
-    else \
+    if [ "$ARCH" == "x86_64" ]; then \
        mv /root/upmpdcli-buster.list /etc/apt/sources.list.d/upmpdcli.list; \
+    else \
+       mv /root/upmpdcli-rbuster.list /etc/apt/sources.list.d/upmpdcli.list; \
     fi'
 
 RUN cat /etc/apt/sources.list.d/upmpdcli.list
@@ -32,7 +32,8 @@ RUN cat /etc/apt/sources.list.d/upmpdcli.list
 RUN apt-get update
 RUN apt-get install upmpdcli -y
 RUN apt-get install upmpdcli-qobuz -y
-RUN apt-get install upmpdcli-tidal -y
+RUN apt-get install upmpdcli-spotify -y
+#RUN apt-get install upmpdcli-tidal -y
 
 RUN rm -rf /var/lib/apt/lists/*
 
