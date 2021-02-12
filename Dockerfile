@@ -15,7 +15,7 @@ RUN echo "gpg completed"
 RUN mv /root/lesbonscomptes.gpg /usr/share/keyrings/
 
 COPY upmpdcli-buster.list /root
-COPY upmpdcli-rbuster.list /root
+#COPY upmpdcli-rbuster.list /root
 
 
 RUN /bin/bash -c 'set -ex && \
