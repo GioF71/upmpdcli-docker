@@ -32,7 +32,7 @@ RUN cat /etc/apt/sources.list.d/upmpdcli.list
 RUN apt-get update
 RUN apt-get install upmpdcli -y
 RUN apt-get install upmpdcli-qobuz -y
-RUN apt-get install upmpdcli-spotify -y
+#RUN apt-get install upmpdcli-spotify -y
 #RUN apt-get install upmpdcli-tidal -y
 
 RUN rm -rf /var/lib/apt/lists/*
