@@ -1,33 +1,14 @@
-from debian:buster-slim
+from ubuntu:focal
 
 RUN apt-get update
-RUN apt-get install curl -y
-RUN apt-get install gpg -y
-RUN apt-get install dirmngr -y
+RUN apt install software-properties-common -y
+RUN add-apt-repository ppa:jean-francois-dockes/upnpp1 -y
 
-RUN apt-get --no-install-recommends install -y ca-certificates
+#RUN apt-get install curl -y
+#RUN apt-get install gpg -y
+#RUN apt-get install dirmngr -y
 
-RUN mkdir -p /root/.gnupg
-RUN chmod 755 /root/.gnupg
-
-RUN gpg --no-default-keyring --keyring /root/lesbonscomptes.gpg --keyserver pool.sks-keyservers.net --recv-key F8E3347256922A8AE767605B7808CE96D38B9201
-RUN echo "gpg completed"
-RUN mv /root/lesbonscomptes.gpg /usr/share/keyrings/
-
-COPY upmpdcli-buster.list /root
-COPY upmpdcli-rbuster.list /root
-
-
-RUN /bin/bash -c 'set -ex && \
-    ARCH=`uname -m` && \
-    echo $ARCH && \
-    if [ "$ARCH" == "x86_64" ]; then \
-       mv /root/upmpdcli-buster.list /etc/apt/sources.list.d/upmpdcli.list; \
-    else \
-       mv /root/upmpdcli-rbuster.list /etc/apt/sources.list.d/upmpdcli.list; \
-    fi'
-
-RUN cat /etc/apt/sources.list.d/upmpdcli.list
+#RUN apt-get --no-install-recommends install -y ca-certificates
 
 RUN apt-get update
 RUN apt-get install upmpdcli -y
@@ -64,3 +45,4 @@ COPY run-upmpdcli.sh /run-upmpdcli.sh
 RUN chmod u+x /run-upmpdcli.sh
 
 ENTRYPOINT ["/run-upmpdcli.sh"]
+
