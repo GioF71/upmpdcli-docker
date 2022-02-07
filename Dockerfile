@@ -5,7 +5,7 @@ RUN add-apt-repository ppa:jean-francois-dockes/upnpp1
 
 RUN apt-get update && apt-get install upmpdcli -y
 
-RUN apt-get install upmpdcli -y
+#RUN apt-get install upmpdcli -y
 RUN apt-get install upmpdcli-qobuz -y
 #RUN apt-get install upmpdcli-spotify -y
 #RUN apt-get install upmpdcli-tidal -y
