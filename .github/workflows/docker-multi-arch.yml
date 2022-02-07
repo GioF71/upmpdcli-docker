@@ -24,7 +24,9 @@ jobs:
                 base="$(cut -d ':' -f2 <<< '${{ matrix.base }}')"
                 base="$(cut -d '-' -f1 <<< ${base})"
                 upmpdcli_version="upmpdcli-1.5.12-libupnpp-0.21.0"
-                tags="${{secrets.DOCKER_USERNAME}}/upmpdcli:${upmpdcli_version}-${base},${{secrets.DOCKER_USERNAME}}/upmpdcli:${upmpdcli_version}-${base}-${date}"
+                image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
+                full="${upmpdcli_version}-${base}-${date}"
+                tags="${{secrets.DOCKER_USERNAME}}/upmpdcli:${upmpdcli_version}-${base},${image_name}:${full}"
                 echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
         -
             name: Set up QEMU
