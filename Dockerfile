@@ -1,4 +1,4 @@
-from ubuntu:focal
+FROM ubuntu:focal-20220113
 
 RUN apt-get update
 RUN apt install software-properties-common -y
@@ -17,6 +17,8 @@ RUN apt-get install upmpdcli-qobuz -y
 #RUN apt-get install upmpdcli-tidal -y
 
 RUN rm -rf /var/lib/apt/lists/*
+
+RUN upmpdcli -v
 
 ENV UPMPD_FRIENDLY_NAME upmpd
 ENV AV_FRIENDLY_NAME upmpd-av
