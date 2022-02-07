@@ -26,7 +26,9 @@ jobs:
                 upmpdcli_version="upmpdcli-1.5.12-libupnpp-0.21.0"
                 image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
                 full="${upmpdcli_version}-${base}-${date}"
-                tags="${{secrets.DOCKER_USERNAME}}/upmpdcli:${upmpdcli_version}-${base},${image_name}:${full}"
+                version_and_base="${upmpdcli_version}-${base}"
+                base_only="${base}"
+                tags="${image_name}:${base_only},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable"
                 echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
         -
             name: Set up QEMU
