@@ -1,0 +1,2 @@
+deb [signed-by=/usr/share/keyrings/lesbonscomptes.gpg] http://www.lesbonscomptes.com/upmpdcli/downloads/debian/ buster main
+deb-src [signed-by=/usr/share/keyrings/lesbonscomptes.gpg] http://www.lesbonscomptes.com/upmpdcli/downloads/debian/ buster main
