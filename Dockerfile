@@ -1,16 +1,10 @@
 FROM ubuntu:focal-20220113
 
-RUN apt-get update
-RUN apt install software-properties-common -y
-RUN add-apt-repository ppa:jean-francois-dockes/upnpp1 -y
+RUN apt-get update && apt-get install -y software-properties-common curl wget
+RUN add-apt-repository ppa:jean-francois-dockes/upnpp1
 
-#RUN apt-get install curl -y
-#RUN apt-get install gpg -y
-#RUN apt-get install dirmngr -y
+RUN apt-get update && apt-get install upmpdcli -y
 
-#RUN apt-get --no-install-recommends install -y ca-certificates
-
-RUN apt-get update
 RUN apt-get install upmpdcli -y
 RUN apt-get install upmpdcli-qobuz -y
 #RUN apt-get install upmpdcli-spotify -y
