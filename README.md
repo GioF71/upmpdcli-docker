@@ -86,3 +86,10 @@ You can build (or rebuild) the image by opening a terminal from the root of the 
 
 It will take very little time even on a Raspberry Pi. When it's finished, you can run the container following the previous instructions.  
 Just be careful to use the tag you have built.
+
+## Release History
+
+Release Date|Major Changes
+---|---
+2022-02-11|Reduced docker image sizes (installation process is now in one line). Add README.md to the image in the directory `/app/doc`.
+2022-02-07|Automated builds, largely inspired to the work from [Der-Henning](https://github.com/Der-Henning/) for [this](https://github.com/GioF71/squeezelite-docker) repository.
