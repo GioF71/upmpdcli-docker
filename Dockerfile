@@ -1,16 +1,16 @@
 FROM ubuntu:focal-20220113
 
-RUN apt-get update && apt-get install -y software-properties-common curl wget
-RUN add-apt-repository ppa:jean-francois-dockes/upnpp1
-
-RUN apt-get update && apt-get install upmpdcli -y
-
-#RUN apt-get install upmpdcli -y
-RUN apt-get install upmpdcli-qobuz -y
-#RUN apt-get install upmpdcli-spotify -y
-#RUN apt-get install upmpdcli-tidal -y
-
-RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+	apt-get install -y software-properties-common && \
+	add-apt-repository ppa:jean-francois-dockes/upnpp1 && \
+	apt-get update && \
+	apt-get install upmpdcli -y && \
+	apt-get install upmpdcli-qobuz -y && \
+	apt-get install upmpdcli-spotify -y && \
+	apt-get install upmpdcli-tidal -y && \
+	apt-get remove software-properties-common -y && \
+	apt-get autoremove -y && \
+	rm -rf /var/lib/apt/lists/*
 
 RUN upmpdcli -v
 
@@ -35,10 +35,14 @@ ENV STARTUP_DELAY_SEC 0
 
 VOLUME /var/cache/upmpdcli
 
+RUN mkdir /app
+RUN mkdir /app/doc
+
 COPY upmpdcli.conf /etc/upmpdcli.conf
 
 COPY run-upmpdcli.sh /run-upmpdcli.sh
 RUN chmod u+x /run-upmpdcli.sh
 
-ENTRYPOINT ["/run-upmpdcli.sh"]
+COPY README.md /app/doc
 
+ENTRYPOINT ["/run-upmpdcli.sh"]
