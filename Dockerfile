@@ -1,6 +1,6 @@
 FROM ubuntu:focal-20220113
 
-RUN apt-get update && \
+RUN apt-get update && apt-get upgrade -y && \
 	apt-get install -y software-properties-common && \
 	add-apt-repository ppa:jean-francois-dockes/upnpp1 && \
 	apt-get update && \
