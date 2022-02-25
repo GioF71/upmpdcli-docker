@@ -14,6 +14,12 @@ RUN apt-get update && apt-get upgrade -y && \
 
 RUN upmpdcli -v
 
+RUN mkdir -p /app
+RUN mkdir -p /app/conf
+RUN mkdir -p /app/doc
+
+RUN cp /etc/upmpdcli.conf /app/conf/original.upmpdcli.conf
+
 ENV UPMPD_FRIENDLY_NAME upmpd
 ENV AV_FRIENDLY_NAME upmpd-av
 
@@ -33,16 +39,18 @@ ENV QOBUZ_FORMAT_ID 5
 
 ENV STARTUP_DELAY_SEC 0
 
+#ENV UPRCL_MEDIADIRS ""
+
 VOLUME /var/cache/upmpdcli
+#VOLUME /media-dir
 
-RUN mkdir /app
-RUN mkdir /app/doc
+COPY app/conf/upmpdcli.conf /app/conf/upmpdcli.conf
 
-COPY upmpdcli.conf /etc/upmpdcli.conf
-
-COPY run-upmpdcli.sh /run-upmpdcli.sh
-RUN chmod u+x /run-upmpdcli.sh
+COPY app/bin/run-upmpdcli.sh /app/bin/run-upmpdcli.sh
+RUN chmod u+x /app/bin/run-upmpdcli.sh
 
 COPY README.md /app/doc
 
-ENTRYPOINT ["/run-upmpdcli.sh"]
+WORKDIR /app/bin
+
+ENTRYPOINT ["/app/bin/run-upmpdcli.sh"]
