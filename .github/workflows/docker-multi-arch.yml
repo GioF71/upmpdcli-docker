@@ -11,7 +11,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                base: [ 'ubuntu:focal-20220105' ]
+                base: [ 'ubuntu:focal-20220302' ]
                 
         steps:
         -

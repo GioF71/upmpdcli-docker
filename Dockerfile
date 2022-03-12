@@ -1,4 +1,5 @@
-FROM ubuntu:focal-20220113
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE} AS base
 
 RUN apt-get update && apt-get upgrade -y && \
 	apt-get install -y software-properties-common && \
