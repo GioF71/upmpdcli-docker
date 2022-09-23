@@ -1,58 +1,52 @@
 name: Publish multi-arch Docker images
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
 jobs:
-    release:
-        runs-on: ubuntu-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                base: [ 'ubuntu:focal-20220302' ]
-                
-        steps:
-        -
-            name: Checkout
-            uses: actions/checkout@v2
-        -
-            name: Set Release Tag
-            run: |
-                date=$(date '+%Y-%m-%d')
-                base="$(cut -d ':' -f2 <<< '${{ matrix.base }}')"
-                base="$(cut -d '-' -f1 <<< ${base})"
-                upmpdcli_version="upmpdcli-1.5.12-libupnpp-0.21.0"
-                image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
-                full="${upmpdcli_version}-${base}-${date}"
-                version_and_base="${upmpdcli_version}-${base}"
-                base_only="${base}"
-                tags="${image_name}:${base_only},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable"
-                echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
-        -
-            name: Set up QEMU
-            uses: docker/setup-qemu-action@v1
-            with:
-                platforms: all
-        -
-            name: Set up Docker Buildx
-            id: buildx
-            uses: docker/setup-buildx-action@v1
-        -
-            name: Login to DockerHub
-            uses: docker/login-action@v1
-            with:
-                username: ${{ secrets.DOCKER_USERNAME }}
-                password: ${{ secrets.DOCKER_PASSWORD }}
-        -
-            name: Build and push
-            uses: docker/build-push-action@v2
-            with:
-                context: .
-                build-args: |
-                    BASE_IMAGE=${{ matrix.base }}
-                    DOWNLOAD_FROM_SOURCEFORGE=${{ matrix.sourceforge }}
-                platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
-                push: true
-                tags: ${{ env.RELEASE_TAGS }}
+  release:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        base: ["ubuntu:jammy"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set Release Tag
+        run: |
+          date=$(date '+%Y-%m-%d')
+          base="$(cut -d ':' -f2 <<< '${{ matrix.base }}')"
+          base="$(cut -d '-' -f1 <<< ${base})"
+          upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
+          image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
+          full="${upmpdcli_version}-${base}-${date}"
+          version_and_base="${upmpdcli_version}-${base}"
+          base_only="${base}"
+          tags="${image_name}:${base_only},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable"
+          echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+        with:
+          platforms: all
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: |
+            BASE_IMAGE=${{ matrix.base }}
+            DOWNLOAD_FROM_SOURCEFORGE=${{ matrix.sourceforge }}
+          platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
+          push: true
+          tags: ${{ env.RELEASE_TAGS }}

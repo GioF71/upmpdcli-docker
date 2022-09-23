@@ -1,7 +1,7 @@
 #!/bin/bash
 
-TAG_FAMILY="focal-20220113"
-TAG_SL_VERSION="upmpdcli-1.5.12-libupnpp-0.21.0"
+TAG_FAMILY="jammy"
+TAG_SL_VERSION="upmpdcli-1.5.20-libupnpp-0.22.2"
 
 TODAY=`date +%F`
 echo "TODAY: "$TODAY
@@ -16,9 +16,7 @@ tags=($TAG_TODAY $TAG_INTERMEDIATE $TAG_FAMILY latest stable)
 
 for tag in "${tags[@]}"; do
         docker build \
-                --push \
-                --platform linux/arm/v7,linux/arm64,linux/amd64 \
-                --tag giof71/upmpdcli:$tag \
+                --build-arg BASE_IMAGE=ubuntu:jammy --tag giof71/upmpdcli:$tag \
                 .
         #docker build \
         #        --push \

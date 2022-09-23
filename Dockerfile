@@ -1,14 +1,15 @@
-ARG BASE_IMAGE
-FROM ${BASE_IMAGE} AS base
+FROM ubuntu:jammy AS base
+
+COPY 01proxy /etc/apt/apt.conf.d/01proxy
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get upgrade -y && \
 	apt-get install -y software-properties-common && \
 	add-apt-repository ppa:jean-francois-dockes/upnpp1 && \
 	apt-get update && \
 	apt-get install upmpdcli -y && \
-	apt-get install upmpdcli-qobuz -y && \
-	apt-get install upmpdcli-spotify -y && \
-	apt-get install upmpdcli-tidal -y && \
+	apt-get install upmpdcli-* -y && \
 	apt-get remove software-properties-common -y && \
 	apt-get autoremove -y && \
 	rm -rf /var/lib/apt/lists/*
@@ -19,13 +20,22 @@ RUN mkdir -p /app
 RUN mkdir -p /app/conf
 RUN mkdir -p /app/doc
 
+RUN echo "--- BEGIN upmpdcli.conf ---"
+RUN cat /etc/upmpdcli.conf
+RUN echo "--- END   upmpdcli.conf ---"
+
 RUN cp /etc/upmpdcli.conf /app/conf/original.upmpdcli.conf
 
-ENV UPMPD_FRIENDLY_NAME upmpd
-ENV AV_FRIENDLY_NAME upmpd-av
+ENV UPMPD_FRIENDLY_NAME ""
+ENV AV_FRIENDLY_NAME ""
 
-ENV MPD_HOST localhost
-ENV MPD_PORT 6600
+ENV UPNPAV 1
+ENV OPENHOME 1
+
+ENV MPD_HOST ""
+ENV MPD_PORT ""
+
+ENV UPNPIFACE ""
 
 ENV TIDAL_ENABLE no
 ENV TIDAL_USERNAME tidal_username
