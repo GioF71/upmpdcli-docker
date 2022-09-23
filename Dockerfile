@@ -1,4 +1,5 @@
-FROM ubuntu:jammy AS base
+ARG BASE_IMAGE=ubuntu:rolling
+FROM ${BASE_IMAGE}
 
 COPY 01proxy /etc/apt/apt.conf.d/01proxy
 
