@@ -1,29 +1,45 @@
 #!/bin/bash
 
-TAG_FAMILY="focal-20220113"
-TAG_SL_VERSION="upmpdcli-1.5.12-libupnpp-0.21.0"
+declare -A base_images
 
-TODAY=`date +%F`
-echo "TODAY: "$TODAY
+base_images[bionic]=ubuntu:bionic
+base_images[jammy]=ubuntu:jammy
 
-TAG_TODAY=$TAG_SL_VERSION"-"$TAG_FAMILY"-"$TODAY
-echo "TODAY's tag: "$TAG_TODAY
+DEFAULT_BASE_IMAGE=jammy
+DEFAULT_TAG=latest
+DEFAULT_USE_PROXY=N
 
-TAG_INTERMEDIATE=$TAG_SL_VERSION"-"$TAG_FAMILY
-echo "Intermediate tag: "$TAG_INTERMEDIATE
+tag=$DEFAULT_TAG
+use_proxy=$DEFAULT_USE_PROXY
 
-tags=($TAG_TODAY $TAG_INTERMEDIATE $TAG_FAMILY latest stable) 
-
-for tag in "${tags[@]}"; do
-        docker build \
-                --push \
-                --platform linux/arm/v7,linux/arm64,linux/amd64 \
-                --tag giof71/upmpdcli:$tag \
-                .
-        #docker build \
-        #        --push \
-        #        --platform linux/amd64 \
-        #        --tag giof71/upmpdcli:$tag \
-        #        .
+while getopts b:t:p: flag
+do
+    case "${flag}" in
+        b) base_image=${OPTARG};;
+        t) tag=${OPTARG};;
+        p) proxy=${OPTARG};;
+    esac
 done
 
+echo "base_image: $base_image";
+echo "tag: $tag";
+echo "proxy: $proxy";
+
+if [ -z "${base_image}" ]; then
+  base_image=$DEFAULT_BASE_IMAGE
+fi
+
+if [ -z "${proxy}" ]; then
+  use_proxy=$proxy
+fi
+
+expanded_base_image=${base_images[$base_image]}
+
+echo "Base Image: ["$expanded_base_image"]"
+echo "Tag: ["$tag"]"
+echo "Proxy: ["$use_proxy"]"
+
+docker build . \
+    --build-arg BASE_IMAGE=${expanded_base_image} \
+    --build-arg USE_APT_PROXY=${use_proxy} \
+    -t giof71/upmpdcli:$tag

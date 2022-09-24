@@ -8,10 +8,79 @@ if test -f "$CONFIG_FILE"; then
 else 
     echo "Configuration file [$CONFIG_FILE] not found, creating."
     cp $SOURCE_CONFIG_FILE $CONFIG_FILE
-    sed -i 's/UPMPD_FRIENDLY_NAME/'"$UPMPD_FRIENDLY_NAME"'/g' $CONFIG_FILE
-    sed -i 's/AV_FRIENDLY_NAME/'"$AV_FRIENDLY_NAME"'/g' $CONFIG_FILE
-    sed -i 's/MPD_HOST/'"$MPD_HOST"'/g' $CONFIG_FILE
-    sed -i 's/MPD_PORT/'"$MPD_PORT"'/g' $CONFIG_FILE
+
+    echo "UPNPIFACE=["$UPNPIFACE"]"
+    if [ -z "${UPNPIFACE}" ]; then
+        echo "UPNPIFACE not set"
+    else 
+        echo "Setting UPNPIFACE to ["$UPNPIFACE"]"
+        sed -i 's/\#upnpiface/upnpiface/g' $CONFIG_FILE;
+        sed -i 's/UPNPIFACE/'"$UPNPIFACE"'/g' $CONFIG_FILE;
+    fi
+
+    echo "UPNPPORT=["$UPNPPORT"]"
+    if [ -z "${UPNPPORT}" ]; then
+        echo "UPNPPORT not set"
+    else 
+        echo "Setting UPNPPORT to ["$UPNPPORT"]"
+        sed -i 's/\#upnpport/upnpport/g' $CONFIG_FILE;
+        sed -i 's/UPNPPORT/'"$UPNPPORT"'/g' $CONFIG_FILE;
+    fi
+
+    echo "UPMPD_FRIENDLY_NAME=["$UPMPD_FRIENDLY_NAME"]"
+    if [ -z "${UPMPD_FRIENDLY_NAME}" ]; then
+        echo "UPMPD_FRIENDLY_NAME not set"
+    else 
+        echo "Setting UPMPD_FRIENDLY_NAME to ["$UPMPD_FRIENDLY_NAME"]"
+        sed -i 's/\#friendlyname/friendlyname/g' $CONFIG_FILE;
+        sed -i 's/UPMPD_FRIENDLY_NAME/'"$UPMPD_FRIENDLY_NAME"'/g' $CONFIG_FILE;
+    fi
+
+    echo "UPNPAV=["$UPNPAV"]"
+    if [ -z "${UPNPAV}" ]; then
+        echo "UPNPAV not set"
+    else 
+        echo "Setting UPNPAV to ["$UPNPAV"]"
+        sed -i 's/\#upnpav/upnpav/g' $CONFIG_FILE;
+        sed -i 's/UPNPAV/'"$UPNPAV"'/g' $CONFIG_FILE;
+    fi
+
+    echo "OPENHOME=["$OPENHOME"]"
+    if [ -z "${OPENHOME}" ]; then
+        echo "OPENHOME not set"
+    else 
+        echo "Setting OPENHOME to ["$OPENHOME"]"
+        sed -i 's/\#openhome/openhome/g' $CONFIG_FILE;
+        sed -i 's/OPENHOME/'"$OPENHOME"'/g' $CONFIG_FILE;
+    fi
+
+    echo "AV_FRIENDLY_NAME=["$AV_FRIENDLY_NAME"]"
+    if [ -z "${AV_FRIENDLY_NAME}" ]; then
+        echo "AV_FRIENDLY_NAME not set"
+    else 
+        echo "Setting AV_FRIENDLY_NAME to ["$AV_FRIENDLY_NAME"]"
+        sed -i 's/\#avfriendlyname/avfriendlyname/g' $CONFIG_FILE;
+        sed -i 's/AV_FRIENDLY_NAME/'"$AV_FRIENDLY_NAME"'/g' $CONFIG_FILE;
+    fi
+
+    echo "MPD_HOST=["$MPD_HOST"]"
+    if [ -z "${MPD_HOST}" ]; then
+        echo "MPD_HOST not set"
+    else 
+        echo "Setting MPD_HOST to ["$MPD_HOST"]"
+        sed -i 's/\#mpdhost/mpdhost/g' $CONFIG_FILE;
+        sed -i 's/MPD_HOST/'"$MPD_HOST"'/g' $CONFIG_FILE;
+    fi
+
+    echo "MPD_PORT=["$MPD_PORT"]"
+    if [ -z "${MPD_PORT}" ]; then
+        echo "MPD_PORT not set"
+    else 
+        echo "Setting MPD_PORT to ["$MPD_PORT"]"
+        sed -i 's/\#mpdport/mpdport/g' $CONFIG_FILE;
+        sed -i 's/MPD_PORT/'"$MPD_PORT"'/g' $CONFIG_FILE;
+    fi
+
     echo "Tidal Enable: $TIDAL_ENABLE"
     if [ "$TIDAL_ENABLE" == "yes" ]; then
         echo "Processing Tidal settings";

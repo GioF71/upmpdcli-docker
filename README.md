@@ -65,8 +65,12 @@ VARIABLE|DEFAULT|NOTES
 ---|---|---
 MPD_HOST|localhost|The host where mpd runs
 MPD_PORT|6600|The port used by mpd
+UPNPIFACE||UPnP network interface
+UPNPPORT||UPnP port
 UPMPD_FRIENDLY_NAME|upmpd|Name of the upnpd renderer
 AV_FRIENDLY_NAME|upmpd-av|Name of the upnpd renderer (av mode)
+UPNPAV|1|Enable UPnP AV services (0/1)
+OPENHOME|1|Enable OpenHome services (0/1)
 TIDAL_ENABLE|no|Set to yes to enable Tidal support
 TIDAL_USERNAME|tidal_username|Your Tidal account username
 TIDAL_PASSWORD|tidal_password|Your Tidal account password
@@ -91,6 +95,7 @@ Just be careful to use the tag you have built.
 
 Release Date|Major Changes
 ---|---
+2022-09-25|New environment variables & cleanup
 2022-03-12|Ubuntu version bump, fixed build-arg for base-image
 2022-02-11|Reduced docker image sizes (installation process is now in one line). Add README.md to the image in the directory `/app/doc`.
 2022-02-07|Automated builds, largely inspired to the work from [Der-Henning](https://github.com/Der-Henning/) for [this](https://github.com/GioF71/squeezelite-docker) repository.
