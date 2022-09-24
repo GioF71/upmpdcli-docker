@@ -18,6 +18,15 @@ else
         sed -i 's/UPNPIFACE/'"$UPNPIFACE"'/g' $CONFIG_FILE;
     fi
 
+    echo "UPNPPORT=["$UPNPPORT"]"
+    if [ -z "${UPNPPORT}" ]; then
+        echo "UPNPPORT not set"
+    else 
+        echo "Setting UPNPPORT to ["$UPNPPORT"]"
+        sed -i 's/\#upnpport/upnpport/g' $CONFIG_FILE;
+        sed -i 's/UPNPPORT/'"$UPNPPORT"'/g' $CONFIG_FILE;
+    fi
+
     echo "UPMPD_FRIENDLY_NAME=["$UPMPD_FRIENDLY_NAME"]"
     if [ -z "${UPMPD_FRIENDLY_NAME}" ]; then
         echo "UPMPD_FRIENDLY_NAME not set"

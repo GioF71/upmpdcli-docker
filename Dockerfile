@@ -1,7 +1,20 @@
+ARG USE_APT_PROXY=N
 ARG BASE_IMAGE=ubuntu:rolling
 FROM ${BASE_IMAGE}
 
-COPY 01proxy /etc/apt/apt.conf.d/01proxy
+RUN mkdir -p /app
+RUN mkdir -p /app/conf
+RUN mkdir -p /app/doc
+
+COPY 01proxy /app/conf/
+
+RUN if [ "$USE_APT_PROXY" = "Y" ]; then \
+	echo "Using apt proxy"; \
+	cp /app/conf/01proxy /etc/apt/apt.conf.d/01proxy; \
+	echo /etc/apt/apt.conf.d/01proxy; \
+	else \
+	echo "Building without proxy"; \
+	fi
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -16,10 +29,6 @@ RUN apt-get update && apt-get upgrade -y && \
 	rm -rf /var/lib/apt/lists/*
 
 RUN upmpdcli -v
-
-RUN mkdir -p /app
-RUN mkdir -p /app/conf
-RUN mkdir -p /app/doc
 
 RUN echo "--- BEGIN upmpdcli.conf ---"
 RUN cat /etc/upmpdcli.conf
@@ -37,6 +46,7 @@ ENV MPD_HOST ""
 ENV MPD_PORT ""
 
 ENV UPNPIFACE ""
+ENV UPNPPORT ""
 
 ENV TIDAL_ENABLE no
 ENV TIDAL_USERNAME tidal_username
