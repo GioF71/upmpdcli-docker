@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Set Release Tag
         run: |
-          date=$(date '+%Y-%m-%d')
+          date=$(TZ=Europe/Rome date '+%Y-%m-%d')
           base="$(cut -d ':' -f2 <<< '${{ matrix.base }}')"
           base="$(cut -d '-' -f1 <<< ${base})"
           upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
