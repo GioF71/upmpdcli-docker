@@ -41,7 +41,7 @@ jobs:
           if [ "${ref_name}" = "devel" ]; then
             echo "devel mode";
             devel_ts=$(TZ=Europe/Rome date '+%Y-%m-%d-%H-%M-%S')
-            tags="${image_name}:devel,${image_name}:devel-${devel_ts}";
+            tags="${image_name}:devel,${image_name}:devel-${base},${image_name}:devel-${base}-${devel_ts}";
           else
             echo "non-devel mode";
             full="${upmpdcli_version}-${base}-${select_date}";
