@@ -76,13 +76,13 @@ jobs:
             tags="${image_name}:devel-${base},${image_name}:devel-${base}-${devel_ts}";
           elif [ "${ref_name}" = "main" ]; then
             echo "main mode";
-            tags="${image_name}:main-"${base}";
+            tags="${image_name}:main-${base}";
             tags="${image_name}:main-${base}-${select_date}";
             tags="$tags,${image_name}:main-${base}-${upmpdcli_version}";
             tags="$tags,${image_name}:main-${base}-${upmpdcli_version}-${select_date}";
           else
             echo "tag mode";
-            release=$branch_or_tag
+            release=${branch_or_tag}
             tags="${image_name}:${base}";
             tags="${image_name}:${base}-${release}";
             tags="$tags,${image_name}:${base}-${upmpdcli_version}";
