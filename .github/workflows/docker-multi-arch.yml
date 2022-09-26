@@ -44,6 +44,7 @@ jobs:
           echo "ref_name = ["$ref_name"]"
           prefix=""
           if [ "${ref_name}" = "devel" ]; then
+            echo "dev mode";
             prefix="dev-"
           fi
           echo "prefix=["$prefix"]"
