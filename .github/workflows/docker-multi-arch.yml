@@ -20,7 +20,7 @@ jobs:
       - name: Set Release Tag
         run: |
           prefix=""
-          if [ "${{ GITHUB_BASE_REF }}" = "devel" ]; then
+          if [ "$GITHUB_BASE_REF" = "devel" ]; then
             prefix = "dev-"
           fi
           date=$(TZ=Europe/Rome date '+%Y-%m-%d')
