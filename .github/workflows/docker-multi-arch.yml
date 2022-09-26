@@ -56,9 +56,6 @@ jobs:
           echo "initial - tags=["$tags"]"
           if [ "${ref_name}" = "devel" ]; then
             echo "dev mode"
-          fi
-          if [ "${ref_name}" = "devel" ]; then
-            tags="${image_name}:dev";
             echo "Tags=["$tags"]";
             echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV;
           else
