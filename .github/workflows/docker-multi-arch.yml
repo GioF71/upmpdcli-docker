@@ -40,7 +40,8 @@ jobs:
           tags=""
           if [ "${ref_name}" = "devel" ]; then
             echo "devel mode";
-            tags="${image_name}:devel";
+            devel_ts=$(TZ=Europe/Rome date '+%Y-%m-%d-%H-%M-%S')
+            tags="${image_name}:devel,${image_name}:devel-${devel_ts}";
           else
             echo "non-devel mode";
             full="${upmpdcli_version}-${base}-${select_date}";
@@ -48,7 +49,6 @@ jobs:
             base_only="${base}";
             tags="${image_name}:${base_only},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable";
           fi
-
           echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
