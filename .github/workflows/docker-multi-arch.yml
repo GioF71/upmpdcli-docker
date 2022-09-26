@@ -19,18 +19,21 @@ jobs:
         uses: actions/checkout@v2
       - name: Set Release Tag
         run: |
+          base=${{ matrix.base }}
+
           declare -A base_image_from_matrix
 
           base_image_from_matrix[focal]=ubuntu:focal
           base_image_from_matrix[jammy]=ubuntu:jammy
 
           # set default base image
-          select_base_image=base_image_from_matrix[jammy]
+          select_base_image=$base_image_from_matrix[jammy]
 
-          if [ -v base_image_from_matrix[${{ matrix.base }}] ]; then
-            select_base_image=base_image_from_matrix[${{ matrix.base }}]
+          if [ -v $base_image_from_matrix[$base] ]; then
+            echo "Selecting base image..."
+            select_base_image=${base_image_from_matrix[$base]}
           fi
-          echo "Select Base Image [" $select_base_image "]"
+          echo "Selected base image ["$select_base_image"]"
 
           echo "GITHUB_REF_NAME = ["${{ env.GITHUB_REF_NAME }}"]"
           prefix=""
@@ -38,7 +41,6 @@ jobs:
             prefix = "dev-"
           fi
           date=$(TZ=Europe/Rome date '+%Y-%m-%d')
-          base=${{ matrix.base }}
           upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
           full="${upmpdcli_version}-${base}-${date}"
