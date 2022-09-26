@@ -65,7 +65,7 @@ jobs:
           echo "upmpdcli_version=["$upmpdcli_version"]"
 
           tags=""
-          if [ "${ref_name}" = "branch" ]; then
+          if [ "${ref_type}" = "branch" ]; then
             echo "branch mode";
             if [ "${ref_name}" = "devel" ]; then
               echo "devel branch";
@@ -78,7 +78,7 @@ jobs:
               tags="$tags,${image_name}:main-${base}-${upmpdcli_version}";
               tags="$tags,${image_name}:main-${base}-${upmpdcli_version}-${select_date}";
             fi
-          elif [ "${ref_name}" = "tag" ]; then
+          elif [ "${ref_type}" = "tag" ]; then
             echo "tag mode";
             echo "tag is ["${ref_name}"]";
             release=${ref_name}
