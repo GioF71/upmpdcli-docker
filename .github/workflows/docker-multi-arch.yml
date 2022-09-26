@@ -29,12 +29,12 @@ jobs:
           fi
       - name: Set Release Tag
         run: |
-          date=$(TZ=Europe/Rome date '+%Y-%m-%d')
+          select_date=$(TZ=Europe/Rome date '+%Y-%m-%d')
           base="$(cut -d ':' -f2 <<< '${{ matrix.base }}')"
           base="$(cut -d '-' -f1 <<< ${base})"
           upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
-          full="${upmpdcli_version}-${base}-${date}"
+          full="${upmpdcli_version}-${base}-${select_date}"
           version_and_base="${upmpdcli_version}-${base}"
           base_only="${base}"
           tags="${image_name}:${base_only},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable"
