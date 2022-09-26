@@ -20,7 +20,6 @@ jobs:
       - name: Set Release Tag
         run: |
           prefix=""
-          if {{ GITHUB_BASE_REF }}
           if [ "${{ GITHUB_BASE_REF }}" = "devel" ]; then
             prefix = "dev-"
           fi
