@@ -56,9 +56,11 @@ jobs:
           echo "initial - tags=["$tags"]"
           if [ "${ref_name}" = "devel" ]; then
             echo "dev mode"
-            echo "Tags=["$tags"]";
+            tags="${image_name}:devel";
+            echo "Tags=["$tags"]"
             echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV;
-          else
+          fi
+          if [ "${ref_name}" = "main" ]; then
             echo "non-dev mode";
             upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2";
             echo "upmpdcli_version=["$upmpdcli_version"];
