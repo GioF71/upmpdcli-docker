@@ -57,7 +57,7 @@ jobs:
           if [ "${ref_name}" = "devel" ]; then
             echo "dev mode";
             tags="${image_name}:devel";
-            echo "Tags=["$tags"]"
+            echo "Tags=["$tags"]";
             RELEASE_TAGS=${tags};
           fi
           if [ "${ref_name}" = "main" ]; then
