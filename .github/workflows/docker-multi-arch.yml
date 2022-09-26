@@ -74,7 +74,7 @@ jobs:
           context: .
           build-args: |
             USE_APT_PROXY=N
-            BASE_IMAGE={{ env.BASE_IMAGE }}
+            BASE_IMAGE=${{ env.BASE_IMAGE }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
           push: true
           tags: ${{ env.RELEASE_TAGS }}
