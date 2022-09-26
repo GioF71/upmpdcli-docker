@@ -36,6 +36,13 @@ jobs:
           base="$(cut -d '-' -f1 <<< ${base})"
           upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
+
+          if [ "${ref_name}" = "devel"]; then
+            echo "devel mode";
+          else
+            echo "non-devel mode";
+          fi
+
           full="${upmpdcli_version}-${base}-${select_date}"
           version_and_base="${upmpdcli_version}-${base}"
           base_only="${base}"
