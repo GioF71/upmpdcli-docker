@@ -20,23 +20,23 @@ jobs:
       - name: Set Release Tag
         run: |
           base=${{ matrix.base }}
+          echo "base=["$base"]"
 
           declare -A base_image_from_matrix
-
           base_image_from_matrix[focal]=ubuntu:focal
           base_image_from_matrix[jammy]=ubuntu:jammy
 
           # set default base image
-          select_base_image=$base_image_from_matrix[jammy]
-
           select_base_image=${base_image_from_matrix[$base]}
           echo "Selected base image ["$select_base_image"]"
 
-          echo "GITHUB_REF_NAME = ["${{ env.GITHUB_REF_NAME }}"]"
+          ref_name=${{ env.GITHUB_REF_NAME }}
+          echo "GITHUB_REF_NAME = ["$ref_name"]"
           prefix=""
-          if [ "$env.GITHUB_REF_NAME" = "devel" ]; then
+          if [ "$ref_name" = "devel" ]; then
             prefix = "dev-"
           fi
+          echo "prefix=["$prefix"]"
           date=$(TZ=Europe/Rome date '+%Y-%m-%d')
           upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"

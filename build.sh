@@ -36,13 +36,18 @@ else
   use_proxy=$proxy
 fi
 
-expanded_base_image=${base_images[$base_image]}
+if [[ -z ${base_images[$base_image]} ]]; then
+  echo "Image for ["$base_image"] not found"
+  select_base_image=${base_images[$DEFAULT_BASE_IMAGE]}
+else
+  select_base_image=${base_images[$base_image]}
+fi
 
-echo "Base Image: ["$expanded_base_image"]"
+echo "Base Image: ["$select_base_image"]"
 echo "Tag: ["$tag"]"
 echo "Proxy: ["$use_proxy"]"
 
 docker build . \
-    --build-arg BASE_IMAGE=${expanded_base_image} \
+    --build-arg BASE_IMAGE=${select_base_image} \
     --build-arg USE_APT_PROXY=${use_proxy} \
     -t giof71/upmpdcli:$tag
