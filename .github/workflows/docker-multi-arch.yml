@@ -37,11 +37,10 @@ jobs:
           base_images[jammy]=ubuntu:jammy
           base_images[focal]=ubuntu:focal
 
-          select_base_image=${base_images[${{ matrix.base }}]}
+          base = ${{ matrix.base }}
+          select_base_image=${base_images[${base}]}
           echo "select_base_image=["$select_base_image"]"
 
-          base="$(cut -d ':' -f2 <<< '${{ matrix.base }}')"
-          base="$(cut -d '-' -f1 <<< ${base})"
           upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
 
