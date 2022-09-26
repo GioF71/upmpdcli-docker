@@ -32,9 +32,9 @@ jobs:
           fi
           echo "Select Base Image [" $select_base_image "]"
 
-          echo "GITHUB_REF_NAME = ["${{ GITHUB_REF_NAME }}"]"
+          echo "GITHUB_REF_NAME = ["${{ env.GITHUB_REF_NAME }}"]"
           prefix=""
-          if [ "$GITHUB_REF_NAME" = "devel" ]; then
+          if [ "$env.GITHUB_REF_NAME" = "devel" ]; then
             prefix = "dev-"
           fi
           date=$(TZ=Europe/Rome date '+%Y-%m-%d')
