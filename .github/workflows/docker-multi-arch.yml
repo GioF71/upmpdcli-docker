@@ -32,6 +32,11 @@ jobs:
           ref_name=${{ steps.extract_branch.outputs.branch }}
           echo "ref_name=["$ref_name"]"
           select_date=$(TZ=Europe/Rome date '+%Y-%m-%d')
+
+          declare -A base_images
+          base_images[jammy]=ubuntu:jammy
+          base_images[focal]=ubuntu:focal
+
           base="$(cut -d ':' -f2 <<< '${{ matrix.base }}')"
           base="$(cut -d '-' -f1 <<< ${base})"
           upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
