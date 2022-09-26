@@ -51,6 +51,8 @@ jobs:
           echo "date=["$select_date"]"
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
           echo "image_name=["$image_name"]"
+          tags=""
+          echo "initial - tags=["$tags"]"
           if [ "${ref_name}" = "devel" ]; then
             echo "dev mode"
             tags="${image_name}:dev"
