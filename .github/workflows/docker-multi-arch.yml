@@ -56,7 +56,7 @@ jobs:
           echo "initial - tags=["$tags"]"
           if [ "${ref_name}" = "devel" ]; then
             echo "dev mode";
-            tags="${image_name}:devel";
+            tags="${image_name}:latest";
             echo "Tags=["$tags"]";
             RELEASE_TAGS=${tags};
           fi
