@@ -17,16 +17,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Branch used
-        id: extract_branch
-        run: |
-          if [[ "${GITHUB_EVENT_NAME}" == "push" ]]; then
-            echo "::set-output name=branch::$(echo ${GITHUB_REF##*/})"
-          elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
-            echo "::set-output name=branch::$(echo $GITHUB_BASE_REF)"
-          else
-            echo "::set-output name=branch::INVALID_EVENT_BRANCH_UNKNOWN"
-          fi
       - name: Set Release Tag
         run: |
           base=${{ matrix.base }}
@@ -40,7 +30,8 @@ jobs:
           select_base_image=${base_image_from_matrix[$base]}
           echo "Selected base image ["$select_base_image"]"
 
-          ref_name=${{ steps.extract_branch.outputs.branch }}
+          #ref_name=${{ steps.extract_branch.outputs.branch }}
+          ref_name=devel
           echo "ref_name=["$ref_name"]"
           prefix=""
           if [ "${ref_name}" = "devel" ]; then
@@ -68,7 +59,7 @@ jobs:
             tags="${image_name}:${base},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable";
             echo "Tags=["$tags"]";
           fi
-           echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV;
+          echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV;
           echo "BASE_IMAGE=${select_base_image}" >> $GITHUB_ENV
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
