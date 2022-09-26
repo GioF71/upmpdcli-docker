@@ -37,16 +37,18 @@ jobs:
           upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
 
+          tags=""
           if [ "${ref_name}" = "devel" ]; then
             echo "devel mode";
+            tags="${image_name}:devel";
           else
             echo "non-devel mode";
+            full="${upmpdcli_version}-${base}-${select_date}";
+            version_and_base="${upmpdcli_version}-${base}";
+            base_only="${base}";
+            tags="${image_name}:${base_only},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable";
           fi
 
-          full="${upmpdcli_version}-${base}-${select_date}"
-          version_and_base="${upmpdcli_version}-${base}"
-          base_only="${base}"
-          tags="${image_name}:${base_only},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable"
           echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
