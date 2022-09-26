@@ -56,9 +56,8 @@ jobs:
           echo "initial - tags=["$tags"]"
           if [ "${ref_name}" = "devel" ]; then
             echo "dev mode";
-            tags="${image_name}:latest";
+            tags="${image_name}:dev";
             echo "Tags=["$tags"]";
-            RELEASE_TAGS=${tags};
           fi
           if [ "${ref_name}" = "main" ]; then
             echo "non-dev mode";
@@ -68,7 +67,6 @@ jobs:
             version_and_base="${upmpdcli_version}-${base}";
             tags="${image_name}:${base},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable";
             echo "Tags=["$tags"]";
-            RELEASE_TAGS=${tags};
           fi
            echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV;
           echo "BASE_IMAGE=${select_base_image}" >> $GITHUB_ENV
