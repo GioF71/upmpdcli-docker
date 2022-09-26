@@ -22,6 +22,9 @@ jobs:
 
       - name: Prepare for docker build
         run: |
+          ref_type=${{ github.ref_type }}
+          echo "REF_TYPE: ["$ref_type"]"
+
           ref_name=${{ github.ref_name }}
           echo "REF_NAME: ["$ref_name"]"
 
