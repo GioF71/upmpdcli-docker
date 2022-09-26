@@ -85,6 +85,7 @@ jobs:
               tags="$tags,${image_name}:stable";
             fi
           fi
+          echo "Building tags: ["${tags}"]"
           echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
           echo "BASE_IMAGE=${select_base_image}" >> $GITHUB_ENV
       - name: Set up QEMU
