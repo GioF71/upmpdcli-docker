@@ -48,7 +48,9 @@ jobs:
           fi
           echo "prefix=["$prefix"]"
           date=$(TZ=Europe/Rome date '+%Y-%m-%d')
+          echo "date=["$date"]"
           upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
+          echo "upmpdcli_version=["$upmpdcli_version"]
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
           full="${upmpdcli_version}-${base}-${date}"
           version_and_base="${upmpdcli_version}-${base}"
