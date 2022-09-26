@@ -95,6 +95,7 @@ Just be careful to use the tag you have built.
 
 Release Date|Major Changes
 ---|---
+2022-09-26|Build process reviewed
 2022-09-26|Restored Qobuz and Tidal placeholders ([issue #5](https://github.com/GioF71/upmpdcli-docker/issues/5))
 2022-09-25|New environment variables & cleanup
 2022-03-12|Ubuntu version bump, fixed build-arg for base-image
