@@ -29,6 +29,9 @@ jobs:
           fi
       - name: Set Release Tag
         run: |
+          branch_or_tag=${{ github.ref_name }}
+          echo "Branch or tag: ["$branch_or_tag"]"
+
           declare -A base_images
           base_images[jammy]=ubuntu:jammy
           base_images[focal]=ubuntu:focal
