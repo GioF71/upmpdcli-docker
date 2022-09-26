@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        base: ["ubuntu:jammy"]
+        base: ["jammy"]
 
     steps:
       - name: Checkout
@@ -36,6 +36,9 @@ jobs:
           declare -A base_images
           base_images[jammy]=ubuntu:jammy
           base_images[focal]=ubuntu:focal
+
+          select_base_image=$base_images[${{ matrix.base }}]
+          echo "select_base_image=["$select_base_image"]"
 
           base="$(cut -d ':' -f2 <<< '${{ matrix.base }}')"
           base="$(cut -d '-' -f1 <<< ${base})"
