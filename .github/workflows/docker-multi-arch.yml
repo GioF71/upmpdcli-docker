@@ -37,7 +37,7 @@ jobs:
           base_images[jammy]=ubuntu:jammy
           base_images[focal]=ubuntu:focal
 
-          select_base_image=$base_images[${{ matrix.base }}]
+          select_base_image=$base_images["${{ matrix.base }}"]
           echo "select_base_image=["$select_base_image"]"
 
           base="$(cut -d ':' -f2 <<< '${{ matrix.base }}')"
