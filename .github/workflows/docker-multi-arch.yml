@@ -29,10 +29,7 @@ jobs:
           # set default base image
           select_base_image=$base_image_from_matrix[jammy]
 
-          if [[ -v $base_image_from_matrix[$base] ]]; then
-            echo "Selecting base image..."
-            select_base_image=${base_image_from_matrix[$base]}
-          fi
+          select_base_image=${base_image_from_matrix[$base]}
           echo "Selected base image ["$select_base_image"]"
 
           echo "GITHUB_REF_NAME = ["${{ env.GITHUB_REF_NAME }}"]"
