@@ -78,10 +78,10 @@ jobs:
             tags="${image_name}:${base}-${select_date}";
             tags="$tags,${image_name}:${base}-${upmpdcli_version}";
             tags="$tags,${image_name}:${base}-${upmpdcli_version}-${select_date}";
-            if [ "${base}" = ${tag_latest} ]; then
+            if [ "${base}" = "${tag_latest}" ]; then
               tags="$tags,${image_name}:latest";
             fi
-            if [ "${base}" = ${tag_stable} ]; then
+            if [ "${base}" = "${tag_stable}" ]; then
               tags="$tags,${image_name}:stable";
             fi
           fi
