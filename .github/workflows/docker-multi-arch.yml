@@ -74,12 +74,19 @@ jobs:
             echo "devel mode";
             devel_ts=$(TZ=Europe/Rome date '+%Y-%m-%d-%H-%M-%S')
             tags="${image_name}:devel-${base},${image_name}:devel-${base}-${devel_ts}";
+          elif [ "${ref_name}" = "main" ]; then
+            echo "main mode";
+            tags="${image_name}:main-"${base}";
+            tags="${image_name}:main-${base}-${select_date}";
+            tags="$tags,${image_name}:main-${base}-${upmpdcli_version}";
+            tags="$tags,${image_name}:main-${base}-${upmpdcli_version}-${select_date}";
           else
-            echo "non-devel mode";
+            echo "tag mode";
+            release=$branch_or_tag
             tags="${image_name}:${base}";
-            tags="${image_name}:${base}-${select_date}";
+            tags="${image_name}:${base}-${release}";
             tags="$tags,${image_name}:${base}-${upmpdcli_version}";
-            tags="$tags,${image_name}:${base}-${upmpdcli_version}-${select_date}";
+            tags="$tags,${image_name}:${base}-${upmpdcli_version}-${release}";
             if [ "${base}" = "${latest}" ]; then
               tags="$tags,${image_name}:${tag_latest}";
             fi
