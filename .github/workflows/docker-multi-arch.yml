@@ -41,7 +41,7 @@ jobs:
           echo "Selected base image ["$select_base_image"]"
 
           ref_name=${{ steps.extract_branch.outputs.branch }}
-          echo "ref_name = ["$ref_name"]"
+          echo "ref_name=["$ref_name"]"
           prefix=""
           if [ "${ref_name}" = "devel" ]; then
             echo "dev mode";
@@ -55,10 +55,10 @@ jobs:
           tags=""
           echo "initial - tags=["$tags"]"
           if [ "${ref_name}" = "devel" ]; then
-            echo "dev mode"
+            echo "dev mode";
             tags="${image_name}:devel";
             echo "Tags=["$tags"]"
-            echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV;
+            RELEASE_TAGS=${tags};
           fi
           if [ "${ref_name}" = "main" ]; then
             echo "non-dev mode";
@@ -68,8 +68,9 @@ jobs:
             version_and_base="${upmpdcli_version}-${base}";
             tags="${image_name}:${base},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable";
             echo "Tags=["$tags"]";
-            echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV;
+            RELEASE_TAGS=${tags};
           fi
+           echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV;
           echo "BASE_IMAGE=${select_base_image}" >> $GITHUB_ENV
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
