@@ -56,6 +56,8 @@ jobs:
           echo "initial - tags=["$tags"]"
           if [ "${ref_name}" = "devel" ]; then
             tags="${image_name}:dev";
+            echo "Tags=["$tags"]"
+            echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
           else
             echo "non-dev mode";
             upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2";
@@ -63,9 +65,9 @@ jobs:
             full="${upmpdcli_version}-${base}-${select_date}";
             version_and_base="${upmpdcli_version}-${base}";
             tags="${image_name}:${base},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable";
+            echo "Tags=["$tags"]"
+            echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
           fi
-          echo "Tags=["$tags"]"
-          echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
           echo "BASE_IMAGE=${select_base_image}" >> $GITHUB_ENV
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
