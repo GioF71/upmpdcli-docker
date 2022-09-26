@@ -29,7 +29,7 @@ jobs:
           # set default base image
           select_base_image=$base_image_from_matrix[jammy]
 
-          if [ -v $base_image_from_matrix[$base] ]; then
+          if [[ -v $base_image_from_matrix[$base] ]]; then
             echo "Selecting base image..."
             select_base_image=${base_image_from_matrix[$base]}
           fi
