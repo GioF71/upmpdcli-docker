@@ -6,7 +6,7 @@ RUN mkdir -p /app
 RUN mkdir -p /app/conf
 RUN mkdir -p /app/doc
 
-COPY 01proxy /app/conf/
+COPY app/conf/01proxy /app/conf/
 
 RUN if [ "$USE_APT_PROXY" = "Y" ]; then \
 	echo "Using apt proxy"; \

@@ -5,6 +5,8 @@ on:
     branches:
       - main
       - devel
+    tags:
+      - "*"
 
 jobs:
   release:
@@ -36,11 +38,11 @@ jobs:
           base_images[jammy]=ubuntu:jammy
           base_images[focal]=ubuntu:focal
 
-          stable=jammy
-          latest=jammy
+          stable="jammy"
+          latest="jammy"
 
-          tag_stable=stable
-          tag_latest=latest
+          tag_stable="stable"
+          tag_latest="latest"
 
           ref_name=${{ steps.extract_branch.outputs.branch }}
           echo "ref_name=["$ref_name"]"
@@ -72,19 +74,27 @@ jobs:
             echo "devel mode";
             devel_ts=$(TZ=Europe/Rome date '+%Y-%m-%d-%H-%M-%S')
             tags="${image_name}:devel-${base},${image_name}:devel-${base}-${devel_ts}";
+          elif [ "${ref_name}" = "main" ]; then
+            echo "main mode";
+            tags="${image_name}:main-${base}";
+            tags="$tags,${image_name}:main-${base}-${select_date}";
+            tags="$tags,${image_name}:main-${base}-${upmpdcli_version}";
+            tags="$tags,${image_name}:main-${base}-${upmpdcli_version}-${select_date}";
           else
-            echo "non-devel mode";
+            echo "tag mode";
+            release=${branch_or_tag}
             tags="${image_name}:${base}";
-            tags="${image_name}:${base}-${select_date}";
+            tags="$tags,${image_name}:${base}-${release}";
             tags="$tags,${image_name}:${base}-${upmpdcli_version}";
-            tags="$tags,${image_name}:${base}-${upmpdcli_version}-${select_date}";
-            if [ "${base}" = "${tag_latest}" ]; then
-              tags="$tags,${image_name}:latest";
+            tags="$tags,${image_name}:${base}-${upmpdcli_version}-${release}";
+            if [ "${base}" = "${latest}" ]; then
+              tags="$tags,${image_name}:${tag_latest}";
             fi
-            if [ "${base}" = "${tag_stable}" ]; then
-              tags="$tags,${image_name}:stable";
+            if [ "${base}" = "${stable}" ]; then
+              tags="$tags,${image_name}:${tag_stable}";
             fi
           fi
+          echo "Building tags: ["${tags}"]"
           echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
           echo "BASE_IMAGE=${select_base_image}" >> $GITHUB_ENV
       - name: Set up QEMU
