@@ -29,20 +29,37 @@ jobs:
           fi
       - name: Set Release Tag
         run: |
+          declare -A base_images
+          base_images[jammy]=ubuntu:jammy
+          base_images[focal]=ubuntu:focal
+
+          stable=jammy
+          latest=jammy
+
           ref_name=${{ steps.extract_branch.outputs.branch }}
           echo "ref_name=["$ref_name"]"
           select_date=$(TZ=Europe/Rome date '+%Y-%m-%d')
 
-          declare -A base_images
-          base_images[jammy]=ubuntu:jammy
-          base_images[focal]=ubuntu:focal
+          declare -A upmpdcli_versions
+          upmpdcli_versions[jammy]=1.5.19
+          upmpdcli_versions[focal]=1.5.19
+
+          declare -A libupnp_versions
+          libupnp_versions[jammy]=0.22.2
+          libupnp_versions[focal]=0.22.2
 
           base=${{ matrix.base }}
           select_base_image=${base_images[$base]}
           echo "select_base_image=["$select_base_image"]"
 
-          upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
+          select_upmpdcli_version=${upmpdcli_versions[$base]}
+          select_libupnp_version=${libupnp_versions[$base]}
+
+          upmpdcli_version="upmpdcli-$select_upmpdcli_version-libupnpp-$select_libupnp_version"
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
+
+          echo "image_name=["$image_name"]"
+          echo "upmpdcli_version=["$upmpdcli_version"]"
 
           tags=""
           if [ "${ref_name}" = "devel" ]; then
