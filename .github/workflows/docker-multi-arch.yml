@@ -37,7 +37,7 @@ jobs:
           upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
 
-          if [ "${ref_name}" = "devel"]; then
+          if [ "${ref_name}" = "devel" ]; then
             echo "devel mode";
           else
             echo "non-devel mode";
