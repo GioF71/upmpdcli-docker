@@ -52,11 +52,11 @@ jobs:
           upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
           echo "upmpdcli_version=["$upmpdcli_version"]
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
-          full="${upmpdcli_version}-${base}-${date}"
-          version_and_base="${upmpdcli_version}-${base}"
           if [ "$ref_name" = "devel" ]; then
-            tags="${image_name}:dev-${base}-${date}
+            tags="${image_name}:dev-${base}-${date}"
           else
+            full="${upmpdcli_version}-${base}-${date}"
+            version_and_base="${upmpdcli_version}-${base}"
             tags="${image_name}:${base},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable"
           fi
           echo "Tags=["$tags"]"
