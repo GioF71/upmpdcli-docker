@@ -47,15 +47,15 @@ jobs:
             prefix="dev-"
           fi
           echo "prefix=["$prefix"]"
-          date=$(TZ=Europe/Rome date '+%Y-%m-%d')
-          echo "date=["$date"]"
+          select_date=$(TZ=Europe/Rome date '+%Y-%m-%d')
+          echo "date=["$select_date"]"
           upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
           echo "upmpdcli_version=["$upmpdcli_version"]
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
           if [ "$ref_name" = "devel" ]; then
             tags="${image_name}:dev"
           else
-            full="${upmpdcli_version}-${base}-${date}"
+            full="${upmpdcli_version}-${base}-${select_date}"
             version_and_base="${upmpdcli_version}-${base}"
             tags="${image_name}:${base},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable"
           fi
