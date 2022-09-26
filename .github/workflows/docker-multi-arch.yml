@@ -50,7 +50,8 @@ jobs:
           select_date=$(TZ=Europe/Rome date '+%Y-%m-%d')
           echo "date=["$select_date"]"
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
-          if [ "$ref_name" = "devel" ]; then
+          echo "image_name=["$image_name"]"
+          if [ "${ref_name}" = "devel" ]; then
             echo "dev mode"
             tags="${image_name}:dev"
           else
