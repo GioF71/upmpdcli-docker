@@ -54,15 +54,15 @@ jobs:
           tags=""
           echo "initial - tags=["$tags"]"
           if [ "${ref_name}" = "devel" ]; then
-            echo "dev mode"
-            tags="${image_name}:dev"
+            echo "dev mode";
+            tags="${image_name}:dev";
           else
-            echo "non-dev mode"
-            upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
-            echo "upmpdcli_version=["$upmpdcli_version"]
-            full="${upmpdcli_version}-${base}-${select_date}"
-            version_and_base="${upmpdcli_version}-${base}"
-            tags="${image_name}:${base},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable"
+            echo "non-dev mode";
+            upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2";
+            echo "upmpdcli_version=["$upmpdcli_version"];
+            full="${upmpdcli_version}-${base}-${select_date}";
+            version_and_base="${upmpdcli_version}-${base}";
+            tags="${image_name}:${base},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable";
           fi
           echo "Tags=["$tags"]"
           echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
