@@ -3,8 +3,7 @@ name: Publish multi-arch Docker images
 on:
   push:
     branches:
-      - main
-      - devel
+      - "*"
     tags:
       - "*"
 
@@ -65,17 +64,21 @@ jobs:
           tags=""
           if [ "${ref_type}" = "branch" ]; then
             echo "branch mode";
-            if [ "${ref_name}" = "devel" ]; then
-              echo "devel branch";
-              devel_timestamp=$(TZ=Europe/Rome date '+%Y-%m-%d-%H-%M-%S')
-              tags="${image_name}:devel-${base},${image_name}:devel-${base}-${devel_timestamp}";
-            elif [ "${ref_name}" = "main" ]; then
+            if [ "${ref_name}" = "main" ]; then
               echo "main branch";
               tags="${image_name}:main-${base}";
               main_date=$(TZ=Europe/Rome date '+%Y-%m-%d')
               tags="$tags,${image_name}:main-${base}-${main_date}";
               tags="$tags,${image_name}:main-${base}-${upmpdcli_version}";
               tags="$tags,${image_name}:main-${base}-${upmpdcli_version}-${select_date}";
+            elif [ "${ref_name}" = "devel" ]; then
+              echo "devel branch";
+              devel_timestamp=$(TZ=Europe/Rome date '+%Y-%m-%d-%H-%M-%S')
+              tags="${image_name}:devel-${base},${image_name}:devel-${base}-${devel_timestamp}";
+            else
+              echo "other branch ["${ref_name}"]";
+              other_timestamp=$(TZ=Europe/Rome date '+%Y-%m-%d-%H-%M-%S')
+              tags="${image_name}:${ref_name}-${base}-${other_timestamp}";
             fi
           elif [ "${ref_type}" = "tag" ]; then
             echo "tag mode";
