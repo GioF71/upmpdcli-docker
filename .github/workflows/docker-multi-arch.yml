@@ -12,21 +12,33 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        base: ["ubuntu:jammy"]
+        base: ["jammy"]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Set Release Tag
         run: |
+          declare -A base_image_from_matrix
+
+          base_image_from_matrix[focal]=ubuntu:focal
+          base_image_from_matrix[jammy]=ubuntu:jammy
+
+          # set default base image
+          select_base_image=base_image_from_matrix[jammy]
+
+          if [ -v base_image_from_matrix[${{ matrix.base }}] ]; then
+            select_base_image=base_image_from_matrix[${{ matrix.base }}]
+          fi
+          echo "Select Base Image [" $select_base_image "]"
+
+          echo "GITHUB_BASE_REF = ["${{ GITHUB_BASE_REF }}"]"
           prefix=""
           if [ "$GITHUB_BASE_REF" = "devel" ]; then
             prefix = "dev-"
           fi
           date=$(TZ=Europe/Rome date '+%Y-%m-%d')
-          base="$(cut -d ':' -f2 <<< '${{ matrix.base }}')"
-          base="$(cut -d '-' -f1 <<< ${base})"
-          base=$prefix$base
+          base=${{ matrix.base }}
           upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
           full="${upmpdcli_version}-${base}-${date}"
@@ -34,6 +46,7 @@ jobs:
           base_only="${base}"
           tags="${image_name}:${base_only},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable"
           echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
+          echo "BASE_IMAGE=${select_base_image}" >> $GITHUB_ENV
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
         with:
