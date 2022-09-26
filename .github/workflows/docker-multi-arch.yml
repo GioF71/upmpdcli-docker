@@ -58,7 +58,7 @@ jobs:
             tags="${image_name}:${base_only},${image_name}:${version_and_base},${image_name}:${full},${image_name}:latest,${image_name}:stable";
           fi
           echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
-          echo "BASE_IMAGE=${{ matrix.base }}" >> $GITHUB_ENV
+          echo "BASE_IMAGE=${select_base_image}" >> $GITHUB_ENV
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
         with:
