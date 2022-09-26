@@ -2,7 +2,8 @@
 
 declare -A base_images
 
-base_images[bionic]=ubuntu:bionic
+base_images[kinetic]=ubuntu:kinetic
+base_images[focal]=ubuntu:focal
 base_images[jammy]=ubuntu:jammy
 
 DEFAULT_BASE_IMAGE=jammy
@@ -30,6 +31,8 @@ if [ -z "${base_image}" ]; then
 fi
 
 if [ -z "${proxy}" ]; then
+  use_proxy="N"
+else
   use_proxy=$proxy
 fi
 

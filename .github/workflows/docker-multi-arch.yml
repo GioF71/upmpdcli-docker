@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - devel
 
 jobs:
   release:
@@ -18,9 +19,15 @@ jobs:
         uses: actions/checkout@v2
       - name: Set Release Tag
         run: |
+          prefix=""
+          if {{ GITHUB_BASE_REF }}
+          if [ "${{ GITHUB_BASE_REF }}" = "devel" ]; then
+            prefix = "dev-"
+          fi
           date=$(TZ=Europe/Rome date '+%Y-%m-%d')
           base="$(cut -d ':' -f2 <<< '${{ matrix.base }}')"
           base="$(cut -d '-' -f1 <<< ${base})"
+          base=$prefix$base
           upmpdcli_version="upmpdcli-1.5.20-libupnpp-0.22.2"
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
           full="${upmpdcli_version}-${base}-${date}"
@@ -46,7 +53,7 @@ jobs:
           context: .
           build-args: |
             BASE_IMAGE=${{ matrix.base }}
-            DOWNLOAD_FROM_SOURCEFORGE=${{ matrix.sourceforge }}
+            USE_APT_PROXY=N
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
           push: true
           tags: ${{ env.RELEASE_TAGS }}
