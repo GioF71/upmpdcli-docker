@@ -23,7 +23,10 @@ jobs:
       - name: Prepare for docker build
         run: |
           ref_name=${{ github.ref_name }}
-          echo "Branch or Tag: ["$ref_name"]"
+          echo "REF_NAME: ["$ref_name"]"
+
+          ref=${{ github.ref }}
+          echo "REF: ["$ref"]"
 
           declare -A base_images
           base_images[jammy]=ubuntu:jammy
@@ -35,7 +38,6 @@ jobs:
           tag_stable="stable"
           tag_latest="latest"
 
-          echo "ref_name=["$ref_name"]"
           select_date=$(TZ=Europe/Rome date '+%Y-%m-%d')
 
           declare -A upmpdcli_versions
