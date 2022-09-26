@@ -77,7 +77,7 @@ jobs:
           elif [ "${ref_name}" = "main" ]; then
             echo "main mode";
             tags="${image_name}:main-${base}";
-            tags="${image_name}:main-${base}-${select_date}";
+            tags="$tags,${image_name}:main-${base}-${select_date}";
             tags="$tags,${image_name}:main-${base}-${upmpdcli_version}";
             tags="$tags,${image_name}:main-${base}-${upmpdcli_version}-${select_date}";
           else
