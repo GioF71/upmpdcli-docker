@@ -65,18 +65,22 @@ jobs:
           echo "upmpdcli_version=["$upmpdcli_version"]"
 
           tags=""
-          if [ "${ref_name}" = "devel" ]; then
-            echo "devel mode";
-            devel_ts=$(TZ=Europe/Rome date '+%Y-%m-%d-%H-%M-%S')
-            tags="${image_name}:devel-${base},${image_name}:devel-${base}-${devel_ts}";
-          elif [ "${ref_name}" = "main" ]; then
-            echo "main mode";
-            tags="${image_name}:main-${base}";
-            tags="$tags,${image_name}:main-${base}-${select_date}";
-            tags="$tags,${image_name}:main-${base}-${upmpdcli_version}";
-            tags="$tags,${image_name}:main-${base}-${upmpdcli_version}-${select_date}";
-          else
+          if [ "${ref_name}" = "branch" ]; then
+            echo "branch mode";
+            if [ "${ref_name}" = "devel" ]; then
+              echo "devel branch";
+              devel_ts=$(TZ=Europe/Rome date '+%Y-%m-%d-%H-%M-%S')
+              tags="${image_name}:devel-${base},${image_name}:devel-${base}-${devel_ts}";
+            elif [ "${ref_name}" = "main" ]; then
+              echo "main branch";
+              tags="${image_name}:main-${base}";
+              tags="$tags,${image_name}:main-${base}-${select_date}";
+              tags="$tags,${image_name}:main-${base}-${upmpdcli_version}";
+              tags="$tags,${image_name}:main-${base}-${upmpdcli_version}-${select_date}";
+            fi
+          elif [ "${ref_name}" = "tag" ]; then
             echo "tag mode";
+            echo "tag is ["${ref_name}"]";
             release=${ref_name}
             tags="${image_name}:${base}";
             tags="$tags,${image_name}:${base}-${release}";
