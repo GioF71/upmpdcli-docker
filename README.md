@@ -91,10 +91,12 @@ You can build (or rebuild) the image by opening a terminal from the root of the 
 It will take very little time even on a Raspberry Pi. When it's finished, you can run the container following the previous instructions.  
 Just be careful to use the tag you have built.
 
-## Release History
+## Change History
 
-Release Date|Major Changes
+Change Date|Major Changes
 ---|---
+2022-09-30|Dropped focal build (due to a build error, to be investigated)
+2022-09-30|Build process review: build enabled on on tag push
 2022-09-26|Moved file 01proxy to app/conf
 2022-09-26|Build process reviewed
 2022-09-26|Restored Qobuz and Tidal placeholders ([issue #5](https://github.com/GioF71/upmpdcli-docker/issues/5))
