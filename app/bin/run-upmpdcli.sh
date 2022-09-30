@@ -81,7 +81,7 @@ else
         sed -i 's/MPD_PORT/'"$MPD_PORT"'/g' $CONFIG_FILE;
     fi
 
-    echo "Tidal Enable: $TIDAL_ENABLE"
+    echo "Tidal Enable [$TIDAL_ENABLE]"
     if [ "$TIDAL_ENABLE" == "yes" ]; then
         echo "Processing Tidal settings";
         sed -i 's/\#tidaluser/tidaluser/g' $CONFIG_FILE;
@@ -93,7 +93,7 @@ else
         sed -i 's/TIDAL_API_TOKEN/'"$TIDAL_API_TOKEN"'/g' $CONFIG_FILE;
         sed -i 's/TIDAL_QUALITY/'"$TIDAL_QUALITY"'/g' $CONFIG_FILE;
     fi
-    echo "Qobuz Enable: $QOBUZ_ENABLE"
+    echo "Qobuz Enable [$QOBUZ_ENABLE]"
     if [ "$QOBUZ_ENABLE" == "yes" ]; then
         echo "Processing Qobuz settings";
         sed -i 's/\#qobuzuser/qobuzuser/g' $CONFIG_FILE;
@@ -110,6 +110,25 @@ else
 #        sed -i 's/\#uprclmediadirs/uprclmediadirs/g' $CONFIG_FILE;
 #        sed -i 's/UPRCL_MEDIADIRS/'"$UPRCL_MEDIADIRS"'/g' $CONFIG_FILE;
 #    fi
+
+    echo "ENABLE_UPRCL [$ENABLE_UPRCL]"
+    if [ "$ENABLE_UPRCL" == "yes" ]; then
+        sed -i 's/\#uprclconfdir/uprclconfdir/g' $CONFIG_FILE;
+        # set UPRCL_USER if not empty
+        echo "UPRCL_USER [$UPRCL_USER]"
+        if [ -n "${UPRCL_USER}" ]; then
+            echo "Setting uprcluser $UPRCL_USER"
+            sed -i 's/#uprcluser/'"uprcluser"'/g' $CONFIG_FILE;
+            sed -i 's/UPRCL_USER/'"$UPRCL_USER"'/g' $CONFIG_FILE;
+        fi
+        echo "UPRCL_HOSTPORT [$UPRCL_HOSTPORT]"
+        if [ -n "${UPRCL_HOSTPORT}" ]; then
+            echo "Setting uprclhostport $UPRCL_HOSTPORT"
+            sed -i 's/#uprclhostport/'"uprclhostport"'/g' $CONFIG_FILE;
+            sed -i 's/UPRCL_HOSTPORT/'"$UPRCL_HOSTPORT"'/g' $CONFIG_FILE;
+        fi
+    fi
+
     cat $CONFIG_FILE
 fi
 
