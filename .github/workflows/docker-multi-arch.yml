@@ -20,7 +20,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Set Release Tag
+      - name: Prepare for Docker Build
         run: |
           ref_type=${{ github.ref_type }}
           echo "REF_TYPE: ["$ref_type"]"
@@ -63,6 +63,7 @@ jobs:
           echo "upmpdcli_version=["$upmpdcli_version"]"
 
           tags=""
+<<<<<<< HEAD
           if [ "${ref_name}" = "devel" ]; then
             echo "devel branch mode";
             tags="${image_name}:devel-${base},${image_name}:devel-${base}";
@@ -100,23 +101,56 @@ jobs:
             elif [ "${tag_type}" = "feature" ]; then
               echo "feature tag";
               tags="${image_name}:feature-${tag_name}-${base}";
+=======
+          if [ "${ref_type}" = "branch" ]; then
+            echo "branch mode";
+            if [ "${ref_name}" = "devel" ]; then
+              echo "devel branch";
+              devel_timestamp=$(TZ=Europe/Rome date '+%Y-%m-%d-%H-%M-%S')
+              tags="${image_name}:devel-${base},${image_name}:devel-${base}-${devel_timestamp}";
+            elif [ "${ref_name}" = "main" ]; then
+              echo "main branch";
+              tags="${image_name}:main-${base}";
+              main_date=$(TZ=Europe/Rome date '+%Y-%m-%d')
+              tags="$tags,${image_name}:main-${base}-${main_date}";
+              tags="$tags,${image_name}:main-${base}-${upmpdcli_version}";
+              tags="$tags,${image_name}:main-${base}-${upmpdcli_version}-${select_date}";
+            fi
+          elif [ "${ref_type}" = "tag" ]; then
+            echo "tag mode";
+            echo "tag is ["${ref_name}"]";
+            release=${ref_name}
+            tags="${image_name}:${base}";
+            tags="$tags,${image_name}:${base}-${release}";
+            tags="$tags,${image_name}:${base}-${upmpdcli_version}";
+            tags="$tags,${image_name}:${base}-${upmpdcli_version}-${release}";
+            if [ "${base}" = "${latest}" ]; then
+              tags="$tags,${image_name}:${tag_latest}";
+            fi
+            if [ "${base}" = "${stable}" ]; then
+              tags="$tags,${image_name}:${tag_stable}";
+>>>>>>> devel
             fi
           fi
           echo "Building tags: ["${tags}"]"
           echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
           echo "BASE_IMAGE=${select_base_image}" >> $GITHUB_ENV
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
         with:
           platforms: all
+
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
+
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
