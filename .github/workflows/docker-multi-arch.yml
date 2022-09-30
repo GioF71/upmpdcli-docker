@@ -65,15 +65,11 @@ jobs:
           tags=""
           if [ "${ref_name}" = "devel" ]; then
             echo "devel branch mode";
-            devel_ts=$(TZ=Europe/Rome date '+%Y-%m-%d-%H-%M-%S')
-            tags="${image_name}:devel-${base},${image_name}:devel-${base}-${devel_ts}";
+            tags="${image_name}:devel-${base},${image_name}:devel-${base}";
           elif [ "${ref_name}" = "main" ]; then
             echo "main branch mode";
             tags="${image_name}:main-${base}";
-            select_date=$(TZ=Europe/Rome date '+%Y-%m-%d')
-            tags="$tags,${image_name}:main-${base}-${select_date}";
             tags="$tags,${image_name}:main-${base}-${upmpdcli_version}";
-            tags="$tags,${image_name}:main-${base}-${upmpdcli_version}-${select_date}";
           else
             echo "tag mode";
             echo "tag is ["${ref_name}"]";
