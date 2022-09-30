@@ -2,11 +2,11 @@ name: Publish multi-arch Docker images
 
 on:
   push:
-    branches:
-      - main
-      - devel
     tags:
-      - "*"
+      - "release/*"
+      - "main/*"
+      - "devel/*"
+      - "feature/*"
 
 jobs:
   release:
@@ -19,20 +19,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Branch used
-        id: extract_branch
-        run: |
-          if [[ "${GITHUB_EVENT_NAME}" == "push" ]]; then
-            echo "::set-output name=branch::$(echo ${GITHUB_REF##*/})"
-          elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
-            echo "::set-output name=branch::$(echo $GITHUB_BASE_REF)"
-          else
-            echo "::set-output name=branch::INVALID_EVENT_BRANCH_UNKNOWN"
-          fi
+
       - name: Set Release Tag
         run: |
-          branch_or_tag=${{ github.ref_name }}
-          echo "Branch or tag: ["$branch_or_tag"]"
+          ref_type=${{ github.ref_type }}
+          echo "REF_TYPE: ["$ref_type"]"
+
+          ref_name=${{ github.ref_name }}
+          echo "REF_NAME: ["$ref_name"]"
+
+          ref=${{ github.ref }}
+          echo "REF: ["$ref"]"
 
           declare -A base_images
           base_images[jammy]=ubuntu:jammy
@@ -71,28 +68,47 @@ jobs:
 
           tags=""
           if [ "${ref_name}" = "devel" ]; then
-            echo "devel mode";
+            echo "devel branch mode";
             devel_ts=$(TZ=Europe/Rome date '+%Y-%m-%d-%H-%M-%S')
             tags="${image_name}:devel-${base},${image_name}:devel-${base}-${devel_ts}";
           elif [ "${ref_name}" = "main" ]; then
-            echo "main mode";
+            echo "main branch mode";
             tags="${image_name}:main-${base}";
             tags="$tags,${image_name}:main-${base}-${select_date}";
             tags="$tags,${image_name}:main-${base}-${upmpdcli_version}";
             tags="$tags,${image_name}:main-${base}-${upmpdcli_version}-${select_date}";
           else
             echo "tag mode";
-            release=${branch_or_tag}
-            tags="${image_name}:${base}";
-            tags="$tags,${image_name}:${base}-${release}";
-            tags="$tags,${image_name}:${base}-${upmpdcli_version}";
-            tags="$tags,${image_name}:${base}-${upmpdcli_version}-${release}";
-            if [ "${base}" = "${latest}" ]; then
-              tags="$tags,${image_name}:${tag_latest}";
+            echo "tag is ["${ref_name}"]";
+
+            tag_type=$(echo ${ref_name} | cut -d '/' -f 1)
+            tag_name=$(echo ${ref_name} | cut -d '/' -f 2) 
+
+            release=${tag_name}
+
+            if [ "${tag_type}" = "release" ]; then
+              echo "release tag";
+              tags="${image_name}:${base}";
+              tags="$tags,${image_name}:${base}-${release}";
+              tags="$tags,${image_name}:${base}-${upmpdcli_version}";
+              tags="$tags,${image_name}:${base}-${upmpdcli_version}-${release}";
+              if [ "${base}" = "${latest}" ]; then
+                tags="$tags,${image_name}:${tag_latest}";
+              fi
+              if [ "${base}" = "${stable}" ]; then
+                tags="$tags,${image_name}:${tag_stable}";
+              fi
+            elif [ "${tag_type}" = "main" ]; then
+              echo "main tag";
+              tags="${image_name}:main-${tag_name}-${base}";
+            elif [ "${tag_type}" = "devel" ]; then
+              echo "devel tag";
+              tags="${image_name}:devel-${tag_name}-${base}";
+            elif [ "${tag_type}" = "feature" ]; then
+              echo "feature tag";
+              tags="${image_name}:feature-${tag_name}-${base}";
             fi
-            if [ "${base}" = "${stable}" ]; then
-              tags="$tags,${image_name}:${tag_stable}";
-            fi
+
           fi
           echo "Building tags: ["${tags}"]"
           echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
