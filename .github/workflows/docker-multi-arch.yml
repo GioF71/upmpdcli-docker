@@ -101,7 +101,6 @@ jobs:
               echo "feature tag";
               tags="${image_name}:feature-${tag_name}-${base}";
             fi
-
           fi
           echo "Building tags: ["${tags}"]"
           echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
