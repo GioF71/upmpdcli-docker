@@ -1,6 +1,6 @@
-ARG USE_APT_PROXY
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
+ARG USE_APT_PROXY
 
 RUN mkdir -p /app
 RUN mkdir -p /app/conf
