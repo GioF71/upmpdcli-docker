@@ -63,7 +63,6 @@ jobs:
           echo "upmpdcli_version=["$upmpdcli_version"]"
 
           tags=""
-<<<<<<< HEAD
           if [ "${ref_name}" = "devel" ]; then
             echo "devel branch mode";
             tags="${image_name}:devel-${base},${image_name}:devel-${base}";
@@ -101,35 +100,6 @@ jobs:
             elif [ "${tag_type}" = "feature" ]; then
               echo "feature tag";
               tags="${image_name}:feature-${tag_name}-${base}";
-=======
-          if [ "${ref_type}" = "branch" ]; then
-            echo "branch mode";
-            if [ "${ref_name}" = "devel" ]; then
-              echo "devel branch";
-              devel_timestamp=$(TZ=Europe/Rome date '+%Y-%m-%d-%H-%M-%S')
-              tags="${image_name}:devel-${base},${image_name}:devel-${base}-${devel_timestamp}";
-            elif [ "${ref_name}" = "main" ]; then
-              echo "main branch";
-              tags="${image_name}:main-${base}";
-              main_date=$(TZ=Europe/Rome date '+%Y-%m-%d')
-              tags="$tags,${image_name}:main-${base}-${main_date}";
-              tags="$tags,${image_name}:main-${base}-${upmpdcli_version}";
-              tags="$tags,${image_name}:main-${base}-${upmpdcli_version}-${select_date}";
-            fi
-          elif [ "${ref_type}" = "tag" ]; then
-            echo "tag mode";
-            echo "tag is ["${ref_name}"]";
-            release=${ref_name}
-            tags="${image_name}:${base}";
-            tags="$tags,${image_name}:${base}-${release}";
-            tags="$tags,${image_name}:${base}-${upmpdcli_version}";
-            tags="$tags,${image_name}:${base}-${upmpdcli_version}-${release}";
-            if [ "${base}" = "${latest}" ]; then
-              tags="$tags,${image_name}:${tag_latest}";
-            fi
-            if [ "${base}" = "${stable}" ]; then
-              tags="$tags,${image_name}:${tag_stable}";
->>>>>>> devel
             fi
           fi
           echo "Building tags: ["${tags}"]"
