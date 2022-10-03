@@ -131,32 +131,24 @@ else
             sed -i 's/UPRCL_HOSTPORT/'"$UPRCL_HOSTPORT"'/g' $CONFIG_FILE;
         fi
     fi
-
     cat $CONFIG_FILE
 fi
 
 if [ "$ENABLE_UPRCL" == "yes" ]; then
-
     echo "UPRCL is enabled, creating user ...";
-
     DEFAULT_UID=1000
     DEFAULT_GID=1000
-
     if [ -z "${PUID}" ]; then
-    PUID=$DEFAULT_UID;
-    echo "Setting default value for PUID: ["$PUID"]"
+        PUID=$DEFAULT_UID;
+        echo "Setting default value for PUID: ["$PUID"]"
     fi
-
     if [ -z "${PGID}" ]; then
-    PGID=$DEFAULT_GID;
-    echo "Setting default value for PGID: ["$PGID"]"
+        PGID=$DEFAULT_GID;
+        echo "Setting default value for PGID: ["$PGID"]"
     fi
-
     USER_NAME=upmpd-user
     GROUP_NAME=upmpd-user
-
     HOME_DIR=/home/$USER_NAME
-
     ### create home directory and ancillary directories
     if [ ! -d "$HOME_DIR" ]; then
     echo "Home directory [$HOME_DIR] not found, creating."
@@ -165,28 +157,23 @@ if [ "$ENABLE_UPRCL" == "yes" ]; then
     ls -la $HOME_DIR -d
     ls -la $HOME_DIR
     fi
-
     ### create group
     if [ ! $(getent group $GROUP_NAME) ]; then
-    echo "group $GROUP_NAME does not exist, creating..."
-    groupadd -g $PGID $GROUP_NAME
+        echo "group $GROUP_NAME does not exist, creating..."
+        groupadd -g $PGID $GROUP_NAME
     else
-    echo "group $GROUP_NAME already exists."
+        echo "group $GROUP_NAME already exists."
     fi
-
     ### create user
     if [ ! $(getent passwd $USER_NAME) ]; then
-    echo "user $USER_NAME does not exist, creating..."
-    useradd -g $PGID -u $PUID -s /bin/bash -M -d $HOME_DIR $USER_NAME
-    id $USER_NAME
-    echo "user $USER_NAME created."
+        echo "user $USER_NAME does not exist, creating..."
+        useradd -g $PGID -u $PUID -s /bin/bash -M -d $HOME_DIR $USER_NAME
+        id $USER_NAME
+        echo "user $USER_NAME created."
     else
-    echo "user $USER_NAME already exists."
+        echo "user $USER_NAME already exists."
     fi
-
     echo "UPRCL is enabled, create $USER_NAME (group: $GROUP_NAME)";
-
-
 fi
 
 echo "About to sleep for $STARTUP_DELAY_SEC second(s)"
@@ -200,4 +187,3 @@ if [ "$ENABLE_UPRCL" == "yes" ]; then
 else
     eval $CMD_LINE
 fi
-
