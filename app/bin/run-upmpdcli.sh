@@ -114,6 +114,10 @@ else
     echo "ENABLE_UPRCL [$ENABLE_UPRCL]"
     if [ "$ENABLE_UPRCL" == "yes" ]; then
         sed -i 's/\#uprclconfdir/uprclconfdir/g' $CONFIG_FILE;
+        echo "enabling uprclconfdir"
+        sed -i 's/#uprclconfdir/'"uprclconfdir"'/g' $CONFIG_FILE;
+        echo "enabling uprclmediadirs"
+        sed -i 's/#uprclmediadirs/'"uprclmediadirs"'/g' $CONFIG_FILE;
         # set UPRCL_USER if not empty
         echo "UPRCL_USER [$UPRCL_USER]"
         if [ -n "${UPRCL_USER}" ]; then
@@ -127,20 +131,63 @@ else
             sed -i 's/#uprclhostport/'"uprclhostport"'/g' $CONFIG_FILE;
             sed -i 's/UPRCL_HOSTPORT/'"$UPRCL_HOSTPORT"'/g' $CONFIG_FILE;
         fi
-        echo "UPRCL_MEDIADIRS [$UPRCL_MEDIADIRS]"
-        if [ -n "${UPRCL_MEDIADIRS}" ]; then
-            echo "Setting uprclmediadirs $UPRCL_MEDIADIRS"
-            sed -i 's/#uprclmediadirs/'"uprclmediadirs"'/g' $CONFIG_FILE;
-            sed -i 's/UPRCL_MEDIADIRS/'"$UPRCL_MEDIADIRS"'/g' $CONFIG_FILE;
-        fi
     fi
 
     cat $CONFIG_FILE
+fi
+
+DEFAULT_UID=1000
+DEFAULT_GID=1000
+
+if [ -z "${PUID}" ]; then
+  PUID=$DEFAULT_UID;
+  echo "Setting default value for PUID: ["$PUID"]"
+fi
+
+if [ -z "${PGID}" ]; then
+  PGID=$DEFAULT_GID;
+  echo "Setting default value for PGID: ["$PGID"]"
+fi
+
+USER_NAME=sq-pulse
+GROUP_NAME=sq-pulse
+
+HOME_DIR=/home/$USER_NAME
+
+#cat /etc/passwd
+
+### create home directory and ancillary directories
+if [ ! -d "$HOME_DIR" ]; then
+  echo "Home directory [$HOME_DIR] not found, creating."
+  mkdir -p $HOME_DIR
+  chown -R $PUID:$PGID $HOME_DIR
+  ls -la $HOME_DIR -d
+  ls -la $HOME_DIR
+fi
+
+### create group
+if [ ! $(getent group $GROUP_NAME) ]; then
+  echo "group $GROUP_NAME does not exist, creating..."
+  groupadd -g $PGID $GROUP_NAME
+else
+  echo "group $GROUP_NAME already exists."
+fi
+
+### create user
+if [ ! $(getent passwd $USER_NAME) ]; then
+  echo "user $USER_NAME does not exist, creating..."
+  useradd -g $PGID -u $PUID -s /bin/bash -M -d $HOME_DIR $USER_NAME
+  id $USER_NAME
+  echo "user $USER_NAME created."
+else
+  echo "user $USER_NAME already exists."
 fi
 
 echo "About to sleep for $STARTUP_DELAY_SEC second(s)"
 sleep $STARTUP_DELAY_SEC
 echo "Ready to start."
 
-/usr/bin/upmpdcli -c $CONFIG_FILE
+CMD_LINE="/usr/bin/upmpdcli -c $CONFIG_FILE"
+
+su - $USER_NAME -c "$CMD_LINE"
 

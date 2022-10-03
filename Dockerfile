@@ -51,7 +51,6 @@ ENV UPNPPORT ""
 ENV ENABLE_UPRCL ""
 ENV UPRCL_USER ""
 ENV UPRCL_HOSTPORT ""
-ENV UPRCL_MEDIADIRS ""
 
 ENV TIDAL_ENABLE no
 ENV TIDAL_USERNAME tidal_username
@@ -64,7 +63,13 @@ ENV QOBUZ_USERNAME qobuz_username
 ENV QOBUZ_PASSWORD qobuz_password
 ENV QOBUZ_FORMAT_ID 5
 
+ENV PUID ""
+ENV PGID ""
+
 ENV STARTUP_DELAY_SEC 0
+
+VOLUME /uprcl/confdir
+VOLUME /uprcl/mediadirs
 
 COPY app/conf/upmpdcli.conf /app/conf/upmpdcli.conf
 
