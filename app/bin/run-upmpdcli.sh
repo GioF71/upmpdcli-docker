@@ -103,13 +103,6 @@ else
         sed -i 's/QOBUZ_PASSWORD/'"$QOBUZ_PASSWORD"'/g' $CONFIG_FILE;
         sed -i 's/QOBUZ_FORMAT_ID/'"$QOBUZ_FORMAT_ID"'/g' $CONFIG_FILE;
     fi
-#    if [ -z "${UPRCL_MEDIADIRS}" ]; then
-#        echo "Variable UPRCL_MEDIADIRS not specified";
-#    else
-#        echo "Variable UPRCL_MEDIADIRS has been specified specified: [$UPRCL_MEDIADIRS]";
-#        sed -i 's/\#uprclmediadirs/uprclmediadirs/g' $CONFIG_FILE;
-#        sed -i 's/UPRCL_MEDIADIRS/'"$UPRCL_MEDIADIRS"'/g' $CONFIG_FILE;
-#    fi
 
     echo "ENABLE_UPRCL [$ENABLE_UPRCL]"
     if [ "$ENABLE_UPRCL" == "yes" ]; then
@@ -119,6 +112,12 @@ else
         echo "enabling uprclmediadirs"
         sed -i 's/#uprclmediadirs/'"uprclmediadirs"'/g' $CONFIG_FILE;
         # set UPRCL_USER if not empty
+        echo "UPRCL_TITLE [$UPRCL_TITLE]"
+        if [ -n "${UPRCL_TITLE}" ]; then
+            echo "Setting uprcltitle $UPRCL_TITLE"
+            sed -i 's/#uprcltitle/'"uprcltitle"'/g' $CONFIG_FILE;
+            sed -i 's/UPRCL_TITLE/'"$UPRCL_TITLE"'/g' $CONFIG_FILE;
+        fi
         echo "UPRCL_USER [$UPRCL_USER]"
         if [ -n "${UPRCL_USER}" ]; then
             echo "Setting uprcluser $UPRCL_USER"
@@ -149,8 +148,8 @@ if [ -z "${PGID}" ]; then
   echo "Setting default value for PGID: ["$PGID"]"
 fi
 
-USER_NAME=sq-pulse
-GROUP_NAME=sq-pulse
+USER_NAME=upmpd-user
+GROUP_NAME=upmpd-user
 
 HOME_DIR=/home/$USER_NAME
 
