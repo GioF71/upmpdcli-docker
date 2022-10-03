@@ -112,7 +112,7 @@ Change Date|Major Changes
 ---|---
 2022-10-03|Add support for Uprcl
 2022-09-30|Dropped focal build (due to a build error, to be investigated)
-2022-09-30|Build process review: build enabled on on tag push
+2022-09-30|Build process review: build enabled on tag push
 2022-09-26|Moved file 01proxy to app/conf
 2022-09-26|Build process reviewed
 2022-09-26|Restored Qobuz and Tidal placeholders ([issue #5](https://github.com/GioF71/upmpdcli-docker/issues/5))
