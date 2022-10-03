@@ -48,6 +48,11 @@ ENV MPD_PORT ""
 ENV UPNPIFACE ""
 ENV UPNPPORT ""
 
+ENV ENABLE_UPRCL ""
+ENV UPRCL_USER ""
+ENV UPRCL_HOSTPORT ""
+ENV UPRCL_TITLE "Local Music"
+
 ENV TIDAL_ENABLE no
 ENV TIDAL_USERNAME tidal_username
 ENV TIDAL_PASSWORD tidal_password
@@ -59,12 +64,13 @@ ENV QOBUZ_USERNAME qobuz_username
 ENV QOBUZ_PASSWORD qobuz_password
 ENV QOBUZ_FORMAT_ID 5
 
+ENV PUID ""
+ENV PGID ""
+
 ENV STARTUP_DELAY_SEC 0
 
-#ENV UPRCL_MEDIADIRS ""
-
-VOLUME /var/cache/upmpdcli
-#VOLUME /media-dir
+VOLUME /uprcl/confdir
+VOLUME /uprcl/mediadirs
 
 COPY app/conf/upmpdcli.conf /app/conf/upmpdcli.conf
 
