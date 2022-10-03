@@ -129,7 +129,7 @@ else
         fi
         echo "UPRCL_MEDIADIRS [$UPRCL_MEDIADIRS]"
         if [ -n "${UPRCL_MEDIADIRS}" ]; then
-            echo "Setting uprclhostport $UPRCL_MEDIADIRS"
+            echo "Setting uprclmediadirs $UPRCL_MEDIADIRS"
             sed -i 's/#uprclmediadirs/'"uprclmediadirs"'/g' $CONFIG_FILE;
             sed -i 's/UPRCL_MEDIADIRS/'"$UPRCL_MEDIADIRS"'/g' $CONFIG_FILE;
         fi
