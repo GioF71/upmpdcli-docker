@@ -135,51 +135,58 @@ else
     cat $CONFIG_FILE
 fi
 
-DEFAULT_UID=1000
-DEFAULT_GID=1000
+if [ "$ENABLE_UPRCL" == "yes" ]; then
 
-if [ -z "${PUID}" ]; then
-  PUID=$DEFAULT_UID;
-  echo "Setting default value for PUID: ["$PUID"]"
-fi
+    echo "UPRCL is enabled, creating user ...";
 
-if [ -z "${PGID}" ]; then
-  PGID=$DEFAULT_GID;
-  echo "Setting default value for PGID: ["$PGID"]"
-fi
+    DEFAULT_UID=1000
+    DEFAULT_GID=1000
 
-USER_NAME=upmpd-user
-GROUP_NAME=upmpd-user
+    if [ -z "${PUID}" ]; then
+    PUID=$DEFAULT_UID;
+    echo "Setting default value for PUID: ["$PUID"]"
+    fi
 
-HOME_DIR=/home/$USER_NAME
+    if [ -z "${PGID}" ]; then
+    PGID=$DEFAULT_GID;
+    echo "Setting default value for PGID: ["$PGID"]"
+    fi
 
-#cat /etc/passwd
+    USER_NAME=upmpd-user
+    GROUP_NAME=upmpd-user
 
-### create home directory and ancillary directories
-if [ ! -d "$HOME_DIR" ]; then
-  echo "Home directory [$HOME_DIR] not found, creating."
-  mkdir -p $HOME_DIR
-  chown -R $PUID:$PGID $HOME_DIR
-  ls -la $HOME_DIR -d
-  ls -la $HOME_DIR
-fi
+    HOME_DIR=/home/$USER_NAME
 
-### create group
-if [ ! $(getent group $GROUP_NAME) ]; then
-  echo "group $GROUP_NAME does not exist, creating..."
-  groupadd -g $PGID $GROUP_NAME
-else
-  echo "group $GROUP_NAME already exists."
-fi
+    ### create home directory and ancillary directories
+    if [ ! -d "$HOME_DIR" ]; then
+    echo "Home directory [$HOME_DIR] not found, creating."
+    mkdir -p $HOME_DIR
+    chown -R $PUID:$PGID $HOME_DIR
+    ls -la $HOME_DIR -d
+    ls -la $HOME_DIR
+    fi
 
-### create user
-if [ ! $(getent passwd $USER_NAME) ]; then
-  echo "user $USER_NAME does not exist, creating..."
-  useradd -g $PGID -u $PUID -s /bin/bash -M -d $HOME_DIR $USER_NAME
-  id $USER_NAME
-  echo "user $USER_NAME created."
-else
-  echo "user $USER_NAME already exists."
+    ### create group
+    if [ ! $(getent group $GROUP_NAME) ]; then
+    echo "group $GROUP_NAME does not exist, creating..."
+    groupadd -g $PGID $GROUP_NAME
+    else
+    echo "group $GROUP_NAME already exists."
+    fi
+
+    ### create user
+    if [ ! $(getent passwd $USER_NAME) ]; then
+    echo "user $USER_NAME does not exist, creating..."
+    useradd -g $PGID -u $PUID -s /bin/bash -M -d $HOME_DIR $USER_NAME
+    id $USER_NAME
+    echo "user $USER_NAME created."
+    else
+    echo "user $USER_NAME already exists."
+    fi
+
+    echo "UPRCL is enabled, create $USER_NAME (group: $GROUP_NAME)";
+
+
 fi
 
 echo "About to sleep for $STARTUP_DELAY_SEC second(s)"
@@ -188,5 +195,9 @@ echo "Ready to start."
 
 CMD_LINE="/usr/bin/upmpdcli -c $CONFIG_FILE"
 
-su - $USER_NAME -c "$CMD_LINE"
+if [ "$ENABLE_UPRCL" == "yes" ]; then
+    su - $USER_NAME -c "$CMD_LINE"
+else
+    eval $CMD_LINE
+fi
 
