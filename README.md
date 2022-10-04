@@ -59,10 +59,14 @@ Note that we have used the *MPD_HOST* environment variable so that upmpdcli can 
 
 We also need to use the *host* network so the upnp renderer can be discovered on your network.
 
+### Environment variables
+
 The following tables reports all the currently supported environment variables.
 
 VARIABLE|DEFAULT|NOTES
 ---|---|---
+PUID|1000|User id. Used only when UPRCL is enabled
+PGID|1000|Group id. Used only when UPRCL is enabled
 MPD_HOST|localhost|The host where mpd runs
 MPD_PORT|6600|The port used by mpd
 UPNPIFACE||UPnP network interface
@@ -71,6 +75,10 @@ UPMPD_FRIENDLY_NAME|upmpd|Name of the upnpd renderer
 AV_FRIENDLY_NAME|upmpd-av|Name of the upnpd renderer (av mode)
 UPNPAV|1|Enable UPnP AV services (0/1)
 OPENHOME|1|Enable OpenHome services (0/1)
+ENABLE_UPRCL||Enable local music support (uprcl). Set to `yes` to enable
+UPCRL_USER||User for uprcl
+UPRCL_HOSTPORT||Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
+UPRCL_TITLE|Local Music|Title for the media server
 TIDAL_ENABLE|no|Set to yes to enable Tidal support
 TIDAL_USERNAME|tidal_username|Your Tidal account username
 TIDAL_PASSWORD|tidal_password|Your Tidal account password
@@ -81,6 +89,13 @@ QOBUZ_USERNAME|qobuz_username|Your Qobuz account username
 QOBUZ_PASSWORD|qobuz_password|Your Qobuz account password
 QOBUZ_FORMAT_ID|5|Qobuz format id: 5 for mp3, 7 for FLAC, 27 for hi-res
 STARTUP_DELAY_SEC|0| Delay before starting the application. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite if all those services run on the same audio device. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience.
+
+### Volumes
+
+Volume|Description
+:---|:---
+/uprcl/confdir|Uprcl configuration directory
+/uprcl/mediadirs|Uprcl media directories
 
 ## Build
 
@@ -95,8 +110,9 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-10-03|Add support for Uprcl
 2022-09-30|Dropped focal build (due to a build error, to be investigated)
-2022-09-30|Build process review: build enabled on on tag push
+2022-09-30|Build process review: build enabled on tag push
 2022-09-26|Moved file 01proxy to app/conf
 2022-09-26|Build process reviewed
 2022-09-26|Restored Qobuz and Tidal placeholders ([issue #5](https://github.com/GioF71/upmpdcli-docker/issues/5))

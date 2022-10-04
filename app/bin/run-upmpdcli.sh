@@ -81,7 +81,7 @@ else
         sed -i 's/MPD_PORT/'"$MPD_PORT"'/g' $CONFIG_FILE;
     fi
 
-    echo "Tidal Enable: $TIDAL_ENABLE"
+    echo "Tidal Enable [$TIDAL_ENABLE]"
     if [ "$TIDAL_ENABLE" == "yes" ]; then
         echo "Processing Tidal settings";
         sed -i 's/\#tidaluser/tidaluser/g' $CONFIG_FILE;
@@ -93,7 +93,7 @@ else
         sed -i 's/TIDAL_API_TOKEN/'"$TIDAL_API_TOKEN"'/g' $CONFIG_FILE;
         sed -i 's/TIDAL_QUALITY/'"$TIDAL_QUALITY"'/g' $CONFIG_FILE;
     fi
-    echo "Qobuz Enable: $QOBUZ_ENABLE"
+    echo "Qobuz Enable [$QOBUZ_ENABLE]"
     if [ "$QOBUZ_ENABLE" == "yes" ]; then
         echo "Processing Qobuz settings";
         sed -i 's/\#qobuzuser/qobuzuser/g' $CONFIG_FILE;
@@ -103,19 +103,87 @@ else
         sed -i 's/QOBUZ_PASSWORD/'"$QOBUZ_PASSWORD"'/g' $CONFIG_FILE;
         sed -i 's/QOBUZ_FORMAT_ID/'"$QOBUZ_FORMAT_ID"'/g' $CONFIG_FILE;
     fi
-#    if [ -z "${UPRCL_MEDIADIRS}" ]; then
-#        echo "Variable UPRCL_MEDIADIRS not specified";
-#    else
-#        echo "Variable UPRCL_MEDIADIRS has been specified specified: [$UPRCL_MEDIADIRS]";
-#        sed -i 's/\#uprclmediadirs/uprclmediadirs/g' $CONFIG_FILE;
-#        sed -i 's/UPRCL_MEDIADIRS/'"$UPRCL_MEDIADIRS"'/g' $CONFIG_FILE;
-#    fi
+
+    echo "ENABLE_UPRCL [$ENABLE_UPRCL]"
+    if [ "$ENABLE_UPRCL" == "yes" ]; then
+        sed -i 's/\#uprclconfdir/uprclconfdir/g' $CONFIG_FILE;
+        echo "enabling uprclconfdir"
+        sed -i 's/#uprclconfdir/'"uprclconfdir"'/g' $CONFIG_FILE;
+        echo "enabling uprclmediadirs"
+        sed -i 's/#uprclmediadirs/'"uprclmediadirs"'/g' $CONFIG_FILE;
+        # set UPRCL_USER if not empty
+        echo "UPRCL_TITLE [$UPRCL_TITLE]"
+        if [ -n "${UPRCL_TITLE}" ]; then
+            echo "Setting uprcltitle $UPRCL_TITLE"
+            sed -i 's/#uprcltitle/'"uprcltitle"'/g' $CONFIG_FILE;
+            sed -i 's/UPRCL_TITLE/'"$UPRCL_TITLE"'/g' $CONFIG_FILE;
+        fi
+        echo "UPRCL_USER [$UPRCL_USER]"
+        if [ -n "${UPRCL_USER}" ]; then
+            echo "Setting uprcluser $UPRCL_USER"
+            sed -i 's/#uprcluser/'"uprcluser"'/g' $CONFIG_FILE;
+            sed -i 's/UPRCL_USER/'"$UPRCL_USER"'/g' $CONFIG_FILE;
+        fi
+        echo "UPRCL_HOSTPORT [$UPRCL_HOSTPORT]"
+        if [ -n "${UPRCL_HOSTPORT}" ]; then
+            echo "Setting uprclhostport $UPRCL_HOSTPORT"
+            sed -i 's/#uprclhostport/'"uprclhostport"'/g' $CONFIG_FILE;
+            sed -i 's/UPRCL_HOSTPORT/'"$UPRCL_HOSTPORT"'/g' $CONFIG_FILE;
+        fi
+    fi
     cat $CONFIG_FILE
+fi
+
+if [ "$ENABLE_UPRCL" == "yes" ]; then
+    echo "UPRCL is enabled, creating user ...";
+    DEFAULT_UID=1000
+    DEFAULT_GID=1000
+    if [ -z "${PUID}" ]; then
+        PUID=$DEFAULT_UID;
+        echo "Setting default value for PUID: ["$PUID"]"
+    fi
+    if [ -z "${PGID}" ]; then
+        PGID=$DEFAULT_GID;
+        echo "Setting default value for PGID: ["$PGID"]"
+    fi
+    USER_NAME=upmpd-user
+    GROUP_NAME=upmpd-user
+    HOME_DIR=/home/$USER_NAME
+    ### create home directory and ancillary directories
+    if [ ! -d "$HOME_DIR" ]; then
+    echo "Home directory [$HOME_DIR] not found, creating."
+    mkdir -p $HOME_DIR
+    chown -R $PUID:$PGID $HOME_DIR
+    ls -la $HOME_DIR -d
+    ls -la $HOME_DIR
+    fi
+    ### create group
+    if [ ! $(getent group $GROUP_NAME) ]; then
+        echo "group $GROUP_NAME does not exist, creating..."
+        groupadd -g $PGID $GROUP_NAME
+    else
+        echo "group $GROUP_NAME already exists."
+    fi
+    ### create user
+    if [ ! $(getent passwd $USER_NAME) ]; then
+        echo "user $USER_NAME does not exist, creating..."
+        useradd -g $PGID -u $PUID -s /bin/bash -M -d $HOME_DIR $USER_NAME
+        id $USER_NAME
+        echo "user $USER_NAME created."
+    else
+        echo "user $USER_NAME already exists."
+    fi
+    echo "UPRCL is enabled, create $USER_NAME (group: $GROUP_NAME)";
 fi
 
 echo "About to sleep for $STARTUP_DELAY_SEC second(s)"
 sleep $STARTUP_DELAY_SEC
 echo "Ready to start."
 
-/usr/bin/upmpdcli -c $CONFIG_FILE
+CMD_LINE="/usr/bin/upmpdcli -c $CONFIG_FILE"
 
+if [ "$ENABLE_UPRCL" == "yes" ]; then
+    su - $USER_NAME -c "$CMD_LINE"
+else
+    eval $CMD_LINE
+fi
