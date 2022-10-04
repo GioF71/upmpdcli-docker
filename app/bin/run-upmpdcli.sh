@@ -130,6 +130,12 @@ else
             sed -i 's/#uprclhostport/'"uprclhostport"'/g' $CONFIG_FILE;
             sed -i 's/UPRCL_HOSTPORT/'"$UPRCL_HOSTPORT"'/g' $CONFIG_FILE;
         fi
+        echo "UPRCL_AUTOSTART [$UPRCL_AUTOSTART]"
+        if [ -n "${UPRCL_AUTOSTART}" ]; then
+            echo "Setting uprclautostart $UPRCL_AUTOSTART"
+            sed -i 's/#uprclautostart/'"uprclautostart"'/g' $CONFIG_FILE;
+            sed -i 's/UPRCL_AUTOSTART/'"$UPRCL_AUTOSTART"'/g' $CONFIG_FILE;
+        fi
     fi
     cat $CONFIG_FILE
 fi
