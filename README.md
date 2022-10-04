@@ -110,6 +110,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-10-04|Add support for UPRCL_AUTOSTART (uprclautostart)
 2022-10-03|Add support for Uprcl
 2022-09-30|Dropped focal build (due to a build error, to be investigated)
 2022-09-30|Build process review: build enabled on tag push
