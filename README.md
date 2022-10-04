@@ -76,6 +76,7 @@ AV_FRIENDLY_NAME|upmpd-av|Name of the upnpd renderer (av mode)
 UPNPAV|1|Enable UPnP AV services (0/1)
 OPENHOME|1|Enable OpenHome services (0/1)
 ENABLE_UPRCL||Enable local music support (uprcl). Set to `yes` to enable
+UPRCL_AUTOSTART||Autostart UPRCL if set to `1`
 UPCRL_USER||User for uprcl
 UPRCL_HOSTPORT||Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
 UPRCL_TITLE|Local Music|Title for the media server
