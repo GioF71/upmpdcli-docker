@@ -77,7 +77,7 @@ UPNPAV|1|Enable UPnP AV services (0/1)
 OPENHOME|1|Enable OpenHome services (0/1)
 ENABLE_UPRCL||Enable local music support (uprcl). Set to `yes` to enable
 UPCRL_USER||User for uprcl
-UPRCL_HOSTPORT||Hostname and port for uprcl
+UPRCL_HOSTPORT||Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
 UPRCL_TITLE|Local Music|Title for the media server
 TIDAL_ENABLE|no|Set to yes to enable Tidal support
 TIDAL_USERNAME|tidal_username|Your Tidal account username
