@@ -81,6 +81,24 @@ else
         sed -i 's/MPD_PORT/'"$MPD_PORT"'/g' $CONFIG_FILE;
     fi
 
+    echo "PLG_MICRO_HTTP_HOST=["$PLG_MICRO_HTTP_HOST"]"
+    if [ -z "${PLG_MICRO_HTTP_HOST}" ]; then
+        echo "PLG_MICRO_HTTP_HOST not set"
+    else 
+        echo "Setting PLG_MICRO_HTTP_HOST to ["$PLG_MICRO_HTTP_HOST"]"
+        sed -i 's/\#plgmicrohttphost/plgmicrohttphost/g' $CONFIG_FILE;
+        sed -i 's/PLG_MICRO_HTTP_HOST/'"$PLG_MICRO_HTTP_HOST"'/g' $CONFIG_FILE;
+    fi
+
+    echo "PLG_MICRO_HTTP_PORT=["$PLG_MICRO_HTTP_PORT"]"
+    if [ -z "${PLG_MICRO_HTTP_PORT}" ]; then
+        echo "PLG_MICRO_HTTP_PORT not set"
+    else 
+        echo "Setting PLG_MICRO_HTTP_PORT to ["$PLG_MICRO_HTTP_PORT"]"
+        sed -i 's/\#plgmicrohttpport/plgmicrohttpport/g' $CONFIG_FILE;
+        sed -i 's/PLG_MICRO_HTTP_PORT/'"$PLG_MICRO_HTTP_PORT"'/g' $CONFIG_FILE;
+    fi
+
     echo "Tidal Enable [$TIDAL_ENABLE]"
     if [ "$TIDAL_ENABLE" == "yes" ]; then
         echo "Processing Tidal settings";
