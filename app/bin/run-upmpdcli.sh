@@ -121,6 +121,8 @@ replace_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmic
 #    sed -i 's/PLG_MICRO_HTTP_PORT/'"$PLG_MICRO_HTTP_PORT"'/g' $CONFIG_FILE;
 #fi
 
+replace_parameter $CONFIG_FILE MEDIA_SERVER_FRIENDLY_NAME "$MEDIA_SERVER_FRIENDLY_NAME" msfriendlyname
+
 echo "Tidal Enable [$TIDAL_ENABLE]"
 if [ "$TIDAL_ENABLE" == "yes" ]; then
     echo "Processing Tidal settings";
