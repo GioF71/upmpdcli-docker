@@ -71,15 +71,15 @@ replace_parameter $CONFIG_FILE OPENHOME $OPENHOME openhome
 #    sed -i 's/OPENHOME/'"$OPENHOME"'/g' $CONFIG_FILE;
 #fi
 
-#replace_parameter $CONFIG_FILE AV_FRIENDLY_NAME $AV_FRIENDLY_NAME avfriendlyname
-echo "AV_FRIENDLY_NAME=["$AV_FRIENDLY_NAME"]"
-if [ -z "${AV_FRIENDLY_NAME}" ]; then
-    echo "AV_FRIENDLY_NAME not set"
-else 
-    echo "Setting AV_FRIENDLY_NAME to ["$AV_FRIENDLY_NAME"]"
-    sed -i 's/\#avfriendlyname/avfriendlyname/g' $CONFIG_FILE;
-    sed -i 's/AV_FRIENDLY_NAME/'"$AV_FRIENDLY_NAME"'/g' $CONFIG_FILE;
-fi
+replace_parameter $CONFIG_FILE AV_FRIENDLY_NAME $AV_FRIENDLY_NAME avfriendlyname
+#echo "AV_FRIENDLY_NAME=["$AV_FRIENDLY_NAME"]"
+#if [ -z "${AV_FRIENDLY_NAME}" ]; then
+#    echo "AV_FRIENDLY_NAME not set"
+#else 
+#    echo "Setting AV_FRIENDLY_NAME to ["$AV_FRIENDLY_NAME"]"
+#    sed -i 's/\#avfriendlyname/avfriendlyname/g' $CONFIG_FILE;
+#    sed -i 's/AV_FRIENDLY_NAME/'"$AV_FRIENDLY_NAME"'/g' $CONFIG_FILE;
+#fi
 
 #replace_parameter $CONFIG_FILE MPD_HOST $MPD_HOST mpdhost
 echo "MPD_HOST=["$MPD_HOST"]"
