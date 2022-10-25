@@ -27,29 +27,29 @@ if [ -z "${UPNPIFACE}" ]; then
     echo "UPNPIFACE not set"
 else 
     echo "Setting UPNPIFACE to ["$UPNPIFACE"]"
-    sed -i 's/\#upnpiface/upnpiface/g' $CONFIG_FILE;
-    sed -i 's/UPNPIFACE/'"$UPNPIFACE"'/g' $CONFIG_FILE;
+    sed -i 's/\#upnpiface/upnpiface/g' $CONFIG_FILE
+    sed -i 's/UPNPIFACE/'"$UPNPIFACE"'/g' $CONFIG_FILE
 fi
 
-#replace_parameter $CONFIG_FILE UPNPPORT $UPNPPORT upnpport
-echo "UPNPPORT=["$UPNPPORT"]"
-if [ -z "${UPNPPORT}" ]; then
-    echo "UPNPPORT not set"
-else 
-    echo "Setting UPNPPORT to ["$UPNPPORT"]"
-    sed -i 's/\#upnpport/upnpport/g' $CONFIG_FILE;
-    sed -i 's/UPNPPORT/'"$UPNPPORT"'/g' $CONFIG_FILE;
-fi
+replace_parameter $CONFIG_FILE UPNPPORT $UPNPPORT upnpport
+#echo "UPNPPORT=["$UPNPPORT"]"
+#if [ -z "${UPNPPORT}" ]; then
+#    echo "UPNPPORT not set"
+#else 
+#    echo "Setting UPNPPORT to ["$UPNPPORT"]"
+#    sed -i 's/\#upnpport/upnpport/g' $CONFIG_FILE;
+#    sed -i 's/UPNPPORT/'"$UPNPPORT"'/g' $CONFIG_FILE;
+#fi
 
-#replace_parameter $CONFIG_FILE UPMPD_FRIENDLY_NAME $UPMPD_FRIENDLY_NAME friendlyname
-echo "UPMPD_FRIENDLY_NAME=["$UPMPD_FRIENDLY_NAME"]"
-if [ -z "${UPMPD_FRIENDLY_NAME}" ]; then
-    echo "UPMPD_FRIENDLY_NAME not set"
-else 
-    echo "Setting UPMPD_FRIENDLY_NAME to ["$UPMPD_FRIENDLY_NAME"]"
-    sed -i 's/\#friendlyname/friendlyname/g' $CONFIG_FILE;
-    sed -i 's/UPMPD_FRIENDLY_NAME/'"$UPMPD_FRIENDLY_NAME"'/g' $CONFIG_FILE;
-fi
+replace_parameter $CONFIG_FILE UPMPD_FRIENDLY_NAME $UPMPD_FRIENDLY_NAME friendlyname
+#echo "UPMPD_FRIENDLY_NAME=["$UPMPD_FRIENDLY_NAME"]"
+#if [ -z "${UPMPD_FRIENDLY_NAME}" ]; then
+#    echo "UPMPD_FRIENDLY_NAME not set"
+#else 
+#    echo "Setting UPMPD_FRIENDLY_NAME to ["$UPMPD_FRIENDLY_NAME"]"
+#    sed -i 's/\#friendlyname/friendlyname/g' $CONFIG_FILE;
+#    sed -i 's/UPMPD_FRIENDLY_NAME/'"$UPMPD_FRIENDLY_NAME"'/g' $CONFIG_FILE;
+#fi
 
 #replace_parameter $CONFIG_FILE UPNPAV $UPNPAV upnpav
 echo "UPNPAV=["$UPNPAV"]"
