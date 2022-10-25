@@ -51,25 +51,25 @@ replace_parameter $CONFIG_FILE UPMPD_FRIENDLY_NAME $UPMPD_FRIENDLY_NAME friendly
 #    sed -i 's/UPMPD_FRIENDLY_NAME/'"$UPMPD_FRIENDLY_NAME"'/g' $CONFIG_FILE;
 #fi
 
-#replace_parameter $CONFIG_FILE UPNPAV $UPNPAV upnpav
-echo "UPNPAV=["$UPNPAV"]"
-if [ -z "${UPNPAV}" ]; then
-    echo "UPNPAV not set"
-else 
-    echo "Setting UPNPAV to ["$UPNPAV"]"
-    sed -i 's/\#upnpav/upnpav/g' $CONFIG_FILE;
-    sed -i 's/UPNPAV/'"$UPNPAV"'/g' $CONFIG_FILE;
-fi
+replace_parameter $CONFIG_FILE UPNPAV $UPNPAV upnpav
+#echo "UPNPAV=["$UPNPAV"]"
+#if [ -z "${UPNPAV}" ]; then
+#    echo "UPNPAV not set"
+#else 
+#    echo "Setting UPNPAV to ["$UPNPAV"]"
+#    sed -i 's/\#upnpav/upnpav/g' $CONFIG_FILE;
+#    sed -i 's/UPNPAV/'"$UPNPAV"'/g' $CONFIG_FILE;
+#fi
 
-#replace_parameter $CONFIG_FILE OPENHOME $OPENHOME openhome
-echo "OPENHOME=["$OPENHOME"]"
-if [ -z "${OPENHOME}" ]; then
-    echo "OPENHOME not set"
-else 
-    echo "Setting OPENHOME to ["$OPENHOME"]"
-    sed -i 's/\#openhome/openhome/g' $CONFIG_FILE;
-    sed -i 's/OPENHOME/'"$OPENHOME"'/g' $CONFIG_FILE;
-fi
+replace_parameter $CONFIG_FILE OPENHOME $OPENHOME openhome
+#echo "OPENHOME=["$OPENHOME"]"
+#if [ -z "${OPENHOME}" ]; then
+#    echo "OPENHOME not set"
+#else 
+#    echo "Setting OPENHOME to ["$OPENHOME"]"
+#    sed -i 's/\#openhome/openhome/g' $CONFIG_FILE;
+#    sed -i 's/OPENHOME/'"$OPENHOME"'/g' $CONFIG_FILE;
+#fi
 
 #replace_parameter $CONFIG_FILE AV_FRIENDLY_NAME $AV_FRIENDLY_NAME avfriendlyname
 echo "AV_FRIENDLY_NAME=["$AV_FRIENDLY_NAME"]"
