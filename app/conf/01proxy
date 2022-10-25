@@ -1,1 +1,1 @@
-Acquire::http::proxy "http://apt.homelab.com:3142";
+Acquire::http::proxy "http://apt.homelab.local:3142";

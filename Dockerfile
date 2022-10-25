@@ -1,10 +1,9 @@
-ARG BASE_IMAGE
-FROM ${BASE_IMAGE}
+ARG BASE_IMAGE="${BASE_IMAGE:-ubuntu:jammy}"
+FROM ${BASE_IMAGE} AS BASE
+ARG USE_PPA="${USE_PPA:-upnpp1}"
 ARG USE_APT_PROXY
 
-RUN mkdir -p /app
 RUN mkdir -p /app/conf
-RUN mkdir -p /app/doc
 
 COPY app/conf/01proxy /app/conf/
 
@@ -18,21 +17,32 @@ RUN if [ "$USE_APT_PROXY" = "Y" ]; then \
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get upgrade -y && \
-	apt-get install -y software-properties-common && \
-	add-apt-repository ppa:jean-francois-dockes/upnpp1 && \
-	apt-get update && \
-	apt-get install upmpdcli -y && \
-	apt-get install upmpdcli-* -y && \
-	apt-get remove software-properties-common -y && \
-	apt-get autoremove -y && \
-	rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository ppa:jean-francois-dockes/${USE_PPA}
+RUN apt-get update
+RUN apt-get install upmpdcli -y
+RUN apt-get install upmpdcli-* -y
+RUN apt-get remove software-properties-common -y
+RUN apt-get autoremove -y
+RUN	rm -rf /var/lib/apt/lists/*
 
 RUN upmpdcli -v
 
 RUN echo "--- BEGIN upmpdcli.conf ---"
 RUN cat /etc/upmpdcli.conf
 RUN echo "--- END   upmpdcli.conf ---"
+
+FROM scratch
+COPY --from=BASE / /
+
+LABEL maintainer="GioF71"
+LABEL source="https://github.com/GioF71/upmpdcli-docker"
+
+RUN mkdir -p /app
+RUN mkdir -p /app/conf
+RUN mkdir -p /app/doc
 
 RUN cp /etc/upmpdcli.conf /app/conf/original.upmpdcli.conf
 
