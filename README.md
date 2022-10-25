@@ -114,6 +114,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-10-26|Support for local build with experimental ppa (exp5)
 2022-10-25|Updated github actions
 2022-10-25|Add support for msfriendlyname (Media Server Friendly Name)
 2022-10-25|Add support for PLG_MICRO_HTTP_HOST and PLG_MICRO_HTTP_PORT
