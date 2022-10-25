@@ -82,6 +82,7 @@ UPRCL_HOSTPORT||Hostname and port for uprcl. Currently required when enabling UP
 UPRCL_TITLE|Local Music|Title for the media server
 PLG_MICRO_HTTP_HOST||IP for the tidal/qobuz local HTTP service.
 PLG_MICRO_HTTP_PORT||Port for the tidal/qobuz local HTTP service.
+MEDIA_SERVER_FRIENDLY_NAME||Friendly name for the Media Server
 TIDAL_ENABLE|no|Set to yes to enable Tidal support
 TIDAL_USERNAME|tidal_username|Your Tidal account username
 TIDAL_PASSWORD|tidal_password|Your Tidal account password
@@ -113,6 +114,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-10-25|Add support for msfriendlyname (Media Server Friendly Name)
 2022-10-25|Add support for PLG_MICRO_HTTP_HOST and PLG_MICRO_HTTP_PORT
 2022-10-04|Add support for UPRCL_AUTOSTART (uprclautostart)
 2022-10-03|Add support for Uprcl

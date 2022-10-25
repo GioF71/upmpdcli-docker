@@ -1,5 +1,0 @@
-gpg --no-default-keyring --keyring ./lesbonscomptes.gpg --keyserver keyserver.ubuntu.com --recv-key F8E3347256922A8AE767605B7808CE96D38B9201
-
-gpg --no-default-keyring --keyring ./lesbonscomptes.gpg --keyserver keyserver.ubuntu.com --recv-key BD1EC68CAB92BBD56698F1C507971A38C8A2CA38
-
-https://keyserver.ubuntu.com/pks/lookup?fingerprint=on&op=index&search=0xBD1EC68CAB92BBD56698F1C507971A38C8A2CA38
