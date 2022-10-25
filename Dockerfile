@@ -73,6 +73,7 @@ ENV PLG_MICRO_HTTP_PORT ""
 
 ENV STARTUP_DELAY_SEC 0
 
+VOLUME /var/cache/upmpdcli
 VOLUME /uprcl/confdir
 VOLUME /uprcl/mediadirs
 
