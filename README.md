@@ -1,4 +1,6 @@
-# upmpdcli-docker - a Docker image for upmpdcli
+# upmpdcli-docker
+
+A Docker image for upmpdcli.
 
 ## Reference
 
