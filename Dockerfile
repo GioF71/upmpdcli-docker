@@ -20,12 +20,13 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y software-properties-common
+RUN apt-get install -y exiftool
 RUN add-apt-repository ppa:jean-francois-dockes/${USE_PPA}
 RUN apt-get update
-RUN apt-get install upmpdcli -y
-RUN apt-get install upmpdcli-* -y
-RUN apt-get remove software-properties-common -y
-RUN apt-get autoremove -y
+RUN apt-get install -y upmpdcli
+RUN apt-get install -y upmpdcli-*
+RUN apt-get remove -y software-properties-common
+RUN apt-get -y autoremove
 RUN	rm -rf /var/lib/apt/lists/*
 
 RUN upmpdcli -v

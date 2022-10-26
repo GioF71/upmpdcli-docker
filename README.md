@@ -114,12 +114,13 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-10-26|Added `exiftool` package
 2022-10-26|Support for local build with experimental ppa (exp5)
 2022-10-25|Updated github actions
-2022-10-25|Add support for msfriendlyname (Media Server Friendly Name)
-2022-10-25|Add support for PLG_MICRO_HTTP_HOST and PLG_MICRO_HTTP_PORT
-2022-10-04|Add support for UPRCL_AUTOSTART (uprclautostart)
-2022-10-03|Add support for Uprcl
+2022-10-25|Added support for msfriendlyname (Media Server Friendly Name)
+2022-10-25|Added support for PLG_MICRO_HTTP_HOST and PLG_MICRO_HTTP_PORT
+2022-10-04|Added support for UPRCL_AUTOSTART (uprclautostart)
+2022-10-03|Added support for Uprcl
 2022-09-30|Dropped focal build (due to a build error, to be investigated)
 2022-09-30|Build process review: build enabled on tag push
 2022-09-26|Moved file 01proxy to app/conf
