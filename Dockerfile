@@ -89,6 +89,7 @@ ENV STARTUP_DELAY_SEC 0
 VOLUME /var/cache/upmpdcli
 VOLUME /uprcl/confdir
 VOLUME /uprcl/mediadirs
+VOLUME /user/config
 
 COPY app/conf/upmpdcli.conf /app/conf/upmpdcli.conf
 

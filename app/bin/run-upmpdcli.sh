@@ -101,6 +101,23 @@ if [ "$ENABLE_UPRCL" == "yes" ]; then
         sed -i 's/UPRCL_AUTOSTART/'"$UPRCL_AUTOSTART"'/g' $CONFIG_FILE;
     fi
 fi
+
+MAIN_RADIO_LIST_FILENAME=/usr/share/upmpdcli/radio_scripts/radiolist.conf
+USER_CONF_PATH=/user/config
+ADDITIONAL_RADIO_LIST=additional-radio-list.txt
+
+RADIO_LIST=/app/conf/radiolist.conf
+
+ADDITIONAL_RADIO_LIST_FILENAME="$USER_CONF_PATH/$ADDITIONAL_RADIO_LIST"
+cp $MAIN_RADIO_LIST_FILENAME $RADIO_LIST
+if [ -f "$ADDITIONAL_RADIO_LIST_FILENAME" ]; then
+    echo "Adding additional radio list file"
+    cat $ADDITIONAL_RADIO_LIST_FILENAME
+    cat $ADDITIONAL_RADIO_LIST_FILENAME >> $RADIO_LIST
+else
+    echo "No additional radio list file."
+fi
+
 cat $CONFIG_FILE
 
 if [ "$ENABLE_UPRCL" == "yes" ]; then
