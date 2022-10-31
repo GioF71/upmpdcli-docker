@@ -102,6 +102,25 @@ Volume|Description
 :---|:---
 /uprcl/confdir|Uprcl configuration directory
 /uprcl/mediadirs|Uprcl media directories
+/user/config|Location for additional files. Currently: `additional-radio-list.txt`
+
+### Additional Radio file
+
+You can add your custom radios to upmpdcli.
+Mount the volume `/user/config` and make a file named `additional-radio-list.txt` available.  
+Each entry in the file must follow this schema:
+
+```text
+[radio My Radio]
+url = http://some.host/some/path.pls
+artUrl = http://some.host/icon/path.png
+artScript = /path/to/script/dynamic-art-getter
+metaScript = /path/to/script/metadata-getter
+preferScript = 1
+```
+
+Only the `url` line is mandatory.  
+Refer to the file `app/reference/radiolist.txt` in this repository for further details.
 
 ## Build
 
@@ -116,6 +135,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-10-31|Support for additional radio list
 2022-10-26|Added `exiftool` package
 2022-10-26|Support for local build with experimental ppa (exp5)
 2022-10-25|Updated github actions
