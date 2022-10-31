@@ -121,7 +121,7 @@ preferScript = 1
 ```
 
 Only the `url` line is mandatory.  
-Refer to the file `app/reference/radiolist.conf` in this repository for further details.
+Refer to the file [radiolist.conf](https://github.com/GioF71/upmpdcli-docker/blob/main/app/reference/radiolist.conf) from the git repository for further details.
 
 ## Build
 
