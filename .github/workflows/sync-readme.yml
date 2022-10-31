@@ -4,7 +4,7 @@ on:
   push:
     tags:
       - "release/*"
-      - "docs/*"
+      - "doc/*"
 
 jobs:
   sync-readme:
