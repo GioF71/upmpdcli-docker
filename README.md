@@ -121,7 +121,7 @@ preferScript = 1
 ```
 
 Only the `url` line is mandatory.  
-Refer to the file `app/reference/radiolist.txt` in this repository for further details.
+Refer to the file `app/reference/radiolist.conf` in this repository for further details.
 
 ## Build
 
