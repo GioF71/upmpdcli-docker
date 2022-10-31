@@ -1,6 +1,7 @@
 # upmpdcli-docker
 
-A Docker image for upmpdcli.
+A Docker image for upmpdcli.  
+Now with support for custom radios.
 
 ## Reference
 
