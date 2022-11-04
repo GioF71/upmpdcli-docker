@@ -103,7 +103,7 @@ Volume|Description
 :---|:---
 /uprcl/confdir|Uprcl configuration directory
 /uprcl/mediadirs|Uprcl media directories
-/user/config|Location for additional files. Currently: `additional-radio-list.txt`
+/user/config|Location for additional files. Currently: `additional-radio-list.txt` and `recoll.conf.user`.
 
 ### Additional Radio file
 
@@ -136,6 +136,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-11-04|Support for uprclconfrecolluser when `recoll.conf.user` file is available
 2022-10-31|Support for additional radio list
 2022-10-26|Added `exiftool` package
 2022-10-26|Support for local build with experimental ppa (exp5)
