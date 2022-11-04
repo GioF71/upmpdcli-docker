@@ -100,6 +100,10 @@ if [ "$ENABLE_UPRCL" == "yes" ]; then
         sed -i 's/#uprclautostart/'"uprclautostart"'/g' $CONFIG_FILE;
         sed -i 's/UPRCL_AUTOSTART/'"$UPRCL_AUTOSTART"'/g' $CONFIG_FILE;
     fi
+    UPRCL_USER_CONFIG_FILE="/user/config/recoll.conf.user"
+    if [ -f "$UPRCL_USER_CONFIG_FILE" ]; then
+        sed -i 's/#uprclconfrecolluser/'"uprclconfrecolluser"'/g' $CONFIG_FILE;
+    fi
 fi
 
 MAIN_RADIO_LIST_FILENAME=/usr/share/upmpdcli/radio_scripts/radiolist.conf
@@ -162,6 +166,7 @@ if [ "$ENABLE_UPRCL" == "yes" ]; then
     # Permissions of writable volumes
     chown -R $USER_NAME:$GROUP_NAME /var/cache/upmpdcli
     chown -R $USER_NAME:$GROUP_NAME /uprcl/confdir
+    chown -R $USER_NAME:$GROUP_NAME /user/config
 fi
 
 echo "About to sleep for $STARTUP_DELAY_SEC second(s)"
