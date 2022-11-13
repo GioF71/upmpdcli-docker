@@ -49,6 +49,7 @@ RUN cp /etc/upmpdcli.conf /app/conf/original.upmpdcli.conf
 
 ENV UPMPD_FRIENDLY_NAME ""
 ENV AV_FRIENDLY_NAME ""
+ENV FRIENDLY_NAME ""
 
 ENV UPNPAV 1
 ENV OPENHOME 1

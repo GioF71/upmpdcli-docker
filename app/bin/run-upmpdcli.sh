@@ -31,6 +31,11 @@ else
     sed -i 's/UPNPIFACE/'"$UPNPIFACE"'/g' $CONFIG_FILE
 fi
 
+if [ -n "${FRIENDLY_NAME}" ]; then
+    UPMPD_FRIENDLY_NAME="${FRIENDLY_NAME}"
+    AV_FRIENDLY_NAME="${FRIENDLY_NAME}-av"
+fi
+
 replace_parameter $CONFIG_FILE UPNPPORT "$UPNPPORT" upnpport
 replace_parameter $CONFIG_FILE UPMPD_FRIENDLY_NAME "$UPMPD_FRIENDLY_NAME" friendlyname
 replace_parameter $CONFIG_FILE UPNPAV "$UPNPAV" upnpav
