@@ -76,6 +76,7 @@ UPNPIFACE||UPnP network interface
 UPNPPORT||UPnP port
 UPMPD_FRIENDLY_NAME|upmpd|Name of the upnpd renderer
 AV_FRIENDLY_NAME|upmpd-av|Name of the upnpd renderer (av mode)
+FRIENDLY_NAME||Name of the renderer, overrides `UPMPD_FRIENDLY_NAME` and `AV_FRIENDLY_NAME`. The latter is set to the specified `FRIENDLY_NAME` and appended with `-av`.
 UPNPAV|1|Enable UPnP AV services (0/1)
 OPENHOME|1|Enable OpenHome services (0/1)
 ENABLE_UPRCL||Enable local music support (uprcl). Set to `yes` to enable
@@ -136,6 +137,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-11-13|Add env variable FRIENDLY_NAME
 2022-11-04|Support for uprclconfrecolluser when `recoll.conf.user` file is available
 2022-10-31|Support for additional radio list
 2022-10-26|Added `exiftool` package
