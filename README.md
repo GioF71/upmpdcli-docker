@@ -38,7 +38,7 @@ The Dockerfile and the included scripts have been tested on the following distro
 
 - Manjaro Linux with Gnome (amd64)
 - Asus Tinkerboard
-- Raspberry Pi 3 (but I have no reason to doubt it will also work on a Raspberry Pi 4/400)
+- Raspberry Pi 3 and 4, both 32 and 64 bit
 
 As I test the Dockerfile on more platforms, I will update this list.
 
