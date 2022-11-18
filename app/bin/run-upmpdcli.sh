@@ -3,6 +3,9 @@
 SOURCE_CONFIG_FILE=/app/conf/upmpdcli.conf
 CONFIG_FILE=/app/conf/current-upmpdcli.conf
 
+DEFAULT_UPNPPORT=49152
+DEFAULT_PLG_MICRO_HTTP_PORT=49149
+
 replace_parameter() {
     CFG_FILE=$1
     PARAM_NAME=$2
@@ -19,6 +22,16 @@ replace_parameter() {
         sed -i "s/${PARAM_NAME}/${PARAM_VALUE}/g" $CFG_FILE;
     fi
 }
+
+if [[ -n $PORT_OFFSET && $PORT_OFFSET -ge 0 ]]; then
+    echo "Applying PORT_OFFSET=[$PORT_OFFSET]"
+    UPNPPORT=`expr $DEFAULT_UPNPPORT + $PORT_OFFSET`
+    PLG_MICRO_HTTP_PORT=`expr $DEFAULT_PLG_MICRO_HTTP_PORT - $PORT_OFFSET`
+    echo "UPNPPORT=$UPNPPORT"
+    echo "PLG_MICRO_HTTP_PORT=$PLG_MICRO_HTTP_PORT"
+else
+    echo "PORT_OFFSET not specified"
+fi
 
 cp $SOURCE_CONFIG_FILE $CONFIG_FILE
 

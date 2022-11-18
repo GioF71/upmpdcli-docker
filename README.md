@@ -72,6 +72,7 @@ PUID|1000|User id. Used only when UPRCL is enabled
 PGID|1000|Group id. Used only when UPRCL is enabled
 MPD_HOST|localhost|The host where mpd runs
 MPD_PORT|6600|The port used by mpd
+PORT_OFFSET||If set, the offset is applied to `UPNP_PORT` (summed) and to `PLG_MICRO_HTTP_PORT` (subtracted). Setting this variable overrides these individual variables.
 UPNPIFACE||UPnP network interface
 UPNPPORT||UPnP port
 UPMPD_FRIENDLY_NAME|upmpd|Name of the upnpd renderer
@@ -137,6 +138,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-11-18|Add PORT_OFFSET environment variable for easier configuration
 2022-11-13|Upnp av services are disabled by default
 2022-11-13|Add env variable FRIENDLY_NAME
 2022-11-04|Support for uprclconfrecolluser when `recoll.conf.user` file is available
