@@ -83,13 +83,16 @@ replace_parameter $CONFIG_FILE UPNPPORT "$UPNPPORT" upnpport
 replace_parameter $CONFIG_FILE UPMPD_FRIENDLY_NAME "$UPMPD_FRIENDLY_NAME" friendlyname
 replace_parameter $CONFIG_FILE UPNPAV "$UPNPAV" upnpav
 replace_parameter $CONFIG_FILE OPENHOME "$OPENHOME" openhome
-replace_parameter $CONFIG_FILE AV_FRIENDLY_NAME "$AV_FRIENDLY_NAME" avfriendlyname
+if [ "${UPNPAV}" -eq 1 ]; then
+    replace_parameter $CONFIG_FILE AV_FRIENDLY_NAME "$AV_FRIENDLY_NAME" avfriendlyname
+fi
 replace_parameter $CONFIG_FILE MPD_HOST "$MPD_HOST" mpdhost
 replace_parameter $CONFIG_FILE MPD_PORT "$MPD_PORT" mpdport
 replace_parameter $CONFIG_FILE PLG_MICRO_HTTP_HOST "$PLG_MICRO_HTTP_HOST" plgmicrohttphost
 replace_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmicrohttpport
-replace_parameter $CONFIG_FILE MEDIA_SERVER_FRIENDLY_NAME "$MEDIA_SERVER_FRIENDLY_NAME" msfriendlyname
-
+if [ "${ENABLE_UPRCL^^}" == "YES" ]; then
+    replace_parameter $CONFIG_FILE MEDIA_SERVER_FRIENDLY_NAME "$MEDIA_SERVER_FRIENDLY_NAME" msfriendlyname
+fi
 echo "Tidal Enable [$TIDAL_ENABLE]"
 if [ "${TIDAL_ENABLE^^}" == "YES" ]; then
     echo "Processing Tidal settings";
