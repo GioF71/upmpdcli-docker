@@ -77,7 +77,7 @@ UPNPIFACE||UPnP network interface
 UPNPPORT||UPnP port
 UPMPD_FRIENDLY_NAME|upmpd|Name of the upnpd renderer
 AV_FRIENDLY_NAME|upmpd-av|Name of the upnpd renderer (av mode)
-FRIENDLY_NAME||Name of the renderer, overrides `UPMPD_FRIENDLY_NAME` and `AV_FRIENDLY_NAME`. The latter is set to the specified `FRIENDLY_NAME` and appended with `-av`.
+FRIENDLY_NAME||Name of the renderer, overrides `UPMPD_FRIENDLY_NAME`, `AV_FRIENDLY_NAME` and MEDIA_SERVER_FRIENDLY_NAME. The variable`AV_FRIENDLY_NAME` is set to the specified `FRIENDLY_NAME` and appended with `-av`.
 UPNPAV|0|Enable UPnP AV services (0/1)
 OPENHOME|1|Enable OpenHome services (0/1)
 ENABLE_UPRCL||Enable local music support (uprcl). Set to `yes` to enable
