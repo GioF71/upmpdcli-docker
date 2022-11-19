@@ -105,7 +105,7 @@ Volume|Description
 :---|:---
 /uprcl/confdir|Uprcl configuration directory
 /uprcl/mediadirs|Uprcl media directories
-/user/config|Location for additional files. Currently: `additional-radio-list.txt` and `recoll.conf.user`.
+/user/config|Location for additional files. Currently: `additional-radio-list.txt` and `recoll.conf.user` as well as credentials for qobuz on `qobuz.txt` and for tidal on `tidal.txt`. The credentials file format is the same as a `.env` file. Ensure to include all the settings related the streaming service.
 
 ### Additional Radio file
 
@@ -138,6 +138,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-11-19|Add ability to read qobuz and tidal configuration from files
 2022-11-18|Add PORT_OFFSET environment variable for easier configuration
 2022-11-13|Upnp av services are disabled by default
 2022-11-13|Add env variable FRIENDLY_NAME

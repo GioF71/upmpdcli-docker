@@ -3,6 +3,35 @@
 SOURCE_CONFIG_FILE=/app/conf/upmpdcli.conf
 CONFIG_FILE=/app/conf/current-upmpdcli.conf
 
+QOBUZ_CREDENTIALS_FILE=/user/config/qobuz.txt
+TIDAL_CREDENTIALS_FILE=/user/config/tidal.txt
+
+declare -A file_dict
+
+source read-file.sh
+source get-value.sh
+
+if [ -f "$QOBUZ_CREDENTIALS_FILE" ]; then
+    echo "Reading $QOBUZ_CREDENTIALS_FILE"
+    read_file $QOBUZ_CREDENTIALS_FILE
+    QOBUZ_USERNAME=$(get_value "QOBUZ_USERNAME" $PARAMETER_PRIORITY)
+    QOBUZ_PASSWORD=$(get_value "QOBUZ_PASSWORD" $PARAMETER_PRIORITY)
+    QOBUZ_FORMAT_ID=$(get_value "QOBUZ_FORMAT_ID" $PARAMETER_PRIORITY)
+else
+    echo "File $QOBUZ_CREDENTIALS_FILE not found."
+fi
+
+if [ -f "$TIDAL_CREDENTIALS_FILE" ]; then
+    echo "Reading $TIDAL_CREDENTIALS_FILE"
+    read_file $TIDAL_CREDENTIALS_FILE
+    TIDAL_USERNAME=$(get_value "TIDAL_USERNAME" $PARAMETER_PRIORITY)
+    TIDAL_PASSWORD=$(get_value "TIDAL_PASSWORD" $PARAMETER_PRIORITY)
+    TIDAL_API_TOKEN=$(get_value "TIDAL_API_TOKEN" $PARAMETER_PRIORITY)
+    TIDAL_QUALITY=$(get_value "TIDAL_QUALITY" $PARAMETER_PRIORITY)
+else
+    echo "File $TIDAL_CREDENTIALS_FILE not found."
+fi
+
 DEFAULT_UPNPPORT=49152
 DEFAULT_PLG_MICRO_HTTP_PORT=49149
 
@@ -61,7 +90,7 @@ replace_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmic
 replace_parameter $CONFIG_FILE MEDIA_SERVER_FRIENDLY_NAME "$MEDIA_SERVER_FRIENDLY_NAME" msfriendlyname
 
 echo "Tidal Enable [$TIDAL_ENABLE]"
-if [ "$TIDAL_ENABLE" == "yes" ]; then
+if [ "${TIDAL_ENABLE^^}" == "yes" ]; then
     echo "Processing Tidal settings";
     sed -i 's/\#tidaluser/tidaluser/g' $CONFIG_FILE;
     sed -i 's/\#tidalpass/tidalpass/g' $CONFIG_FILE; \
@@ -74,7 +103,7 @@ if [ "$TIDAL_ENABLE" == "yes" ]; then
 fi
 
 echo "Qobuz Enable [$QOBUZ_ENABLE]"
-if [ "$QOBUZ_ENABLE" == "yes" ]; then
+if [ "${QOBUZ_ENABLE^^}" == "yes" ]; then
     echo "Processing Qobuz settings";
     sed -i 's/\#qobuzuser/qobuzuser/g' $CONFIG_FILE;
     sed -i 's/\#qobuzpass/qobuzpass/g' $CONFIG_FILE;

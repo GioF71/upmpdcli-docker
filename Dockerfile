@@ -96,8 +96,10 @@ VOLUME /user/config
 
 COPY app/conf/upmpdcli.conf /app/conf/upmpdcli.conf
 
-COPY app/bin/run-upmpdcli.sh /app/bin/run-upmpdcli.sh
-RUN chmod u+x /app/bin/run-upmpdcli.sh
+COPY app/bin/run-upmpdcli.sh /app/bin/
+COPY app/bin/read-file.sh /app/bin/
+COPY app/bin/get-value.sh /app/bin/
+RUN chmod u+x /app/bin/*.sh
 
 COPY README.md /app/doc
 
