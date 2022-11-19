@@ -76,6 +76,7 @@ fi
 if [ -n "${FRIENDLY_NAME}" ]; then
     UPMPD_FRIENDLY_NAME="${FRIENDLY_NAME}"
     AV_FRIENDLY_NAME="${FRIENDLY_NAME}-av"
+    MEDIA_SERVER_FRIENDLY_NAME="${FRIENDLY_NAME}"
 fi
 
 replace_parameter $CONFIG_FILE UPNPPORT "$UPNPPORT" upnpport
@@ -90,7 +91,7 @@ replace_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmic
 replace_parameter $CONFIG_FILE MEDIA_SERVER_FRIENDLY_NAME "$MEDIA_SERVER_FRIENDLY_NAME" msfriendlyname
 
 echo "Tidal Enable [$TIDAL_ENABLE]"
-if [ "${TIDAL_ENABLE^^}" == "yes" ]; then
+if [ "${TIDAL_ENABLE^^}" == "YES" ]; then
     echo "Processing Tidal settings";
     sed -i 's/\#tidaluser/tidaluser/g' $CONFIG_FILE;
     sed -i 's/\#tidalpass/tidalpass/g' $CONFIG_FILE; \
@@ -103,7 +104,7 @@ if [ "${TIDAL_ENABLE^^}" == "yes" ]; then
 fi
 
 echo "Qobuz Enable [$QOBUZ_ENABLE]"
-if [ "${QOBUZ_ENABLE^^}" == "yes" ]; then
+if [ "${QOBUZ_ENABLE^^}" == "YES" ]; then
     echo "Processing Qobuz settings";
     sed -i 's/\#qobuzuser/qobuzuser/g' $CONFIG_FILE;
     sed -i 's/\#qobuzpass/qobuzpass/g' $CONFIG_FILE;

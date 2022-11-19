@@ -138,6 +138,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-11-19|Also apply FRIENDLY_NAME to MEDIA_SERVER_FRIENDLY_NAME
 2022-11-19|Add ability to read qobuz and tidal configuration from files
 2022-11-18|Add PORT_OFFSET environment variable for easier configuration
 2022-11-13|Upnp av services are disabled by default
