@@ -90,7 +90,7 @@ replace_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmic
 replace_parameter $CONFIG_FILE MEDIA_SERVER_FRIENDLY_NAME "$MEDIA_SERVER_FRIENDLY_NAME" msfriendlyname
 
 echo "Tidal Enable [$TIDAL_ENABLE]"
-if [ "${TIDAL_ENABLE^^}" == "yes" ]; then
+if [ "${TIDAL_ENABLE^^}" == "YES" ]; then
     echo "Processing Tidal settings";
     sed -i 's/\#tidaluser/tidaluser/g' $CONFIG_FILE;
     sed -i 's/\#tidalpass/tidalpass/g' $CONFIG_FILE; \
@@ -103,7 +103,7 @@ if [ "${TIDAL_ENABLE^^}" == "yes" ]; then
 fi
 
 echo "Qobuz Enable [$QOBUZ_ENABLE]"
-if [ "${QOBUZ_ENABLE^^}" == "yes" ]; then
+if [ "${QOBUZ_ENABLE^^}" == "YES" ]; then
     echo "Processing Qobuz settings";
     sed -i 's/\#qobuzuser/qobuzuser/g' $CONFIG_FILE;
     sed -i 's/\#qobuzpass/qobuzpass/g' $CONFIG_FILE;
@@ -114,7 +114,7 @@ if [ "${QOBUZ_ENABLE^^}" == "yes" ]; then
 fi
 
 echo "ENABLE_UPRCL [$ENABLE_UPRCL]"
-if [ "$ENABLE_UPRCL" == "yes" ]; then
+if [ "${ENABLE_UPRCL^^}" == "YES" ]; then
     sed -i 's/\#uprclconfdir/uprclconfdir/g' $CONFIG_FILE;
     echo "enabling uprclconfdir"
     sed -i 's/#uprclconfdir/'"uprclconfdir"'/g' $CONFIG_FILE;
@@ -171,7 +171,7 @@ fi
 
 cat $CONFIG_FILE
 
-if [ "$ENABLE_UPRCL" == "yes" ]; then
+if [ "${ENABLE_UPRCL^^}" == "YES" ]; then
     echo "UPRCL is enabled, creating user ...";
     DEFAULT_UID=1000
     DEFAULT_GID=1000
@@ -222,7 +222,7 @@ echo "Ready to start."
 
 CMD_LINE="/usr/bin/upmpdcli -c $CONFIG_FILE"
 
-if [ "$ENABLE_UPRCL" == "yes" ]; then
+if [ "${ENABLE_UPRCL^^}" == "YES" ]; then
     su - $USER_NAME -c "$CMD_LINE"
 else
     eval $CMD_LINE
