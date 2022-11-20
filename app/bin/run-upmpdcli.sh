@@ -80,9 +80,11 @@ if [ -n "${FRIENDLY_NAME}" ]; then
 fi
 
 replace_parameter $CONFIG_FILE UPNPPORT "$UPNPPORT" upnpport
-replace_parameter $CONFIG_FILE UPMPD_FRIENDLY_NAME "$UPMPD_FRIENDLY_NAME" friendlyname
 replace_parameter $CONFIG_FILE UPNPAV "$UPNPAV" upnpav
 replace_parameter $CONFIG_FILE OPENHOME "$OPENHOME" openhome
+if [ "${OPENHOME}" -eq 1 ]; then
+    replace_parameter $CONFIG_FILE UPMPD_FRIENDLY_NAME "$UPMPD_FRIENDLY_NAME" friendlyname
+fi
 if [ "${UPNPAV}" -eq 1 ]; then
     replace_parameter $CONFIG_FILE AV_FRIENDLY_NAME "$AV_FRIENDLY_NAME" avfriendlyname
 fi
