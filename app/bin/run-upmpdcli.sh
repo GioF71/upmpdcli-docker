@@ -92,7 +92,17 @@ replace_parameter $CONFIG_FILE MPD_HOST "$MPD_HOST" mpdhost
 replace_parameter $CONFIG_FILE MPD_PORT "$MPD_PORT" mpdport
 replace_parameter $CONFIG_FILE PLG_MICRO_HTTP_HOST "$PLG_MICRO_HTTP_HOST" plgmicrohttphost
 replace_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmicrohttpport
-if [ "${ENABLE_UPRCL^^}" == "YES" ]; then
+
+MEDIA_SERVER_ENABLED=0
+if [[ "${ENABLE_UPRCL^^}" == "YES" || 
+      "${TIDAL_ENABLE^^}" == "YES" ||
+      "${QOBUZ_ENABLE^^}" == "YES" ]]; then
+    MEDIA_SERVER_ENABLED=1
+fi
+
+echo "MEDIA_SERVER_ENABLED=[${MEDIA_SERVER_ENABLED}]"
+if [ "${MEDIA_SERVER_ENABLED}" -eq 1 ]; then
+    echo "Setting msfriendlyname to [${MEDIA_SERVER_FRIENDLY_NAME}]"
     replace_parameter $CONFIG_FILE MEDIA_SERVER_FRIENDLY_NAME "$MEDIA_SERVER_FRIENDLY_NAME" msfriendlyname
 fi
 echo "Tidal Enable [$TIDAL_ENABLE]"
