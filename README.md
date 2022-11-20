@@ -138,6 +138,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-11-19|Set `friendlyname` only when `openhome` is enabled
 2022-11-19|FRIENDLY_NAME applies `AV_FRIENDLY_NAME` and `MEDIA_SERVER_FRIENDLY_NAME` only when appropriate
 2022-11-19|Also apply FRIENDLY_NAME to MEDIA_SERVER_FRIENDLY_NAME
 2022-11-19|Add ability to read qobuz and tidal configuration from files
