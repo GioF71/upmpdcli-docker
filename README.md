@@ -64,7 +64,7 @@ We also need to use the *host* network so the upnp renderer can be discovered on
 
 ### Environment variables
 
-The following tables reports all the currently supported environment variables.
+The following table reports all the currently supported environment variables.
 
 VARIABLE|DEFAULT|NOTES
 ---|---|---
