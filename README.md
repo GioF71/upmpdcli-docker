@@ -97,6 +97,8 @@ QOBUZ_ENABLE|no|Set to yes to enable Qobuz support
 QOBUZ_USERNAME|qobuz_username|Your Qobuz account username
 QOBUZ_PASSWORD|qobuz_password|Your Qobuz account password
 QOBUZ_FORMAT_ID|5|Qobuz format id: 5 for mp3, 7 for FLAC, 27 for hi-res
+LOG_ENABLE||Set to `yes` to enable. If enabled, the logfile is `/log/upmpdcli.log`. Otherwise, umpdcli will log to stderr.
+LOG_LEVEL||Defaults to `2`
 STARTUP_DELAY_SEC|0| Delay before starting the application. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite if all those services run on the same audio device. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience.
 
 ### Volumes
@@ -106,6 +108,8 @@ Volume|Description
 /uprcl/confdir|Uprcl configuration directory
 /uprcl/mediadirs|Uprcl media directories
 /user/config|Location for additional files. Currently: `additional-radio-list.txt` and `recoll.conf.user` as well as credentials for qobuz on `qobuz.txt` and for tidal on `tidal.txt`. The credentials file format is the same as a `.env` file. Ensure to include all the settings related the streaming service.
+/cache|Runtime information for upmpdcli. Attach a volume to this path in order to maintain consistency across restarts.
+/log|Location for the upmpdcli log file. Enabled using `LOG_ENABLE`
 
 ### Additional Radio file
 
@@ -138,6 +142,9 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-11-22|Fixed permissions for `/cache` in user mode
+2022-11-22|Existing but undocumented volume `/var/cache/upmpdcli` changed to `/cache` for convenience
+2022-11-22|Enable logging configurability, relevant volume is `/log`
 2022-11-20|Enable configuration for `msfriendlyname` only when necessary
 2022-11-20|Enable configuration for `friendlyname` only when `openhome` is enabled
 2022-11-19|`FRIENDLY_NAME` enables `avfriendlyname` (`AV_FRIENDLY_NAME`) and `msfriendlyname` (`MEDIA_SERVER_FRIENDLY_NAME`) only when appropriate
