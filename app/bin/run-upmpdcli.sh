@@ -64,6 +64,14 @@ fi
 
 cp $SOURCE_CONFIG_FILE $CONFIG_FILE
 
+# log support
+if [ "${ENABLE_LOG^^}" == "YES" ]; then
+    sed -i "s/#logfilename/logfilename/g" $CONFIG_FILE;
+    if [ -z "${LOG_LEVEL}" ]; then
+        replace_parameter $CONFIG_FILE LOG_LEVEL "$LOG_LEVEL" loglevel
+    fi
+fi
+
 echo "UPNPIFACE=["$UPNPIFACE"]"
 if [ -z "${UPNPIFACE}" ]; then
     echo "UPNPIFACE not set"
@@ -187,8 +195,11 @@ fi
 
 cat $CONFIG_FILE
 
-if [ "${ENABLE_UPRCL^^}" == "YES" ]; then
-    echo "UPRCL is enabled, creating user ...";
+USER_MODE=0
+# user is create when using UPRCL, or when at least PUID is set
+if [[ "${ENABLE_UPRCL^^}" == "YES" || -n "${PUID}" ]]; then
+    USER_MODE=1
+    echo "Creating user ...";
     DEFAULT_UID=1000
     DEFAULT_GID=1000
     if [ -z "${PUID}" ]; then
@@ -227,9 +238,13 @@ if [ "${ENABLE_UPRCL^^}" == "YES" ]; then
     # set permission for home dir
     chown -R $USER_NAME:$GROUP_NAME $HOME_DIR
     # Permissions of writable volumes
-    chown -R $USER_NAME:$GROUP_NAME /var/cache/upmpdcli
+    chown -R $USER_NAME:$GROUP_NAME /cache
+    # Fix permission errors on existing files
+    find /cache -type d -exec chmod 755 {} \;
+    find /cache -type f -exec chmod 644 {} \;
     chown -R $USER_NAME:$GROUP_NAME /uprcl/confdir
     chown -R $USER_NAME:$GROUP_NAME /user/config
+    chown -R $USER_NAME:$GROUP_NAME /log
 fi
 
 echo "About to sleep for $STARTUP_DELAY_SEC second(s)"
@@ -238,8 +253,10 @@ echo "Ready to start."
 
 CMD_LINE="/usr/bin/upmpdcli -c $CONFIG_FILE"
 
-if [ "${ENABLE_UPRCL^^}" == "YES" ]; then
+if [ "${USER_MODE}" -eq 1 ]; then
+    echo "USER MODE"
     su - $USER_NAME -c "$CMD_LINE"
 else
+    echo "ROOT MODE"
     eval $CMD_LINE
 fi

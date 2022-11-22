@@ -87,12 +87,16 @@ ENV PLG_MICRO_HTTP_PORT ""
 
 ENV MEDIA_SERVER_FRIENDLY_NAME ""
 
+ENV LOG_ENABLE ""
+ENV LOG_LEVEL ""
+
 ENV STARTUP_DELAY_SEC 0
 
-VOLUME /var/cache/upmpdcli
 VOLUME /uprcl/confdir
 VOLUME /uprcl/mediadirs
 VOLUME /user/config
+VOLUME /cache
+VOLUME /log
 
 COPY app/conf/upmpdcli.conf /app/conf/upmpdcli.conf
 
