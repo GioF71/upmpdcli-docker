@@ -138,22 +138,22 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
-2022-11-20|Set `msfriendlyname` when necessary
-2022-11-20|Set `friendlyname` only when `openhome` is enabled
-2022-11-19|FRIENDLY_NAME applies `AV_FRIENDLY_NAME` and `MEDIA_SERVER_FRIENDLY_NAME` only when appropriate
-2022-11-19|Also apply FRIENDLY_NAME to MEDIA_SERVER_FRIENDLY_NAME
+2022-11-20|Enable configuration for `msfriendlyname` only when necessary
+2022-11-20|Enable configuration for `friendlyname` only when `openhome` is enabled
+2022-11-19|`FRIENDLY_NAME` enables `avfriendlyname` (`AV_FRIENDLY_NAME`) and `msfriendlyname` (`MEDIA_SERVER_FRIENDLY_NAME`) only when appropriate
+2022-11-19|Also apply `FRIENDLY_NAME` to `MEDIA_SERVER_FRIENDLY_NAME`
 2022-11-19|Add ability to read qobuz and tidal configuration from files
 2022-11-18|Add PORT_OFFSET environment variable for easier configuration
 2022-11-13|Upnp av services are disabled by default
-2022-11-13|Add env variable FRIENDLY_NAME
+2022-11-13|Add env variable `FRIENDLY_NAME`
 2022-11-04|Support for uprclconfrecolluser when `recoll.conf.user` file is available
 2022-10-31|Support for additional radio list
 2022-10-26|Added `exiftool` package
 2022-10-26|Support for local build with experimental ppa (exp5)
 2022-10-25|Updated github actions
-2022-10-25|Added support for msfriendlyname (Media Server Friendly Name)
-2022-10-25|Added support for PLG_MICRO_HTTP_HOST and PLG_MICRO_HTTP_PORT
-2022-10-04|Added support for UPRCL_AUTOSTART (uprclautostart)
+2022-10-25|Added support for `msfriendlyname` (`MEDIA_SERVER_FRIENDLY_NAME`)
+2022-10-25|Added support for `PLG_MICRO_HTTP_HOST` and `PLG_MICRO_HTTP_PORT`
+2022-10-04|Added support for `UPRCL_AUTOSTART` (`uprclautostart`)
 2022-10-03|Added support for Uprcl
 2022-09-30|Dropped focal build (due to a build error, to be investigated)
 2022-09-30|Build process review: build enabled on tag push
