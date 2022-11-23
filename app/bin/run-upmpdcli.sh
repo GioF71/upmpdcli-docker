@@ -5,6 +5,9 @@ CONFIG_FILE=/app/conf/current-upmpdcli.conf
 
 QOBUZ_CREDENTIALS_FILE=/user/config/qobuz.txt
 TIDAL_CREDENTIALS_FILE=/user/config/tidal.txt
+SPOTIFY_CREDENTIALS_FILE=/user/config/spotify.txt
+DEEZER_CREDENTIALS_FILE=/user/config/deezer.txt
+HRA_CREDENTIALS_FILE=/user/config/hra.txt
 
 declare -A file_dict
 
@@ -30,6 +33,35 @@ if [ -f "$TIDAL_CREDENTIALS_FILE" ]; then
     TIDAL_QUALITY=$(get_value "TIDAL_QUALITY" $PARAMETER_PRIORITY)
 else
     echo "File $TIDAL_CREDENTIALS_FILE not found."
+fi
+
+if [ -f "$SPOTIFY_CREDENTIALS_FILE" ]; then
+    echo "Reading $SPOTIFY_CREDENTIALS_FILE"
+    read_file $SPOTIFY_CREDENTIALS_FILE
+    SPOTIFY_USERNAME=$(get_value "SPOTIFY_USERNAME" $PARAMETER_PRIORITY)
+    SPOTIFY_PASSWORD=$(get_value "SPOTIFY_PASSWORD" $PARAMETER_PRIORITY)
+    SPOTIFY_BITRATE=$(get_value "SPOTIFY_BITRATE" $PARAMETER_PRIORITY)
+else
+    echo "File $SPOTIFY_CREDENTIALS_FILE not found."
+fi
+
+if [ -f "$DEEZER_CREDENTIALS_FILE" ]; then
+    echo "Reading $DEEZER_CREDENTIALS_FILE"
+    read_file $DEEZER_CREDENTIALS_FILE
+    DEEZER_USERNAME=$(get_value "DEEZER_USERNAME" $PARAMETER_PRIORITY)
+    DEEZER_PASSWORD=$(get_value "DEEZER_PASSWORD" $PARAMETER_PRIORITY)
+else
+    echo "File $DEEZER_CREDENTIALS_FILE not found."
+fi
+
+if [ -f "$HRA_CREDENTIALS_FILE" ]; then
+    echo "Reading $HRA_CREDENTIALS_FILE"
+    read_file $HRA_CREDENTIALS_FILE
+    HRA_USERNAME=$(get_value "HRA_USERNAME" $PARAMETER_PRIORITY)
+    HRA_PASSWORD=$(get_value "HRA_PASSWORD" $PARAMETER_PRIORITY)
+    HRA_LANG=$(get_value "HRA_LANG" $PARAMETER_PRIORITY)
+else
+    echo "File $HRA_CREDENTIALS_FILE not found."
 fi
 
 DEFAULT_UPNPPORT=49152
@@ -104,6 +136,9 @@ replace_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmic
 MEDIA_SERVER_ENABLED=0
 if [[ "${ENABLE_UPRCL^^}" == "YES" || 
       "${TIDAL_ENABLE^^}" == "YES" ||
+      "${SPOTIFY_ENABLE^^}" == "YES" ||
+      "${DEEZER_ENABLE^^}" == "YES" ||
+      "${HRA_ENABLE^^}" == "YES" ||
       "${QOBUZ_ENABLE^^}" == "YES" ]]; then
     MEDIA_SERVER_ENABLED=1
 fi
@@ -113,6 +148,7 @@ if [ "${MEDIA_SERVER_ENABLED}" -eq 1 ]; then
     echo "Setting msfriendlyname to [${MEDIA_SERVER_FRIENDLY_NAME}]"
     replace_parameter $CONFIG_FILE MEDIA_SERVER_FRIENDLY_NAME "$MEDIA_SERVER_FRIENDLY_NAME" msfriendlyname
 fi
+
 echo "Tidal Enable [$TIDAL_ENABLE]"
 if [ "${TIDAL_ENABLE^^}" == "YES" ]; then
     echo "Processing Tidal settings";
@@ -135,6 +171,37 @@ if [ "${QOBUZ_ENABLE^^}" == "YES" ]; then
     sed -i 's/QOBUZ_USERNAME/'"$QOBUZ_USERNAME"'/g' $CONFIG_FILE;
     sed -i 's/QOBUZ_PASSWORD/'"$QOBUZ_PASSWORD"'/g' $CONFIG_FILE;
     sed -i 's/QOBUZ_FORMAT_ID/'"$QOBUZ_FORMAT_ID"'/g' $CONFIG_FILE;
+fi
+
+echo "Spotify Enable [$SPOTIFY_ENABLE]"
+if [ "${SPOTIFY_ENABLE^^}" == "YES" ]; then
+    echo "Processing Spotify settings";
+    sed -i 's/\#spotifyuser/spotifyuser/g' $CONFIG_FILE;
+    sed -i 's/\#spotifypass/spotifypass/g' $CONFIG_FILE;
+    sed -i 's/\#spotifybitrate/spotifybitrate/g' $CONFIG_FILE;
+    sed -i 's/SPOTIFY_USERNAME/'"$SPOTIFY_USERNAME"'/g' $CONFIG_FILE;
+    sed -i 's/SPOTIFY_PASSWORD/'"$SPOTIFY_PASSWORD"'/g' $CONFIG_FILE;
+    sed -i 's/SPOTIFY_BITRATE/'"$SPOTIFY_BITRATE"'/g' $CONFIG_FILE;
+fi
+
+echo "Deezer Enable [$DEEZER_ENABLE]"
+if [ "${DEEZER_ENABLE^^}" == "YES" ]; then
+    echo "Processing Deezer settings";
+    sed -i 's/\#deezeruser/deezeruser/g' $CONFIG_FILE;
+    sed -i 's/\#deezerpass/deezerpass/g' $CONFIG_FILE;
+    sed -i 's/DEEZER_USERNAME/'"$DEEZER_USERNAME"'/g' $CONFIG_FILE;
+    sed -i 's/DEEZER_PASSWORD/'"$DEEZER_PASSWORD"'/g' $CONFIG_FILE;
+fi
+
+echo "HRA Enable [$HRA_ENABLE]"
+if [ "${HRA_ENABLE^^}" == "YES" ]; then
+    echo "Processing HRA settings";
+    sed -i 's/\#hrauser/hrauser/g' $CONFIG_FILE;
+    sed -i 's/\#hrapass/hrapass/g' $CONFIG_FILE;
+    sed -i 's/\#hralang/hralang/g' $CONFIG_FILE;
+    sed -i 's/HRA_USERNAME/'"$HRA_USERNAME"'/g' $CONFIG_FILE;
+    sed -i 's/HRA_PASSWORD/'"$HRA_PASSWORD"'/g' $CONFIG_FILE;
+    sed -i 's/HRA_LANG/'"$HRA_LANG"'/g' $CONFIG_FILE;
 fi
 
 echo "ENABLE_UPRCL [$ENABLE_UPRCL]"

@@ -20,13 +20,9 @@ I prepared this Dockerfile Because I wanted to be able to install upmpdcli easil
 
 ## Prerequisites
 
+### Docker
+
 You need to have Docker up and running on a Linux machine, and the current user must be allowed to run containers (this usually means that the current user belongs to the "docker" group).
-
-You will also need a running instance mpd server (Music Player Daemon) on your network.  
-You might consider using my mpd-alsa docker image, at the following links:
-
-mpd-alsa-docker Source: [GitHub](https://github.com/giof71/mpd-alsa-docker)  
-mpd-alsa Images: [DockerHub](https://hub.docker.com/r/giof71/mpd-alsa)
 
 You can verify whether your user belongs to the "docker" group with the following command:
 
@@ -34,7 +30,19 @@ You can verify whether your user belongs to the "docker" group with the followin
 
 This command will output one line if the current user does belong to the "docker" group, otherwise there will be no output.
 
-The Dockerfile and the included scripts have been tested on the following distros:
+### MPD
+
+You will also need a running instance of `mpd` (Music Player Daemon) on your network.  
+You might consider using my `mpd-alsa` docker image, at the following links:
+
+Repository|Type|Link
+---|:---:|:---:
+mpd-alsa-docker|Source Code|[GitHub](https://github.com/giof71/mpd-alsa-docker)  
+mpd-alsa|Docker Images|[DockerHub](https://hub.docker.com/r/giof71/mpd-alsa)
+
+### Supported platforms
+
+The Dockerfile and the scripts included in this repository have been tested on the following distros:
 
 - Manjaro Linux with Gnome (amd64)
 - Asus Tinkerboard
@@ -67,7 +75,7 @@ We also need to use the *host* network so the upnp renderer can be discovered on
 The following table reports all the currently supported environment variables.
 
 VARIABLE|DEFAULT|NOTES
----|---|---
+---|:---:|---
 PUID|1000|User id. Used only when UPRCL is enabled
 PGID|1000|Group id. Used only when UPRCL is enabled
 MPD_HOST|localhost|The host where mpd runs
@@ -97,6 +105,17 @@ QOBUZ_ENABLE|no|Set to yes to enable Qobuz support
 QOBUZ_USERNAME|qobuz_username|Your Qobuz account username
 QOBUZ_PASSWORD|qobuz_password|Your Qobuz account password
 QOBUZ_FORMAT_ID|5|Qobuz format id: 5 for mp3, 7 for FLAC, 27 for hi-res
+SPOTIFY_ENABLE|no|Set to yes to enable Qobuz support
+SPOTIFY_USERNAME|spotifyuser|Your Spotify account username
+SPOTIFY_PASSWORD|spotifypass|Your Spotify account password
+SPOTIFY_BITRATE|320|Spotify bitrate. I changed upmpdcli's default from 160 to 320.
+DEEZER_ENABLE|no|Set to yes to enable Deezer support
+DEEZER_USERNAME|deezer_username|Your Deezer account username
+DEEZER_PASSWORD|deezer_password|Your Deezer account password
+HRA_ENABLE|no|Set to yes to enable HRA support
+HRA_USERNAME|hra_username|Your HRA account username
+HRA_PASSWORD|hra_password|Your HRA account password
+HRA_LANG|hra_lang|Your HRA account language
 LOG_ENABLE||Set to `yes` to enable. If enabled, the logfile is `/log/upmpdcli.log`. Otherwise, umpdcli will log to stderr.
 LOG_LEVEL||Defaults to `2`
 STARTUP_DELAY_SEC|0| Delay before starting the application. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite if all those services run on the same audio device. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience.
@@ -107,7 +126,7 @@ Volume|Description
 :---|:---
 /uprcl/confdir|Uprcl configuration directory
 /uprcl/mediadirs|Uprcl media directories
-/user/config|Location for additional files. Currently: `additional-radio-list.txt` and `recoll.conf.user` as well as credentials for qobuz on `qobuz.txt` and for tidal on `tidal.txt`. The credentials file format is the same as a `.env` file. Ensure to include all the settings related the streaming service.
+/user/config|Location for additional files. Currently: `additional-radio-list.txt` and `recoll.conf.user` as well as credentials for qobuz on `qobuz.txt`, for tidal on `tidal.txt`, for spotify on `spotify.txt`, for deezer on `deezer.txt`, for hra on `hra.txt`. The credentials file format is the same as a `.env` file. Ensure to include all the settings related the streaming service.
 /cache|Runtime information for upmpdcli. Attach a volume to this path in order to maintain consistency across restarts.
 /log|Location for the upmpdcli log file. Enabled using `LOG_ENABLE`
 
@@ -142,6 +161,9 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-11-23|Add `HRA` support
+2022-11-23|Add `Deezer` support
+2022-11-23|Add `Spotify` support
 2022-11-22|Fixed permissions for `/cache` in user mode
 2022-11-22|Existing but undocumented volume `/var/cache/upmpdcli` changed to `/cache` for convenience
 2022-11-22|Enable logging configurability, relevant volume is `/log`
