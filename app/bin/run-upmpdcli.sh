@@ -97,9 +97,9 @@ fi
 cp $SOURCE_CONFIG_FILE $CONFIG_FILE
 
 # log support
-if [ "${ENABLE_LOG^^}" == "YES" ]; then
+if [ "${LOG_ENABLE^^}" == "YES" ]; then
     sed -i "s/#logfilename/logfilename/g" $CONFIG_FILE;
-    if [ -z "${LOG_LEVEL}" ]; then
+    if [ -n "${LOG_LEVEL}" ]; then
         replace_parameter $CONFIG_FILE LOG_LEVEL "$LOG_LEVEL" loglevel
     fi
 fi
