@@ -161,6 +161,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-11-28|Version bump to `1.6.1` for docker tags
 2022-11-28|Fixed logging (was using wrong variable)
 2022-11-23|Add `HRA` support
 2022-11-23|Add `Deezer` support
