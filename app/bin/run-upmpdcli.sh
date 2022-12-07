@@ -1,5 +1,9 @@
 #!/bin/bash
 
+## error codes
+# 1 Generic error
+# 2 Invalid RENDERER_MODE value
+
 SOURCE_CONFIG_FILE=/app/conf/upmpdcli.conf
 CONFIG_FILE=/app/conf/current-upmpdcli.conf
 
@@ -113,10 +117,40 @@ else
     sed -i 's/UPNPIFACE/'"$UPNPIFACE"'/g' $CONFIG_FILE
 fi
 
+# Renderer mode
+if [ -n "${RENDERER_MODE}" ]; then
+    echo "RENDERER_MODE = [${RENDERER_MODE}]"
+    UPNPAV=0
+    OPENHOME=0
+    if [ "${RENDERER_MODE^^}" == "OPENHOME" ]; then
+        OPENHOME=1
+    elif [ "${RENDERER_MODE^^}" == "UPNPAV" ]; then
+        UPNPAV=1
+    elif [ "${RENDERER_MODE^^}" == "BOTH" ]; then
+        UPNPAV=1
+        OPENHOME=1
+    elif [ "${RENDERER_MODE^^}" != "NONE" ]; then
+        echo "Invalid RENDERER_MODE [${RENDERER_MODE}]"
+        exit 2
+    fi
+    echo "RENDERER_MODE=[${RENDERER_MODE}] => OPENHOME=[${OPENHOME}] UPNPAV=[${UPNPAV}]"
+fi
+
+# Friendly name management
 if [ -n "${FRIENDLY_NAME}" ]; then
+    echo "FRIENDLY_NAME=[${FRIENDLY_NAME}], UPNPAV_SKIP_NAME_POSTFIX=[${UPNPAV_SKIP_NAME_POSTFIX}]"
     UPMPD_FRIENDLY_NAME="${FRIENDLY_NAME}"
-    AV_FRIENDLY_NAME="${FRIENDLY_NAME}-av"
+    echo "UPMPD_FRIENDLY_NAME=[${UPMPD_FRIENDLY_NAME}]"
+    if [[ -z "${UPNPAV_SKIP_NAME_POSTFIX}" || "${UPNPAV_SKIP_NAME_POSTFIX^^}" == "YES" ]] && 
+          [ "${OPENHOME}" -eq 0 ] && 
+          [ "${UPNPAV}" -eq 1 ]; then
+        AV_FRIENDLY_NAME="${FRIENDLY_NAME}"
+    else
+        AV_FRIENDLY_NAME="${FRIENDLY_NAME}-av"
+    fi
+    echo "AV_FRIENDLY_NAME=[${AV_FRIENDLY_NAME}]"
     MEDIA_SERVER_FRIENDLY_NAME="${FRIENDLY_NAME}"
+    echo "MEDIA_SERVER_FRIENDLY_NAME=[${MEDIA_SERVER_FRIENDLY_NAME}]"
 fi
 
 replace_parameter $CONFIG_FILE UPNPPORT "$UPNPPORT" upnpport
