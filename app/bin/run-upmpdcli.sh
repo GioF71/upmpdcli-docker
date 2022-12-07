@@ -288,7 +288,9 @@ ADDITIONAL_RADIO_LIST_FILENAME="$USER_CONF_PATH/$ADDITIONAL_RADIO_LIST"
 cp $MAIN_RADIO_LIST_FILENAME $RADIO_LIST
 if [ -f "$ADDITIONAL_RADIO_LIST_FILENAME" ]; then
     echo "Adding additional radio list file"
-    cat $ADDITIONAL_RADIO_LIST_FILENAME
+    if [ "${DUMP_ADDITIONAL_RADIO_LIST^^}" == "YES" ]; then
+        cat $ADDITIONAL_RADIO_LIST_FILENAME
+    fi
     cat $ADDITIONAL_RADIO_LIST_FILENAME >> $RADIO_LIST
 else
     echo "No additional radio list file."
