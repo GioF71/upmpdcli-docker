@@ -85,7 +85,7 @@ UPNPIFACE||UPnP network interface
 UPNPPORT||UPnP port
 UPMPD_FRIENDLY_NAME|upmpd|Name of the upnp renderer
 AV_FRIENDLY_NAME|upmpd-av|Name of the upnp renderer (av mode)
-FRIENDLY_NAME||Name of the renderer, overrides `UPMPD_FRIENDLY_NAME`, `AV_FRIENDLY_NAME` and `MEDIA_SERVER_FRIENDLY_NAME`. The variable `AV_FRIENDLY_NAME` is set to the specified `FRIENDLY_NAME` and appended with `-av`.
+FRIENDLY_NAME||Name of the renderer, overrides `UPMPD_FRIENDLY_NAME`, `AV_FRIENDLY_NAME` and `MEDIA_SERVER_FRIENDLY_NAME`. The variable `AV_FRIENDLY_NAME` is appended with the postfix `-av`, unless UPNPAV is the only enabled renderer. See `UPNPAV_SKIP_NAME_POSTFIX` for more details.
 RENDERER_MODE||If set, this variable overrides `UPNPAV` and `OPENHOME`. Possible values are `NONE`, `OPENHOME`, `UPNPAV` and `BOTH`
 UPNPAV|0|Enable UPnP AV services (`0`/`1`)
 OPENHOME|1|Enable OpenHome services (`0`/`1`)
