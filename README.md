@@ -86,8 +86,10 @@ UPNPPORT||UPnP port
 UPMPD_FRIENDLY_NAME|upmpd|Name of the upnp renderer
 AV_FRIENDLY_NAME|upmpd-av|Name of the upnp renderer (av mode)
 FRIENDLY_NAME||Name of the renderer, overrides `UPMPD_FRIENDLY_NAME`, `AV_FRIENDLY_NAME` and `MEDIA_SERVER_FRIENDLY_NAME`. The variable `AV_FRIENDLY_NAME` is set to the specified `FRIENDLY_NAME` and appended with `-av`.
-UPNPAV|0|Enable UPnP AV services (0/1)
-OPENHOME|1|Enable OpenHome services (0/1)
+RENDERER_MODE||If set, this variable overrides `UPNPAV` and `OPENHOME`. Possible values are `NONE`, `OPENHOME`, `UPNPAV` and `BOTH`
+UPNPAV|0|Enable UPnP AV services (`0`/`1`)
+OPENHOME|1|Enable OpenHome services (`0`/`1`)
+UPNPAV_SKIP_NAME_POSTFIX||If not set or set to `yes`, and if only `UPNPAV` renderer is enabled, the `-av` postfix is not appended to `FRIENDLY_NAME`
 ENABLE_UPRCL||Enable local music support (uprcl). Set to `yes` to enable
 UPRCL_AUTOSTART||Autostart UPRCL if set to `1`
 UPCRL_USER||User for uprcl
@@ -161,6 +163,8 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-12-07|Support `RENDERER_MODE` for easier renderer configuration
+2022-12-07|New `UPNPAV_SKIP_NAME_POSTFIX` allows to avoid `-av` postfix
 2022-11-28|Version bump to `1.6.1` for docker tags
 2022-11-28|Fixed logging (was using wrong variable)
 2022-11-23|Add `HRA` support
