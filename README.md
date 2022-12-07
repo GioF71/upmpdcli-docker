@@ -120,6 +120,7 @@ HRA_PASSWORD|hra_password|Your HRA account password
 HRA_LANG|hra_lang|Your HRA account language
 LOG_ENABLE||Set to `yes` to enable. If enabled, the logfile is `/log/upmpdcli.log`. Otherwise, umpdcli will log to stderr.
 LOG_LEVEL||Defaults to `2`
+DUMP_ADDITIONAL_RADIO_LIST||Dumps the additional radio file when set to `yes`
 STARTUP_DELAY_SEC|0| Delay before starting the application. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite if all those services run on the same audio device. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience.
 
 ### Volumes
