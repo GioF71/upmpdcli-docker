@@ -1,1 +1,0 @@
-docker build --push --platform linux/arm/v7,linux/arm/v8,linux/amd64 --tag giof71/upmpdcli:latest .

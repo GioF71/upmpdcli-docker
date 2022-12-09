@@ -164,6 +164,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-12-09|Minor maintenance tasks
 2022-12-07|Option for dumping additional radio list
 2022-12-07|Support `RENDERER_MODE` for easier renderer configuration
 2022-12-07|New `UPNPAV_SKIP_NAME_POSTFIX` allows to avoid `-av` postfix

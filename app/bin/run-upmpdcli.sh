@@ -17,6 +17,7 @@ declare -A file_dict
 
 source read-file.sh
 source get-value.sh
+source config-builder.sh
 
 if [ -f "$QOBUZ_CREDENTIALS_FILE" ]; then
     echo "Reading $QOBUZ_CREDENTIALS_FILE"
@@ -71,22 +72,6 @@ fi
 DEFAULT_UPNPPORT=49152
 DEFAULT_PLG_MICRO_HTTP_PORT=49149
 
-replace_parameter() {
-    CFG_FILE=$1
-    PARAM_NAME=$2
-    PARAM_VALUE=$3
-    PARAM_KEY=$4
-    echo "$PARAM_NAME=["$PARAM_VALUE"] for key [$PARAM_KEY] on file $CFG_FILE"
-    if [ -z "${PARAM_VALUE}" ]; then
-        echo "$PARAM_NAME not set"
-    else 
-        echo "Setting $PARAM_NAME to ["$PARAM_VALUE"]"
-        echo "enabling key [$PARAM_KEY]"
-        sed -i "s/#${PARAM_KEY}/${PARAM_KEY}/g" $CFG_FILE;
-        echo "Setting value for key [${PARAM_KEY}] to [${PARAM_VALUE}]"
-        sed -i "s/${PARAM_NAME}/${PARAM_VALUE}/g" $CFG_FILE;
-    fi
-}
 
 if [[ -n $PORT_OFFSET && $PORT_OFFSET -ge 0 ]]; then
     echo "Applying PORT_OFFSET=[$PORT_OFFSET]"
@@ -104,7 +89,7 @@ cp $SOURCE_CONFIG_FILE $CONFIG_FILE
 if [ "${LOG_ENABLE^^}" == "YES" ]; then
     sed -i "s/#logfilename/logfilename/g" $CONFIG_FILE;
     if [ -n "${LOG_LEVEL}" ]; then
-        replace_parameter $CONFIG_FILE LOG_LEVEL "$LOG_LEVEL" loglevel
+        set_parameter $CONFIG_FILE LOG_LEVEL "$LOG_LEVEL" loglevel
     fi
 fi
 
@@ -153,19 +138,19 @@ if [ -n "${FRIENDLY_NAME}" ]; then
     echo "MEDIA_SERVER_FRIENDLY_NAME=[${MEDIA_SERVER_FRIENDLY_NAME}]"
 fi
 
-replace_parameter $CONFIG_FILE UPNPPORT "$UPNPPORT" upnpport
-replace_parameter $CONFIG_FILE UPNPAV "$UPNPAV" upnpav
-replace_parameter $CONFIG_FILE OPENHOME "$OPENHOME" openhome
+set_parameter $CONFIG_FILE UPNPPORT "$UPNPPORT" upnpport
+set_parameter $CONFIG_FILE UPNPAV "$UPNPAV" upnpav
+set_parameter $CONFIG_FILE OPENHOME "$OPENHOME" openhome
 if [ "${OPENHOME}" -eq 1 ]; then
-    replace_parameter $CONFIG_FILE UPMPD_FRIENDLY_NAME "$UPMPD_FRIENDLY_NAME" friendlyname
+    set_parameter $CONFIG_FILE UPMPD_FRIENDLY_NAME "$UPMPD_FRIENDLY_NAME" friendlyname
 fi
 if [ "${UPNPAV}" -eq 1 ]; then
-    replace_parameter $CONFIG_FILE AV_FRIENDLY_NAME "$AV_FRIENDLY_NAME" avfriendlyname
+    set_parameter $CONFIG_FILE AV_FRIENDLY_NAME "$AV_FRIENDLY_NAME" avfriendlyname
 fi
-replace_parameter $CONFIG_FILE MPD_HOST "$MPD_HOST" mpdhost
-replace_parameter $CONFIG_FILE MPD_PORT "$MPD_PORT" mpdport
-replace_parameter $CONFIG_FILE PLG_MICRO_HTTP_HOST "$PLG_MICRO_HTTP_HOST" plgmicrohttphost
-replace_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmicrohttpport
+set_parameter $CONFIG_FILE MPD_HOST "$MPD_HOST" mpdhost
+set_parameter $CONFIG_FILE MPD_PORT "$MPD_PORT" mpdport
+set_parameter $CONFIG_FILE PLG_MICRO_HTTP_HOST "$PLG_MICRO_HTTP_HOST" plgmicrohttphost
+set_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmicrohttpport
 
 MEDIA_SERVER_ENABLED=0
 if [[ "${ENABLE_UPRCL^^}" == "YES" || 
@@ -180,7 +165,7 @@ fi
 echo "MEDIA_SERVER_ENABLED=[${MEDIA_SERVER_ENABLED}]"
 if [ "${MEDIA_SERVER_ENABLED}" -eq 1 ]; then
     echo "Setting msfriendlyname to [${MEDIA_SERVER_FRIENDLY_NAME}]"
-    replace_parameter $CONFIG_FILE MEDIA_SERVER_FRIENDLY_NAME "$MEDIA_SERVER_FRIENDLY_NAME" msfriendlyname
+    set_parameter $CONFIG_FILE MEDIA_SERVER_FRIENDLY_NAME "$MEDIA_SERVER_FRIENDLY_NAME" msfriendlyname
 fi
 
 echo "Tidal Enable [$TIDAL_ENABLE]"
