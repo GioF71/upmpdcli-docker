@@ -7,7 +7,8 @@ Now with support for custom radios.
 
 First and foremost, the reference to the awesome project:
 
-[An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/)
+[An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).  
+Current version is `1.6.2`.
 
 ## Links
 
@@ -164,6 +165,8 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-12-12|Support for building with `kinetic` as the base image
+2022-12-12|Upmpdcli version bump to `1.6.2`
 2022-12-09|Minor maintenance tasks
 2022-12-07|Option for dumping additional radio list
 2022-12-07|Support `RENDERER_MODE` for easier renderer configuration

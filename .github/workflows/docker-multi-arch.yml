@@ -33,8 +33,10 @@ jobs:
           echo "REF: ["$ref"]"
 
           declare -A base_images
+          base_images[kinetic]=ubuntu:kinetic
           base_images[jammy]=ubuntu:jammy
           base_images[focal]=ubuntu:focal
+          base_images[bionic]=ubuntu:bionic
 
           stable="jammy"
           latest="jammy"
@@ -43,12 +45,12 @@ jobs:
           tag_latest="latest"
 
           declare -A upmpdcli_versions
-          upmpdcli_versions[jammy]=1.6.1
-          upmpdcli_versions[focal]=1.6.1
+          upmpdcli_versions[jammy]=1.6.2
+          upmpdcli_versions[focal]=1.6.2
 
           declare -A libupnp_versions
-          libupnp_versions[jammy]=0.22.2
-          libupnp_versions[focal]=0.22.2
+          libupnp_versions[jammy]=0.22.4
+          libupnp_versions[focal]=0.22.4
 
           base=${{ matrix.base }}
           select_base_image=${base_images[$base]}

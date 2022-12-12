@@ -3,8 +3,9 @@
 declare -A base_images
 
 base_images[kinetic]=ubuntu:kinetic
-base_images[focal]=ubuntu:focal
 base_images[jammy]=ubuntu:jammy
+base_images[focal]=ubuntu:focal
+base_images[bionic]=ubuntu:bionic
 
 DEFAULT_BASE_IMAGE=jammy
 DEFAULT_TAG=latest
