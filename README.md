@@ -8,7 +8,13 @@ Now with support for custom radios.
 First and foremost, the reference to the awesome project:
 
 [An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).  
-Current version is `1.6.2`.
+Current version is `1.6.2`.  
+
+## News
+
+### Streaming to Kodi enhanced
+
+Starting with release `1.6.2`, included in this container image since 2022-12-12, Kodi support is considerably improved. Upmpdcli (in media server mode) can now stream hi-res from Qobuz as well as it can stream Internet Radios. Configuration examples will be made available soon.
 
 ## Links
 
