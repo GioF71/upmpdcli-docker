@@ -171,6 +171,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-12-14|Radio support metadata value `Internet Radio` for kodi
 2022-12-12|Support for building with `kinetic` as the base image
 2022-12-12|Upmpdcli version bump to `1.6.2`
 2022-12-09|Minor maintenance tasks
