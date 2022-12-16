@@ -175,6 +175,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-12-16|Moved mandatory variables on top of config file
 2022-12-16|Usage examples provided
 2022-12-14|Radio support metadata value `Internet Radio` for kodi
 2022-12-12|Support for building with `kinetic` as the base image
