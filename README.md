@@ -158,6 +158,10 @@ preferScript = 1
 Only the `url` line is mandatory.  
 Refer to the file [radiolist.conf](https://github.com/GioF71/upmpdcli-docker/blob/main/app/reference/radiolist.conf) from the git repository for further details.
 
+
+## Usage examples
+
+A few usage examples are available [here](doc/example-configurations.md).  
 ## Build
 
 You can build (or rebuild) the image by opening a terminal from the root of the repository and issuing the following command:
@@ -171,6 +175,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-12-16|Usage examples provided
 2022-12-14|Radio support metadata value `Internet Radio` for kodi
 2022-12-12|Support for building with `kinetic` as the base image
 2022-12-12|Upmpdcli version bump to `1.6.2`
