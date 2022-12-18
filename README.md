@@ -14,7 +14,7 @@ Current version is `1.6.3`.
 
 ### Streaming to Kodi enhanced
 
-Starting with release `1.6.2`, included in this container image since 2022-12-12, Kodi support is considerably improved. Upmpdcli (in media server mode) can now stream hi-res from Qobuz as well as it can stream Internet Radios. Configuration examples will be made available soon.
+Starting with release `1.6.2`, included in this container image since 2022-12-12, Kodi support is considerably improved. Upmpdcli (in media server mode) can now stream hi-res from Qobuz as well as it can stream Internet Radios. Configuration examples are available [here](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md).
 
 ## Links
 
@@ -161,7 +161,7 @@ Refer to the file [radiolist.conf](https://github.com/GioF71/upmpdcli-docker/blo
 
 ## Usage examples
 
-A few usage examples are available [here](doc/example-configurations.md).  
+A few usage examples are available [here](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md).  
 ## Build
 
 You can build (or rebuild) the image by opening a terminal from the root of the repository and issuing the following command:
