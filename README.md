@@ -175,8 +175,9 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-12-18|Restored `Internet Radio` patch
 2022-12-18|Remove `Internet Radio` patch created `2022-12-14`
-2022-12-18|Upmpdcli version bump to `1.6.2`
+2022-12-18|Upmpdcli version bump to `1.6.3`
 2022-12-16|Moved mandatory variables on top of config file
 2022-12-16|Usage examples provided
 2022-12-14|Radio support metadata value `Internet Radio` for kodi
