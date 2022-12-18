@@ -45,8 +45,8 @@ jobs:
           tag_latest="latest"
 
           declare -A upmpdcli_versions
-          upmpdcli_versions[jammy]=1.6.2
-          upmpdcli_versions[focal]=1.6.2
+          upmpdcli_versions[jammy]=1.6.3
+          upmpdcli_versions[focal]=1.6.3
 
           declare -A libupnp_versions
           libupnp_versions[jammy]=0.22.4
