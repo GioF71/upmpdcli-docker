@@ -83,8 +83,8 @@ The following table reports all the currently supported environment variables.
 
 VARIABLE|DEFAULT|NOTES
 ---|:---:|---
-PUID|1000|User id. Used only when UPRCL is enabled
-PGID|1000|Group id. Used only when UPRCL is enabled
+PUID|1000|User id. Used when UPRCL is enabled
+PGID|1000|Group id. Used when UPRCL is enabled
 MPD_HOST|localhost|The host where mpd runs
 MPD_PORT|6600|The port used by mpd
 PORT_OFFSET||If set, the offset is applied to the default for `UPNP_PORT` (summed) and to the default `PLG_MICRO_HTTP_PORT` (subtracted). Setting this variable overrides these individual variables.
