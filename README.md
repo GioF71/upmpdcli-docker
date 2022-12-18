@@ -8,7 +8,7 @@ Now with support for custom radios.
 First and foremost, the reference to the awesome project:
 
 [An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).  
-Current version is `1.6.3`.  
+Current version is `1.6.2`.  
 
 ## News
 
@@ -175,6 +175,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-12-18|Upmpdcli version is still `1.6.2`, my mistake
 2022-12-18|Restored `Internet Radio` patch
 2022-12-18|Remove `Internet Radio` patch created `2022-12-14`
 2022-12-18|Upmpdcli version bump to `1.6.3`
