@@ -127,8 +127,6 @@ RUN chmod u+x /app/bin/*.sh
 
 COPY README.md /app/doc
 
-COPY app/radio-patch/upradioconf.py /usr/share/upmpdcli/cdplugins/pycommon/
-
 WORKDIR /app/bin
 
 ENTRYPOINT ["/app/bin/run-upmpdcli.sh"]
