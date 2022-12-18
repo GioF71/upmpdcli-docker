@@ -126,6 +126,7 @@ COPY app/bin/config-builder.sh /app/bin/
 RUN chmod u+x /app/bin/*.sh
 
 COPY README.md /app/doc
+COPY app/patch/upradioconf.py /usr/share/upmpdcli/cdplugins/pycommon/
 
 WORKDIR /app/bin
 
