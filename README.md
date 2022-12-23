@@ -114,10 +114,6 @@ QOBUZ_ENABLE|no|Set to yes to enable Qobuz support
 QOBUZ_USERNAME|qobuz_username|Your Qobuz account username
 QOBUZ_PASSWORD|qobuz_password|Your Qobuz account password
 QOBUZ_FORMAT_ID|5|Qobuz format id: 5 for mp3, 7 for FLAC, 27 for hi-res
-SPOTIFY_ENABLE|no|Set to yes to enable Qobuz support
-SPOTIFY_USERNAME|spotifyuser|Your Spotify account username
-SPOTIFY_PASSWORD|spotifypass|Your Spotify account password
-SPOTIFY_BITRATE|320|Spotify bitrate. I changed upmpdcli's default from 160 to 320.
 DEEZER_ENABLE|no|Set to yes to enable Deezer support
 DEEZER_USERNAME|deezer_username|Your Deezer account username
 DEEZER_PASSWORD|deezer_password|Your Deezer account password
@@ -136,7 +132,7 @@ Volume|Description
 :---|:---
 /uprcl/confdir|Uprcl configuration directory
 /uprcl/mediadirs|Uprcl media directories
-/user/config|Location for additional files. Currently: `additional-radio-list.txt` and `recoll.conf.user` as well as credentials for qobuz on `qobuz.txt`, for tidal on `tidal.txt`, for spotify on `spotify.txt`, for deezer on `deezer.txt`, for hra on `hra.txt`. The credentials file format is the same as a `.env` file. Ensure to include all the settings related the streaming service.
+/user/config|Location for additional files. Currently: `additional-radio-list.txt` and `recoll.conf.user` as well as credentials for qobuz on `qobuz.txt`, for tidal on `tidal.txt`, for deezer on `deezer.txt`, for hra on `hra.txt`. The credentials file format is the same as a `.env` file. Ensure to include all the settings related the streaming service.
 /cache|Runtime information for upmpdcli. Attach a volume to this path in order to maintain consistency across restarts.
 /log|Location for the upmpdcli log file. Enabled using `LOG_ENABLE`
 
@@ -175,6 +171,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2022-12-23|Removed Spotify support (see `[here](https://framagit.org/medoc92/upmpdcli/-/commit/43aa55d70fe6378ee7f0c65bfb4b90602334cd1c)`)
 2022-12-18|Upmpdcli version is still `1.6.2`, my mistake
 2022-12-18|Restored `Internet Radio` patch
 2022-12-18|Remove `Internet Radio` patch created `2022-12-14`
