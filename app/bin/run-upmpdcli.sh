@@ -9,7 +9,6 @@ CONFIG_FILE=/app/conf/current-upmpdcli.conf
 
 QOBUZ_CREDENTIALS_FILE=/user/config/qobuz.txt
 TIDAL_CREDENTIALS_FILE=/user/config/tidal.txt
-SPOTIFY_CREDENTIALS_FILE=/user/config/spotify.txt
 DEEZER_CREDENTIALS_FILE=/user/config/deezer.txt
 HRA_CREDENTIALS_FILE=/user/config/hra.txt
 
@@ -38,16 +37,6 @@ if [ -f "$TIDAL_CREDENTIALS_FILE" ]; then
     TIDAL_QUALITY=$(get_value "TIDAL_QUALITY" $PARAMETER_PRIORITY)
 else
     echo "File $TIDAL_CREDENTIALS_FILE not found."
-fi
-
-if [ -f "$SPOTIFY_CREDENTIALS_FILE" ]; then
-    echo "Reading $SPOTIFY_CREDENTIALS_FILE"
-    read_file $SPOTIFY_CREDENTIALS_FILE
-    SPOTIFY_USERNAME=$(get_value "SPOTIFY_USERNAME" $PARAMETER_PRIORITY)
-    SPOTIFY_PASSWORD=$(get_value "SPOTIFY_PASSWORD" $PARAMETER_PRIORITY)
-    SPOTIFY_BITRATE=$(get_value "SPOTIFY_BITRATE" $PARAMETER_PRIORITY)
-else
-    echo "File $SPOTIFY_CREDENTIALS_FILE not found."
 fi
 
 if [ -f "$DEEZER_CREDENTIALS_FILE" ]; then
@@ -155,7 +144,6 @@ set_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmicroht
 MEDIA_SERVER_ENABLED=0
 if [[ "${ENABLE_UPRCL^^}" == "YES" || 
       "${TIDAL_ENABLE^^}" == "YES" ||
-      "${SPOTIFY_ENABLE^^}" == "YES" ||
       "${DEEZER_ENABLE^^}" == "YES" ||
       "${HRA_ENABLE^^}" == "YES" ||
       "${QOBUZ_ENABLE^^}" == "YES" ]]; then
@@ -190,17 +178,6 @@ if [ "${QOBUZ_ENABLE^^}" == "YES" ]; then
     sed -i 's/QOBUZ_USERNAME/'"$QOBUZ_USERNAME"'/g' $CONFIG_FILE;
     sed -i 's/QOBUZ_PASSWORD/'"$QOBUZ_PASSWORD"'/g' $CONFIG_FILE;
     sed -i 's/QOBUZ_FORMAT_ID/'"$QOBUZ_FORMAT_ID"'/g' $CONFIG_FILE;
-fi
-
-echo "Spotify Enable [$SPOTIFY_ENABLE]"
-if [ "${SPOTIFY_ENABLE^^}" == "YES" ]; then
-    echo "Processing Spotify settings";
-    sed -i 's/\#spotifyuser/spotifyuser/g' $CONFIG_FILE;
-    sed -i 's/\#spotifypass/spotifypass/g' $CONFIG_FILE;
-    sed -i 's/\#spotifybitrate/spotifybitrate/g' $CONFIG_FILE;
-    sed -i 's/SPOTIFY_USERNAME/'"$SPOTIFY_USERNAME"'/g' $CONFIG_FILE;
-    sed -i 's/SPOTIFY_PASSWORD/'"$SPOTIFY_PASSWORD"'/g' $CONFIG_FILE;
-    sed -i 's/SPOTIFY_BITRATE/'"$SPOTIFY_BITRATE"'/g' $CONFIG_FILE;
 fi
 
 echo "Deezer Enable [$DEEZER_ENABLE]"
