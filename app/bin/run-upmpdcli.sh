@@ -18,6 +18,14 @@ source read-file.sh
 source get-value.sh
 source config-builder.sh
 
+if [[ -n $ENABLE_UPRCL ]]; then
+    echo "ENABLE_UPRCL is deprecated, use UPRCL_ENABLE instead"
+    if [[ -z "$UPRCL_ENABLE" ]]; then
+        echo "Setting UPRCL_ENABLE to ENABLE_UPRCL ($ENABLE_UPRCL) for you"
+        UPRCL_ENABLE=$ENABLE_UPRCL
+    fi
+fi
+
 if [ -f "$QOBUZ_CREDENTIALS_FILE" ]; then
     echo "Reading $QOBUZ_CREDENTIALS_FILE"
     read_file $QOBUZ_CREDENTIALS_FILE
@@ -142,7 +150,7 @@ set_parameter $CONFIG_FILE PLG_MICRO_HTTP_HOST "$PLG_MICRO_HTTP_HOST" plgmicroht
 set_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmicrohttpport
 
 MEDIA_SERVER_ENABLED=0
-if [[ "${ENABLE_UPRCL^^}" == "YES" || 
+if [[ "${UPRCL_ENABLE^^}" == "YES" || 
       "${TIDAL_ENABLE^^}" == "YES" ||
       "${DEEZER_ENABLE^^}" == "YES" ||
       "${HRA_ENABLE^^}" == "YES" ||
@@ -200,8 +208,8 @@ if [ "${HRA_ENABLE^^}" == "YES" ]; then
     sed -i 's/HRA_LANG/'"$HRA_LANG"'/g' $CONFIG_FILE;
 fi
 
-echo "ENABLE_UPRCL [$ENABLE_UPRCL]"
-if [ "${ENABLE_UPRCL^^}" == "YES" ]; then
+echo "UPRCL_ENABLE [$UPRCL_ENABLE]"
+if [ "${UPRCL_ENABLE^^}" == "YES" ]; then
     sed -i 's/\#uprclconfdir/uprclconfdir/g' $CONFIG_FILE;
     echo "enabling uprclconfdir"
     sed -i 's/#uprclconfdir/'"uprclconfdir"'/g' $CONFIG_FILE;
@@ -262,7 +270,7 @@ cat $CONFIG_FILE
 
 USER_MODE=0
 # user is create when using UPRCL, or when at least PUID is set
-if [[ "${ENABLE_UPRCL^^}" == "YES" || -n "${PUID}" ]]; then
+if [[ "${UPRCL_ENABLE^^}" == "YES" || -n "${PUID}" ]]; then
     USER_MODE=1
     echo "Creating user ...";
     DEFAULT_UID=1000

@@ -83,7 +83,7 @@ services:
       - PGID=1000
       - RENDERER_MODE=NONE
       - FRIENDLY_NAME=upmpd-library
-      - ENABLE_UPRCL=yes
+      - UPRCL_ENABLE=yes
       - UPRCL_USER=upmpdcli-library
       - UPRCL_HOSTPORT=192.168.1.101:9090
       - UPRCL_AUTOSTART=1
@@ -120,7 +120,7 @@ services:
       - PORT_OFFSET=0
       - RENDERER_MODE=NONE
       - FRIENDLY_NAME=upmpd-radio
-      - ENABLE_UPRCL=yes
+      - UPRCL_ENABLE=yes
       - UPRCL_USER=upmpdcli-library
       - UPRCL_HOSTPORT=192.168.1.105:9090
       - UPRCL_AUTOSTART=1
