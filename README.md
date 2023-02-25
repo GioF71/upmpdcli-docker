@@ -8,7 +8,7 @@ Now with support for custom radios.
 First and foremost, the reference to the awesome project:
 
 [An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).  
-Current version is `1.6.2`.  
+Current version is `1.7.2`.  
 
 ## News
 
@@ -154,7 +154,6 @@ preferScript = 1
 Only the `url` line is mandatory.  
 Refer to the file [radiolist.conf](https://github.com/GioF71/upmpdcli-docker/blob/main/app/reference/radiolist.conf) from the git repository for further details.
 
-
 ## Usage examples
 
 A few usage examples are available [here](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md).  
@@ -171,6 +170,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-02-25|Update to Upmpdcli version 1.7.2
 2022-12-23|Removed Spotify support (see `[here](https://framagit.org/medoc92/upmpdcli/-/commit/43aa55d70fe6378ee7f0c65bfb4b90602334cd1c)`)
 2022-12-18|Upmpdcli version is still `1.6.2`, my mistake
 2022-12-18|Restored `Internet Radio` patch
