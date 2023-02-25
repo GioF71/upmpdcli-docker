@@ -97,11 +97,12 @@ RENDERER_MODE||If set, this variable overrides `UPNPAV` and `OPENHOME`. Possible
 UPNPAV|0|Enable UPnP AV services (`0`/`1`)
 OPENHOME|1|Enable OpenHome services (`0`/`1`)
 UPNPAV_SKIP_NAME_POSTFIX||If not set or set to `yes`, and if only `UPNPAV` renderer is enabled, the `-av` postfix is not appended to `FRIENDLY_NAME`
-ENABLE_UPRCL||Enable local music support (uprcl). Set to `yes` to enable
+UPRCL_ENABLE||Enable local music support (uprcl). Set to `yes` to enable
 UPRCL_AUTOSTART||Autostart UPRCL if set to `1`
 UPCRL_USER||User for uprcl
 UPRCL_HOSTPORT||Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
 UPRCL_TITLE|Local Music|Title for the media server
+ENABLE_UPRCL||Enable local music support (uprcl). Set to `yes` to enable (Deprecated, use UPRCL_ENABLE)
 PLG_MICRO_HTTP_HOST||IP for the tidal/qobuz local HTTP service.
 PLG_MICRO_HTTP_PORT||Port for the tidal/qobuz local HTTP service.
 MEDIA_SERVER_FRIENDLY_NAME||Friendly name for the Media Server
@@ -170,6 +171,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-02-25|Renamed ENABLE_UPRCL to UPRCL_ENABLE
 2023-02-25|Update to Upmpdcli version 1.7.2
 2022-12-23|Removed Spotify support (see `[here](https://framagit.org/medoc92/upmpdcli/-/commit/43aa55d70fe6378ee7f0c65bfb4b90602334cd1c)`)
 2022-12-18|Upmpdcli version is still `1.6.2`, my mistake
