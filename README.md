@@ -14,7 +14,7 @@ Current version is `1.7.2`.
 
 ### Support for Radio Browser
 
-Since `2023-02-26`, I have added support for the new Radio-Browser available in upmpdcli.  
+Since `2023-02-26`, I have added support for the new Radio-Browser media server available in upmpdcli.  
 See [here](https://www.lesbonscomptes.com/upmpdcli/upmpdcli-manual.html#UPMPDCLI-MS-RADIO-BROWSER) for more details.
 
 ### Streaming to Kodi enhanced
