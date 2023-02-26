@@ -15,11 +15,11 @@ Current version is `1.7.2`.
 ### Support for Radio Browser
 
 Since `2023-02-26`, I have added support for the new Radio-Browser available in upmpdcli.  
-See [here](https://www.lesbonscomptes.com/upmpdcli/upmpdcli-manual.html#UPMPDCLI-MS-RADIO-BROWSER) for more details.  
+See [here](https://www.lesbonscomptes.com/upmpdcli/upmpdcli-manual.html#UPMPDCLI-MS-RADIO-BROWSER) for more details.
 
 ### Streaming to Kodi enhanced
 
-Starting with release `1.6.2`, included in this container image since 2022-12-12, Kodi support is considerably improved. Upmpdcli (in media server mode) can now stream hi-res from Qobuz as well as it can stream Internet Radios. Configuration examples are available [here](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md).
+Starting with release `1.6.2`, included in this container image since `2022-12-12`, Kodi support is considerably improved. Upmpdcli (in media server mode) can now stream hi-res from Qobuz as well as it can stream Internet Radios. Configuration examples are available [here](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md).
 
 ## Links
 
