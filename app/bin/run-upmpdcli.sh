@@ -151,6 +151,8 @@ set_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmicroht
 
 MEDIA_SERVER_ENABLED=0
 if [[ "${UPRCL_ENABLE^^}" == "YES" || 
+      "${RADIO_BROWSER_ENABLE^^}" == "YES" ||
+      "${HRA_ENABLE^^}" == "YES" ||
       "${TIDAL_ENABLE^^}" == "YES" ||
       "${DEEZER_ENABLE^^}" == "YES" ||
       "${HRA_ENABLE^^}" == "YES" ||
@@ -162,6 +164,12 @@ echo "MEDIA_SERVER_ENABLED=[${MEDIA_SERVER_ENABLED}]"
 if [ "${MEDIA_SERVER_ENABLED}" -eq 1 ]; then
     echo "Setting msfriendlyname to [${MEDIA_SERVER_FRIENDLY_NAME}]"
     set_parameter $CONFIG_FILE MEDIA_SERVER_FRIENDLY_NAME "$MEDIA_SERVER_FRIENDLY_NAME" msfriendlyname
+fi
+
+echo "RADIO_BROWSER_ENABLE=[$RADIO_BROWSER_ENABLE]"
+if [ "${RADIO_BROWSER_ENABLE^^}" == "YES" ]; then
+    echo "Enabling Radio Browser";
+    sed -i 's/\#radio-browseruser/radio-browseruser/g' $CONFIG_FILE;
 fi
 
 echo "Tidal Enable [$TIDAL_ENABLE]"

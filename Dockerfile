@@ -25,6 +25,9 @@ RUN add-apt-repository ppa:jean-francois-dockes/${USE_PPA}
 RUN apt-get update
 RUN apt-get install -y upmpdcli
 RUN apt-get install -y upmpdcli-*
+RUN apt-get install -y python3 
+RUN apt-get install -y python3-pip
+RUN pip install pyradios 
 RUN apt-get remove -y software-properties-common
 RUN apt-get -y autoremove
 RUN	rm -rf /var/lib/apt/lists/*
@@ -93,6 +96,8 @@ ENV HRA_ENABLE no
 ENV HRA_USERNAME hra_username
 ENV HRA_PASSWORD hra_password
 ENV HRA_LANG en
+
+ENV RADIO_BROWSER_ENABLE ""
 
 ENV PUID ""
 ENV PGID ""
