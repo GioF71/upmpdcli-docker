@@ -163,7 +163,8 @@ Refer to the file [radiolist.conf](https://github.com/GioF71/upmpdcli-docker/blo
 
 ## Usage examples
 
-A few usage examples are available [here](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md).  
+A few usage examples are available [here](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md).
+
 ## Build
 
 You can build (or rebuild) the image by opening a terminal from the root of the repository and issuing the following command:
