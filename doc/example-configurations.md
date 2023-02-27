@@ -60,10 +60,10 @@ This configuration will instruct upmpdcli to connect to mpd on localhost at port
 Also, it will create the OpenHome renderer. This can be easily changed adding the `RENDERER_MODE` variable.  
 Easily specify the friendly name using one variable `FRIENDLY_NAME`. The container startup script will handle the different names of renderers according to the requested configuration.  
 Mounting a directory for the `/cache` volume is not mandatory, but if you do so, upmpdcli will preserve its state across restarts.  
-Mounting a directory for the `/log` volume is not mandatory, but if you do so, you will be able to read the application logs across restarts.   
+Mounting a directory for the `/log` volume is not mandatory, but if you do so, you will be able to read the application logs across restarts.  
 An optional file containing additional radios has been provided via the mountpoint `/user/config/additional-radio-list.txt` in read-only mode.  
 The configuration is using the optional `PUID` and `PGID` variables, see [user mode](#user-mode).  
-The configuration is disabling Watchtower: see [here](#disabling-watchtower).    
+The configuration is disabling Watchtower: see [here](#disabling-watchtower).
 
 ### Media Server
 
