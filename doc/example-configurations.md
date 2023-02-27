@@ -28,7 +28,6 @@ Logging can be tuned using `LOG_ENABLE` and `LOG_LEVEL`. See the [README](../REA
 We can avoid that our container is stopped and restarted by [watchtower](https://github.com/containrrr/watchtower) setting the label `com.centurylinklabs.watchtower.enable` to `false`.  
 Watchtower is a great tool, but be warned that automatic updating can result in interruptions of your listening experience.  
 
-
 ## Sample Configurations
 
 ### Renderer
