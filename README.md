@@ -180,7 +180,7 @@ Change Date|Major Changes
 2023-02-26|Add support for Radio Browser (`RADIO_BROWSER_ENABLE`)
 2023-02-25|Renamed ENABLE_UPRCL to UPRCL_ENABLE
 2023-02-25|Update to Upmpdcli version 1.7.2
-2022-12-23|Removed Spotify support (see `[here](https://framagit.org/medoc92/upmpdcli/-/commit/43aa55d70fe6378ee7f0c65bfb4b90602334cd1c)`)
+2022-12-23|Removed Spotify support (see [here](https://framagit.org/medoc92/upmpdcli/-/commit/43aa55d70fe6378ee7f0c65bfb4b90602334cd1c))
 2022-12-18|Upmpdcli version is still `1.6.2`, my mistake
 2022-12-18|Restored `Internet Radio` patch
 2022-12-18|Remove `Internet Radio` patch created `2022-12-14`
