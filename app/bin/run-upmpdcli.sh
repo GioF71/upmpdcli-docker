@@ -18,6 +18,17 @@ source read-file.sh
 source get-value.sh
 source config-builder.sh
 
+DEFAULT_UPNPAV=0
+DEFAULT_OPENHOME=1
+
+if [[ -z "$UPNPAV" ]]; then
+    UPNPAV=$DEFAULT_UPNPAV
+fi
+
+if [[ -z "$OPENHOME" ]]; then
+    OPENHOME=$DEFAULT_OPENHOME
+fi
+
 if [[ -n $ENABLE_UPRCL ]]; then
     echo "ENABLE_UPRCL is deprecated, use UPRCL_ENABLE instead"
     if [[ -z "$UPRCL_ENABLE" ]]; then
