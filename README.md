@@ -90,8 +90,8 @@ VARIABLE|DEFAULT|NOTES
 ---|:---:|---
 PUID|1000|User id. Used when UPRCL is enabled
 PGID|1000|Group id. Used when UPRCL is enabled
-MPD_HOST|localhost|The host where mpd runs
-MPD_PORT|6600|The port used by mpd
+MPD_HOST||The host where mpd runs, defaults to `localhost`
+MPD_PORT||The port used by mpd, defaults to `6600`
 PORT_OFFSET||If set, the offset is applied to the default for `UPNP_PORT` (summed) and to the default `PLG_MICRO_HTTP_PORT` (subtracted). Setting this variable overrides these individual variables.
 UPNPIFACE||UPnP network interface
 UPNPPORT||UPnP port
