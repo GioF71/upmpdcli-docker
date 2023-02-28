@@ -8,7 +8,7 @@ base_images[focal]=ubuntu:focal
 base_images[bionic]=ubuntu:bionic
 
 DEFAULT_BASE_IMAGE=jammy
-DEFAULT_TAG=latest
+DEFAULT_TAG=local
 DEFAULT_USE_PROXY=N
 DEFAULT_PPA=upnpp1
 
