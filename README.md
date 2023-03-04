@@ -12,6 +12,11 @@ Current version is `1.7.2`.
 
 ## News
 
+### Scrobbling
+
+I have prepared a docker container for [Yams, Yet Another MPD Scrobbler](https://github.com/Berulacks/yams). [Here](https://github.com/GioF71/yams-docker/) is the repository.  
+This is the first scrobbler, to my knowledge, to be working correctly with upmpdcli.
+
 ### Support for Radio Browser
 
 Since `2023-02-26`, I have added support for the new Radio-Browser media server available in upmpdcli.  
