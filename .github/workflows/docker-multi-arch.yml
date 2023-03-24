@@ -45,19 +45,19 @@ jobs:
           tag_latest="latest"
 
           declare -A upmpdcli_versions
-          upmpdcli_versions[jammy]=1.7.2
-          upmpdcli_versions[focal]=1.7.2
+          upmpdcli_versions[jammy]=1.7.7
+          upmpdcli_versions[focal]=1.7.7
 
-          declare -A libupnp_versions
-          libupnp_versions[jammy]=0.22.4
-          libupnp_versions[focal]=0.22.4
+          declare -A libupnpp7_versions
+          libupnpp7_versions[jammy]=0.22.4
+          libupnpp7_versions[focal]=0.22.4
 
           base=${{ matrix.base }}
           select_base_image=${base_images[$base]}
           echo "select_base_image=["$select_base_image"]"
 
           select_upmpdcli_version=${upmpdcli_versions[$base]}
-          select_libupnp_version=${libupnp_versions[$base]}
+          select_libupnp_version=${libupnpp7_versions[$base]}
 
           upmpdcli_version="upmpdcli-$select_upmpdcli_version-libupnpp-$select_libupnp_version"
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
