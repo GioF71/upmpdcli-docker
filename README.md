@@ -8,7 +8,7 @@ Now with support for custom radios and radio-browser.
 First and foremost, the reference to the awesome project:
 
 [An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).  
-Current version is `1.7.2`.  
+Current version is `1.7.7`.  
 
 ## News
 
@@ -53,7 +53,7 @@ You will also need a running instance of `mpd` (Music Player Daemon) on your net
 You might consider using my `mpd-alsa` docker image, at the following links:
 
 Repository|Type|Link
----|:---:|:---:
+:---|:---|:---
 mpd-alsa-docker|Source Code|[GitHub](https://github.com/giof71/mpd-alsa-docker)  
 mpd-alsa|Docker Images|[DockerHub](https://hub.docker.com/r/giof71/mpd-alsa)
 
@@ -183,6 +183,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-03-24|Update to Upmpdcli version 1.7.7
 2023-02-27|Removed defaults for `UPNPAV` and `OPENHOME` from Dockerfile
 2023-02-26|Add support for Radio Browser (`RADIO_BROWSER_ENABLE`)
 2023-02-25|Renamed ENABLE_UPRCL to UPRCL_ENABLE
