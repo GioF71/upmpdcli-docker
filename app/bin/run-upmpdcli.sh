@@ -160,6 +160,8 @@ set_parameter $CONFIG_FILE MPD_PORT "$MPD_PORT" mpdport
 set_parameter $CONFIG_FILE PLG_MICRO_HTTP_HOST "$PLG_MICRO_HTTP_HOST" plgmicrohttphost
 set_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmicrohttpport
 
+set_parameter $CONFIG_FILE OWN_QUEUE "$OWN_QUEUE" ownqueue
+
 MEDIA_SERVER_ENABLED=0
 if [[ "${UPRCL_ENABLE^^}" == "YES" || 
       "${RADIO_BROWSER_ENABLE^^}" == "YES" ||

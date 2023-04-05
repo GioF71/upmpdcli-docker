@@ -97,6 +97,7 @@ PUID||User id. Used when UPRCL is enabled. Defaults to `1000` when required
 PGID||Group id. Used when UPRCL is enabled. Defaults to `1000` when required
 MPD_HOST||The host where mpd runs, defaults to `localhost`
 MPD_PORT||The port used by mpd, defaults to `6600`
+UPRCL_HOSTPORT||Set if we own the MPD queue, defaults to `1`, possible values `1` and `0`
 PORT_OFFSET||If set, the offset is applied to the default for `UPNP_PORT` (summed) and to the default `PLG_MICRO_HTTP_PORT` (subtracted). Setting this variable overrides these individual variables.
 UPNPIFACE||UPnP network interface
 UPNPPORT||UPnP port
@@ -183,6 +184,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-04-05|Add support for `OWN_QUEUE` (see issue[#138](https://github.com/GioF71/upmpdcli-docker/issues/138))
 2023-03-24|Update to Upmpdcli version 1.7.7
 2023-02-27|Removed defaults for `UPNPAV` and `OPENHOME` from Dockerfile
 2023-02-26|Add support for Radio Browser (`RADIO_BROWSER_ENABLE`)
