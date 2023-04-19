@@ -16,6 +16,7 @@ Current version is `1.7.9`.
 
 From release 2023-04-19, support for the SubSonic plugin has been introduced.  
 I am now a contributor to upmpdcli for this plugin. See the git repository [here](https://framagit.org/medoc92/upmpdcli).  
+The plugin uses my [subsonic-connector](https://github.com/GioF71/subsonic-connector) library which in turn is built around [py-sonic](https://github.com/crustymonkey/py-sonic).  
 Everything has been developed and tested against [Navidrome](https://www.navidrome.org/) but should work with other servers hopefully.  
 
 ### Scrobbling
