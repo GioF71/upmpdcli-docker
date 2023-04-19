@@ -8,7 +8,7 @@ Now with support for custom radios and radio-browser.
 First and foremost, the reference to the awesome project:
 
 [An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).  
-Current version is `1.7.7`.  
+Current version is `1.7.9`.  
 
 ## News
 
