@@ -45,12 +45,12 @@ jobs:
           tag_latest="latest"
 
           declare -A upmpdcli_versions
-          upmpdcli_versions[jammy]=1.7.7
-          upmpdcli_versions[focal]=1.7.7
+          upmpdcli_versions[jammy]=1.7.9
+          upmpdcli_versions[focal]=1.7.9
 
           declare -A libupnpp7_versions
-          libupnpp7_versions[jammy]=0.22.4
-          libupnpp7_versions[focal]=0.22.4
+          libupnpp7_versions[jammy]=0.22.5
+          libupnpp7_versions[focal]=0.22.5
 
           base=${{ matrix.base }}
           select_base_image=${base_images[$base]}
