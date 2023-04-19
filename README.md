@@ -110,6 +110,16 @@ OPENHOME||Enable OpenHome services (`0`/`1`), defaults to `1`
 UPNPAV_SKIP_NAME_POSTFIX||If not set or set to `yes`, and if only `UPNPAV` renderer is enabled, the `-av` postfix is not appended to `FRIENDLY_NAME`
 UPRCL_ENABLE||Enable local music support (uprcl). Set to `yes` to enable
 RADIO_BROWSER_ENABLE||Enable the Radio Browser plugin. Set to `yes` to enable
+SUBSONIC_ENABLE||Enable the Subsonic plugin. Set to `yes` to enable
+SUBSONIC_AUTOSTART||Autostart SubSonic plugin if set to `1`
+SUBSONIC_BASE_URL||SubSonic base url. Example: `http://my_navidrome.homelab.local`
+SUBSONIC_PORT||SubSonic port, defaults to `4533`
+SUBSONIC_USER||SubSonic username
+SUBSONIC_PASSWORD||SubSonic password
+SUBSONIC_ITEMS_PER_PAGE||Number of items per page, defaults to `100`
+SUBSONIC_APPEND_YEAR_TO_ALBUM||If set to `yes` (default), the album year is appended to the album
+SUBSONIC_APPEND_CODECS_TO_ALBUM||If set to `yes` (default), the codecs for the album are appended to the album unless all codecs are in the white list
+SUBSONIC_WHITELIST_CODECS||List of comma-separated whitelist (ideally lossless) codecs. Defaults to `alac,wav,flac,dsf`
 UPRCL_AUTOSTART||Autostart UPRCL if set to `1`
 UPCRL_USER||User for uprcl
 UPRCL_HOSTPORT||Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
@@ -184,6 +194,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-04-19|Add support for the new subsonic plugin (see issue[#140](https://github.com/GioF71/upmpdcli-docker/issues/140))
 2023-04-05|Add support for `OWN_QUEUE` (see issue[#138](https://github.com/GioF71/upmpdcli-docker/issues/138))
 2023-03-24|Update to Upmpdcli version 1.7.7
 2023-02-27|Removed defaults for `UPNPAV` and `OPENHOME` from Dockerfile

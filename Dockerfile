@@ -27,7 +27,8 @@ RUN apt-get install -y upmpdcli
 RUN apt-get install -y upmpdcli-*
 RUN apt-get install -y python3 
 RUN apt-get install -y python3-pip
-RUN pip install pyradios 
+RUN pip install pyradios
+RUN pip install subsonic-connector
 RUN apt-get remove -y software-properties-common
 RUN apt-get -y autoremove
 RUN	rm -rf /var/lib/apt/lists/*
@@ -100,6 +101,17 @@ ENV HRA_PASSWORD hra_password
 ENV HRA_LANG en
 
 ENV RADIO_BROWSER_ENABLE ""
+
+ENV SUBSONIC_ENABLE ""
+ENV SUBSONIC_AUTOSTART ""
+ENV SUBSONIC_BASE_URL ""
+ENV SUBSONIC_PORT ""
+ENV SUBSONIC_USER ""
+ENV SUBSONIC_PASSWORD ""
+ENV SUBSONIC_ITEMS_PER_PAGE ""
+ENV SUBSONIC_APPEND_YEAR_TO_ALBUM ""
+ENV SUBSONIC_APPEND_CODECS_TO_ALBUM ""
+ENV SUBSONIC_WHITELIST_CODECS ""
 
 ENV PUID ""
 ENV PGID ""

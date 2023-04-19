@@ -165,6 +165,7 @@ set_parameter $CONFIG_FILE OWN_QUEUE "$OWN_QUEUE" ownqueue
 MEDIA_SERVER_ENABLED=0
 if [[ "${UPRCL_ENABLE^^}" == "YES" || 
       "${RADIO_BROWSER_ENABLE^^}" == "YES" ||
+      "${SUBSONIC_ENABLE^^}" == "YES" ||
       "${HRA_ENABLE^^}" == "YES" ||
       "${TIDAL_ENABLE^^}" == "YES" ||
       "${DEEZER_ENABLE^^}" == "YES" ||
@@ -185,11 +186,62 @@ if [ "${RADIO_BROWSER_ENABLE^^}" == "YES" ]; then
     sed -i 's/\#radio-browseruser/radio-browseruser/g' $CONFIG_FILE;
 fi
 
+echo "SUBSONIC_ENABLE=[$SUBSONIC_ENABLE]"
+if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
+    echo "Enabling Subsonic, processing settings";
+    sed -i 's/\#subsonicuser/subsonicuser/g' $CONFIG_FILE
+    echo "SUBSONIC_AUTOSTART=[$SUBSONIC_AUTOSTART]"
+    if [ "${SUBSONIC_AUTOSTART^^}" == "YES" ]; then
+        sed -i 's/\#subsonicautostart/subsonicautostart/g' $CONFIG_FILE;
+    fi
+    echo "Setting subsonic base_url [$SUBSONIC_BASE_URL]"
+    sed -i 's/\#subsonicbaseurl/subsonicbaseurl/g' $CONFIG_FILE
+    sed -i 's,SUBSONIC_BASE_URL,'"$SUBSONIC_BASE_URL"',g' $CONFIG_FILE
+    echo "Setting subsonic port [$SUBSONIC_PORT]"
+    sed -i 's/\#subsonicport/subsonicport/g' $CONFIG_FILE
+    sed -i 's/SUBSONIC_PORT/'"$SUBSONIC_PORT"'/g' $CONFIG_FILE
+    echo "Setting subsonic username [$SUBSONIC_USER]"
+    sed -i 's/SUBSONIC_USER/'"$SUBSONIC_USER"'/g' $CONFIG_FILE
+    echo "Setting subsonic password [$SUBSONIC_PASSWORD]"
+    sed -i 's/\#subsonicpassword/subsonicpassword/g' $CONFIG_FILE
+    sed -i 's/SUBSONIC_PASSWORD/'"$SUBSONIC_PASSWORD"'/g' $CONFIG_FILE
+    if [[ -n "${SUBSONIC_ITEMS_PER_PAGE}" ]]; then
+        sed -i 's/\#subsonicitemsperpage/subsonicitemsperpage/g' $CONFIG_FILE
+        sed -i 's/SUBSONIC_ITEMS_PER_PAGE/'"$SUBSONIC_ITEMS_PER_PAGE"'/g' $CONFIG_FILE
+    fi
+    if [[ -n "${SUBSONIC_APPEND_YEAR_TO_ALBUM}" ]]; then
+        sed -i 's/\#subsonicappendyeartoalbum/subsonicappendyeartoalbum/g' $CONFIG_FILE
+        append_year=1
+        if [[ "${SUBSONIC_APPEND_YEAR_TO_ALBUM^^}" == "NO" ]]; then
+            append_year=0
+        elif [[ ! "${SUBSONIC_APPEND_YEAR_TO_ALBUM^^}" == "YES" ]]; then
+            echo "Invalid SUBSONIC_APPEND_YEAR_TO_ALBUM [${SUBSONIC_APPEND_YEAR_TO_ALBUM}]"
+            exit 2
+        fi
+        sed -i 's/SUBSONIC_APPEND_YEAR_TO_ALBUM/'"$append_year"'/g' $CONFIG_FILE
+    fi
+    if [[ -n "${SUBSONIC_APPEND_CODECS_TO_ALBUM}" ]]; then
+        sed -i 's/\#subsonicappendcodecstoalbum/subsonicappendcodecstoalbum/g' $CONFIG_FILE
+        append_year=1
+        if [[ "${SUBSONIC_APPEND_CODECS_TO_ALBUM^^}" == "NO" ]]; then
+            append_year=0
+        elif [[ ! "${SUBSONIC_APPEND_CODECS_TO_ALBUM^^}" == "YES" ]]; then
+            echo "Invalid SUBSONIC_APPEND_CODECS_TO_ALBUM [${SUBSONIC_APPEND_CODECS_TO_ALBUM}]"
+            exit 2
+        fi
+        sed -i 's/SUBSONIC_APPEND_CODECS_TO_ALBUM/'"$append_year"'/g' $CONFIG_FILE
+    fi
+    if [[ -n "${SUBSONIC_WHITELIST_CODECS}" ]]; then
+        sed -i 's/\#subsonicwhitelistcodecs/subsonicwhitelistcodecs/g' $CONFIG_FILE
+        sed -i 's/SUBSONIC_WHITELIST_CODECS/'"$SUBSONIC_WHITELIST_CODECS"'/g' $CONFIG_FILE
+    fi
+fi
+
 echo "Tidal Enable [$TIDAL_ENABLE]"
 if [ "${TIDAL_ENABLE^^}" == "YES" ]; then
     echo "Processing Tidal settings";
     sed -i 's/\#tidaluser/tidaluser/g' $CONFIG_FILE;
-    sed -i 's/\#tidalpass/tidalpass/g' $CONFIG_FILE; \
+    sed -i 's/\#tidalpass/tidalpass/g' $CONFIG_FILE;
     sed -i 's/\#tidalapitoken/tidalapitoken/g' $CONFIG_FILE;
     sed -i 's/\#tidalquality/tidalquality/g' $CONFIG_FILE;
     sed -i 's/TIDAL_USERNAME/'"$TIDAL_USERNAME"'/g' $CONFIG_FILE;
