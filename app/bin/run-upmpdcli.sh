@@ -4,6 +4,28 @@
 # 1 Generic error
 # 2 Invalid RENDERER_MODE value
 
+if [[ "${SUBSONIC_DOWNLOAD_PLUGIN^^}" ]]; then
+    echo "Downloading updated subsonic plugin"
+    if [[ -n "${SUBSONIC_PLUGIN_BRANCH}" ]]; then
+        echo "  using branch [$SUBSONIC_PLUGIN_BRANCH]"
+        cd /app
+        mkdir -p src
+        cd /app/src
+        git clone https://framagit.org/GioF71/upmpdcli.git --branch ${SUBSONIC_PLUGIN_BRANCH}
+        echo "  copying updated files ..."
+        cp upmpdcli/src/mediaserver/cdplugins/subsonic/* /usr/share/upmpdcli/cdplugins/subsonic/
+        echo "  copied, removing repo ..."
+        rm -Rf upmpdcli
+        echo "  repo removed."
+        cd ..
+        rm -Rf src
+        echo "  src directory removed."
+    fi
+    # return to the path
+    cd /app/bin
+fi
+
+
 SOURCE_CONFIG_FILE=/app/conf/upmpdcli.conf
 CONFIG_FILE=/app/conf/current-upmpdcli.conf
 
