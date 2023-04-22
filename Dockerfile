@@ -27,6 +27,7 @@ RUN apt-get install -y upmpdcli
 RUN apt-get install -y upmpdcli-*
 RUN apt-get install -y python3 
 RUN apt-get install -y python3-pip
+RUN apt-get install -y git
 RUN pip install pyradios
 RUN pip install subsonic-connector
 RUN apt-get remove -y software-properties-common
@@ -112,6 +113,8 @@ ENV SUBSONIC_ITEMS_PER_PAGE ""
 ENV SUBSONIC_APPEND_YEAR_TO_ALBUM ""
 ENV SUBSONIC_APPEND_CODECS_TO_ALBUM ""
 ENV SUBSONIC_WHITELIST_CODECS ""
+ENV SUBSONIC_DOWNLOAD_PLUGIN ""
+ENV SUBSONIC_PLUGIN_BRANCH ""
 
 ENV PUID ""
 ENV PGID ""
