@@ -128,7 +128,7 @@ SUBSONIC_APPEND_YEAR_TO_ALBUM||If set to `yes` (default), the album year is appe
 SUBSONIC_APPEND_CODECS_TO_ALBUM||If set to `yes` (default), the codecs for the album are appended to the album unless all codecs are in the white list
 SUBSONIC_WHITELIST_CODECS||List of comma-separated whitelist (ideally lossless) codecs. Defaults to `alac,wav,flac,dsf`
 SUBSONIC_DOWNLOAD_PLUGIN||If set to `YES`, the updated plugin is downloaded from the upstream repo
-SUBSONIC_PLUGIN_BRANCH||If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `SUBSONIC_DOWNLOAD_PLUGIN`s
+SUBSONIC_PLUGIN_BRANCH||If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `SUBSONIC_DOWNLOAD_PLUGIN`
 UPRCL_AUTOSTART||Autostart UPRCL if set to `1`
 UPCRL_USER||User for uprcl
 UPRCL_HOSTPORT||Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
