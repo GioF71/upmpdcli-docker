@@ -203,6 +203,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-04-24|Bugfix: see issue[#151](https://github.com/GioF71/upmpdcli-docker/issues/151)
 2023-04-22|Add support for downloading updated subsonic plugin (see issue[#148](https://github.com/GioF71/upmpdcli-docker/issues/148))
 2023-04-19|Add support for the new subsonic plugin (see issue[#140](https://github.com/GioF71/upmpdcli-docker/issues/140))
 2023-04-05|Add support for `OWN_QUEUE` (see issue[#138](https://github.com/GioF71/upmpdcli-docker/issues/138))

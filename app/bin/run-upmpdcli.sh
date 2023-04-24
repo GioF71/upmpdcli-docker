@@ -4,7 +4,7 @@
 # 1 Generic error
 # 2 Invalid RENDERER_MODE value
 
-if [[ "${SUBSONIC_DOWNLOAD_PLUGIN^^}" ]]; then
+if [[ "${SUBSONIC_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     echo "Downloading updated subsonic plugin"
     if [[ -n "${SUBSONIC_PLUGIN_BRANCH}" ]]; then
         echo "  using branch [$SUBSONIC_PLUGIN_BRANCH]"
