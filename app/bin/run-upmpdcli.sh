@@ -163,7 +163,11 @@ if [ -n "${FRIENDLY_NAME}" ]; then
     else
         AV_FRIENDLY_NAME="${FRIENDLY_NAME}-av"
     fi
+    if [[ -z "${OH_PRODUCT_ROOM}" ]]; then
+        OH_PRODUCT_ROOM="${AV_FRIENDLY_NAME}"
+    fi
     echo "AV_FRIENDLY_NAME=[${AV_FRIENDLY_NAME}]"
+    echo "OH_PRODUCT_ROOM=[${OH_PRODUCT_ROOM}]"
     MEDIA_SERVER_FRIENDLY_NAME="${FRIENDLY_NAME}"
     echo "MEDIA_SERVER_FRIENDLY_NAME=[${MEDIA_SERVER_FRIENDLY_NAME}]"
 fi
@@ -176,6 +180,7 @@ if [ "${OPENHOME}" -eq 1 ]; then
 fi
 if [ "${UPNPAV}" -eq 1 ]; then
     set_parameter $CONFIG_FILE AV_FRIENDLY_NAME "$AV_FRIENDLY_NAME" avfriendlyname
+    set_parameter $CONFIG_FILE OH_PRODUCT_ROOM "$OH_PRODUCT_ROOM" ohproductroom
 fi
 set_parameter $CONFIG_FILE MPD_HOST "$MPD_HOST" mpdhost
 set_parameter $CONFIG_FILE MPD_PORT "$MPD_PORT" mpdport
