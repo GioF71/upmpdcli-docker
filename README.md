@@ -111,6 +111,7 @@ UPNPPORT||UPnP port
 UPMPD_FRIENDLY_NAME|upmpd|Name of the upnp renderer
 AV_FRIENDLY_NAME|upmpd-av|Name of the upnp renderer (av mode)
 FRIENDLY_NAME||Name of the renderer, overrides `UPMPD_FRIENDLY_NAME`, `AV_FRIENDLY_NAME` and `MEDIA_SERVER_FRIENDLY_NAME`. The variable `AV_FRIENDLY_NAME` is appended with the postfix `-av`, unless UPNPAV is the only enabled renderer. See `UPNPAV_SKIP_NAME_POSTFIX` for more details.
+OH_PRODUCT_ROOM||Sets `ohproductroom`, defaults to same value calculated for AV_FRIENDLY_NAME if upnp-av is enabled
 RENDERER_MODE||If set, this variable overrides `UPNPAV` and `OPENHOME`. Possible values are `NONE`, `OPENHOME`, `UPNPAV` and `BOTH`
 UPNPAV||Enable UPnP AV services (`0`/`1`), defaults to `0`
 OPENHOME||Enable OpenHome services (`0`/`1`), defaults to `1`
@@ -203,6 +204,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-04-25|Add support for OH Product Room (see issue[#153](https://github.com/GioF71/upmpdcli-docker/issues/153))
 2023-04-24|Bugfix: see issue[#151](https://github.com/GioF71/upmpdcli-docker/issues/151)
 2023-04-22|Add support for downloading updated subsonic plugin (see issue[#148](https://github.com/GioF71/upmpdcli-docker/issues/148))
 2023-04-19|Add support for the new subsonic plugin (see issue[#140](https://github.com/GioF71/upmpdcli-docker/issues/140))

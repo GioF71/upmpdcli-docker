@@ -55,6 +55,7 @@ RUN cp /etc/upmpdcli.conf /app/conf/original.upmpdcli.conf
 ENV UPMPD_FRIENDLY_NAME ""
 ENV AV_FRIENDLY_NAME ""
 ENV FRIENDLY_NAME ""
+ENV OH_PRODUCT_ROOM ""
 
 ENV RENDERER_MODE ""
 ENV UPNPAV ""
