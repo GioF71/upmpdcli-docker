@@ -111,11 +111,11 @@ UPNPPORT||UPnP port
 UPMPD_FRIENDLY_NAME|upmpd|Name of the upnp renderer
 AV_FRIENDLY_NAME|upmpd-av|Name of the upnp renderer (av mode)
 FRIENDLY_NAME||Name of the renderer, overrides `UPMPD_FRIENDLY_NAME`, `AV_FRIENDLY_NAME` and `MEDIA_SERVER_FRIENDLY_NAME`. The variable `AV_FRIENDLY_NAME` is appended with the postfix `-av`, unless UPNPAV is the only enabled renderer. See `UPNPAV_SKIP_NAME_POSTFIX` for more details.
-OH_PRODUCT_ROOM||Sets `ohproductroom`, defaults to same value calculated for AV_FRIENDLY_NAME if upnp-av is enabled
 RENDERER_MODE||If set, this variable overrides `UPNPAV` and `OPENHOME`. Possible values are `NONE`, `OPENHOME`, `UPNPAV` and `BOTH`
 UPNPAV||Enable UPnP AV services (`0`/`1`), defaults to `0`
-OPENHOME||Enable OpenHome services (`0`/`1`), defaults to `1`
 UPNPAV_SKIP_NAME_POSTFIX||If not set or set to `yes`, and if only `UPNPAV` renderer is enabled, the `-av` postfix is not appended to `FRIENDLY_NAME`
+OPENHOME||Enable OpenHome services (`0`/`1`), defaults to `1`
+OH_PRODUCT_ROOM||Sets `ohproductroom`, defaults to same value calculated for AV_FRIENDLY_NAME if upnp-av is enabled
 UPRCL_ENABLE||Enable local music support (uprcl). Set to `yes` to enable
 RADIO_BROWSER_ENABLE||Enable the Radio Browser plugin. Set to `yes` to enable
 SUBSONIC_ENABLE||Enable the Subsonic plugin. Set to `yes` to enable
