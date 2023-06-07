@@ -243,7 +243,7 @@ Change Date|Major Changes
 2022-11-22|Enable logging configurability, relevant volume is `/log`
 2022-11-20|Enable configuration for `msfriendlyname` only when necessary
 2022-11-20|Enable configuration for `friendlyname` only when `openhome` is enabled
-2022-11-19|`FRIENDLY_NAME` enables `avfriendlyname` (`AV_FRIENDLY_NAME`) and `msfriendlyname` (`MEDIA_SERVER_FRIENDLY_NAME`) only when appropriate
+2022-11-19|`FRIENDLY_NAME` simplified
 2022-11-19|Also apply `FRIENDLY_NAME` to `MEDIA_SERVER_FRIENDLY_NAME`
 2022-11-19|Add ability to read qobuz and tidal configuration from files
 2022-11-18|Add PORT_OFFSET environment variable for easier configuration
