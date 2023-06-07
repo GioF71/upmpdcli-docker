@@ -265,5 +265,6 @@ Change Date|Major Changes
 2022-09-26|Restored Qobuz and Tidal placeholders ([issue #5](https://github.com/GioF71/upmpdcli-docker/issues/5))
 2022-09-25|New environment variables & cleanup
 2022-03-12|Ubuntu version bump, fixed build-arg for base-image
-2022-02-11|Reduced docker image sizes (installation process is now in one line). Add README.md to the image in the directory `/app/doc`.
+2022-02-11|Reduced docker image sizes (installation process is now in one line).
+2022-02-11|Add README.md to the image in the directory `/app/doc`.
 2022-02-07|Automated builds, largely inspired to the work from [Der-Henning](https://github.com/Der-Henning/) for [this](https://github.com/GioF71/squeezelite-docker) repository.
