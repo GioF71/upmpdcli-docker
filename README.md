@@ -239,7 +239,7 @@ Change Date|Major Changes
 2022-11-23|Add `Deezer` support
 2022-11-23|Add `Spotify` support
 2022-11-22|Fixed permissions for `/cache` in user mode
-2022-11-22|Existing but undocumented volume `/var/cache/upmpdcli` changed to `/cache` for convenience
+2022-11-22|Undocumented volume `/var/cache/upmpdcli` changed to `/cache` for convenience
 2022-11-22|Enable logging configurability, relevant volume is `/log`
 2022-11-20|Enable configuration for `msfriendlyname` only when necessary
 2022-11-20|Enable configuration for `friendlyname` only when `openhome` is enabled
