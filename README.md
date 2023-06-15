@@ -1,7 +1,7 @@
 # upmpdcli-docker
 
 A Docker image for upmpdcli.  
-Now with support for custom radios and radio-browser.
+Now with support for custom radios, [radio-browser.info](https://www.radio-browser.info/), and [subsonic servers](https://github.com/navidrome/navidrome/discussions/2324).
 
 ## Reference
 
