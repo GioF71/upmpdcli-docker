@@ -111,10 +111,12 @@ UPNPIFACE||UPnP network interface
 UPNPPORT||UPnP port
 UPMPD_FRIENDLY_NAME|upmpd|Name of the upnp renderer
 AV_FRIENDLY_NAME|upmpd-av|Name of the upnp renderer (av mode)
-FRIENDLY_NAME||Name of the renderer, overrides `UPMPD_FRIENDLY_NAME`, `AV_FRIENDLY_NAME` and `MEDIA_SERVER_FRIENDLY_NAME`. The variable `AV_FRIENDLY_NAME` is appended with the postfix `-av`, unless UPNPAV is the only enabled renderer. See `UPNPAV_SKIP_NAME_POSTFIX` for more details.
+FRIENDLY_NAME||Name of the renderer, overrides `UPMPD_FRIENDLY_NAME`, `AV_FRIENDLY_NAME` and `MEDIA_SERVER_FRIENDLY_NAME`. The variable `AV_FRIENDLY_NAME` is appended with the postfix `-av`, unless UPNPAV is the only enabled renderer. See `UPNPAV_POSTFIX` and `UPNPAV_SKIP_NAME_POSTFIX` for more details.
 RENDERER_MODE||If set, this variable overrides `UPNPAV` and `OPENHOME`. Possible values are `NONE`, `OPENHOME`, `UPNPAV` and `BOTH`
 UPNPAV||Enable UPnP AV services (`0`/`1`), defaults to `0`
-UPNPAV_SKIP_NAME_POSTFIX||If not set or set to `yes`, and if only `UPNPAV` renderer is enabled, the `-av` postfix is not appended to `FRIENDLY_NAME`
+UPNPAV_POSTFIX||The postfix to be appended to the `FRIENDLY_NAME`, defaults to `-av`. Example alternative: `(av)`
+UPNPAV_POSTFIX_PREPEND_SPACE||Option to add a space before a custom `UPNPAV_POSTFIX`, enabled by default. Set to `no` di disable
+UPNPAV_SKIP_NAME_POSTFIX||If not set or set to `yes`, and if only `UPNPAV` renderer is enabled, the `UPNPAV_POSTFIX` postfix is not appended to `FRIENDLY_NAME`
 OPENHOME||Enable OpenHome services (`0`/`1`), defaults to `1`
 OH_PRODUCT_ROOM||Sets `ohproductroom`, defaults to same value calculated for AV_FRIENDLY_NAME if upnp-av is enabled
 UPRCL_ENABLE||Enable local music support (uprcl). Set to `yes` to enable
@@ -205,6 +207,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-06-19|Add support for custom av postfix (see issue[#174](https://github.com/GioF71/upmpdcli-docker/issues/174))
 2023-06-07|Bump subsonic-connector to version 0.1.16 (see issue[#166](https://github.com/GioF71/upmpdcli-docker/issues/166))
 2023-05-23|Bump subsonic-connector to version 0.1.15 (see issue[#162](https://github.com/GioF71/upmpdcli-docker/issues/162))
 2023-05-20|Bump subsonic-connector to version 0.1.14 (see issue[#159](https://github.com/GioF71/upmpdcli-docker/issues/159))
