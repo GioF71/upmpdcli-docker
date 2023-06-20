@@ -208,16 +208,16 @@ Just be careful to use the tag you have built.
 Change Date|Major Changes
 ---|---
 2023-06-19|Avoid package upgrade (see issue [#176](https://github.com/GioF71/upmpdcli-docker/issues/176))
-2023-06-19|Add support for custom av postfix (see issue[#174](https://github.com/GioF71/upmpdcli-docker/issues/174))
-2023-06-07|Bump subsonic-connector to version 0.1.16 (see issue[#166](https://github.com/GioF71/upmpdcli-docker/issues/166))
-2023-05-23|Bump subsonic-connector to version 0.1.15 (see issue[#162](https://github.com/GioF71/upmpdcli-docker/issues/162))
-2023-05-20|Bump subsonic-connector to version 0.1.14 (see issue[#159](https://github.com/GioF71/upmpdcli-docker/issues/159))
-2023-05-09|Bump subsonic-connector to version 0.1.11 (see issue[#157](https://github.com/GioF71/upmpdcli-docker/issues/157))
-2023-04-25|Add support for OH Product Room (see issue[#153](https://github.com/GioF71/upmpdcli-docker/issues/153))
-2023-04-24|Bugfix: see issue[#151](https://github.com/GioF71/upmpdcli-docker/issues/151)
-2023-04-22|Add support for downloading updated subsonic plugin (see issue[#148](https://github.com/GioF71/upmpdcli-docker/issues/148))
-2023-04-19|Add support for the new subsonic plugin (see issue[#140](https://github.com/GioF71/upmpdcli-docker/issues/140))
-2023-04-05|Add support for `OWN_QUEUE` (see issue[#138](https://github.com/GioF71/upmpdcli-docker/issues/138))
+2023-06-19|Add support for custom av postfix (see issue [#174](https://github.com/GioF71/upmpdcli-docker/issues/174))
+2023-06-07|Bump subsonic-connector to version 0.1.16 (see issue [#166](https://github.com/GioF71/upmpdcli-docker/issues/166))
+2023-05-23|Bump subsonic-connector to version 0.1.15 (see issue [#162](https://github.com/GioF71/upmpdcli-docker/issues/162))
+2023-05-20|Bump subsonic-connector to version 0.1.14 (see issue [#159](https://github.com/GioF71/upmpdcli-docker/issues/159))
+2023-05-09|Bump subsonic-connector to version 0.1.11 (see issue [#157](https://github.com/GioF71/upmpdcli-docker/issues/157))
+2023-04-25|Add support for OH Product Room (see issue [#153](https://github.com/GioF71/upmpdcli-docker/issues/153))
+2023-04-24|Bugfix: see issue [#151](https://github.com/GioF71/upmpdcli-docker/issues/151)
+2023-04-22|Add support for downloading updated subsonic plugin (see issue [#148](https://github.com/GioF71/upmpdcli-docker/issues/148))
+2023-04-19|Add support for the new subsonic plugin (see issue [#140](https://github.com/GioF71/upmpdcli-docker/issues/140))
+2023-04-05|Add support for `OWN_QUEUE` (see issue [#138](https://github.com/GioF71/upmpdcli-docker/issues/138))
 2023-03-24|Update to Upmpdcli version 1.7.7
 2023-02-27|Removed defaults for `UPNPAV` and `OPENHOME` from Dockerfile
 2023-02-26|Add support for Radio Browser (`RADIO_BROWSER_ENABLE`)
