@@ -207,6 +207,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-06-21|Bump subsonic-connector to version 0.1.17 (see issue [#179](https://github.com/GioF71/upmpdcli-docker/issues/179))
 2023-06-19|Avoid package upgrade (see issue [#176](https://github.com/GioF71/upmpdcli-docker/issues/176))
 2023-06-19|Add support for custom av postfix (see issue [#174](https://github.com/GioF71/upmpdcli-docker/issues/174))
 2023-06-07|Bump subsonic-connector to version 0.1.16 (see issue [#166](https://github.com/GioF71/upmpdcli-docker/issues/166))

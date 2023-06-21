@@ -28,7 +28,7 @@ RUN apt-get install -y python3
 RUN apt-get install -y python3-pip
 RUN apt-get install -y git
 RUN pip install pyradios
-RUN pip install subsonic-connector==0.1.16
+RUN pip install subsonic-connector==0.1.17
 RUN apt-get remove -y software-properties-common
 RUN apt-get -y autoremove
 RUN	rm -rf /var/lib/apt/lists/*
