@@ -109,12 +109,12 @@ UPRCL_HOSTPORT||Set if we own the MPD queue, defaults to `1`, possible values `1
 PORT_OFFSET||If set, the offset is applied to the default for `UPNP_PORT` (summed) and to the default `PLG_MICRO_HTTP_PORT` (subtracted). Setting this variable overrides these individual variables.
 UPNPIFACE||UPnP network interface
 UPNPPORT||UPnP port
-UPMPD_FRIENDLY_NAME|upmpd|Name of the upnp renderer
-AV_FRIENDLY_NAME|upmpd-av|Name of the upnp renderer (av mode)
-FRIENDLY_NAME||Name of the renderer, overrides `UPMPD_FRIENDLY_NAME`, `AV_FRIENDLY_NAME` and `MEDIA_SERVER_FRIENDLY_NAME`. The variable `AV_FRIENDLY_NAME` is appended with the postfix `-av`, unless UPNPAV is the only enabled renderer. See `UPNPAV_POSTFIX` and `UPNPAV_SKIP_NAME_POSTFIX` for more details.
+UPMPD_FRIENDLY_NAME|upmpd|Name of the upnp renderer (OpenHome)
+AV_FRIENDLY_NAME|upmpd-av|Name of the upnp renderer (UPnP AV mode)
+FRIENDLY_NAME||Name of the renderer, overrides `UPMPD_FRIENDLY_NAME`, `AV_FRIENDLY_NAME` and `MEDIA_SERVER_FRIENDLY_NAME`. The variable `AV_FRIENDLY_NAME` is appended with the postfix `UPNPAV_POSTFIX`, unless UPNPAV is the only enabled renderer. See `UPNPAV_POSTFIX` and `UPNPAV_SKIP_NAME_POSTFIX` for more details.
 RENDERER_MODE||If set, this variable overrides `UPNPAV` and `OPENHOME`. Possible values are `NONE`, `OPENHOME`, `UPNPAV` and `BOTH`
 UPNPAV||Enable UPnP AV services (`0`/`1`), defaults to `0`
-UPNPAV_POSTFIX||The postfix to be appended to the `FRIENDLY_NAME`, defaults to `-av`. Example alternative: `(av)`
+UPNPAV_POSTFIX||The postfix to be appended to the `FRIENDLY_NAME`, defaults to `(av)`
 UPNPAV_POSTFIX_PREPEND_SPACE||Option to add a space before a custom `UPNPAV_POSTFIX`, enabled by default. Set to `no` di disable
 UPNPAV_SKIP_NAME_POSTFIX||If not set or set to `yes`, and if only `UPNPAV` renderer is enabled, the `UPNPAV_POSTFIX` postfix is not appended to `FRIENDLY_NAME`
 OPENHOME||Enable OpenHome services (`0`/`1`), defaults to `1`
@@ -207,6 +207,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-06-21|Changed default for `UPNPAV_POSTFIX` (see issue [#181](https://github.com/GioF71/upmpdcli-docker/issues/181))
 2023-06-21|Bump subsonic-connector to version 0.1.17 (see issue [#179](https://github.com/GioF71/upmpdcli-docker/issues/179))
 2023-06-19|Avoid package upgrade (see issue [#176](https://github.com/GioF71/upmpdcli-docker/issues/176))
 2023-06-19|Add support for custom av postfix (see issue [#174](https://github.com/GioF71/upmpdcli-docker/issues/174))

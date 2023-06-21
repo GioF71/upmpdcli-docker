@@ -161,18 +161,18 @@ if [ -n "${FRIENDLY_NAME}" ]; then
           [ "${UPNPAV}" -eq 1 ]; then
         AV_FRIENDLY_NAME="${FRIENDLY_NAME}"
     else
-        AV_POSTFIX=-av
+        PREPENDED=" "
+        if [[ "${UPNPAV_POSTFIX_PREPEND_SPACE^^}" == "N" || "${UPNPAV_POSTFIX_PREPEND_SPACE^^}" == "NO" ]]; then
+            PREPENDED=""
+        elif [[ -n "${UPNPAV_POSTFIX_PREPEND_SPACE^^}" && !("${UPNPAV_POSTFIX_PREPEND_SPACE^^}" == "Y" || "${UPNPAV_POSTFIX_PREPEND_SPACE^^}" == "YES") ]]; then
+            echo "Invalid UPNPAV_POSTFIX_PREPEND_SPACE [${UPNPAV_POSTFIX_PREPEND_SPACE}]"
+            exit 2
+        fi
+        AV_POSTFIX="(av)"
         if [[ -n "${UPNPAV_POSTFIX}" ]]; then
             AV_POSTFIX=${UPNPAV_POSTFIX}
-            PREPENDED=""
-            if [[ -z "${UPNPAV_POSTFIX_PREPEND_SPACE}" || "${UPNPAV_POSTFIX_PREPEND_SPACE^^}" == "Y" || "${UPNPAV_POSTFIX_PREPEND_SPACE^^}" == "YES" ]]; then
-                PREPENDED=" "
-            elif [[ ! ("${UPNPAV_POSTFIX_PREPEND_SPACE^^}" == "N" || "${UPNPAV_POSTFIX_PREPEND_SPACE^^}" == "NO") ]]; then
-                echo "Invalid UPNPAV_POSTFIX_PREPEND_SPACE [${UPNPAV_POSTFIX_PREPEND_SPACE}]"
-                exit 2
-            fi
-            AV_POSTFIX="$PREPENDED$UPNPAV_POSTFIX"
         fi
+        AV_POSTFIX="$PREPENDED$AV_POSTFIX"
         AV_FRIENDLY_NAME="${FRIENDLY_NAME}${AV_POSTFIX}"
     fi
     if [[ -z "${OH_PRODUCT_ROOM}" ]]; then
