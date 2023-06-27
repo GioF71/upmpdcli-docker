@@ -19,6 +19,7 @@ I am now a contributor to upmpdcli for this plugin. See the git repository [here
 The plugin uses my [subsonic-connector](https://github.com/GioF71/subsonic-connector) library which in turn is built around [py-sonic](https://github.com/crustymonkey/py-sonic).  
 Everything has been developed and tested against [Navidrome](https://www.navidrome.org/) but should work with other servers hopefully.  
 See [this](https://github.com/navidrome/navidrome/discussions/2324) discussion on the Navidrome repo for updates and further information.  
+The current version of the image includes Subsonic Plugin version `0.2.0`.  
 
 ### Scrobbling
 
