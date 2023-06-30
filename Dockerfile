@@ -142,6 +142,8 @@ VOLUME /log
 COPY app/conf/upmpdcli.conf /app/conf/upmpdcli.conf
 
 COPY app/bin/run-upmpdcli.sh /app/bin/
+COPY app/bin/get-version.sh /app/bin/
+COPY app/bin/get-version-ext.sh /app/bin/
 COPY app/bin/read-file.sh /app/bin/
 COPY app/bin/get-value.sh /app/bin/
 COPY app/bin/config-builder.sh /app/bin/

@@ -96,6 +96,29 @@ Note that we have used the *MPD_HOST* environment variable so that upmpdcli can 
 
 We also need to use the *host* network so the upnp renderer can be discovered on your network.
 
+### Check upmpdcli version
+
+You can display the version of the upmpdcli binary using the following command:
+
+```text
+docker run --rm -i --entrypoint /app/bin/get-version.sh giof71/upmpdcli:latest
+```
+
+This will show the output of `upmpdcli -v`.  
+You will get an output similar to the following:
+
+```text
+Upmpdcli 1.8.1 libupnpp 0.23.0
+```
+
+Alternatively, you can run get-version-ext.sh for a more extended output:
+
+```text
+docker run --rm -i --entrypoint /app/bin/get-version-ext.sh giof71/upmpdcli:latest
+```
+
+which will use the `--version` switch of the upmpdcli command line.  
+
 ### Environment variables
 
 The following table reports all the currently supported environment variables.
@@ -208,7 +231,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
-2023-06-27|Update to Upmpdcli version 1.8.1 (see issue [#183](https://github.com/GioF71/upmpdcli-docker/issues/183))
+2023-06-30|Add entrypoints for inspecting version (see issue [#188]2023-06-27|Update to Upmpdcli version 1.8.1 (see issue [#183](https://github.com/GioF71/upmpdcli-docker/issues/183))
 2023-06-21|Changed default for `UPNPAV_POSTFIX` (see issue [#181](https://github.com/GioF71/upmpdcli-docker/issues/181))
 2023-06-21|Bump subsonic-connector to version 0.1.17 (see issue [#179](https://github.com/GioF71/upmpdcli-docker/issues/179))
 2023-06-19|Avoid package upgrade (see issue [#176](https://github.com/GioF71/upmpdcli-docker/issues/176))
