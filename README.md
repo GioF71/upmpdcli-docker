@@ -231,7 +231,8 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
-2023-06-30|Add entrypoints for inspecting version (see issue [#188]2023-06-27|Update to Upmpdcli version 1.8.1 (see issue [#183](https://github.com/GioF71/upmpdcli-docker/issues/183))
+2023-06-30|Add entrypoints for inspecting version (see issue [#188](https://github.com/GioF71/upmpdcli-docker/issues/188)
+2023-06-27|Update to Upmpdcli version 1.8.1 (see issue [#183](https://github.com/GioF71/upmpdcli-docker/issues/183))
 2023-06-21|Changed default for `UPNPAV_POSTFIX` (see issue [#181](https://github.com/GioF71/upmpdcli-docker/issues/181))
 2023-06-21|Bump subsonic-connector to version 0.1.17 (see issue [#179](https://github.com/GioF71/upmpdcli-docker/issues/179))
 2023-06-19|Avoid package upgrade (see issue [#176](https://github.com/GioF71/upmpdcli-docker/issues/176))
