@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        base: ["jammy"]
+        base: ["lunar", "jammy"]
 
     steps:
       - name: Checkout
@@ -33,6 +33,7 @@ jobs:
           echo "REF: ["$ref"]"
 
           declare -A base_images
+          base_images[lunar]=ubuntu:lunar
           base_images[kinetic]=ubuntu:kinetic
           base_images[jammy]=ubuntu:jammy
           base_images[focal]=ubuntu:focal
@@ -40,9 +41,13 @@ jobs:
 
           stable="jammy"
           latest="jammy"
+          lts="jammy"
+          current="lunar"
 
           tag_stable="stable"
           tag_latest="latest"
+          tag_lts="lts"
+          tag_current="current"
 
           base=${{ matrix.base }}
           select_base_image=${base_images[$base]}
@@ -84,6 +89,12 @@ jobs:
               fi
               if [ "${base}" = "${stable}" ]; then
                 tags="$tags,${image_name}:${tag_stable}";
+              fi
+              if [ "${base}" = "${lts}" ]; then
+                tags="$tags,${image_name}:${tag_lts}";
+              fi
+              if [ "${base}" = "${current}" ]; then
+                tags="$tags,${image_name}:${tag_current}";
               fi
             elif [ "${tag_type}" = "main" ]; then
               echo "main tag";

@@ -2,6 +2,7 @@
 
 declare -A base_images
 
+base_images[lunar]=ubuntu:lunar
 base_images[kinetic]=ubuntu:kinetic
 base_images[jammy]=ubuntu:jammy
 base_images[focal]=ubuntu:focal
