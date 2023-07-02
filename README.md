@@ -231,6 +231,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-07-02|Back to installing python packages at container startup (see issue [#196](https://github.com/GioF71/upmpdcli-docker/issues/196))
 2023-06-30|Add support for `lunar` (see issue [#193](https://github.com/GioF71/upmpdcli-docker/issues/193))
 2023-06-30|Remove binary version from image tags (see issue [#190](https://github.com/GioF71/upmpdcli-docker/issues/190))
 2023-06-30|Add entrypoints for inspecting version (see issue [#188](https://github.com/GioF71/upmpdcli-docker/issues/188)

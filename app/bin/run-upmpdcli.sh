@@ -441,4 +441,7 @@ echo "Ready to start."
 CMD_LINE="/usr/bin/upmpdcli -c $CONFIG_FILE"
 
 echo "USER MODE (now mandatory)"
-su - $USER_NAME -c "PATH=/root/venv/bin:$PATH $CMD_LINE"
+su - $USER_NAME -c "pip install pyradios"
+su - $USER_NAME -c "pip install subsonic-connector==0.1.17"
+
+su - $USER_NAME -c "$CMD_LINE"

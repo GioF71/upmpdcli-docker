@@ -26,11 +26,7 @@ RUN apt-get install -y upmpdcli
 RUN apt-get install -y upmpdcli-*
 RUN apt-get install -y python3 
 RUN apt-get install -y python3-pip
-RUN apt-get install -y python3-venv
 RUN apt-get install -y git
-RUN python3 -m venv /root/venv
-RUN PATH=/root/venv/bin:$PATH pip install pyradios
-RUN PATH=/root/venv/bin:$PATH pip install subsonic-connector==0.1.17
 RUN apt-get remove -y software-properties-common
 RUN apt-get -y autoremove
 RUN	rm -rf /var/lib/apt/lists/*
@@ -48,8 +44,8 @@ RUN echo "--- END   upmpdcli.conf ---"
 FROM scratch
 COPY --from=BASE / /
 
-LABEL maintainer="GioF71"
-LABEL source="https://github.com/GioF71/upmpdcli-docker"
+#LABEL maintainer="GioF71"
+#LABEL source="https://github.com/GioF71/upmpdcli-docker"
 
 RUN mkdir -p /app
 RUN mkdir -p /app/conf
