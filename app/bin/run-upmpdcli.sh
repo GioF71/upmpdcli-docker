@@ -25,6 +25,15 @@ if [[ "${SUBSONIC_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     cd /app/bin
 fi
 
+DEFAULT_UID=1000
+DEFAULT_GID=1000
+
+if [[ -z "${PUID}" ]]; then
+    PUID=$DEFAULT_UID
+fi
+if [[ -z "${PGID}" ]]; then
+    PGID=$DEFAULT_GID
+fi
 
 SOURCE_CONFIG_FILE=/app/conf/upmpdcli.conf
 CONFIG_FILE=/app/conf/current-upmpdcli.conf
@@ -101,7 +110,6 @@ fi
 
 DEFAULT_UPNPPORT=49152
 DEFAULT_PLG_MICRO_HTTP_PORT=49149
-
 
 if [[ -n $PORT_OFFSET && $PORT_OFFSET -ge 0 ]]; then
     echo "Applying PORT_OFFSET=[$PORT_OFFSET]"
@@ -380,57 +388,51 @@ fi
 
 cat $CONFIG_FILE
 
-USER_MODE=0
-# user is create when using UPRCL, or when at least PUID is set
-if [[ "${UPRCL_ENABLE^^}" == "YES" || -n "${PUID}" ]]; then
-    USER_MODE=1
-    echo "Creating user ...";
-    DEFAULT_UID=1000
-    DEFAULT_GID=1000
-    if [ -z "${PUID}" ]; then
-        PUID=$DEFAULT_UID;
-        echo "Setting default value for PUID: ["$PUID"]"
-    fi
-    if [ -z "${PGID}" ]; then
-        PGID=$DEFAULT_GID;
-        echo "Setting default value for PGID: ["$PGID"]"
-    fi
-    USER_NAME=upmpd-user
-    GROUP_NAME=upmpd-user
-    HOME_DIR=/home/$USER_NAME
-    ### create home directory and ancillary directories
-    if [ ! -d "$HOME_DIR" ]; then
-        echo "Home directory [$HOME_DIR] not found, creating."
-        mkdir -p $HOME_DIR
-    fi
-    ### create group
-    if [ ! $(getent group $GROUP_NAME) ]; then
-        echo "group $GROUP_NAME does not exist, creating..."
-        groupadd -g $PGID $GROUP_NAME
-    else
-        echo "group $GROUP_NAME already exists."
-    fi
-    ### create user
-    if [ ! $(getent passwd $USER_NAME) ]; then
-        echo "user $USER_NAME does not exist, creating..."
-        useradd -g $PGID -u $PUID -s /bin/bash -M -d $HOME_DIR $USER_NAME
-        id $USER_NAME
-        echo "user $USER_NAME created."
-    else
-        echo "user $USER_NAME already exists."
-    fi
-    echo "UPRCL is enabled, create $USER_NAME (group: $GROUP_NAME)";
-    # set permission for home dir
-    chown -R $USER_NAME:$GROUP_NAME $HOME_DIR
-    # Permissions of writable volumes
-    chown -R $USER_NAME:$GROUP_NAME /cache
-    # Fix permission errors on existing files
-    find /cache -type d -exec chmod 755 {} \;
-    find /cache -type f -exec chmod 644 {} \;
-    chown -R $USER_NAME:$GROUP_NAME /uprcl/confdir
-    chown -R $USER_NAME:$GROUP_NAME /user/config
-    chown -R $USER_NAME:$GROUP_NAME /log
+USER_NAME=upmpd-user
+GROUP_NAME=upmpd-user
+
+echo "Creating user ...";
+if [ -z "${PUID}" ]; then
+    PUID=$DEFAULT_UID;
+    echo "Setting default value for PUID: ["$PUID"]"
 fi
+if [ -z "${PGID}" ]; then
+    PGID=$DEFAULT_GID;
+    echo "Setting default value for PGID: ["$PGID"]"
+fi
+HOME_DIR=/home/$USER_NAME
+### create home directory and ancillary directories
+if [ ! -d "$HOME_DIR" ]; then
+    echo "Home directory [$HOME_DIR] not found, creating."
+    mkdir -p $HOME_DIR
+fi
+### create group
+if [ ! $(getent group $GROUP_NAME) ]; then
+    echo "group $GROUP_NAME does not exist, creating..."
+    groupadd -g $PGID $GROUP_NAME
+else
+    echo "group $GROUP_NAME already exists."
+fi
+### create user
+if [ ! $(getent passwd $USER_NAME) ]; then
+    echo "user $USER_NAME does not exist, creating..."
+    useradd -g $PGID -u $PUID -s /bin/bash -M -d $HOME_DIR $USER_NAME
+    id $USER_NAME
+    echo "user $USER_NAME created."
+else
+    echo "user $USER_NAME already exists."
+fi
+echo "UPRCL is enabled, create $USER_NAME (group: $GROUP_NAME)";
+# set permission for home dir
+chown -R $USER_NAME:$GROUP_NAME $HOME_DIR
+# Permissions of writable volumes
+chown -R $USER_NAME:$GROUP_NAME /cache
+# Fix permission errors on existing files
+find /cache -type d -exec chmod 755 {} \;
+find /cache -type f -exec chmod 644 {} \;
+chown -R $USER_NAME:$GROUP_NAME /uprcl/confdir
+chown -R $USER_NAME:$GROUP_NAME /user/config
+chown -R $USER_NAME:$GROUP_NAME /log
 
 echo "About to sleep for $STARTUP_DELAY_SEC second(s)"
 sleep $STARTUP_DELAY_SEC
@@ -438,10 +440,5 @@ echo "Ready to start."
 
 CMD_LINE="/usr/bin/upmpdcli -c $CONFIG_FILE"
 
-if [ "${USER_MODE}" -eq 1 ]; then
-    echo "USER MODE"
-    su - $USER_NAME -c "$CMD_LINE"
-else
-    echo "ROOT MODE"
-    eval $CMD_LINE
-fi
+echo "USER MODE (now mandatory)"
+su - $USER_NAME -c "PATH=/root/venv/bin:$PATH $CMD_LINE"
