@@ -44,8 +44,8 @@ RUN echo "--- END   upmpdcli.conf ---"
 FROM scratch
 COPY --from=BASE / /
 
-#LABEL maintainer="GioF71"
-#LABEL source="https://github.com/GioF71/upmpdcli-docker"
+LABEL maintainer="GioF71"
+LABEL source="https://github.com/GioF71/upmpdcli-docker"
 
 RUN mkdir -p /app
 RUN mkdir -p /app/conf
