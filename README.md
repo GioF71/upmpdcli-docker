@@ -94,10 +94,10 @@ Please find a list of the currently built images in the following table.
 
 Base Image|Build Mode|Tags
 :---|:---:|:---
-ubuntu:jammy|full|latest,stable,lts,jammy,daily-jammy
-ubuntu:jammy|renderer|latest-renderer,stable-renderer,lts-renderer,jammy-renderer,daily-jammy-renderer
-ubuntu:lunar|full|current,lunar,daily-lunar
-ubuntu:lunar|renderer|current-renderer,lunar-renderer,daily-lunar-renderer
+ubuntu:jammy|full|`latest` `stable` `lts` `jammy` `daily-jammy`
+ubuntu:jammy|renderer|`latest-renderer` `stable-renderer` `lts-renderer` `jammy-renderer` `daily-jammy-renderer`
+ubuntu:lunar|full|`current` `lunar` `daily-lunar`
+ubuntu:lunar|renderer|`current-renderer` `lunar-renderer` `daily-lunar-renderer`
 
 ## Usage
 
