@@ -90,6 +90,7 @@ You may want to pull the "stable" image as opposed to the "latest".
 
 Since version 2023-07-04, we have dedicated images for renderer-only mode.  
 If you select any of those images (which have `-renderer` appended to the tag), mediaserver functionalities will not be available.  
+The `renderer` images are currently about 3.3x smaller in size, and thus pulling and decompressing is much faster.  
 Please find a list of the currently built images in the following table.
 
 Base Image|Build Mode|Tags
