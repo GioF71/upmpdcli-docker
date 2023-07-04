@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        base: ["lunar", "jammy"]
+        base: ["jammy"]
         build_mode: ["full", "renderer"]
 
     steps:
@@ -49,10 +49,10 @@ jobs:
           echo "Building build_key: ["$build_key"]";
 
           declare -A special_tags
-          special_tags[jammy-full]="${image_name}:stable,${image_name}:lts,${image_name}:jammy"
-          special_tags[jammy-renderer]="${image_name}:stable-renderer,${image_name}:lts-renderer"
-          special_tags[lunar-full]="${image_name}:latest,${image_name}:current,${image_name}:lunar"
-          special_tags[lunar-renderer]="${image_name}:latest-renderer,${image_name}:current-renderer"
+          special_tags[jammy-full]="${image_name}:latest,${image_name}:stable,${image_name}:lts,${image_name}:jammy"
+          special_tags[jammy-renderer]="${image_name}:latest-renderer,${image_name}:stable-renderer,${image_name}:lts-renderer"
+          #special_tags[lunar-full]="${image_name}:latest,${image_name}:current,${image_name}:lunar"
+          #special_tags[lunar-renderer]="${image_name}:latest-renderer,${image_name}:current-renderer"
 
           base=${{ matrix.base }}
           build_mode=${{ matrix.build_mode }}

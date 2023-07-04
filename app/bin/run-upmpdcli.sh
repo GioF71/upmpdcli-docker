@@ -230,12 +230,14 @@ fi
 echo "RADIO_BROWSER_ENABLE=[$RADIO_BROWSER_ENABLE]"
 if [ "${RADIO_BROWSER_ENABLE^^}" == "YES" ]; then
     echo "Enabling Radio Browser";
+    RADIO_BROWSER_ENABLE=YES
     sed -i 's/\#radio-browseruser/radio-browseruser/g' $CONFIG_FILE;
 fi
 
 echo "SUBSONIC_ENABLE=[$SUBSONIC_ENABLE]"
 if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
     echo "Enabling Subsonic, processing settings";
+    SUBSONIC_ENABLE=YES
     sed -i 's/\#subsonicuser/subsonicuser/g' $CONFIG_FILE
     echo "SUBSONIC_AUTOSTART=[$SUBSONIC_AUTOSTART]"
     if [ "${SUBSONIC_AUTOSTART^^}" == "YES" ]; then
@@ -440,8 +442,5 @@ echo "Ready to start."
 
 CMD_LINE="/usr/bin/upmpdcli -c $CONFIG_FILE"
 
-echo "USER MODE (now mandatory)"
-su - $USER_NAME -c "pip install pyradios"
-su - $USER_NAME -c "pip install subsonic-connector==0.1.17"
-
+echo "USER MODE [$USER_NAME] (now mandatory)"
 su - $USER_NAME -c "$CMD_LINE"
