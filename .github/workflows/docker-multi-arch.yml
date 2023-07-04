@@ -16,12 +16,14 @@ jobs:
       fail-fast: false
       matrix:
         base: ["lunar", "jammy"]
+        build_mode: ["full", "renderer"]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Prepare for Docker Build
+        id: prepare
         run: |
           ref_type=${{ github.ref_type }}
           echo "REF_TYPE: ["$ref_type"]"
@@ -39,37 +41,37 @@ jobs:
           base_images[focal]=ubuntu:focal
           base_images[bionic]=ubuntu:bionic
 
-          stable="jammy"
-          latest="jammy"
-          lts="jammy"
-          current="lunar"
-
-          tag_stable="stable"
-          tag_latest="latest"
-          tag_lts="lts"
-          tag_current="current"
-
-          base=${{ matrix.base }}
-          select_base_image=${base_images[$base]}
-          echo "select_base_image=["$select_base_image"]"
-
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
 
           echo "image_name=["$image_name"]"
+
+          build_key="${{ matrix.base }}-${{ matrix.build_mode }}";
+          echo "Building build_key: ["$build_key"]";
+
+          declare -A special_tags
+          special_tags[jammy-full]="${image_name}:latest,${image_name}:stable,${image_name}:lts,${image_name}:jammy"
+          special_tags[jammy-renderer]="${image_name}:latest-renderer,${image_name}:stable-renderer,${image_name}:lts-renderer,${image_name}:jammy-renderer"
+          special_tags[lunar-full]="${image_name}:current,${image_name}:lunar"
+          special_tags[lunar-renderer]="${image_name}:current-renderer,${image_name}:lunar-renderer"
+
+          base=${{ matrix.base }}
+          build_mode=${{ matrix.build_mode }}
+          select_base_image=${base_images[$base]}
+          echo "select_base_image=["$select_base_image"]"
 
           tags=""
           if [ "${ref_type}" = "branch" ]; then
             echo "branch mode";
             if [ "${ref_name}" = "main" ]; then
               echo "main branch";
-              tags="${image_name}:main-${base}";
+              tags="${image_name}:main-${build_key}";
             elif [ "${ref_name}" = "devel" ]; then
               echo "devel branch";
               devel_timestamp=$(TZ=Europe/Rome date '+%Y-%m-%d-%H-%M-%S')
-              tags="${image_name}:devel-${base},${image_name}:devel-${base}-${devel_timestamp}";
+              tags="${image_name}:devel-${build_key},${image_name}:devel-${build_key}-${devel_timestamp}";
             else
               echo "other branch ["${ref_name}"]";
-              tags="${image_name}:${ref_name}-${base}";
+              tags="${image_name}:${ref_name}-${build_key}";
             fi
           elif [ "${ref_type}" = "tag" ]; then
             echo "tag mode";
@@ -82,37 +84,32 @@ jobs:
 
             if [ "${tag_type}" = "release" ]; then
               echo "release tag";
-              tags="${image_name}:${base}";
-              tags="$tags,${image_name}:${base}-${release}";
-              if [ "${base}" = "${latest}" ]; then
-                tags="$tags,${image_name}:${tag_latest}";
+              tags="${image_name}:${build_key}";
+              tags="$tags,${image_name}:${build_key}-${release}";
+              select_special_tags=${special_tags["${build_key}"]};
+              if [[ -n "${select_special_tags}" ]]; then
+                echo "Found special tags for ["${build_key}"]=["${select_special_tags}"]";
+                tags="$tags,${select_special_tags}";
+              else
+                echo "Not found special tags for ["${build_key}"]";
               fi
-              if [ "${base}" = "${stable}" ]; then
-                tags="$tags,${image_name}:${tag_stable}";
-              fi
-              if [ "${base}" = "${lts}" ]; then
-                tags="$tags,${image_name}:${tag_lts}";
-              fi
-              if [ "${base}" = "${current}" ]; then
-                tags="$tags,${image_name}:${tag_current}";
-              fi
-            elif [ "${tag_type}" = "main" ]; then
+              elif [ "${tag_type}" = "main" ]; then
               echo "main tag";
-              tags="${image_name}:main-${tag_name}-${base}";
+              tags="${image_name}:main-${tag_name}-${build_key}";
             elif [ "${tag_type}" = "devel" ]; then
               echo "devel tag";
-              tags="${image_name}:devel-${tag_name}-${base}";
+              tags="${image_name}:devel-${tag_name}-${build_key}";
             elif [ "${tag_type}" = "feature" ]; then
               echo "feature tag";
-              tags="${image_name}:feature-${tag_name}-${base}";
+              tags="${image_name}:feature-${tag_name}-${build_key}";
             elif [ "${tag_type}" = "daily" ]; then
               echo "daily build";
-              tags="${tags},${image_name}:daily-${base}";
+              tags="${tags},${image_name}:daily-${build_key}";
             fi
           fi
           echo "Building tags: ["${tags}"]"
-          echo "RELEASE_TAGS=${tags}" >> $GITHUB_ENV
-          echo "BASE_IMAGE=${select_base_image}" >> $GITHUB_ENV
+          echo "RELEASE_TAGS=${tags}" >> $GITHUB_OUTPUT
+          echo "BASE_IMAGE=${select_base_image}" >> $GITHUB_OUTPUT
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -135,7 +132,8 @@ jobs:
           context: .
           build-args: |
             USE_APT_PROXY=N
-            BASE_IMAGE=${{ env.BASE_IMAGE }}
+            BASE_IMAGE=${{ steps.prepare.outputs.BASE_IMAGE }}
+            BUILD_MODE=${{ matrix.build_mode }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
           push: true
-          tags: ${{ env.RELEASE_TAGS }}
+          tags: ${{ steps.prepare.outputs.RELEASE_TAGS }}
