@@ -95,10 +95,8 @@ Please find a list of the currently built images in the following table.
 
 Base Image|Build Mode|Tags
 :---|:---:|:---
-ubuntu:jammy|full|`stable` `lts` `jammy` `daily-jammy`
-ubuntu:jammy|renderer|`stable-renderer` `lts-renderer` `jammy-renderer` `daily-jammy-renderer`
-ubuntu:lunar|full|`latest` `current` `lunar` `daily-lunar`
-ubuntu:lunar|renderer|`latest-renderer` `current-renderer` `lunar-renderer` `daily-lunar-renderer`
+ubuntu:jammy|full|`latest` `stable` `current` `lts` `jammy` `daily-jammy`
+ubuntu:jammy|renderer|`latest-renderer` `stable-renderer` `current-renderer` `lts-renderer` `jammy-renderer` `daily-jammy-renderer`
 
 ## Usage
 
@@ -245,6 +243,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-07-04|Install python packages only when needed (see issue [#206](https://github.com/GioF71/upmpdcli-docker/issues/206))
 2023-07-04|Set `latest` tag to `lunar` builds, leave `stable` to `jammy` (see issue [#204](https://github.com/GioF71/upmpdcli-docker/issues/204))
 2023-07-04|Dedicated builds for `renderer` mode (see issue [#199](https://github.com/GioF71/upmpdcli-docker/issues/199))
 2023-07-02|Back to installing python packages at container startup (see issue [#196](https://github.com/GioF71/upmpdcli-docker/issues/196))
