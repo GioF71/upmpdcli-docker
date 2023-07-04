@@ -245,6 +245,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-07-04|Set `latest` tag to `lunar` builds, leave `stable` to `jammy` (see issue [#204](https://github.com/GioF71/upmpdcli-docker/issues/204))
 2023-07-04|Dedicated builds for `renderer` mode (see issue [#199](https://github.com/GioF71/upmpdcli-docker/issues/199))
 2023-07-02|Back to installing python packages at container startup (see issue [#196](https://github.com/GioF71/upmpdcli-docker/issues/196))
 2023-06-30|Add support for `lunar` (see issue [#193](https://github.com/GioF71/upmpdcli-docker/issues/193))
