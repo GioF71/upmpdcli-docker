@@ -38,8 +38,9 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 			python3 \
 			python3-pip \
 			git; \
-		pip install pyradios; \
-		pip install subsonic-connector==0.1.17; \
+		pip install --upgrade pip; \
+		pip install --break-system-packages pyradios; \
+		pip install --break-system-packages subsonic-connector==0.1.17; \
 	fi
 RUN apt-get remove -y software-properties-common
 RUN apt-get -y autoremove
@@ -49,14 +50,8 @@ RUN if [ "$USE_APT_PROXY" = "Y" ]; then \
 		rm /etc/apt/apt.conf.d/01proxy; \
 	fi
 
-RUN upmpdcli -v
-
-RUN echo "--- BEGIN upmpdcli.conf ---"
-RUN cat /etc/upmpdcli.conf
-RUN echo "--- END   upmpdcli.conf ---"
-
-#FROM scratch
-#COPY --from=BASE / /
+FROM scratch
+COPY --from=BASE / /
 
 LABEL maintainer="GioF71"
 LABEL source="https://github.com/GioF71/upmpdcli-docker"
