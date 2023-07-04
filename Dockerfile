@@ -1,7 +1,16 @@
 ARG BASE_IMAGE="${BASE_IMAGE:-ubuntu:jammy}"
 FROM ${BASE_IMAGE} AS BASE
 ARG USE_PPA="${USE_PPA:-upnpp1}"
+ARG BUILD_MODE="${BUILD_MODE:-full}"
 ARG USE_APT_PROXY
+
+RUN if $(grep -q 1000 /etc/passwd); then \
+  userdel -r $(id -un 1000); \
+fi
+
+RUN if $(grep -q 1000 /etc/group); then \
+  groupdel -r $(id -gn 1000); \
+fi
 
 RUN mkdir -p /app/conf
 
@@ -19,14 +28,17 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update
 RUN apt-get install -y software-properties-common
-RUN apt-get install -y exiftool
 RUN add-apt-repository ppa:jean-francois-dockes/${USE_PPA}
 RUN apt-get update
 RUN apt-get install -y upmpdcli
-RUN apt-get install -y upmpdcli-*
-RUN apt-get install -y python3 
-RUN apt-get install -y python3-pip
-RUN apt-get install -y git
+RUN if [ "$BUILD_MODE" = "full" ]; then \
+		apt-get install -y \
+			upmpdcli-* \
+			exiftool \
+			python3 \
+			python3-pip \
+			git; \
+	fi
 RUN apt-get remove -y software-properties-common
 RUN apt-get -y autoremove
 RUN	rm -rf /var/lib/apt/lists/*
@@ -52,14 +64,6 @@ RUN mkdir -p /app/conf
 RUN mkdir -p /app/doc
 
 RUN cp /etc/upmpdcli.conf /app/conf/original.upmpdcli.conf
-
-RUN if $(grep -q 1000 /etc/passwd); then \
-  userdel -r $(id -un 1000); \
-fi
-
-RUN if $(grep -q 1000 /etc/group); then \
-  groupdel -r $(id -gn 1000); \
-fi
 
 ENV UPMPD_FRIENDLY_NAME ""
 ENV AV_FRIENDLY_NAME ""

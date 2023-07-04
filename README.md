@@ -86,6 +86,19 @@ Getting the image from DockerHub is as simple as typing:
 
 You may want to pull the "stable" image as opposed to the "latest".
 
+### Image Versions
+
+Since version 2023-07-04, we have dedicated images for renderer-only mode.  
+If you select any of those images (which have `-renderer` appended to the tag), mediaserver functionalities will not be available.  
+Please find a list of the currently built images in the following table.
+
+Base Image|Build Mode|Tags
+:---|:---:|:---
+ubuntu:jammy|full|latest,stable,lts,jammy,daily-jammy
+ubuntu:jammy|renderer|latest-renderer,stable-renderer,lts-renderer,jammy-renderer,daily-jammy-renderer
+ubuntu:lunar|full|current,lunar,daily-lunar
+ubuntu:lunar|renderer|current-renderer,lunar-renderer,daily-lunar-renderer
+
 ## Usage
 
 Say your mpd host is "mpd.local", you can start upmpdcli by typing
@@ -231,6 +244,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-07-04|Dedicated builds for `renderer` mode (see issue [#199](https://github.com/GioF71/upmpdcli-docker/issues/199))
 2023-07-02|Back to installing python packages at container startup (see issue [#196](https://github.com/GioF71/upmpdcli-docker/issues/196))
 2023-06-30|Add support for `lunar` (see issue [#193](https://github.com/GioF71/upmpdcli-docker/issues/193))
 2023-06-30|Remove binary version from image tags (see issue [#190](https://github.com/GioF71/upmpdcli-docker/issues/190))
