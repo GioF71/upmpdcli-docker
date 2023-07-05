@@ -167,6 +167,10 @@ UPNPAV_POSTFIX_PREPEND_SPACE||Option to add a space before a custom `UPNPAV_POST
 UPNPAV_SKIP_NAME_POSTFIX||If not set or set to `yes`, and if only `UPNPAV` renderer is enabled, the `UPNPAV_POSTFIX` postfix is not appended to `FRIENDLY_NAME`
 OPENHOME||Enable OpenHome services (`0`/`1`), defaults to `1`
 OH_PRODUCT_ROOM||Sets `ohproductroom`, defaults to same value calculated for AV_FRIENDLY_NAME if upnp-av is enabled
+OH_MANUFACTURER_NAME||Sets `ohmanufacturername`
+OH_MANUFACTURER_INFO||Sets `ohmanufacturerinfo`
+OH_PRODUCT_NAME||Sets `ohproductname`
+OH_PRODUCT_INFO||Sets `ohproductinfo`
 UPRCL_ENABLE||Enable local music support (uprcl). Set to `yes` to enable
 RADIOS_ENABLE||Enable Radios plugin. Set to `yes` to enable
 BBC_ENABLE||Enable BBC plugin. Set to `yes` to enable

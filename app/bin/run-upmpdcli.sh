@@ -200,7 +200,19 @@ if [ "${OPENHOME}" -eq 1 ]; then
 fi
 if [ "${UPNPAV}" -eq 1 ]; then
     set_parameter $CONFIG_FILE AV_FRIENDLY_NAME "$AV_FRIENDLY_NAME" avfriendlyname
-    set_parameter $CONFIG_FILE OH_PRODUCT_ROOM "$OH_PRODUCT_ROOM" ohproductroom
+fi
+set_parameter $CONFIG_FILE OH_PRODUCT_ROOM "$OH_PRODUCT_ROOM" ohproductroom
+if [[ -n "${OH_MANUFACTURER_NAME}" ]]; then
+    set_parameter $CONFIG_FILE OH_MANUFACTURER_NAME "$OH_MANUFACTURER_NAME" ohmanufacturername
+fi
+if [[ -n "${OH_MANUFACTURER_INFO}" ]]; then
+    set_parameter $CONFIG_FILE OH_MANUFACTURER_INFO "$OH_MANUFACTURER_INFO" ohmanufacturerinfo
+fi
+if [[ -n "${OH_PRODUCT_NAME}" ]]; then
+    set_parameter $CONFIG_FILE OH_PRODUCT_NAME "$OH_PRODUCT_NAME" ohproductname
+fi
+if [[ -n "${OH_PRODUCT_INFO}" ]]; then
+    set_parameter $CONFIG_FILE OH_PRODUCT_INFO "$OH_PRODUCT_INFO" ohproductinfo
 fi
 set_parameter $CONFIG_FILE MPD_HOST "$MPD_HOST" mpdhost
 set_parameter $CONFIG_FILE MPD_PORT "$MPD_PORT" mpdport
