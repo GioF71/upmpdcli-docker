@@ -4,14 +4,6 @@ ARG USE_PPA="${USE_PPA:-upnpp1}"
 ARG BUILD_MODE="${BUILD_MODE:-full}"
 ARG USE_APT_PROXY
 
-RUN if $(grep -q 1000 /etc/passwd); then \
-  userdel -r $(id -un 1000); \
-fi
-
-RUN if $(grep -q 1000 /etc/group); then \
-  groupdel -r $(id -gn 1000); \
-fi
-
 RUN mkdir -p /app/conf
 
 COPY app/conf/01proxy /app/conf/
