@@ -25,7 +25,16 @@ RUN apt-get update
 RUN apt-get install -y upmpdcli
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y \
-			upmpdcli-* \
+			upmpdcli \
+			upmpdcli-bbc \
+			upmpdcli-deezer \
+			upmpdcli-hra \
+			upmpdcli-qobuz \
+			upmpdcli-radio-browser \
+			upmpdcli-radios \
+			upmpdcli-spotify \
+			upmpdcli-subsonic \
+			upmpdcli-uprcl \
 			exiftool \
 			python3 \
 			python3-pip \
