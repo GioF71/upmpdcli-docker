@@ -212,6 +212,8 @@ set_parameter $CONFIG_FILE OWN_QUEUE "$OWN_QUEUE" ownqueue
 MEDIA_SERVER_ENABLED=0
 if [[ "${UPRCL_ENABLE^^}" == "YES" || 
       "${RADIO_BROWSER_ENABLE^^}" == "YES" ||
+      "${RADIOS_ENABLE^^}" == "YES" ||
+      "${BBC_ENABLE^^}" == "YES" ||
       "${SUBSONIC_ENABLE^^}" == "YES" ||
       "${HRA_ENABLE^^}" == "YES" ||
       "${TIDAL_ENABLE^^}" == "YES" ||
@@ -225,6 +227,27 @@ echo "MEDIA_SERVER_ENABLED=[${MEDIA_SERVER_ENABLED}]"
 if [ "${MEDIA_SERVER_ENABLED}" -eq 1 ]; then
     echo "Setting msfriendlyname to [${MEDIA_SERVER_FRIENDLY_NAME}]"
     set_parameter $CONFIG_FILE MEDIA_SERVER_FRIENDLY_NAME "$MEDIA_SERVER_FRIENDLY_NAME" msfriendlyname
+fi
+
+echo "RADIOS_ENABLE=[$RADIOS_ENABLE]"
+if [ "${RADIOS_ENABLE^^}" == "YES" ]; then
+    echo "Enabling Radios";
+    RADIOS_ENABLE=YES
+    sed -i 's/\#upradiosuser/upradiosuser/g' $CONFIG_FILE;
+fi
+
+echo "BBC_ENABLE=[$BBC_ENABLE]"
+if [ "${BBC_ENABLE^^}" == "YES" ]; then
+    echo "Enabling BBC";
+    BBC_ENABLE=YES
+    sed -i 's/\#bbcuser/bbcuser/g' $CONFIG_FILE;
+    if [[ -n "${BBC_PROGRAMME_DAYS}" ]]; then
+        if ! [[ $BBC_PROGRAMME_DAYS =~ '^[0-9]+$' ]]; then
+            echo "BBC_PROGRAMME_DAYS [$BBC_PROGRAMME_DAYS] is not a number, ignored."
+        fi
+        sed -i 's/\#bbcprogrammedays/bbcprogrammedays/g' $CONFIG_FILE;
+        sed -i 's/BBC_PROGRAMME_DAYS/'"$BBC_PROGRAMME_DAYS"'/g' $CONFIG_FILE
+    fi
 fi
 
 echo "RADIO_BROWSER_ENABLE=[$RADIO_BROWSER_ENABLE]"

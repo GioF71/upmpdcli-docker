@@ -13,9 +13,17 @@ Current version is `1.8.1`.
 
 ## News
 
+### BBC
+
+Since release 2023-07-05, support the upmpdcli [`BBC Sounds`](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#UPMPDCLI-MS-BBC) plugin has been enabled.
+
+### Radios
+
+Since release 2023-07-05, support the upmpdcli [`Upradios radio list`](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#UPMPDCLI-MS-UPRADIOS) plugin has been enabled.
+
 ### SubSonic
 
-From release 2023-04-19, support for the SubSonic plugin has been introduced.  
+Since release 2023-04-19, support for the [`SubSonic plugin`](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#UPMPDCLI-MS-SUBSONIC) has been introduced.  
 I am now a contributor to upmpdcli for this plugin. See the git repository [here](https://framagit.org/medoc92/upmpdcli).  
 The plugin uses my [subsonic-connector](https://github.com/GioF71/subsonic-connector) library which in turn is built around [py-sonic](https://github.com/crustymonkey/py-sonic).  
 Everything has been developed and tested against [Navidrome](https://www.navidrome.org/) but should work with other servers hopefully.  
@@ -159,6 +167,9 @@ UPNPAV_SKIP_NAME_POSTFIX||If not set or set to `yes`, and if only `UPNPAV` rende
 OPENHOME||Enable OpenHome services (`0`/`1`), defaults to `1`
 OH_PRODUCT_ROOM||Sets `ohproductroom`, defaults to same value calculated for AV_FRIENDLY_NAME if upnp-av is enabled
 UPRCL_ENABLE||Enable local music support (uprcl). Set to `yes` to enable
+RADIOS_ENABLE||Enable Radios plugin. Set to `yes` to enable
+BBC_ENABLE||Enable BBC plugin. Set to `yes` to enable
+BBC_PROGRAMME_DAYS||Past days in BBC Sounds catalog listing. This controls how many days are listed in the station displays.
 RADIO_BROWSER_ENABLE||Enable the Radio Browser plugin. Set to `yes` to enable
 SUBSONIC_ENABLE||Enable the Subsonic plugin. Set to `yes` to enable
 SUBSONIC_AUTOSTART||Autostart SubSonic plugin if set to `1`
@@ -246,7 +257,8 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
-2023-07-05|Add `-full` to tags for full builds (see issue [#218](https://github.com/GioF71/upmpdcli-docker/issues/218))
+2023-07-06|Add `-full` to tags for full builds (see issue [#218](https://github.com/GioF71/upmpdcli-docker/issues/218))
+2023-07-06|Add support for radiolist and bbc plugins (see issue [#217](https://github.com/GioF71/upmpdcli-docker/issues/217))
 2023-07-05|Install individual upmpdci packages (see issue [#214](https://github.com/GioF71/upmpdcli-docker/issues/214))
 2023-07-05|Remove old radio patch (see issue [#212](https://github.com/GioF71/upmpdcli-docker/issues/212))
 2023-07-05|Reuse existing user that should exist in the base image (see issue [#194](https://github.com/GioF71/upmpdcli-docker/issues/194))
