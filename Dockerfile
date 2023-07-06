@@ -25,7 +25,6 @@ RUN apt-get update
 RUN apt-get install -y upmpdcli
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y \
-			upmpdcli \
 			upmpdcli-bbc \
 			upmpdcli-deezer \
 			upmpdcli-hra \
@@ -34,14 +33,24 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 			upmpdcli-radios \
 			upmpdcli-spotify \
 			upmpdcli-subsonic \
-			upmpdcli-uprcl \
+			upmpdcli-uprcl; \
+		fi
+RUN if [ "$BUILD_MODE" = "full" ]; then \
+		apt-get install -y \
 			exiftool \
 			python3 \
 			python3-pip \
 			git; \
+		fi
+RUN if [ "$BUILD_MODE" = "full" ]; then \
+		apt-get install -y; \
 		pip install --upgrade pip; \
 		pip install --break-system-packages pyradios; \
 		pip install --break-system-packages subsonic-connector==0.1.17; \
+		pip install --break-system-packages beautifulsoup4; \
+		pip install --break-system-packages python-dateutil; \
+		pip install --break-system-packages feedparser; \
+		pip install --break-system-packages requests; \
 	fi
 RUN apt-get remove -y software-properties-common
 RUN apt-get -y autoremove
@@ -114,6 +123,11 @@ ENV HRA_ENABLE no
 ENV HRA_USERNAME hra_username
 ENV HRA_PASSWORD hra_password
 ENV HRA_LANG en
+
+ENV RADIOS_ENABLE ""
+
+ENV BBC_ENABLE ""
+ENV BBC_PROGRAMME_DAYS ""
 
 ENV RADIO_BROWSER_ENABLE ""
 
