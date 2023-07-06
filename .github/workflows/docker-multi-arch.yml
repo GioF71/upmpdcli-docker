@@ -49,9 +49,9 @@ jobs:
           echo "Building build_key: ["$build_key"]";
 
           declare -A special_tags
-          special_tags[jammy-full]="${image_name}:stable,${image_name}:lts,${image_name}:jammy"
+          special_tags[jammy-full]="${image_name}:stable,${image_name}:lts,${image_name}:jammy,${image_name}:stable-full,${image_name}:lts-full,${image_name}:jammy-full"
           special_tags[jammy-renderer]="${image_name}:stable-renderer,${image_name}:lts-renderer"
-          special_tags[lunar-full]="${image_name}:latest,${image_name}:current,${image_name}:lunar"
+          special_tags[lunar-full]="${image_name}:latest,${image_name}:current,${image_name}:lunar,${image_name}:latest-full,${image_name}:current-full,${image_name}:lunar-full"
           special_tags[lunar-renderer]="${image_name}:latest-renderer,${image_name}:current-renderer"
 
           base=${{ matrix.base }}

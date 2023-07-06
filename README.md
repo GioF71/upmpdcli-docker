@@ -246,6 +246,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-07-05|Add `-full` to tags for full builds (see issue [#218](https://github.com/GioF71/upmpdcli-docker/issues/218))
 2023-07-05|Install individual upmpdci packages (see issue [#214](https://github.com/GioF71/upmpdcli-docker/issues/214))
 2023-07-05|Remove old radio patch (see issue [#212](https://github.com/GioF71/upmpdcli-docker/issues/212))
 2023-07-05|Reuse existing user that should exist in the base image (see issue [#194](https://github.com/GioF71/upmpdcli-docker/issues/194))
