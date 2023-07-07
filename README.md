@@ -155,6 +155,7 @@ MPD_PORT||The port used by mpd, defaults to `6600`
 UPRCL_HOSTPORT||Set if we own the MPD queue, defaults to `1`, possible values `1` and `0`
 PORT_OFFSET||If set, the offset is applied to the default for `UPNP_PORT` (summed) and to the default `PLG_MICRO_HTTP_PORT` (subtracted). Setting this variable overrides these individual variables.
 UPNPIFACE||UPnP network interface
+CHECK_CONTENT_FORMAT||Set to `yes` to enable, see [here](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#checkcontentformat)
 UPNPPORT||UPnP port
 UPMPD_FRIENDLY_NAME|upmpd|Name of the upnp renderer (OpenHome)
 AV_FRIENDLY_NAME|upmpd-av|Name of the upnp renderer (UPnP AV mode)
@@ -257,6 +258,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-07-07|Add support for checkcontentformat (see issue [#221](https://github.com/GioF71/upmpdcli-docker/issues/221))
 2023-07-06|Add `-full` to tags for full builds (see issue [#218](https://github.com/GioF71/upmpdcli-docker/issues/218))
 2023-07-06|Add support for radiolist and bbc plugins (see issue [#217](https://github.com/GioF71/upmpdcli-docker/issues/217))
 2023-07-05|Install individual upmpdci packages (see issue [#214](https://github.com/GioF71/upmpdcli-docker/issues/214))

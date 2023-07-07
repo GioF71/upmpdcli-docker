@@ -209,6 +209,20 @@ set_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmicroht
 
 set_parameter $CONFIG_FILE OWN_QUEUE "$OWN_QUEUE" ownqueue
 
+echo "CHECK_CONTENT_FORMAT=[${CHECK_CONTENT_FORMAT}]"
+if [[ -n "${CHECK_CONTENT_FORMAT}" ]]; then
+    if [[ "${CHECK_CONTENT_FORMAT^^}" == "YES" || "${CHECK_CONTENT_FORMAT^^}" == "Y" ]]; then
+        check_content_format_value=1
+    elif [[ "${CHECK_CONTENT_FORMAT^^}" == "NO" || "${CHECK_CONTENT_FORMAT^^}" == "N" ]]; then
+        check_content_format_value=0
+    else
+        echo "Invalid CHECK_CONTENT_FORMAT [${CHECK_CONTENT_FORMAT}]"
+        exit 2
+    fi
+    echo "Setting checkcontentformat to [$check_content_format_value]"
+    set_parameter $CONFIG_FILE CHECK_CONTENT_FORMAT "$check_content_format_value" "checkcontentformat"
+fi
+
 MEDIA_SERVER_ENABLED=0
 if [[ "${UPRCL_ENABLE^^}" == "YES" || 
       "${RADIO_BROWSER_ENABLE^^}" == "YES" ||
