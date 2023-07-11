@@ -258,7 +258,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
-2023-07-10|Avoid use of `--break-system-packages` in Dockerfile (see issue [#227](https://github.com/GioF71/upmpdcli-docker/issues/227))
+2023-07-11|Avoid use of `--break-system-packages` in Dockerfile (see issue [#227](https://github.com/GioF71/upmpdcli-docker/issues/227))
 2023-07-08|Rebuild (see issue [#225](https://github.com/GioF71/upmpdcli-docker/issues/225))
 2023-07-07|Remove redundancies in the github workflow (see issue [#223](https://github.com/GioF71/upmpdcli-docker/issues/223))
 2023-07-07|Add support for checkcontentformat (see issue [#221](https://github.com/GioF71/upmpdcli-docker/issues/221))
