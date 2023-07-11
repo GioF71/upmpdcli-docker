@@ -24,6 +24,15 @@ RUN add-apt-repository ppa:jean-francois-dockes/${USE_PPA}
 RUN apt-get update
 RUN apt-get install -y upmpdcli
 RUN if [ "$BUILD_MODE" = "full" ]; then \
+		apt-get install -y python3 python3-pip python3-venv; \
+fi
+RUN if [ "$BUILD_MODE" = "full" ]; then \
+		python3 -m venv /root/venv; \
+fi
+RUN if [ "$BUILD_MODE" = "full" ]; then \
+		/root/venv/bin/pip install virtualenv-clone; \
+fi
+RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y \
 			upmpdcli-bbc \
 			upmpdcli-deezer \
@@ -36,21 +45,20 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 			upmpdcli-uprcl; \
 		fi
 RUN if [ "$BUILD_MODE" = "full" ]; then \
-		apt-get install -y \
-			exiftool \
-			python3 \
-			python3-pip \
-			git; \
+		apt-get install -y exiftool; \
 		fi
 RUN if [ "$BUILD_MODE" = "full" ]; then \
-		apt-get install -y; \
-		pip install --upgrade pip; \
-		pip install --break-system-packages pyradios; \
-		pip install --break-system-packages subsonic-connector==0.1.17; \
-		pip install --break-system-packages beautifulsoup4; \
-		pip install --break-system-packages python-dateutil; \
-		pip install --break-system-packages feedparser; \
-		pip install --break-system-packages requests; \
+		apt-get install -y git; \
+		fi
+RUN if [ "$BUILD_MODE" = "full" ]; then \
+		/root/venv/bin/pip install --upgrade pip; \
+		/root/venv/bin/pip install pyradios; \
+		/root/venv/bin/pip install py-sonic; \
+		/root/venv/bin/pip install subsonic-connector==0.1.17; \
+		/root/venv/bin/pip install beautifulsoup4; \
+		/root/venv/bin/pip install python-dateutil; \
+		/root/venv/bin/pip install feedparser; \
+		/root/venv/bin/pip install requests; \
 	fi
 RUN apt-get remove -y software-properties-common
 RUN apt-get -y autoremove
@@ -59,6 +67,9 @@ RUN	rm -rf /var/lib/apt/lists/*
 RUN if [ "$USE_APT_PROXY" = "Y" ]; then \
 		rm /etc/apt/apt.conf.d/01proxy; \
 	fi
+
+RUN echo $BUILD_MODE > /app/conf/build_mode.txt
+RUN echo $USE_PPA > /app/conf/ppa.txt
 
 FROM scratch
 COPY --from=BASE / /
