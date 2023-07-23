@@ -104,10 +104,10 @@ Please find a list of the currently built images in the following table.
 
 Base Image|Build Mode|Tags
 :---|:---:|:---
-ubuntu:jammy|full|`stable` `lts` `jammy` `daily-jammy`
-ubuntu:jammy|renderer|`stable-renderer` `current-renderer` `lts-renderer` `jammy-renderer` `daily-jammy-renderer`
-ubuntu:lunar|full|`latest` `current` `lunar` `daily-lunar`
-ubuntu:lunar|renderer|`latest-renderer` `current-renderer` `lunar-renderer` `daily-lunar-renderer`
+debian:bookworm-slim|full|`stable` `latest` `bookworm` `daily-bookworm`
+debian:bookworm-slim|`stable-renderer` `latest-renderer` `bookworm-renderer` `daily-bookworm-renderer`
+ubuntu:lunar|full|`ubuntu-current` `lunar` `daily-lunar`
+ubuntu:lunar|renderer|`ubuntu-current-renderer` `lunar-renderer` `daily-lunar-renderer`
 
 ## Usage
 
@@ -258,6 +258,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-07-23|Switch to debian (see issue [#230](https://github.com/GioF71/upmpdcli-docker/issues/230))
 2023-07-11|Avoid use of `--break-system-packages` in Dockerfile (see issue [#227](https://github.com/GioF71/upmpdcli-docker/issues/227))
 2023-07-08|Rebuild (see issue [#225](https://github.com/GioF71/upmpdcli-docker/issues/225))
 2023-07-07|Remove redundancies in the github workflow (see issue [#223](https://github.com/GioF71/upmpdcli-docker/issues/223))
