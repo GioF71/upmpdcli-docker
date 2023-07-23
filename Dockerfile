@@ -1,27 +1,31 @@
 ARG BASE_IMAGE="${BASE_IMAGE:-ubuntu:jammy}"
 FROM ${BASE_IMAGE} AS BASE
+ARG BASE_IMAGE="${BASE_IMAGE:-ubuntu:jammy}"
 ARG USE_PPA="${USE_PPA:-upnpp1}"
 ARG BUILD_MODE="${BUILD_MODE:-full}"
 ARG USE_APT_PROXY
 
 RUN mkdir -p /app/conf
+RUN mkdir -p /app/install
 
 COPY app/conf/01proxy /app/conf/
 
 RUN if [ "$USE_APT_PROXY" = "Y" ]; then \
-	echo "Using apt proxy"; \
-	cp /app/conf/01proxy /etc/apt/apt.conf.d/01proxy; \
-	echo /etc/apt/apt.conf.d/01proxy; \
+		echo "Using apt proxy"; \
+		cp /app/conf/01proxy /etc/apt/apt.conf.d/01proxy; \
+		echo /etc/apt/apt.conf.d/01proxy; \
 	else \
-	echo "Building without proxy"; \
+		echo "Building without proxy"; \
 	fi
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:jean-francois-dockes/${USE_PPA}
-RUN apt-get update
+COPY app/install/* /app/install
+
+RUN chmod u+x /app/install/*.sh
+
+RUN /app/install/setup.sh
+
 RUN apt-get install -y upmpdcli
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y python3 python3-pip python3-venv; \
