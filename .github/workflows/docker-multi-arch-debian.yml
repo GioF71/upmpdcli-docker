@@ -45,8 +45,8 @@ jobs:
           echo "Building build_key: ["$build_key"]";
 
           declare -A special_tags
-          special_tags[bookworm-full]="${image_name}:stable,${image_name}:lts,${image_name}:bookworm,${image_name}:stable-full"
-          special_tags[bookworm-renderer]="${image_name}:stable-renderer"
+          special_tags[bookworm-full]="${image_name}:stable,${image_name}:latest,${image_name}:bookworm,${image_name}:stable-full"
+          special_tags[bookworm-renderer]="${image_name}:stable-renderer,${image_name}:latest-renderer"
 
           base=${{ matrix.base }}
           build_mode=${{ matrix.build_mode }}
