@@ -46,7 +46,8 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 			upmpdcli-radios \
 			upmpdcli-spotify \
 			upmpdcli-subsonic \
-			upmpdcli-uprcl; \
+			upmpdcli-uprcl \
+			recoll; \
 		fi
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y exiftool; \
