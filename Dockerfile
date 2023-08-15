@@ -37,7 +37,7 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 		/root/venv/bin/pip install virtualenv-clone; \
 fi
 RUN if [ "$BUILD_MODE" = "full" ]; then \
-		apt-get install -y \
+		apt-get install --no-install-recommends -y \
 			upmpdcli-bbc \
 			upmpdcli-deezer \
 			upmpdcli-hra \
@@ -47,7 +47,7 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 			upmpdcli-spotify \
 			upmpdcli-subsonic \
 			upmpdcli-uprcl \
-			recollcmd; \
+			recoll; \
 		fi
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y exiftool; \
