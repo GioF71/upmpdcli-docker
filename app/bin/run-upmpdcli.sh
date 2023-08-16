@@ -516,7 +516,7 @@ if [[ ${build_mode} == "full" ]]; then
     echo "export VIRTUAL_ENV=$HOME_DIR/venv" > $HOME_DIR/.profile
     echo "export PATH=$HOME_DIR/venv/bin:$PATH" >> $HOME_DIR/.profile
     echo "  setting ownership to $venv_dir ..."
-    chown $USER_NAME:$GROUP_NAME $venv_dir
+    chown -R $USER_NAME:$GROUP_NAME $venv_dir
     echo "  displaying $HOME_DIR/.profile ..."
     cat $HOME_DIR/.profile
     echo "  done"
