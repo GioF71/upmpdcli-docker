@@ -37,7 +37,7 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 		/root/venv/bin/pip install virtualenv-clone; \
 fi
 RUN if [ "$BUILD_MODE" = "full" ]; then \
-		apt-get install --no-install-recommends -y \
+		apt-get install -y \
 			upmpdcli-bbc \
 			upmpdcli-deezer \
 			upmpdcli-hra \
@@ -47,8 +47,14 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 			upmpdcli-spotify \
 			upmpdcli-subsonic \
 			upmpdcli-uprcl \
-			recoll; \
+			recoll \
+			recollcmd; \
 		fi
+RUN if [ "$BUILD_MODE" = "full" ]; then \
+		apt-get install -y \
+			upmpdcli-*; \
+		fi
+
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y exiftool; \
 		fi
@@ -57,6 +63,8 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 		fi
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		/root/venv/bin/pip install --upgrade pip; \
+	fi
+RUN if [ "$BUILD_MODE" = "full" ]; then \
 		/root/venv/bin/pip install pyradios; \
 		/root/venv/bin/pip install py-sonic; \
 		/root/venv/bin/pip install subsonic-connector==0.1.17; \
@@ -64,6 +72,7 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 		/root/venv/bin/pip install python-dateutil; \
 		/root/venv/bin/pip install feedparser; \
 		/root/venv/bin/pip install requests; \
+		/root/venv/bin/pip install mutagen; \
 	fi
 RUN apt-get remove -y software-properties-common
 RUN apt-get -y autoremove
