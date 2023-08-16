@@ -31,12 +31,6 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y python3 python3-pip python3-venv; \
 fi
 RUN if [ "$BUILD_MODE" = "full" ]; then \
-		python3 -m venv /root/venv; \
-fi
-RUN if [ "$BUILD_MODE" = "full" ]; then \
-		/root/venv/bin/pip install virtualenv-clone; \
-fi
-RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y \
 			upmpdcli-bbc \
 			upmpdcli-deezer \
@@ -46,8 +40,15 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 			upmpdcli-radios \
 			upmpdcli-spotify \
 			upmpdcli-subsonic \
-			upmpdcli-uprcl; \
+			upmpdcli-uprcl \
+			recoll \
+			recollcmd; \
 		fi
+RUN if [ "$BUILD_MODE" = "full" ]; then \
+		apt-get install -y \
+			upmpdcli-*; \
+		fi
+
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y exiftool; \
 		fi
@@ -55,14 +56,17 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y git; \
 		fi
 RUN if [ "$BUILD_MODE" = "full" ]; then \
-		/root/venv/bin/pip install --upgrade pip; \
-		/root/venv/bin/pip install pyradios; \
-		/root/venv/bin/pip install py-sonic; \
-		/root/venv/bin/pip install subsonic-connector==0.1.17; \
-		/root/venv/bin/pip install beautifulsoup4; \
-		/root/venv/bin/pip install python-dateutil; \
-		/root/venv/bin/pip install feedparser; \
-		/root/venv/bin/pip install requests; \
+		pip install --upgrade pip; \
+	fi
+RUN if [ "$BUILD_MODE" = "full" ]; then \
+		pip install pyradios; \
+		pip install py-sonic; \
+		pip install subsonic-connector==0.1.17; \
+		pip install beautifulsoup4; \
+		pip install python-dateutil; \
+		pip install feedparser; \
+		pip install requests; \
+		pip install mutagen; \
 	fi
 RUN apt-get remove -y software-properties-common
 RUN apt-get -y autoremove

@@ -1,4 +1,4 @@
-name: Publish multi-arch Debian-based Docker images
+name: Publish multi-arch Ubuntu-based Docker images
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        base: ["bookworm"]
+        base: [ "jammy"]
         build_mode: ["full", "renderer"]
 
     steps:
@@ -35,7 +35,11 @@ jobs:
           echo "REF: ["$ref"]"
 
           declare -A base_images
-          base_images[bookworm]=debian:bookworm-slim
+          base_images[lunar]=ubuntu:lunar
+          base_images[kinetic]=ubuntu:kinetic
+          base_images[jammy]=ubuntu:jammy
+          base_images[focal]=ubuntu:focal
+          base_images[bionic]=ubuntu:bionic
 
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
 
@@ -45,8 +49,8 @@ jobs:
           echo "Building build_key: ["$build_key"]";
 
           declare -A special_tags
-          special_tags[bookworm-full]="${image_name}:stable,${image_name}:latest,${image_name}:bookworm,${image_name}:stable-full"
-          special_tags[bookworm-renderer]="${image_name}:stable-renderer,${image_name}:latest-renderer"
+          special_tags[jammy-full]="${image_name}:ubuntu-lts,${image_name}:jammy,${image_name}:ubuntu-lts-full,${image_name}:stable,${image_name}:latest,${image_name}:stable-full"
+          special_tags[jammy-renderer]="${image_name}:ubuntu-lts-renderer,${image_name}:latest-renderer,${image_name}:stable-renderer"
 
           base=${{ matrix.base }}
           build_mode=${{ matrix.build_mode }}
