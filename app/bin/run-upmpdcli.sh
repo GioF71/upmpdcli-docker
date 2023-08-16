@@ -503,25 +503,6 @@ echo ". done."
 
 build_mode=`cat /app/conf/build_mode.txt`
 
-if [[ ${build_mode} == "full" ]]; then
-    echo "Build mode is $build_mode"
-    venv_dir=$HOME_DIR/venv
-    if [ -d "$venv_dir" ]; then
-        echo "  removing existing venv from previous run ..."
-        rm $venv_dir -Rf
-    fi
-    echo "  cloning venv ..."
-    /root/venv/bin/virtualenv-clone /root/venv $venv_dir
-    echo "  setting variables to $HOME_DIR/.profile"
-    echo "export VIRTUAL_ENV=$HOME_DIR/venv" > $HOME_DIR/.profile
-    echo "export PATH=$HOME_DIR/venv/bin:$PATH" >> $HOME_DIR/.profile
-    echo "  setting ownership to $venv_dir ..."
-    chown -R $USER_NAME:$GROUP_NAME $venv_dir
-    echo "  displaying $HOME_DIR/.profile ..."
-    cat $HOME_DIR/.profile
-    echo "  done"
-fi
-
 echo "About to sleep for $STARTUP_DELAY_SEC second(s)"
 sleep $STARTUP_DELAY_SEC
 echo "Ready to start."
