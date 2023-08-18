@@ -38,16 +38,23 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 			upmpdcli-qobuz \
 			upmpdcli-radio-browser \
 			upmpdcli-radios \
-			upmpdcli-spotify \
 			upmpdcli-subsonic \
-			upmpdcli-uprcl \
-			recoll \
-			recollcmd; \
+			upmpdcli-uprcl; \
 		fi
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y \
-			upmpdcli-*; \
+			recollcmd; \
 		fi
+
+#RUN if [ "$BUILD_MODE" = "full" ]; then \
+#		apt-get install -y \
+#			recoll; \
+#		fi
+
+#RUN if [ "$BUILD_MODE" = "full" ]; then \
+#		apt-get install -y \
+#			upmpdcli-*; \
+#		fi
 
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y exiftool; \
@@ -66,6 +73,8 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 		pip install python-dateutil; \
 		pip install feedparser; \
 		pip install requests; \
+	fi
+RUN if [ "$BUILD_MODE" = "full" ]; then \
 		pip install mutagen; \
 	fi
 RUN apt-get remove -y software-properties-common
