@@ -12,6 +12,18 @@ echo "IMAGE_FULL_NAME=[$IMAGE_FULL_NAME]"
 DEBIAN_VERSION=$(echo $IMAGE_FULL_NAME | cut -d "-" -f 1)
 echo "DEBIAN_VERSION=[$DEBIAN_VERSION]"
 
+pip install --upgrade pip --break-system-packages
+
+python_packages=(pyradios py-sonic subsonic-connector==0.1.17 mutagen)
+for pkg in "${python_packages[@]}"
+do
+    echo "Installing ${pkg} with add_switch [$add_switch]..."
+    cmd="pip install --break-system-packages"
+    cmd="$cmd ${pkg}"
+    echo "cmd=[$cmd]"
+    eval "$cmd"
+done
+
 apt-get update
 apt-get install -y wget
 
