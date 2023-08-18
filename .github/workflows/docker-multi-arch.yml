@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        base: [ "jammy"]
+        base: [ "jammy", "lunar", "bookworm"]
         build_mode: ["full", "renderer"]
 
     steps:
@@ -36,10 +36,8 @@ jobs:
 
           declare -A base_images
           base_images[lunar]=ubuntu:lunar
-          base_images[kinetic]=ubuntu:kinetic
           base_images[jammy]=ubuntu:jammy
-          base_images[focal]=ubuntu:focal
-          base_images[bionic]=ubuntu:bionic
+          base_images[bookworm]=debian:bookworm-slim
 
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
 
