@@ -12,21 +12,23 @@ echo "UBUNTU_VERSION=[$UBUNTU_VERSION]"
 
 if [ "$BUILD_MODE" = "full" ]; then
     declare -A needs_switch
-    needs_switch[jammy]=0
     needs_switch[lunar]=1
-    python_packages=(pyradios py-sonic subsonic-connector==0.1.17 mutagen)
-    add_switch=${needs_switch[$UBUNTU_VERSION]}
+    add_switch=0
+    if [[ -v needs_switch[$UBUNTU_VERSION] ]]; then
+        add_switch=${needs_switch[$UBUNTU_VERSION]}
+    fi
     #upgrade pip
-    pip_upgrade="pip install --upgrade pip"
+    pip_upgrade="pip install --no-cache-dir --upgrade pip"
     if [ $add_switch -eq 1 ]; then
         pip_upgrade="$pip_upgrade --break-system-packages"
     fi
     echo "pip_upgrade=[$pip_upgrade]"
     eval "$pip_upgrade"
+    python_packages=(pyradios py-sonic subsonic-connector==0.1.17 mutagen)
     for pkg in "${python_packages[@]}"
     do
         echo "Installing ${pkg} with add_switch [$add_switch]..."
-        cmd="pip install "
+        cmd="pip install --no-cache-dir"
         if [ $add_switch -eq 1 ]; then
             cmd="$cmd --break-system-packages"
         fi

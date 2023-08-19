@@ -13,12 +13,24 @@ DEBIAN_VERSION=$(echo $IMAGE_FULL_NAME | cut -d "-" -f 1)
 echo "DEBIAN_VERSION=[$DEBIAN_VERSION]"
 
 if [ "$BUILD_MODE" = "full" ]; then
-    pip install --upgrade pip --break-system-packages
+    declare -A needs_switch
+    needs_switch[bookworm]=1
+    add_switch=0
+    if [[ -v needs_switch[$DEBIAN_VERSION] ]]; then
+        add_switch=${needs_switch[$DEBIAN_VERSION]}
+    fi
+    pip_upgrade="pip install --no-cache-dir --upgrade pip"
+    if [ $add_switch -eq 1 ]; then
+        pip_upgrade="$pip_upgrade --break-system-packages"
+    fi
     python_packages=(pyradios py-sonic subsonic-connector==0.1.17 mutagen)
     for pkg in "${python_packages[@]}"
     do
         echo "Installing ${pkg} with add_switch [$add_switch]..."
-        cmd="pip install --break-system-packages"
+        cmd="pip install --no-cache-dir"
+        if [ $add_switch -eq 1 ]; then
+            cmd="$cmd --break-system-packages"
+        fi
         cmd="$cmd ${pkg}"
         echo "cmd=[$cmd]"
         eval "$cmd"

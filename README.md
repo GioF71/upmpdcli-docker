@@ -258,6 +258,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-08-19|Build process cleanup, back to no separate venv (see issue [#236](https://github.com/GioF71/upmpdcli-docker/issues/236))
 2023-08-15|Add missing `recoll` package (see issue [#234](https://github.com/GioF71/upmpdcli-docker/issues/234))
 2023-07-23|Switch to debian (see issue [#230](https://github.com/GioF71/upmpdcli-docker/issues/230))
 2023-07-11|Avoid use of `--break-system-packages` in Dockerfile (see issue [#227](https://github.com/GioF71/upmpdcli-docker/issues/227))
