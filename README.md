@@ -176,7 +176,7 @@ UPNPAV_SKIP_NAME_POSTFIX||If not set or set to `yes`, and if only `UPNPAV` rende
 OPENHOME||Enable OpenHome services (`0`/`1`), defaults to `1`
 OH_PRODUCT_ROOM||Sets `ohproductroom`, defaults to same value calculated for AV_FRIENDLY_NAME if upnp-av is enabled
 UPRCL_ENABLE||Enable local music support (uprcl). Set to `yes` to enable
-UPRCL_AUTOSTART||Autostart UPRCL if set to `1`
+UPRCL_AUTOSTART||Autostart UPRCL, defaults to `1`
 UPRCL_USER||Username for `uprcl`
 UPRCL_HOSTPORT||Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
 UPRCL_TITLE|Local Music|Title for the media server
@@ -187,7 +187,7 @@ BBC_ENABLE||Enable BBC plugin. Set to `yes` to enable
 BBC_PROGRAMME_DAYS||Past days in BBC Sounds catalog listing. This controls how many days are listed in the station displays.
 RADIO_BROWSER_ENABLE||Enable the Radio Browser plugin. Set to `yes` to enable
 SUBSONIC_ENABLE||Enable the Subsonic plugin. Set to `yes` to enable
-SUBSONIC_AUTOSTART||Autostart SubSonic plugin if set to `1`
+SUBSONIC_AUTOSTART||Autostart SubSonic plugin, defaults to `1`
 SUBSONIC_BASE_URL||SubSonic base url. Example: `http://my_navidrome.homelab.local`
 SUBSONIC_PORT||SubSonic port, defaults to `4533`
 SUBSONIC_USER||SubSonic username
@@ -262,6 +262,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-08-20|Autostart by default for subsonic and uprcl (see issue [#245](https://github.com/GioF71/upmpdcli-docker/issues/245))
 2023-08-19|Fixed documentation for `UPRCL_USER` (see issue [#241](https://github.com/GioF71/upmpdcli-docker/issues/241))
 2023-08-19|Add autostart for radios (see issue [#239](https://github.com/GioF71/upmpdcli-docker/issues/239))
 2023-08-19|Removed references to tidal plugin (see issue [#237](https://github.com/GioF71/upmpdcli-docker/issues/237))
