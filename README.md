@@ -262,7 +262,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
-2023-08-19|Autostart by default for subsonic and uprcl (see issue [#245](https://github.com/GioF71/upmpdcli-docker/issues/245))
+2023-08-20|Autostart by default for subsonic and uprcl (see issue [#245](https://github.com/GioF71/upmpdcli-docker/issues/245))
 2023-08-19|Fixed documentation for `UPRCL_USER` (see issue [#241](https://github.com/GioF71/upmpdcli-docker/issues/241))
 2023-08-19|Add autostart for radios (see issue [#239](https://github.com/GioF71/upmpdcli-docker/issues/239))
 2023-08-19|Removed references to tidal plugin (see issue [#237](https://github.com/GioF71/upmpdcli-docker/issues/237))

@@ -270,6 +270,7 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
     sed -i 's/\#subsonicuser/subsonicuser/g' $CONFIG_FILE
     echo "SUBSONIC_AUTOSTART=[$SUBSONIC_AUTOSTART]"
     if [[ -z "${SUBSONIC_AUTOSTART^^}" || "${SUBSONIC_AUTOSTART}" == "1" || "${SUBSONIC_AUTOSTART^^}" == "YES" ]]; then
+        SUBSONIC_AUTOSTART=1
         sed -i 's/\#subsonicautostart/subsonicautostart/g' $CONFIG_FILE;
         set_parameter $CONFIG_FILE SUBSONIC_AUTOSTART "$SUBSONIC_AUTOSTART" subsonicautostart
     fi
