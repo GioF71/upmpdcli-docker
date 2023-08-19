@@ -235,6 +235,11 @@ if [ "${RADIOS_ENABLE^^}" == "YES" ]; then
     echo "Enabling Radios";
     RADIOS_ENABLE=YES
     sed -i 's/\#upradiosuser/upradiosuser/g' $CONFIG_FILE;
+    if [[ -z "${RADIOS_AUTOSTART}" || "${RADIOS_AUTOSTART^^}" == "YES" ]]; then
+        RADIOS_AUTOSTART=1
+        sed -i 's/\#upradiosautostart/upradiosautostart/g' $CONFIG_FILE;
+        set_parameter $CONFIG_FILE RADIOS_AUTOSTART "$RADIOS_AUTOSTART" upradiosautostart
+    fi
 fi
 
 echo "BBC_ENABLE=[$BBC_ENABLE]"
