@@ -104,10 +104,12 @@ Please find a list of the currently built images in the following table.
 
 Base Image|Build Mode|Tags
 :---|:---:|:---
-debian:bookworm-slim|full|`stable` `latest` `bookworm` `daily-bookworm`
-debian:bookworm-slim|`stable-renderer` `latest-renderer` `bookworm-renderer` `daily-bookworm-renderer`
-ubuntu:lunar|full|`ubuntu-current` `lunar` `daily-lunar`
+ubuntu:jammy|full|`stable` `latest` `ubuntu-lts-full` `jammy-full` `daily-jammy-full`
+ubuntu:jammy|renderer|`stable-renderer` `latest-renderer` `ubuntu-lts-renderer` `jammy-renderer` `daily-jammy-renderer`
+ubuntu:lunar|full|`ubuntu-current-full` `lunar-full` `daily-lunar`
 ubuntu:lunar|renderer|`ubuntu-current-renderer` `lunar-renderer` `daily-lunar-renderer`
+debian:bookworm-slim|full|`bookworm-full` `daily-bookworm`
+debian:bookworm-slim|`bookworm-renderer` `daily-bookworm-renderer`
 
 ## Usage
 
