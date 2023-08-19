@@ -39,7 +39,6 @@ SOURCE_CONFIG_FILE=/app/conf/upmpdcli.conf
 CONFIG_FILE=/app/conf/current-upmpdcli.conf
 
 QOBUZ_CREDENTIALS_FILE=/user/config/qobuz.txt
-TIDAL_CREDENTIALS_FILE=/user/config/tidal.txt
 DEEZER_CREDENTIALS_FILE=/user/config/deezer.txt
 HRA_CREDENTIALS_FILE=/user/config/hra.txt
 
@@ -76,17 +75,6 @@ if [ -f "$QOBUZ_CREDENTIALS_FILE" ]; then
     QOBUZ_FORMAT_ID=$(get_value "QOBUZ_FORMAT_ID" $PARAMETER_PRIORITY)
 else
     echo "File $QOBUZ_CREDENTIALS_FILE not found."
-fi
-
-if [ -f "$TIDAL_CREDENTIALS_FILE" ]; then
-    echo "Reading $TIDAL_CREDENTIALS_FILE"
-    read_file $TIDAL_CREDENTIALS_FILE
-    TIDAL_USERNAME=$(get_value "TIDAL_USERNAME" $PARAMETER_PRIORITY)
-    TIDAL_PASSWORD=$(get_value "TIDAL_PASSWORD" $PARAMETER_PRIORITY)
-    TIDAL_API_TOKEN=$(get_value "TIDAL_API_TOKEN" $PARAMETER_PRIORITY)
-    TIDAL_QUALITY=$(get_value "TIDAL_QUALITY" $PARAMETER_PRIORITY)
-else
-    echo "File $TIDAL_CREDENTIALS_FILE not found."
 fi
 
 if [ -f "$DEEZER_CREDENTIALS_FILE" ]; then
@@ -230,7 +218,6 @@ if [[ "${UPRCL_ENABLE^^}" == "YES" ||
       "${BBC_ENABLE^^}" == "YES" ||
       "${SUBSONIC_ENABLE^^}" == "YES" ||
       "${HRA_ENABLE^^}" == "YES" ||
-      "${TIDAL_ENABLE^^}" == "YES" ||
       "${DEEZER_ENABLE^^}" == "YES" ||
       "${HRA_ENABLE^^}" == "YES" ||
       "${QOBUZ_ENABLE^^}" == "YES" ]]; then
@@ -321,19 +308,6 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
         sed -i 's/\#subsonicwhitelistcodecs/subsonicwhitelistcodecs/g' $CONFIG_FILE
         sed -i 's/SUBSONIC_WHITELIST_CODECS/'"$SUBSONIC_WHITELIST_CODECS"'/g' $CONFIG_FILE
     fi
-fi
-
-echo "Tidal Enable [$TIDAL_ENABLE]"
-if [ "${TIDAL_ENABLE^^}" == "YES" ]; then
-    echo "Processing Tidal settings";
-    sed -i 's/\#tidaluser/tidaluser/g' $CONFIG_FILE;
-    sed -i 's/\#tidalpass/tidalpass/g' $CONFIG_FILE;
-    sed -i 's/\#tidalapitoken/tidalapitoken/g' $CONFIG_FILE;
-    sed -i 's/\#tidalquality/tidalquality/g' $CONFIG_FILE;
-    sed -i 's/TIDAL_USERNAME/'"$TIDAL_USERNAME"'/g' $CONFIG_FILE;
-    sed -i 's/TIDAL_PASSWORD/'"$TIDAL_PASSWORD"'/g' $CONFIG_FILE;
-    sed -i 's/TIDAL_API_TOKEN/'"$TIDAL_API_TOKEN"'/g' $CONFIG_FILE;
-    sed -i 's/TIDAL_QUALITY/'"$TIDAL_QUALITY"'/g' $CONFIG_FILE;
 fi
 
 echo "Qobuz Enable [$QOBUZ_ENABLE]"
