@@ -13,7 +13,7 @@ Current version is `1.8.1`.
 
 ## News
 
-### Navive Tidal support dropped
+### Native Tidal support dropped
 
 Upmpdcli does not support Tidal natively anymore.  
 I have therefore remove configuration variables and portions of the scripts which build the configuration file based on the environment variables.  
