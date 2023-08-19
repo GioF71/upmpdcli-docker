@@ -74,7 +74,6 @@ RUN if [ "$USE_APT_PROXY" = "Y" ]; then \
 	fi
 
 RUN echo $BUILD_MODE > /app/conf/build_mode.txt
-RUN echo $USE_PPA > /app/conf/ppa.txt
 
 FROM scratch
 COPY --from=BASE / /
