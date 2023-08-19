@@ -41,20 +41,11 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 			upmpdcli-subsonic \
 			upmpdcli-uprcl; \
 		fi
+
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y \
 			recollcmd; \
 		fi
-
-#RUN if [ "$BUILD_MODE" = "full" ]; then \
-#		apt-get install -y \
-#			recoll; \
-#		fi
-
-#RUN if [ "$BUILD_MODE" = "full" ]; then \
-#		apt-get install -y \
-#			upmpdcli-*; \
-#		fi
 
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y exiftool; \
