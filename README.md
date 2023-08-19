@@ -177,7 +177,7 @@ OPENHOME||Enable OpenHome services (`0`/`1`), defaults to `1`
 OH_PRODUCT_ROOM||Sets `ohproductroom`, defaults to same value calculated for AV_FRIENDLY_NAME if upnp-av is enabled
 UPRCL_ENABLE||Enable local music support (uprcl). Set to `yes` to enable
 RADIOS_ENABLE||Enable Radios plugin. Set to `yes` to enable
-RADIOS_AUTOSTART||Start Radios on startup, defaults to `yes`
+RADIOS_AUTOSTART||Start Radios on startup, defaults to `1`
 BBC_ENABLE||Enable BBC plugin. Set to `yes` to enable
 BBC_PROGRAMME_DAYS||Past days in BBC Sounds catalog listing. This controls how many days are listed in the station displays.
 RADIO_BROWSER_ENABLE||Enable the Radio Browser plugin. Set to `yes` to enable
