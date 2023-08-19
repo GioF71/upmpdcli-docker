@@ -13,6 +13,12 @@ Current version is `1.8.1`.
 
 ## News
 
+### Navive Tidal support dropped
+
+Upmpdcli does not support Tidal natively anymore.  
+I have therefore remove configuration variables and portions of the scripts which build the configuration file based on the environment variables.  
+Of course, you can still stream tidal to a upnp player created using upmpdcli using an application like BubbleUpnp, mConnect/mConnect Lite, etc.
+
 ### BBC
 
 Since release 2023-07-05, support the upmpdcli [`BBC Sounds`](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#UPMPDCLI-MS-BBC) plugin has been enabled.
@@ -191,14 +197,9 @@ UPCRL_USER||User for uprcl
 UPRCL_HOSTPORT||Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
 UPRCL_TITLE|Local Music|Title for the media server
 ENABLE_UPRCL||Enable local music support (uprcl). Set to `yes` to enable (Deprecated, use UPRCL_ENABLE)
-PLG_MICRO_HTTP_HOST||IP for the tidal/qobuz local HTTP service.
-PLG_MICRO_HTTP_PORT||Port for the tidal/qobuz local HTTP service.
+PLG_MICRO_HTTP_HOST||IP for the qobuz local HTTP service.
+PLG_MICRO_HTTP_PORT||Port for the qobuz local HTTP service.
 MEDIA_SERVER_FRIENDLY_NAME||Friendly name for the Media Server
-TIDAL_ENABLE|no|Set to yes to enable Tidal support
-TIDAL_USERNAME|tidal_username|Your Tidal account username
-TIDAL_PASSWORD|tidal_password|Your Tidal account password
-TIDAL_API_TOKEN|tidal_api_token|Your Tidal account API token
-TIDAL_QUALITY|low|Tidal quality: low, high, lossless
 QOBUZ_ENABLE|no|Set to yes to enable Qobuz support
 QOBUZ_USERNAME|qobuz_username|Your Qobuz account username
 QOBUZ_PASSWORD|qobuz_password|Your Qobuz account password
@@ -221,7 +222,7 @@ Volume|Description
 :---|:---
 /uprcl/confdir|Uprcl configuration directory
 /uprcl/mediadirs|Uprcl media directories
-/user/config|Location for additional files. Currently: `additional-radio-list.txt` and `recoll.conf.user` as well as credentials for qobuz on `qobuz.txt`, for tidal on `tidal.txt`, for deezer on `deezer.txt`, for hra on `hra.txt`. The credentials file format is the same as a `.env` file. Ensure to include all the settings related the streaming service.
+/user/config|Location for additional files. Currently: `additional-radio-list.txt` and `recoll.conf.user` as well as credentials for qobuz on `qobuz.txt`, for deezer on `deezer.txt`, for hra on `hra.txt`. The credentials file format is the same as a `.env` file. Ensure to include all the settings related the streaming service.
 /cache|Runtime information for upmpdcli. Attach a volume to this path in order to maintain consistency across restarts.
 /log|Location for the upmpdcli log file. Enabled using `LOG_ENABLE`
 
@@ -260,6 +261,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-08-19|Removed references to tidal plugin (see issue [#237](https://github.com/GioF71/upmpdcli-docker/issues/237))
 2023-08-19|Build process cleanup, back to no separate venv (see issue [#236](https://github.com/GioF71/upmpdcli-docker/issues/236))
 2023-08-15|Add missing `recoll` package (see issue [#234](https://github.com/GioF71/upmpdcli-docker/issues/234))
 2023-07-23|Switch to debian (see issue [#230](https://github.com/GioF71/upmpdcli-docker/issues/230))
