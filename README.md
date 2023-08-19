@@ -176,6 +176,11 @@ UPNPAV_SKIP_NAME_POSTFIX||If not set or set to `yes`, and if only `UPNPAV` rende
 OPENHOME||Enable OpenHome services (`0`/`1`), defaults to `1`
 OH_PRODUCT_ROOM||Sets `ohproductroom`, defaults to same value calculated for AV_FRIENDLY_NAME if upnp-av is enabled
 UPRCL_ENABLE||Enable local music support (uprcl). Set to `yes` to enable
+UPRCL_AUTOSTART||Autostart UPRCL if set to `1`
+UPRCL_USER||Username for `uprcl`
+UPRCL_HOSTPORT||Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
+UPRCL_TITLE|Local Music|Title for the media server
+ENABLE_UPRCL||Enable local music support (uprcl). Set to `yes` to enable (Deprecated, use UPRCL_ENABLE)
 RADIOS_ENABLE||Enable Radios plugin. Set to `yes` to enable
 RADIOS_AUTOSTART||Start Radios on startup, defaults to `1`
 BBC_ENABLE||Enable BBC plugin. Set to `yes` to enable
@@ -193,11 +198,6 @@ SUBSONIC_APPEND_CODECS_TO_ALBUM||If set to `yes` (default), the codecs for the a
 SUBSONIC_WHITELIST_CODECS||List of comma-separated whitelist (ideally lossless) codecs. Defaults to `alac,wav,flac,dsf`
 SUBSONIC_DOWNLOAD_PLUGIN||If set to `YES`, the updated plugin is downloaded from the upstream repo
 SUBSONIC_PLUGIN_BRANCH||If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `SUBSONIC_DOWNLOAD_PLUGIN`
-UPRCL_AUTOSTART||Autostart UPRCL if set to `1`
-UPCRL_USER||User for uprcl
-UPRCL_HOSTPORT||Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
-UPRCL_TITLE|Local Music|Title for the media server
-ENABLE_UPRCL||Enable local music support (uprcl). Set to `yes` to enable (Deprecated, use UPRCL_ENABLE)
 PLG_MICRO_HTTP_HOST||IP for the qobuz local HTTP service.
 PLG_MICRO_HTTP_PORT||Port for the qobuz local HTTP service.
 MEDIA_SERVER_FRIENDLY_NAME||Friendly name for the Media Server
@@ -262,6 +262,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-08-19|Fixed documentation for `UPRCL_USER` (see issue [#241](https://github.com/GioF71/upmpdcli-docker/issues/241))
 2023-08-19|Add autostart for radios (see issue [#239](https://github.com/GioF71/upmpdcli-docker/issues/239))
 2023-08-19|Removed references to tidal plugin (see issue [#237](https://github.com/GioF71/upmpdcli-docker/issues/237))
 2023-08-19|Build process cleanup, back to no separate venv (see issue [#236](https://github.com/GioF71/upmpdcli-docker/issues/236))
