@@ -269,8 +269,9 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
     SUBSONIC_ENABLE=YES
     sed -i 's/\#subsonicuser/subsonicuser/g' $CONFIG_FILE
     echo "SUBSONIC_AUTOSTART=[$SUBSONIC_AUTOSTART]"
-    if [ "${SUBSONIC_AUTOSTART^^}" == "YES" ]; then
+    if [[ -z "${SUBSONIC_AUTOSTART^^}" || "${SUBSONIC_AUTOSTART^^}" == "1" || "${SUBSONIC_AUTOSTART^^}" == "YES" ]]; then
         sed -i 's/\#subsonicautostart/subsonicautostart/g' $CONFIG_FILE;
+        set_parameter $CONFIG_FILE SUBSONIC_AUTOSTART "$SUBSONIC_AUTOSTART" subsonicautostart
     fi
     echo "Setting subsonic base_url [$SUBSONIC_BASE_URL]"
     sed -i 's/\#subsonicbaseurl/subsonicbaseurl/g' $CONFIG_FILE
@@ -375,7 +376,8 @@ if [ "${UPRCL_ENABLE^^}" == "YES" ]; then
         sed -i 's/UPRCL_HOSTPORT/'"$UPRCL_HOSTPORT"'/g' $CONFIG_FILE;
     fi
     echo "UPRCL_AUTOSTART [$UPRCL_AUTOSTART]"
-    if [ -n "${UPRCL_AUTOSTART}" ]; then
+    if [[ -z "${UPRCL_AUTOSTART}" || "${UPRCL_AUTOSTART}" == 1 || "${UPRCL_AUTOSTART}" == "YES" ]]; then
+        UPRCL_AUTOSTART=1
         echo "Setting uprclautostart $UPRCL_AUTOSTART"
         sed -i 's/#uprclautostart/'"uprclautostart"'/g' $CONFIG_FILE;
         sed -i 's/UPRCL_AUTOSTART/'"$UPRCL_AUTOSTART"'/g' $CONFIG_FILE;
