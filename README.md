@@ -177,6 +177,7 @@ OPENHOME||Enable OpenHome services (`0`/`1`), defaults to `1`
 OH_PRODUCT_ROOM||Sets `ohproductroom`, defaults to same value calculated for AV_FRIENDLY_NAME if upnp-av is enabled
 UPRCL_ENABLE||Enable local music support (uprcl). Set to `yes` to enable
 RADIOS_ENABLE||Enable Radios plugin. Set to `yes` to enable
+RADIOS_AUTOSTART||Start Radios on startup, defaults to `1`
 BBC_ENABLE||Enable BBC plugin. Set to `yes` to enable
 BBC_PROGRAMME_DAYS||Past days in BBC Sounds catalog listing. This controls how many days are listed in the station displays.
 RADIO_BROWSER_ENABLE||Enable the Radio Browser plugin. Set to `yes` to enable
@@ -261,6 +262,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-08-19|Add autostart for radios (see issue [#239](https://github.com/GioF71/upmpdcli-docker/issues/239))
 2023-08-19|Removed references to tidal plugin (see issue [#237](https://github.com/GioF71/upmpdcli-docker/issues/237))
 2023-08-19|Build process cleanup, back to no separate venv (see issue [#236](https://github.com/GioF71/upmpdcli-docker/issues/236))
 2023-08-15|Add missing `recoll` package (see issue [#234](https://github.com/GioF71/upmpdcli-docker/issues/234))
