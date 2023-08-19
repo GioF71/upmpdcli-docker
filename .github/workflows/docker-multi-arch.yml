@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        base: [ "jammy"]
+        base: [ "jammy", "lunar", "bookworm"]
         build_mode: ["full", "renderer"]
 
     steps:
@@ -39,7 +39,9 @@ jobs:
           base_images[kinetic]=ubuntu:kinetic
           base_images[jammy]=ubuntu:jammy
           base_images[focal]=ubuntu:focal
-          base_images[bionic]=ubuntu:bionic
+          base_images[bookworm]=debian:bookworm-slim
+          base_images[bullseye]=debian:bullseye-slim
+          base_images[buster]=debian:buster-slim
 
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
 
@@ -49,8 +51,14 @@ jobs:
           echo "Building build_key: ["$build_key"]";
 
           declare -A special_tags
-          special_tags[jammy-full]="${image_name}:ubuntu-lts,${image_name}:jammy,${image_name}:ubuntu-lts-full,${image_name}:stable,${image_name}:latest,${image_name}:stable-full"
-          special_tags[jammy-renderer]="${image_name}:ubuntu-lts-renderer,${image_name}:latest-renderer,${image_name}:stable-renderer"
+          special_tags[jammy-full]="${image_name}:latest,${image_name}:stable,${image_name}:ubuntu-lts-full,${image_name}:stable-full"
+          special_tags[jammy-renderer]="${image_name}:latest-renderer,${image_name}:stable-renderer,${image_name}:ubuntu-lts-renderer"
+          special_tags[lunar-full]="${image_name}:ubuntu-current-full"
+          special_tags[lunar-renderer]="${image_name}:ubuntu-current-renderer"
+          special_tags[bookworm-full]="${image_name}:debian-stable-full"
+          special_tags[bookworm-renderer]="${image_name}:debian-stable-renderer"
+          special_tags[bullseye-full]="${image_name}:debian-oldstable-full"
+          special_tags[bullseye-renderer]="${image_name}:debian-oldstable-renderer"
 
           base=${{ matrix.base }}
           build_mode=${{ matrix.build_mode }}

@@ -3,11 +3,11 @@
 declare -A base_images
 
 base_images[bookworm]=debian:bookworm-slim
+base_images[bullseye]=debian:bullseye-slim
 base_images[lunar]=ubuntu:lunar
 base_images[kinetic]=ubuntu:kinetic
 base_images[jammy]=ubuntu:jammy
 base_images[focal]=ubuntu:focal
-base_images[bionic]=ubuntu:bionic
 
 DEFAULT_BASE_IMAGE=jammy
 DEFAULT_TAG=local

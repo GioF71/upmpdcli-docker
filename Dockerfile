@@ -20,16 +20,16 @@ RUN if [ "$USE_APT_PROXY" = "Y" ]; then \
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+RUN if [ "$BUILD_MODE" = "full" ]; then \
+		apt-get update; \
+		apt-get install -y python3 python3-pip; \
+	fi
+
 COPY app/install/* /app/install
-
 RUN chmod u+x /app/install/*.sh
-
 RUN /app/install/setup.sh
 
 RUN apt-get install -y upmpdcli
-RUN if [ "$BUILD_MODE" = "full" ]; then \
-		apt-get install -y python3 python3-pip python3-venv; \
-fi
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y \
 			upmpdcli-bbc \
@@ -38,37 +38,25 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 			upmpdcli-qobuz \
 			upmpdcli-radio-browser \
 			upmpdcli-radios \
-			upmpdcli-spotify \
 			upmpdcli-subsonic \
-			upmpdcli-uprcl \
-			recoll \
-			recollcmd; \
+			upmpdcli-uprcl; \
 		fi
+
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y \
-			upmpdcli-*; \
+			recollcmd; \
 		fi
 
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y exiftool; \
-		fi
+	fi
+
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y git; \
-		fi
-RUN if [ "$BUILD_MODE" = "full" ]; then \
-		pip install --upgrade pip; \
 	fi
-RUN if [ "$BUILD_MODE" = "full" ]; then \
-		pip install pyradios; \
-		pip install py-sonic; \
-		pip install subsonic-connector==0.1.17; \
-		pip install beautifulsoup4; \
-		pip install python-dateutil; \
-		pip install feedparser; \
-		pip install requests; \
-		pip install mutagen; \
-	fi
+
 RUN apt-get remove -y software-properties-common
+
 RUN apt-get -y autoremove
 RUN	rm -rf /var/lib/apt/lists/*
 
@@ -77,7 +65,6 @@ RUN if [ "$USE_APT_PROXY" = "Y" ]; then \
 	fi
 
 RUN echo $BUILD_MODE > /app/conf/build_mode.txt
-RUN echo $USE_PPA > /app/conf/ppa.txt
 
 FROM scratch
 COPY --from=BASE / /
