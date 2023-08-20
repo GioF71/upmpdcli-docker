@@ -16,8 +16,9 @@ Current version is `1.8.1`.
 ### Native Tidal support dropped
 
 Upmpdcli does not support Tidal natively anymore.  
-I have therefore remove configuration variables and portions of the scripts which build the configuration file based on the environment variables.  
-Of course, you can still stream tidal to a upnp player created using upmpdcli using an application like BubbleUpnp, mConnect/mConnect Lite, etc.
+I have therefore removed the relevant environment variables and portions of the scripts which build the configuration file based on the mentioned environment variables.  
+Of course, you can still stream Tidal to a upnp player created using upmpdcli using an application like BubbleUpnp, mConnect/mConnect Lite, etc.  
+On a ARM-based single board computer like the Raspberry Pi and many others (example: an Asus Tinkerboard), you can still run (until Tidal does not stop this somehow) Tidal Connect, see [this](https://github.com/GioF71/tidal-connect) and [this other](https://github.com/TonyTromp/tidal-connect-docker) repository, and then stream direcly from the Tidal official applications.
 
 ### BBC
 
