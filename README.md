@@ -187,7 +187,7 @@ UPRCL_ENABLE||Enable local music support (uprcl). Set to `yes` to enable
 UPRCL_AUTOSTART||Autostart UPRCL, defaults to `1`
 UPRCL_USER||Username for `uprcl`
 UPRCL_HOSTPORT||Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
-UPRCL_TITLE|Local Music|Title for the media server
+UPRCL_TITLE||Title for the media server, defaults to `Local Music`
 ENABLE_UPRCL||Enable local music support (uprcl). Set to `yes` to enable (Deprecated, use UPRCL_ENABLE)
 RADIOS_ENABLE||Enable Radios plugin. Set to `yes` to enable
 RADIOS_AUTOSTART||Start Radios on startup, defaults to `1`
