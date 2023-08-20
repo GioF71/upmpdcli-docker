@@ -4,6 +4,8 @@ A Docker image for upmpdcli.
 Now with support for custom radios, [radio-browser.info](https://www.radio-browser.info/), and [subsonic servers](https://github.com/navidrome/navidrome/discussions/2324).  
 A few screenshots for the subsonic plugin on [Kazoo](https://github.com/GioF71/upmpdcli-docker/tree/main/doc/screenshots/kazoo) and [Upplay](https://github.com/GioF71/upmpdcli-docker/tree/main/doc/screenshots/upplay) are now available.  
 
+[![Publish multi-arch Ubuntu-based Docker images](https://github.com/GioF71/upmpdcli-docker/actions/workflows/docker-multi-arch.yml/badge.svg)](https://github.com/GioF71/upmpdcli-docker/actions/workflows/docker-multi-arch.yml)
+
 ## Reference
 
 First and foremost, the reference to the awesome project:
