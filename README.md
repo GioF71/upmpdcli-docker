@@ -209,21 +209,21 @@ SUBSONIC_PLUGIN_BRANCH||If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by t
 PLG_MICRO_HTTP_HOST||IP for the qobuz local HTTP service.
 PLG_MICRO_HTTP_PORT||Port for the qobuz local HTTP service.
 MEDIA_SERVER_FRIENDLY_NAME||Friendly name for the Media Server
-QOBUZ_ENABLE|no|Set to yes to enable Qobuz support
-QOBUZ_USERNAME|qobuz_username|Your Qobuz account username
-QOBUZ_PASSWORD|qobuz_password|Your Qobuz account password
-QOBUZ_FORMAT_ID|5|Qobuz format id: 5 for mp3, 7 for FLAC, 27 for hi-res
-DEEZER_ENABLE|no|Set to yes to enable Deezer support
+QOBUZ_ENABLE||Set to `yes` to enable Qobuz support, defaults to `no`
+QOBUZ_USERNAME||Your Qobuz account username
+QOBUZ_PASSWORD||Your Qobuz account password
+QOBUZ_FORMAT_ID||Qobuz format id: 5 for mp3, 7 for FLAC, 27 for hi-res, defaults to `5`
+DEEZER_ENABLE||Set to `yes` to enable Deezer support, defaults to `no`
 DEEZER_USERNAME|deezer_username|Your Deezer account username
 DEEZER_PASSWORD|deezer_password|Your Deezer account password
-HRA_ENABLE|no|Set to yes to enable HRA support
-HRA_USERNAME|hra_username|Your HRA account username
-HRA_PASSWORD|hra_password|Your HRA account password
-HRA_LANG|hra_lang|Your HRA account language
+HRA_ENABLE||Set to `yes` to enable HRA support, defaults to `no`
+HRA_USERNAME||Your HRA account username
+HRA_PASSWORD||Your HRA account password
+HRA_LANG||Your HRA account language
 LOG_ENABLE||Set to `yes` to enable. If enabled, the logfile is `/log/upmpdcli.log`. Otherwise, umpdcli will log to stderr.
 LOG_LEVEL||Defaults to `2`
 DUMP_ADDITIONAL_RADIO_LIST||Dumps the additional radio file when set to `yes`
-STARTUP_DELAY_SEC|0| Delay before starting the application. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite if all those services run on the same audio device. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience.
+STARTUP_DELAY_SEC||Delay before starting the application, defaults to `0`. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite if all those services run on the same audio device. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience.
 
 ### Volumes
 
