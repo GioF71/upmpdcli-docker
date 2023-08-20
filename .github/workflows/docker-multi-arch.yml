@@ -51,8 +51,8 @@ jobs:
           echo "Building build_key: ["$build_key"]";
 
           declare -A special_tags
-          special_tags[jammy-full]="${image_name}:latest,${image_name}:stable,${image_name}:ubuntu-lts-full,${image_name}:stable-full"
-          special_tags[jammy-renderer]="${image_name}:latest-renderer,${image_name}:stable-renderer,${image_name}:ubuntu-lts-renderer"
+          special_tags[jammy-full]="${image_name}:latest,${image_name}:latest-full,${image_name}:stable,${image_name}:ubuntu-lts-full,${image_name}:stable-full"
+          special_tags[jammy-renderer]="${image_name}:renderer,${image_name}:latest-renderer,${image_name}:stable-renderer,${image_name}:ubuntu-lts-renderer"
           special_tags[lunar-full]="${image_name}:ubuntu-current-full"
           special_tags[lunar-renderer]="${image_name}:ubuntu-current-renderer"
           special_tags[bookworm-full]="${image_name}:debian-stable-full"
