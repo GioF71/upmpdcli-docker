@@ -28,9 +28,9 @@ Since release 2023-07-05, support the upmpdcli [`BBC Sounds`](https://www.lesbon
 
 Since release 2023-07-05, support the upmpdcli [`Upradios radio list`](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#UPMPDCLI-MS-UPRADIOS) plugin has been enabled.
 
-### SubSonic
+### Subsonic
 
-Since release 2023-04-19, support for the [`SubSonic plugin`](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#UPMPDCLI-MS-SUBSONIC) has been introduced.  
+Since release 2023-04-19, support for the [`Subsonic plugin`](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#UPMPDCLI-MS-SUBSONIC) has been introduced.  
 I am now a contributor to upmpdcli for this plugin. See the git repository [here](https://framagit.org/medoc92/upmpdcli).  
 The plugin uses my [subsonic-connector](https://github.com/GioF71/subsonic-connector) library which in turn is built around [py-sonic](https://github.com/crustymonkey/py-sonic).  
 Everything has been developed and tested against [Navidrome](https://www.navidrome.org/) but should work with other servers hopefully.  
@@ -189,11 +189,11 @@ BBC_ENABLE||Enable BBC plugin. Set to `yes` to enable
 BBC_PROGRAMME_DAYS||Past days in BBC Sounds catalog listing. This controls how many days are listed in the station displays.
 RADIO_BROWSER_ENABLE||Enable the Radio Browser plugin. Set to `yes` to enable
 SUBSONIC_ENABLE||Enable the Subsonic plugin. Set to `yes` to enable
-SUBSONIC_AUTOSTART||Autostart SubSonic plugin, defaults to `1`
-SUBSONIC_BASE_URL||SubSonic base url. Example: `http://my_navidrome.homelab.local`
-SUBSONIC_PORT||SubSonic port, defaults to `4533`
-SUBSONIC_USER||SubSonic username
-SUBSONIC_PASSWORD||SubSonic password
+SUBSONIC_AUTOSTART||Autostart Subsonic plugin, defaults to `1`
+SUBSONIC_BASE_URL||Subsonic base url. Example: `http://my_navidrome.homelab.local`
+SUBSONIC_PORT||Subsonic port, defaults to `4533`
+SUBSONIC_USER||Subsonic username
+SUBSONIC_PASSWORD||Subsonic password
 SUBSONIC_ITEMS_PER_PAGE||Number of items per page, defaults to `100`
 SUBSONIC_APPEND_YEAR_TO_ALBUM||If set to `yes` (default), the album year is appended to the album
 SUBSONIC_APPEND_CODECS_TO_ALBUM||If set to `yes` (default), the codecs for the album are appended to the album unless all codecs are in the white list
