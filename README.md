@@ -214,8 +214,8 @@ QOBUZ_USERNAME||Your Qobuz account username
 QOBUZ_PASSWORD||Your Qobuz account password
 QOBUZ_FORMAT_ID||Qobuz format id: 5 for mp3, 7 for FLAC, 27 for hi-res, defaults to `5`
 DEEZER_ENABLE||Set to `yes` to enable Deezer support, defaults to `no`
-DEEZER_USERNAME|deezer_username|Your Deezer account username
-DEEZER_PASSWORD|deezer_password|Your Deezer account password
+DEEZER_USERNAME||Your Deezer account username
+DEEZER_PASSWORD||Your Deezer account password
 HRA_ENABLE||Set to `yes` to enable HRA support, defaults to `no`
 HRA_USERNAME||Your HRA account username
 HRA_PASSWORD||Your HRA account password
