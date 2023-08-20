@@ -119,6 +119,18 @@ if [ "${LOG_ENABLE^^}" == "YES" ]; then
     fi
 fi
 
+if [[ -z "$ENABLE_AUTO_UPNPIFACE" || "$ENABLE_AUTO_UPNPIFACE" == "1" || "${ENABLE_AUTO_UPNPIFACE^^}" == "YES" || "${ENABLE_AUTO_UPNPIFACE^^}" == "Y" ]]; then
+    if [ -z "${UPNPIFACE}" ]; then
+        if [[ -z "${AUTO_UPNPIFACE_URL}" ]]; then
+            AUTO_UPNPIFACE_URL=1.1.1.1
+        fi
+        iface=$(ip route get $AUTO_UPNPIFACE_URL | grep -oP 'dev\s+\K[^ ]+')
+        echo "Automatically setting UPNPIFACE to ["$iface"]"
+        sed -i 's/\#upnpiface/upnpiface/g' $CONFIG_FILE
+        sed -i 's/UPNPIFACE/'"$iface"'/g' $CONFIG_FILE
+    fi
+fi
+
 echo "UPNPIFACE=["$UPNPIFACE"]"
 if [ -z "${UPNPIFACE}" ]; then
     echo "UPNPIFACE not set"
