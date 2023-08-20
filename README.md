@@ -117,7 +117,7 @@ ubuntu:jammy|renderer|`renderer` `latest-renderer` `stable-renderer` `ubuntu-lts
 ubuntu:lunar|full|`ubuntu-current-full` `lunar-full` `daily-lunar-full`
 ubuntu:lunar|renderer|`ubuntu-current-renderer` `lunar-renderer` `daily-lunar-renderer`
 debian:bookworm-slim|full|`bookworm-full` `daily-bookworm-full`
-debian:bookworm-slim|`bookworm-renderer` `daily-bookworm-renderer`
+debian:bookworm-slim|renderer|`bookworm-renderer` `daily-bookworm-renderer`
 
 ## Usage
 
