@@ -160,70 +160,70 @@ which will use the `--version` switch of the upmpdcli command line.
 
 The following table reports all the currently supported environment variables.
 
-VARIABLE|DEFAULT|NOTES
----|:---:|---
-PUID||User id. Used when UPRCL is enabled. Defaults to `1000` when required
-PGID||Group id. Used when UPRCL is enabled. Defaults to `1000` when required
-MPD_HOST||The host where mpd runs, defaults to `localhost`
-MPD_PORT||The port used by mpd, defaults to `6600`
-UPRCL_HOSTPORT||Set if we own the MPD queue, defaults to `1`, possible values `1` and `0`
-PORT_OFFSET||If set, the offset is applied to the default for `UPNP_PORT` (summed) and to the default `PLG_MICRO_HTTP_PORT` (subtracted). Setting this variable overrides these individual variables.
-UPNPIFACE||UPnP network interface
-ENABLE_AUTO_UPNPIFACE||Allows to automatically set UPNPIFACE, defaults to `yes`, but this does not override an explicitly set `UPNPIFACE` variable
-AUTO_UPNPIFACE_URL||Used by `ENABLE_AUTO_UPNPIFACE`, defaults to `1.1.1.1`
-CHECK_CONTENT_FORMAT||Set to `yes` to enable, see [here](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#checkcontentformat)
-UPNPPORT||UPnP port
-UPMPD_FRIENDLY_NAME||Name of the upnp renderer (OpenHome), defaults to `upmpd`
-AV_FRIENDLY_NAME||Name of the upnp renderer (UPnP AV mode), defaults to `upmpd-av`
-FRIENDLY_NAME||Name of the renderer, overrides `UPMPD_FRIENDLY_NAME`, `AV_FRIENDLY_NAME` and `MEDIA_SERVER_FRIENDLY_NAME`. The variable `AV_FRIENDLY_NAME` is appended with the postfix `UPNPAV_POSTFIX`, unless UPNPAV is the only enabled renderer. See `UPNPAV_POSTFIX` and `UPNPAV_SKIP_NAME_POSTFIX` for more details.
-RENDERER_MODE||If set, this variable overrides `UPNPAV` and `OPENHOME`. Possible values are `NONE`, `OPENHOME`, `UPNPAV` and `BOTH`
-UPNPAV||Enable UPnP AV services (`0`/`1`), defaults to `0`
-UPNPAV_POSTFIX||The postfix to be appended to the `FRIENDLY_NAME`, defaults to `(av)`
-UPNPAV_POSTFIX_PREPEND_SPACE||Option to add a space before a custom `UPNPAV_POSTFIX`, enabled by default. Set to `no` di disable
-UPNPAV_SKIP_NAME_POSTFIX||If not set or set to `yes`, and if only `UPNPAV` renderer is enabled, the `UPNPAV_POSTFIX` postfix is not appended to `FRIENDLY_NAME`
-OPENHOME||Enable OpenHome services (`0`/`1`), defaults to `1`
-OH_PRODUCT_ROOM||Sets `ohproductroom`, defaults to same value calculated for AV_FRIENDLY_NAME if upnp-av is enabled
-UPRCL_ENABLE||Enable local music support (uprcl). Set to `yes` to enable
-UPRCL_AUTOSTART||Autostart UPRCL, defaults to `1`
-UPRCL_USER||Username for `uprcl`
-UPRCL_HOSTPORT||Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
-UPRCL_TITLE||Title for the media server, defaults to `Local Music`
-ENABLE_UPRCL||Enable local music support (uprcl). Set to `yes` to enable (Deprecated, use UPRCL_ENABLE)
-RADIOS_ENABLE||Enable Radios plugin. Set to `yes` to enable
-RADIOS_AUTOSTART||Start Radios on startup, defaults to `1`
-BBC_ENABLE||Enable BBC plugin. Set to `yes` to enable
-BBC_PROGRAMME_DAYS||Past days in BBC Sounds catalog listing. This controls how many days are listed in the station displays.
-RADIO_BROWSER_ENABLE||Enable the Radio Browser plugin. Set to `yes` to enable
-SUBSONIC_ENABLE||Enable the Subsonic plugin. Set to `yes` to enable
-SUBSONIC_AUTOSTART||Autostart Subsonic plugin, defaults to `1`
-SUBSONIC_BASE_URL||Subsonic base url. Example: `http://my_navidrome.homelab.local`
-SUBSONIC_PORT||Subsonic port, defaults to `4533`
-SUBSONIC_USER||Subsonic username
-SUBSONIC_PASSWORD||Subsonic password
-SUBSONIC_ITEMS_PER_PAGE||Number of items per page, defaults to `100`
-SUBSONIC_APPEND_YEAR_TO_ALBUM||If set to `yes` (default), the album year is appended to the album
-SUBSONIC_APPEND_CODECS_TO_ALBUM||If set to `yes` (default), the codecs for the album are appended to the album unless all codecs are in the white list
-SUBSONIC_WHITELIST_CODECS||List of comma-separated whitelist (ideally lossless) codecs. Defaults to `alac,wav,flac,dsf`
-SUBSONIC_DOWNLOAD_PLUGIN||If set to `YES`, the updated plugin is downloaded from the upstream repo
-SUBSONIC_PLUGIN_BRANCH||If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `SUBSONIC_DOWNLOAD_PLUGIN`
-PLG_MICRO_HTTP_HOST||IP for the qobuz local HTTP service.
-PLG_MICRO_HTTP_PORT||Port for the qobuz local HTTP service.
-MEDIA_SERVER_FRIENDLY_NAME||Friendly name for the Media Server
-QOBUZ_ENABLE||Set to `yes` to enable Qobuz support, defaults to `no`
-QOBUZ_USERNAME||Your Qobuz account username
-QOBUZ_PASSWORD||Your Qobuz account password
-QOBUZ_FORMAT_ID||Qobuz format id: 5 for mp3, 7 for FLAC, 27 for hi-res, defaults to `5`
-DEEZER_ENABLE||Set to `yes` to enable Deezer support, defaults to `no`
-DEEZER_USERNAME||Your Deezer account username
-DEEZER_PASSWORD||Your Deezer account password
-HRA_ENABLE||Set to `yes` to enable HRA support, defaults to `no`
-HRA_USERNAME||Your HRA account username
-HRA_PASSWORD||Your HRA account password
-HRA_LANG||Your HRA account language
-LOG_ENABLE||Set to `yes` to enable. If enabled, the logfile is `/log/upmpdcli.log`. Otherwise, umpdcli will log to stderr.
-LOG_LEVEL||Defaults to `2`
-DUMP_ADDITIONAL_RADIO_LIST||Dumps the additional radio file when set to `yes`
-STARTUP_DELAY_SEC||Delay before starting the application, defaults to `0`. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite if all those services run on the same audio device. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience.
+VARIABLE|NOTES
+:---|:---
+PUID|User id. Used when UPRCL is enabled. Defaults to `1000` when required
+PGID|Group id. Used when UPRCL is enabled. Defaults to `1000` when required
+MPD_HOST|The host where mpd runs, defaults to `localhost`
+MPD_PORT|The port used by mpd, defaults to `6600`
+UPRCL_HOSTPORT|Set if we own the MPD queue, defaults to `1`, possible values `1` and `0`
+PORT_OFFSET|If set, the offset is applied to the default for `UPNP_PORT` (summed) and to the default `PLG_MICRO_HTTP_PORT` (subtracted). Setting this variable overrides these individual variables.
+UPNPIFACE|UPnP network interface
+ENABLE_AUTO_UPNPIFACE|Allows to automatically set UPNPIFACE, defaults to `yes`, but this does not override an explicitly set `UPNPIFACE` variable
+AUTO_UPNPIFACE_URL|Used by `ENABLE_AUTO_UPNPIFACE`, defaults to `1.1.1.1`
+CHECK_CONTENT_FORMAT|Set to `yes` to enable, see [here](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#checkcontentformat)
+UPNPPORT|UPnP port
+UPMPD_FRIENDLY_NAME|Name of the upnp renderer (OpenHome), defaults to `upmpd`
+AV_FRIENDLY_NAME|Name of the upnp renderer (UPnP AV mode), defaults to `upmpd-av`
+FRIENDLY_NAME|Name of the renderer, overrides `UPMPD_FRIENDLY_NAME`, `AV_FRIENDLY_NAME` and `MEDIA_SERVER_FRIENDLY_NAME`. The variable `AV_FRIENDLY_NAME` is appended with the postfix `UPNPAV_POSTFIX`, unless UPNPAV is the only enabled renderer. See `UPNPAV_POSTFIX` and `UPNPAV_SKIP_NAME_POSTFIX` for more details.
+RENDERER_MODE|If set, this variable overrides `UPNPAV` and `OPENHOME`. Possible values are `NONE`, `OPENHOME`, `UPNPAV` and `BOTH`
+UPNPAV|Enable UPnP AV services (`0`/`1`), defaults to `0`
+UPNPAV_POSTFIX|The postfix to be appended to the `FRIENDLY_NAME`, defaults to `(av)`
+UPNPAV_POSTFIX_PREPEND_SPACE|Option to add a space before a custom `UPNPAV_POSTFIX`, enabled by default. Set to `no` di disable
+UPNPAV_SKIP_NAME_POSTFIX|If not set or set to `yes`, and if only `UPNPAV` renderer is enabled, the `UPNPAV_POSTFIX` postfix is not appended to `FRIENDLY_NAME`
+OPENHOME|Enable OpenHome services (`0`/`1`), defaults to `1`
+OH_PRODUCT_ROOM|Sets `ohproductroom`, defaults to same value calculated for AV_FRIENDLY_NAME if upnp-av is enabled
+UPRCL_ENABLE|Enable local music support (uprcl). Set to `yes` to enable
+UPRCL_AUTOSTART|Autostart UPRCL, defaults to `1`
+UPRCL_USER|Username for `uprcl`
+UPRCL_HOSTPORT|Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
+UPRCL_TITLE|Title for the media server, defaults to `Local Music`
+ENABLE_UPRCL|Enable local music support (uprcl). Set to `yes` to enable (Deprecated, use UPRCL_ENABLE)
+RADIOS_ENABLE|Enable Radios plugin. Set to `yes` to enable
+RADIOS_AUTOSTART|Start Radios on startup, defaults to `1`
+BBC_ENABLE|Enable BBC plugin. Set to `yes` to enable
+BBC_PROGRAMME_DAYS|Past days in BBC Sounds catalog listing. This controls how many days are listed in the station displays.
+RADIO_BROWSER_ENABLE|Enable the Radio Browser plugin. Set to `yes` to enable
+SUBSONIC_ENABLE|Enable the Subsonic plugin. Set to `yes` to enable
+SUBSONIC_AUTOSTART|Autostart Subsonic plugin, defaults to `1`
+SUBSONIC_BASE_URL|Subsonic base url. Example: `http://my_navidrome.homelab.local`
+SUBSONIC_PORT|Subsonic port, defaults to `4533`
+SUBSONIC_USER|Subsonic username
+SUBSONIC_PASSWORD|Subsonic password
+SUBSONIC_ITEMS_PER_PAGE|Number of items per page, defaults to `100`
+SUBSONIC_APPEND_YEAR_TO_ALBUM|If set to `yes` (default), the album year is appended to the album
+SUBSONIC_APPEND_CODECS_TO_ALBUM|If set to `yes` (default), the codecs for the album are appended to the album unless all codecs are in the white list
+SUBSONIC_WHITELIST_CODECS|List of comma-separated whitelist (ideally lossless) codecs. Defaults to `alac,wav,flac,dsf`
+SUBSONIC_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
+SUBSONIC_PLUGIN_BRANCH|If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `SUBSONIC_DOWNLOAD_PLUGIN`
+PLG_MICRO_HTTP_HOST|IP for the qobuz local HTTP service.
+PLG_MICRO_HTTP_PORT|Port for the qobuz local HTTP service.
+MEDIA_SERVER_FRIENDLY_NAME|Friendly name for the Media Server
+QOBUZ_ENABLE|Set to `yes` to enable Qobuz support, defaults to `no`
+QOBUZ_USERNAME|Your Qobuz account username
+QOBUZ_PASSWORD|Your Qobuz account password
+QOBUZ_FORMAT_ID|Qobuz format id: 5 for mp3, 7 for FLAC, 27 for hi-res, defaults to `5`
+DEEZER_ENABLE|Set to `yes` to enable Deezer support, defaults to `no`
+DEEZER_USERNAME|Your Deezer account username
+DEEZER_PASSWORD|Your Deezer account password
+HRA_ENABLE|Set to `yes` to enable HRA support, defaults to `no`
+HRA_USERNAME|Your HRA account username
+HRA_PASSWORD|Your HRA account password
+HRA_LANG|Your HRA account language
+LOG_ENABLE|Set to `yes` to enable. If enabled, the logfile is `/log/upmpdcli.log`. Otherwise, umpdcli will log to stderr.
+LOG_LEVEL|Defaults to `2`
+DUMP_ADDITIONAL_RADIO_LIST|Dumps the additional radio file when set to `yes`
+STARTUP_DELAY_SEC|Delay before starting the application, defaults to `0`. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite if all those services run on the same audio device. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience.
 
 ### Volumes
 
