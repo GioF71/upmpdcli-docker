@@ -36,6 +36,7 @@ The plugin uses my [subsonic-connector](https://github.com/GioF71/subsonic-conne
 Everything has been developed and tested against [Navidrome](https://www.navidrome.org/) but should work with other servers hopefully.  
 See [this](https://github.com/navidrome/navidrome/discussions/2324) discussion on the Navidrome repo for updates and further information.  
 The current version of the image includes Subsonic Plugin version `0.2.0`.  
+If you use upmpdcli as a renderer for this plugin, you might probably want to setup a scrobbler, so that the Subsonic server can keep track of what you are playing. See [this](https://github.com/GioF71/mpd-subsonic-scrobbler) repository for more details.  
 
 ### Scrobbling
 
