@@ -30,6 +30,8 @@ RUN chmod u+x /app/install/*.sh
 RUN /app/install/setup.sh
 
 RUN apt-get install -y upmpdcli
+RUN apt-get install -y --no-install-recommends iproute2 grep
+
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y \
 			upmpdcli-bbc \
@@ -96,6 +98,8 @@ ENV MPD_PORT ""
 
 ENV PORT_OFFSET ""
 
+ENV AUTO_UPNPIFACE_URL ""
+ENV ENABLE_AUTO_UPNPIFACE ""
 ENV UPNPIFACE ""
 ENV UPNPPORT ""
 
