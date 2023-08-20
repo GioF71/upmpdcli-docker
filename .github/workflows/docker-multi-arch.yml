@@ -1,4 +1,4 @@
-name: Publish multi-arch Ubuntu-based Docker images
+name: Publish multi-arch Docker Images
 
 on:
   push:
