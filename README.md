@@ -270,6 +270,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-09-13|Add example subsonic configuration (see issue [#266](https://github.com/GioF71/upmpdcli-docker/issues/266))
 2023-08-20|Add `renderer` tag image (see issue [#252](https://github.com/GioF71/upmpdcli-docker/issues/252))
 2023-08-20|Add support for `ENABLE_AUTO_UPNPIFACE` (see issue [#248](https://github.com/GioF71/upmpdcli-docker/issues/248))
 2023-08-20|Autostart by default for subsonic and uprcl (see issue [#245](https://github.com/GioF71/upmpdcli-docker/issues/245))
