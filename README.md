@@ -205,7 +205,7 @@ SUBSONIC_APPEND_YEAR_TO_ALBUM|If set to `yes` (default), the album year is appen
 SUBSONIC_APPEND_CODECS_TO_ALBUM|If set to `yes` (default), the codecs for the album are appended to the album unless all codecs are in the white list
 SUBSONIC_WHITELIST_CODECS|List of comma-separated whitelist (ideally lossless) codecs. Defaults to `alac,wav,flac,dsf`
 SUBSONIC_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
-SUBSONIC_PLUGIN_BRANCH|If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `SUBSONIC_DOWNLOAD_PLUGIN`
+SUBSONIC_PLUGIN_BRANCH|If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `SUBSONIC_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-subsonic`
 PLG_MICRO_HTTP_HOST|IP for the qobuz local HTTP service.
 PLG_MICRO_HTTP_PORT|Port for the qobuz local HTTP service.
 MEDIA_SERVER_FRIENDLY_NAME|Friendly name for the Media Server
@@ -270,6 +270,7 @@ Just be careful to use the tag you have built.
 
 Change Date|Major Changes
 ---|---
+2023-09-13|Add example subsonic configuration (see issue [#266](https://github.com/GioF71/upmpdcli-docker/issues/266))
 2023-08-20|Add `renderer` tag image (see issue [#252](https://github.com/GioF71/upmpdcli-docker/issues/252))
 2023-08-20|Add support for `ENABLE_AUTO_UPNPIFACE` (see issue [#248](https://github.com/GioF71/upmpdcli-docker/issues/248))
 2023-08-20|Autostart by default for subsonic and uprcl (see issue [#245](https://github.com/GioF71/upmpdcli-docker/issues/245))

@@ -173,3 +173,33 @@ QOBUZ_FORMAT_ID=27
 ```
 
 Alternatively, those values can be passed as individual environment variables.  
+
+### Subsonic
+
+A simple upmpdcli instance for a Subsonic server:
+
+```text
+---
+version: "3"
+
+services:
+  upmpdcli:
+    image: giof71/upmpdcli
+    container_name: upmpdcli-subsonic
+    network_mode: host
+    environment:
+      - RENDERER_MODE=NONE
+      - FRIENDLY_NAME=upmpdcli-subsonic
+      - SUBSONIC_ENABLE=yes
+      - SUBSONIC_BASE_URL=${SUBSONIC_BASE_URL}
+      - SUBSONIC_PORT=${SUBSONIC_PORT}
+      - SUBSONIC_USER=${SUBSONIC_USER}
+      - SUBSONIC_PASSWORD=${SUBSONIC_PASSWORD}
+      - SUBSONIC_DOWNLOAD_PLUGIN=yes
+      - SUBSONIC_PLUGIN_BRANCH=subsonic-latest
+    volumes:
+      - ./cache:/cache
+    restart: unless-stopped
+```
+
+The configuration assumes the credentials to be stored in the `.env` file.
