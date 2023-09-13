@@ -40,13 +40,13 @@ version: "3"
 
 services:
   upmpdcli:
-    image: giof71/upmpdcli
+    image: giof71/upmpdcli:renderer
     container_name: upmpdcli
     network_mode: host
     environment:
       - PUID=1000
       - PGID=1000
-      - FRIENDLY_NAME=upmpd #optional
+      - FRIENDLY_NAME=upmpd
     volumes:
       - ./cache:/cache
       - ./log:/log
@@ -85,7 +85,6 @@ services:
       - FRIENDLY_NAME=upmpd-library
       - UPRCL_ENABLE=yes
       - UPRCL_USER=upmpdcli-library
-      - UPRCL_HOSTPORT=192.168.1.101:9090
       - UPRCL_AUTOSTART=1
     volumes:
       - ./cache:/cache
@@ -115,14 +114,10 @@ services:
     container_name: upmpdcli-radio
     network_mode: host
     environment:
-      - PUID=1000
-      - PGID=1000
-      - PORT_OFFSET=0
       - RENDERER_MODE=NONE
       - FRIENDLY_NAME=upmpd-radio
       - UPRCL_ENABLE=yes
       - UPRCL_USER=upmpdcli-library
-      - UPRCL_HOSTPORT=192.168.1.105:9090
       - UPRCL_AUTOSTART=1
       - LOG_ENABLE=yes
       - LOG_LEVEL=2
@@ -137,44 +132,7 @@ services:
 This configuration disables the renderers (`RENDERER_MODE=NONE`), but this is not mandatory.  
 When you disable renderers, you are essentially creating a pure upnp/dlna server.
 
-### Streaming Services
-
-A simple upmpdcli instance for streaming Qobuz:
-
-```text
----
-version: "3"
-
-services:
-  upmpdcli-streaming-services:
-    image: giof71/upmpdcli
-    container_name: upmpdcli-streaming-services
-    network_mode: host
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - RENDERER_MODE=NONE
-      - FRIENDLY_NAME=upmpd-streaming-services
-      - QOBUZ_ENABLE=yes
-    volumes:
-      - ./config/uprclconfdir:/uprcl/confdir
-      - ./config/credentials/qobuz.txt:/user/config/qobuz.txt:ro
-    labels:
-      - com.centurylinklabs.watchtower.enable=false
-    restart: unless-stopped
-```
-
-The `qobuz.txt` file should resemble the following:
-
-```text
-QOBUZ_USERNAME=qobuz-username
-QOBUZ_PASSWORD=qobuz-password
-QOBUZ_FORMAT_ID=27
-```
-
-Alternatively, those values can be passed as individual environment variables.  
-
-### Subsonic
+### Subsonic Server
 
 A simple upmpdcli instance for a Subsonic server:
 
@@ -196,10 +154,80 @@ services:
       - SUBSONIC_USER=${SUBSONIC_USER}
       - SUBSONIC_PASSWORD=${SUBSONIC_PASSWORD}
       - SUBSONIC_DOWNLOAD_PLUGIN=yes
-      - SUBSONIC_PLUGIN_BRANCH=latest-subsonic
+      - SUBSONIC_PLUGIN_BRANCH=subsonic-latest
     volumes:
       - ./cache:/cache
     restart: unless-stopped
 ```
 
 The configuration assumes the credentials to be stored in the `.env` file.
+
+### Streaming Services
+
+#### Tidal
+
+A simple upmpdcli instance for streaming Tidal:
+
+```text
+---
+version: "3"
+
+services:
+  upmpdcli:
+    image: giof71/upmpdcli:latest
+    container_name: upmpdcli-tidal
+    network_mode: host
+    environment:
+      - RENDERER_MODE=NONE
+      - FRIENDLY_NAME=Tidal (upmpdcli)
+      - TIDAL_ENABLE=yes
+      - TIDAL_TOKEN_TYPE=${TIDAL_TOKEN_TYPE}
+      - TIDAL_ACCESS_TOKEN=${TIDAL_ACCESS_TOKEN}
+      - TIDAL_REFRESH_TOKEN=${TIDAL_REFRESH_TOKEN}
+      - TIDAL_EXPIRY_TIME=${TIDAL_EXPIRY_TIME}
+      - TIDAL_AUDIO_QUALITY=${TIDAL_AUDIO_QUALITY}
+      - TIDAL_DOWNLOAD_PLUGIN=yes
+      - TIDAL_PLUGIN_BRANCH=latest-tidal
+    volumes:
+      - ./cache:/cache
+    restart: unless-stopped
+```
+
+Remember to use a volume for the `/cache` volume, so that the collected playback statistics will be preserved even when the container is recreated.  
+Refer to the section "Obtain Tidal credentials" in the [README.md](https://github.com/GioF71/upmpdcli-docker/blob/main/README.md) for more information on how to retrieve your set of Tidal credentials.  
+
+#### Qobuz
+
+A simple upmpdcli instance for streaming Qobuz:
+
+```text
+---
+version: "3"
+
+services:
+  upmpdcli-streaming-services:
+    image: giof71/upmpdcli
+    container_name: upmpdcli-streaming-services
+    network_mode: host
+    environment:
+      - RENDERER_MODE=NONE
+      - FRIENDLY_NAME=upmpd-streaming-services
+      - QOBUZ_ENABLE=yes
+    volumes:
+      - ./config/uprclconfdir:/uprcl/confdir
+      - ./config/credentials/qobuz.txt:/user/config/qobuz.txt:ro
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+    restart: unless-stopped
+```
+
+The `qobuz.txt` file should resemble the following:
+
+```text
+QOBUZ_USERNAME=qobuz-username
+QOBUZ_PASSWORD=qobuz-password
+QOBUZ_FORMAT_ID=27
+```
+
+Alternatively, those values can be passed as individual environment variables.  
+

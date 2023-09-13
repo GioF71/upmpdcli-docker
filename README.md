@@ -1,7 +1,7 @@
 # upmpdcli-docker
 
 A Docker image for upmpdcli.  
-Now with support for custom radios, [radio-browser.info](https://www.radio-browser.info/), and [subsonic servers](https://github.com/navidrome/navidrome/discussions/2324).  
+There is built-in support for custom radios, [radio-browser.info](https://www.radio-browser.info/), Tidal, Qobuz, and [subsonic servers](https://github.com/navidrome/navidrome/discussions/2324).  
 A few screenshots for the subsonic plugin on [Kazoo](https://github.com/GioF71/upmpdcli-docker/tree/main/doc/screenshots/kazoo) and [Upplay](https://github.com/GioF71/upmpdcli-docker/tree/main/doc/screenshots/upplay) are now available.  
 
 ## Latest Build
@@ -17,12 +17,21 @@ Current version is `1.8.1`.
 
 ## News
 
-### Native Tidal support dropped
+### Tidal support is back
 
-Upmpdcli does not support Tidal natively anymore.  
+We have a new, updated Tidal plugin for upmpdcli. I have contributed it to upmpdcli. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).  
+The plugin is built around [python-tidal](https://github.com/tamland/python-tidal).  
+Building this plugin would not have been possible without this library, so a big thank you goes to [its author](https://github.com/tamland).  
+Remember, this is not, in any way, supported by Tidal. It might stop working at any moment. Consider alternatives as BubbleUpnp, mConnect or similar software which are, to my knowledge, officially supported by Tidal.  
+About the configuration, this time there is no need to go hunting for a valid access token: again, thanks to the advancements in the underlying library, you will be able to generate your own set of credentials from a valid username/password combination.  
+Of course, a premium account of Tidal is strictly required.  
+
+~~### Native Tidal support dropped~~
+
+~~Upmpdcli does not support Tidal natively anymore.  
 I have therefore removed the relevant environment variables and portions of the scripts which build the configuration file based on the mentioned environment variables.  
 Of course, you can still stream Tidal to a upnp player created using upmpdcli using an application like BubbleUpnp, mConnect/mConnect Lite, etc.  
-On a ARM-based single board computer like the Raspberry Pi and many others (example: an Asus Tinkerboard), you can still run (until Tidal does not stop this somehow) Tidal Connect, see [this](https://github.com/GioF71/tidal-connect) and [this other](https://github.com/TonyTromp/tidal-connect-docker) repository, and then stream direcly from the Tidal official applications.
+On a ARM-based single board computer like the Raspberry Pi and many others (example: an Asus Tinkerboard), you can still run (until Tidal does not stop this somehow) Tidal Connect, see [this](https://github.com/GioF71/tidal-connect) and [this other](https://github.com/TonyTromp/tidal-connect-docker) repository, and then stream direcly from the Tidal official applications.~~
 
 ### BBC
 
@@ -35,7 +44,7 @@ Since release 2023-07-05, support the upmpdcli [`Upradios radio list`](https://w
 ### Subsonic
 
 Since release 2023-04-19, support for the [`Subsonic plugin`](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#UPMPDCLI-MS-SUBSONIC) has been introduced.  
-I am now a contributor to upmpdcli for this plugin. See the git repository [here](https://framagit.org/medoc92/upmpdcli).  
+I am now a contributor to upmpdcli for this plugin. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).  
 The plugin uses my [subsonic-connector](https://github.com/GioF71/subsonic-connector) library which in turn is built around [py-sonic](https://github.com/crustymonkey/py-sonic).  
 Everything has been developed and tested against [Navidrome](https://www.navidrome.org/) but should work with other servers hopefully.  
 See [this](https://github.com/navidrome/navidrome/discussions/2324) discussion on the Navidrome repo for updates and further information.  
@@ -209,6 +218,14 @@ SUBSONIC_PLUGIN_BRANCH|If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by th
 PLG_MICRO_HTTP_HOST|IP for the qobuz local HTTP service.
 PLG_MICRO_HTTP_PORT|Port for the qobuz local HTTP service.
 MEDIA_SERVER_FRIENDLY_NAME|Friendly name for the Media Server
+TIDAL_ENABLE|Set to `yes` to enable Tidal support, defaults to `no`
+TIDAL_TOKEN_TYPE|Tidal token type
+TIDAL_ACCESS_TOKEN|Tidal access token
+TIDAL_REFRESH_TOKEN|Tidal refresh token
+TIDAL_EXPIRY_TIME|Tidal expiry time
+TIDAL_QUALITY|Possible values are `LOW` (mp3@96k), `HIGH` (mp3@320k), `LOSSLESS` (flac@44.1kHz), `HI_RES` (I believe it's MQA), `HI_RES_LOSSLESS` (flac@hires), defaults to `LOSSLESS`
+TIDAL_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
+TIDAL_PLUGIN_BRANCH|If `TIDAL_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `TIDAL_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-tidal`
 QOBUZ_ENABLE|Set to `yes` to enable Qobuz support, defaults to `no`
 QOBUZ_USERNAME|Your Qobuz account username
 QOBUZ_PASSWORD|Your Qobuz account password
@@ -252,6 +269,33 @@ preferScript = 1
 
 Only the `url` line is mandatory.  
 Refer to the file [radiolist.conf](https://github.com/GioF71/upmpdcli-docker/blob/main/app/reference/radiolist.conf) from the git repository for further details.
+
+### Obtain Tidal credentials
+
+In order to obtain your set of tidal credentials, execute the following command:
+
+```text
+docker run --rm -it --entrypoint /app/bin/get-tidal-credentials.py giof71/upmpdcli
+```
+
+You will be presented with an output similar to the following:
+
+```text
+Visit https://link.tidal.com/XXXXX to log in, the code will expire in 300 seconds
+```
+
+Open the link in the browser, login to Tidal and authorize the application. Once that is done, you will be greeted with an output like the following:
+
+```text
+Environment variables:
+TIDAL_TOKEN_TYPE=Bearer
+TIDAL_ACCESS_TOKEN=your-tidal-token
+TIDAL_REFRESH_TOKEN=your-refresh-token
+TIDAL_EXPIRY_TIME=1694616998.732007
+```
+
+The tokens will be very long strings. Those values must be used in your docker-compose file, or, even better, through the separate `.env` file.  
+Never share the tokens on the internet (and also on public git repositories).  
 
 ## Usage examples
 

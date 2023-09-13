@@ -25,6 +25,27 @@ if [[ "${SUBSONIC_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     cd /app/bin
 fi
 
+if [[ "${TIDAL_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
+    echo "Downloading updated tidal plugin"
+    if [[ -n "${TIDAL_PLUGIN_BRANCH}" ]]; then
+        echo "  using branch [$TIDAL_PLUGIN_BRANCH]"
+        cd /app
+        mkdir -p src
+        cd /app/src
+        git clone https://framagit.org/GioF71/upmpdcli.git --branch ${TIDAL_PLUGIN_BRANCH}
+        echo "  copying updated files ..."
+        cp upmpdcli/src/mediaserver/cdplugins/tidal/* /usr/share/upmpdcli/cdplugins/tidal/
+        echo "  copied, removing repo ..."
+        rm -Rf upmpdcli
+        echo "  repo removed."
+        cd ..
+        rm -Rf src
+        echo "  src directory removed."
+    fi
+    # return to the path
+    cd /app/bin
+fi
+
 DEFAULT_UID=1000
 DEFAULT_GID=1000
 
@@ -229,6 +250,7 @@ if [[ "${UPRCL_ENABLE^^}" == "YES" ||
       "${RADIOS_ENABLE^^}" == "YES" ||
       "${BBC_ENABLE^^}" == "YES" ||
       "${SUBSONIC_ENABLE^^}" == "YES" ||
+      "${TIDAL_ENABLE^^}" == "YES" ||
       "${HRA_ENABLE^^}" == "YES" ||
       "${DEEZER_ENABLE^^}" == "YES" ||
       "${HRA_ENABLE^^}" == "YES" ||
@@ -327,6 +349,37 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
         sed -i 's/\#subsonicwhitelistcodecs/subsonicwhitelistcodecs/g' $CONFIG_FILE
         sed -i 's/SUBSONIC_WHITELIST_CODECS/'"$SUBSONIC_WHITELIST_CODECS"'/g' $CONFIG_FILE
     fi
+fi
+
+echo "TIDAL_ENABLE=[$TIDAL_ENABLE]"
+if [ "${TIDAL_ENABLE^^}" == "YES" ]; then
+    echo "Enabling new Tidal, processing settings";
+    TIDAL_ENABLE=YES
+    sed -i 's/\#tidaluser/tidaluser/g' $CONFIG_FILE
+    echo "TIDAL_AUTOSTART=[$TIDAL_AUTOSTART]"
+    if [[ -z "${TIDAL_AUTOSTART^^}" || "${TIDAL_AUTOSTART}" == "1" || "${SUBSONIC_AUTOSTART^^}" == "YES" ]]; then
+        TIDAL_AUTOSTART=1
+        sed -i 's/\#tidalautostart/tidalautostart/g' $CONFIG_FILE;
+        set_parameter $CONFIG_FILE TIDAL_AUTOSTART "$TIDAL_AUTOSTART" tidalautostart
+    fi
+    echo "Setting Token Type [$TIDAL_TOKEN_TYPE]"
+    sed -i 's/\#tidaltokentype/tidaltokentype/g' $CONFIG_FILE
+    sed -i 's,TIDAL_TOKEN_TYPE,'"$TIDAL_TOKEN_TYPE"',g' $CONFIG_FILE
+    echo "Setting Access Token [$TIDAL_ACCESS_TOKEN]"
+    sed -i 's/\#tidalaccesstoken/tidalaccesstoken/g' $CONFIG_FILE
+    sed -i 's,TIDAL_ACCESS_TOKEN,'"$TIDAL_ACCESS_TOKEN"',g' $CONFIG_FILE
+    echo "Setting Access Token [$TIDAL_REFRESH_TOKEN]"
+    sed -i 's/\#tidalrefreshtoken/tidalrefreshtoken/g' $CONFIG_FILE
+    sed -i 's,TIDAL_REFRESH_TOKEN,'"$TIDAL_REFRESH_TOKEN"',g' $CONFIG_FILE
+    echo "Setting Token Expiry Time [$TIDAL_EXPIRY_TIME]"
+    sed -i 's/\#tidalexpirytime/tidalexpirytime/g' $CONFIG_FILE
+    sed -i 's,TIDAL_EXPIRY_TIME,'"$TIDAL_EXPIRY_TIME"',g' $CONFIG_FILE
+    if [[ -z "$TIDAL_AUDIO_QUALITY" ]]; then
+        TIDAL_AUDIO_QUALITY="LOSSLESS"   
+    fi
+    echo "Setting Audio Quality [$TIDAL_AUDIO_QUALITY]"
+    sed -i 's/\#tidalaudioquality/tidalaudioquality/g' $CONFIG_FILE
+    sed -i 's,TIDAL_AUDIO_QUALITY,'"$TIDAL_AUDIO_QUALITY"',g' $CONFIG_FILE
 fi
 
 echo "Qobuz Enable [$QOBUZ_ENABLE]"

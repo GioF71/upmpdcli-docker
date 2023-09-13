@@ -151,6 +151,15 @@ ENV SUBSONIC_WHITELIST_CODECS ""
 ENV SUBSONIC_DOWNLOAD_PLUGIN ""
 ENV SUBSONIC_PLUGIN_BRANCH ""
 
+ENV TIDAL_ENABLE ""
+ENV TIDAL_TOKEN_TYPE ""
+ENV TIDAL_ACCESS_TOKEN ""
+ENV TIDAL_REFRESH_TOKEN ""
+ENV TIDAL_EXPIRY_TIME ""
+ENV TIDAL_AUDIO_QUALITY ""
+ENV TIDAL_DOWNLOAD_PLUGIN ""
+ENV TIDAL_PLUGIN_BRANCH ""
+
 ENV PUID ""
 ENV PGID ""
 
@@ -181,6 +190,9 @@ COPY app/bin/read-file.sh /app/bin/
 COPY app/bin/get-value.sh /app/bin/
 COPY app/bin/config-builder.sh /app/bin/
 RUN chmod u+x /app/bin/*.sh
+
+COPY app/bin/get-tidal-credentials.py /app/bin/
+RUN chmod u+x /app/bin/get-tidal-credentials.py
 
 COPY README.md /app/doc
 
