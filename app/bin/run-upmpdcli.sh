@@ -34,6 +34,7 @@ if [[ "${TIDAL_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
         cd /app/src
         git clone https://framagit.org/GioF71/upmpdcli.git --branch ${TIDAL_PLUGIN_BRANCH}
         echo "  copying updated files ..."
+        mkdir -p /usr/share/upmpdcli/cdplugins/tidal
         cp upmpdcli/src/mediaserver/cdplugins/tidal/* /usr/share/upmpdcli/cdplugins/tidal/
         echo "  copied, removing repo ..."
         rm -Rf upmpdcli
