@@ -23,8 +23,8 @@ We have a new, updated Tidal plugin for upmpdcli. I have contributed it to upmpd
 The plugin is built around [python-tidal](https://github.com/tamland/python-tidal).  
 Building this plugin would not have been possible without this library, so a big thank you goes to [its author](https://github.com/tamland).  
 Remember, this is not, in any way, supported by Tidal. It might stop working at any moment. Consider alternatives as BubbleUpnp, mConnect or similar software which are, to my knowledge, officially supported by Tidal.  
-About the configuration, this time there is no need to go hunting for a valid access token: again, thanks to the advancements in the underlying library, you will be able to generate your own set of credentials from a valid username/password combination.  
-Of course, a premium account of Tidal is strictly required.  
+Thanks to the advancements in the underlying library, you will be able to generate your own set of credentials from a valid username/password combination.  
+A premium account of Tidal is strictly required.  
 
 ### BBC
 
@@ -51,12 +51,12 @@ This is the first scrobbler, to my knowledge, to be working correctly with upmpd
 
 ### Support for Radio Browser
 
-Since `2023-02-26`, I have added support for the new Radio-Browser media server available in upmpdcli.  
+Since `2023-02-26`, I have added support for the new Radio-Browser media server plugin.  
 See [here](https://www.lesbonscomptes.com/upmpdcli/upmpdcli-manual.html#UPMPDCLI-MS-RADIO-BROWSER) for more details.
 
 ### Streaming to Kodi enhanced
 
-Starting with release `1.6.2`, included in this container image since `2022-12-12`, Kodi support is considerably improved. Upmpdcli (in media server mode) can now stream hi-res from Qobuz as well as it can stream Internet Radios. Configuration examples are available [here](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md).
+Starting with release `1.6.2`, (since release `2022-12-12`), Kodi support is improved. Upmpdcli as a media server can now stream hi-res from Qobuz/Tidal as well as Internet Radios. Configuration examples are available [here](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md).
 
 ## Links
 
@@ -93,27 +93,21 @@ mpd-alsa|Docker Images|[DockerHub](https://hub.docker.com/r/giof71/mpd-alsa)
 
 The Dockerfile and the scripts included in this repository have been tested on the following distros:
 
-- Manjaro Linux with Gnome (amd64)
+- Generic Linux (amd64)
 - Asus Tinkerboard
-- Raspberry Pi 3 and 4, both 32 and 64 bit
-
-As I test the Dockerfile on more platforms, I will update this list.
+- Raspberry Pi 3/4, 32/64bit
 
 ## Get the image
 
-Here is the [repository](https://hub.docker.com/repository/docker/giof71/upmpdcli) on DockerHub.
+Getting the image from [Docker Hub](https://hub.docker.com/repository/docker/giof71/upmpdcli) is as simple as typing:
 
-Getting the image from DockerHub is as simple as typing:
-
-`docker pull giof71/upmpdcli:stable`
-
-You may want to pull the "stable" image as opposed to the "latest".
+`docker pull giof71/upmpdcli`
 
 ### Image Versions
 
-Since version 2023-07-04, we have dedicated images for renderer-only mode.  
-If you select any of those images (which have `-renderer` appended to the tag), mediaserver functionalities will not be available.  
-The `renderer` images are currently about 8x smaller in size, and thus pulling and decompressing is much faster.  
+Since version 2023-07-04, we have images for renderer-only mode.  
+Those images (which have `-renderer` appended to the tag) will not have support for mediaserver functionalities.  
+The `renderer` images are currently about 8x smaller in size.  
 Please find a list of the currently built images in the following table.
 
 Base Image|Build Mode|Tags
@@ -150,13 +144,7 @@ You will get an output similar to the following:
 Upmpdcli 1.8.1 libupnpp 0.23.0
 ```
 
-Alternatively, you can run get-version-ext.sh for a more extended output:
-
-```text
-docker run --rm -i --entrypoint /app/bin/get-version-ext.sh giof71/upmpdcli:latest
-```
-
-which will use the `--version` switch of the upmpdcli command line.  
+Replace `get-version.sh` with `get-version-ext.sh` for a more extended output.  
 
 ### Environment variables
 
