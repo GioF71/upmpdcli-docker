@@ -26,13 +26,6 @@ Remember, this is not, in any way, supported by Tidal. It might stop working at 
 About the configuration, this time there is no need to go hunting for a valid access token: again, thanks to the advancements in the underlying library, you will be able to generate your own set of credentials from a valid username/password combination.  
 Of course, a premium account of Tidal is strictly required.  
 
-~~### Native Tidal support dropped~~
-
-~~Upmpdcli does not support Tidal natively anymore.  
-I have therefore removed the relevant environment variables and portions of the scripts which build the configuration file based on the mentioned environment variables.  
-Of course, you can still stream Tidal to a upnp player created using upmpdcli using an application like BubbleUpnp, mConnect/mConnect Lite, etc.  
-On a ARM-based single board computer like the Raspberry Pi and many others (example: an Asus Tinkerboard), you can still run (until Tidal does not stop this somehow) Tidal Connect, see [this](https://github.com/GioF71/tidal-connect) and [this other](https://github.com/TonyTromp/tidal-connect-docker) repository, and then stream direcly from the Tidal official applications.~~
-
 ### BBC
 
 Since release 2023-07-05, support the upmpdcli [`BBC Sounds`](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#UPMPDCLI-MS-BBC) plugin has been enabled.
