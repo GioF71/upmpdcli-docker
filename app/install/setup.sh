@@ -19,7 +19,7 @@ if [ "$BUILD_MODE" = "full" ]; then
     if [ $add_switch -eq 1 ]; then
         pip_upgrade="$pip_upgrade --break-system-packages"
     fi
-    python_packages=(pyradios py-sonic subsonic-connector==0.1.17 mutagen)
+    python_packages=(pyradios py-sonic subsonic-connector==0.1.17 mutagen tidalapi==0.7.3)
     for pkg in "${python_packages[@]}"
     do
         echo "Installing ${pkg} with add_switch [$add_switch]..."
