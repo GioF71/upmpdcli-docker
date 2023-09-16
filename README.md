@@ -23,8 +23,8 @@ We have a new, updated Tidal plugin for upmpdcli. I have contributed it to upmpd
 The plugin is built around [python-tidal](https://github.com/tamland/python-tidal).  
 Building this plugin would not have been possible without this library, so a big thank you goes to [its author](https://github.com/tamland).  
 Remember, this is not, in any way, supported by Tidal. It might stop working at any moment. Consider alternatives as BubbleUpnp, mConnect or similar software which are, to my knowledge, officially supported by Tidal.  
-About the configuration, this time there is no need to go hunting for a valid access token: again, thanks to the advancements in the underlying library, you will be able to generate your own set of credentials from a valid username/password combination.  
-Of course, a premium account of Tidal is strictly required.  
+Thanks to the advancements in the underlying library, you will be able to generate your own set of credentials from a valid username/password combination.  
+A premium account of Tidal is strictly required.  
 
 ### BBC
 
