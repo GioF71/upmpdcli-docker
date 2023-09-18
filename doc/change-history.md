@@ -2,7 +2,7 @@
 
 Change Date|Major Changes
 ---|---
-2023-09-18|Update to Upmpdcli version 1.8.3 (see issue [#282](https://github.com/GioF71/upmpdcli-docker/issues/282))
+2023-09-18|Update to Upmpdcli version 1.8.3, first version with new Tidal Plugin (see issue [#282](https://github.com/GioF71/upmpdcli-docker/issues/282))
 2023-09-16|Support for upcoming new Tidal Plugin (see issue [#269](https://github.com/GioF71/upmpdcli-docker/issues/269))
 2023-09-13|Add example subsonic configuration (see issue [#266](https://github.com/GioF71/upmpdcli-docker/issues/266))
 2023-08-20|Add `renderer` tag image (see issue [#252](https://github.com/GioF71/upmpdcli-docker/issues/252))
