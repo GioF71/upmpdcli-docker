@@ -293,4 +293,4 @@ Just be careful to use the tag you have built.
 
 ## Change History
 
-Please find the change history [here](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/change-history.md)
+Please find the change history [here](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/change-history.md).
