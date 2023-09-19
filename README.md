@@ -20,8 +20,10 @@ Current version is `1.8.3`.
 ### Tidal support is back
 
 We have a new, updated Tidal plugin for upmpdcli. I have contributed it to upmpdcli. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).  
+See the [news](https://www.lesbonscomptes.com/upmpdcli/#news) section in the upmpdcli main page.  
 The plugin is built around [python-tidal](https://github.com/tamland/python-tidal).  
 Building this plugin would not have been possible without this library, so a big thank you goes to [its author](https://github.com/tamland).  
+Also, once again, a big thank you to the upmpdcli author for the support he has provided to help me build this plugin.  
 Remember, this is not, in any way, supported by Tidal. It might stop working at any moment. Consider alternatives as BubbleUpnp, mConnect or similar software which are, to my knowledge, officially supported by Tidal.  
 Thanks to the advancements in the underlying library, you will be able to generate your own set of credentials from a valid username/password combination.  
 A premium account of Tidal will be strictly required.  
