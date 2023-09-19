@@ -24,7 +24,7 @@ See the [news](https://www.lesbonscomptes.com/upmpdcli/#news) section in the upm
 The plugin is built around [python-tidal](https://github.com/tamland/python-tidal).  
 Building this plugin would not have been possible without this library, so a big thank you goes to [its author](https://github.com/tamland).  
 Also, once again, a big thank you to the upmpdcli author for the support he has provided to help me build this plugin.  
-Remember, this is not, in any way, supported by Tidal. It might stop working at any moment. Consider alternatives as BubbleUpnp, mConnect or similar software which are, to my knowledge, officially supported by Tidal.  
+Remember, this is not, in any way, supported by Tidal. It might stop working at any moment. Consider alternatives as [BubbleUpnp](https://play.google.com/store/apps/details?id=com.bubblesoft.android.bubbleupnp), [mConnect Lite](https://play.google.com/store/apps/details?id=com.conversdigital) (also available on iOS/iPadOS) or similar software which are, to my knowledge, officially supported by Tidal.  
 Thanks to the advancements in the underlying library, you will be able to generate your own set of credentials from a valid username/password combination.  
 A premium account of Tidal will be strictly required.  
 
