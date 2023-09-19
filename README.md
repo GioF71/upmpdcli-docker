@@ -83,13 +83,15 @@ This command will output one line if the current user does belong to the "docker
 
 ### MPD
 
-You will also need a running instance of `mpd` (Music Player Daemon) on your network.  
+If you want to create a upnp/dlna renderer with upmpdcli, you will also need a running instance of `mpd` (Music Player Daemon) on your network.  
 You might consider using my `mpd-alsa` docker image, at the following links:
 
 Repository|Type|Link
 :---|:---|:---
 mpd-alsa-docker|Source Code|[GitHub](https://github.com/giof71/mpd-alsa-docker)  
 mpd-alsa|Docker Images|[DockerHub](https://hub.docker.com/r/giof71/mpd-alsa)
+
+Of course the creation of a *media server only* instance of upmpdcli does not require a running instance of `mpd`.  
 
 ### Supported platforms
 
