@@ -237,6 +237,18 @@ Volume|Description
 /cache|Runtime information for upmpdcli. Attach a volume to this path in order to maintain consistency across restarts.
 /log|Location for the upmpdcli log file. Enabled using `LOG_ENABLE`
 
+### Custom icon
+
+It is possible to customize the server icon by mounting a local png file to the container file `/usr/share/upmpdcli/icon.png`. Just put a suitable png file in the same directory of the compose file, then, assuming the icon is called `my-icon.png`, you would want to add an entry to the volumes section, similar to this:
+
+```
+    volumes:
+      - ./my-icon.png:/usr/share/upmpdcli/icon.png:ro
+```
+
+A square image should be a good choice. Don't use a very big image, because the players which are able to show it, will show it as a small icon, afaik.  
+For example, I searched for a tidal png icon file my Tidal media server, so now BubbleUpnp shows a nice Tidal icon instead of the generic (although beloved) penguin icon.
+
 ### Additional Radio file
 
 You can add your custom radios to upmpdcli.
