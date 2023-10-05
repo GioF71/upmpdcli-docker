@@ -1,7 +1,7 @@
 # upmpdcli-docker
 
 A Docker image for upmpdcli.  
-There is built-in support for custom radios, [radio-browser.info](https://www.radio-browser.info/), Tidal, Qobuz, and [subsonic servers](https://github.com/navidrome/navidrome/discussions/2324).  
+There is built-in support for custom radios, [radio-browser.info](https://www.radio-browser.info/), [Radio Paradise](https://radioparadise.com/), Tidal, Qobuz, and [subsonic servers](https://github.com/navidrome/navidrome/discussions/2324).  
 A few screenshots for the subsonic plugin on [Kazoo](https://github.com/GioF71/upmpdcli-docker/tree/main/doc/screenshots/kazoo) and [Upplay](https://github.com/GioF71/upmpdcli-docker/tree/main/doc/screenshots/upplay) are now available.  
 
 ## Latest Build
