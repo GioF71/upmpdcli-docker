@@ -17,6 +17,12 @@ Current version is `1.8.3`.
 
 ## News
 
+### Radio Paradise
+
+We have a new Radio Paradise plugin for upmpdcli. I have contributed it to upmpdcli. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).  
+This plugin has no additional dependencies. See the [configuration example](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#radio-paradise) for information on how to create a container which will run this plugin.  
+Please note that the current release of upmpdcli does not include the plugin yet, the suggested configuration will download the python source code from my fork repo.
+
 ### Tidal support is back
 
 We have a new, updated Tidal plugin for upmpdcli. I have contributed it to upmpdcli. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).  
@@ -200,10 +206,13 @@ SUBSONIC_APPEND_CODECS_TO_ALBUM|If set to `yes` (default), the codecs for the al
 SUBSONIC_WHITELIST_CODECS|List of comma-separated whitelist (ideally lossless) codecs. Defaults to `alac,wav,flac,dsf`
 SUBSONIC_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
 SUBSONIC_PLUGIN_BRANCH|If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `SUBSONIC_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-subsonic`
+RADIO_PARADISE_ENABLE|Enable the Radio Paradise Plugin, set to `yes` to enable
+RADIO_PARADISE_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
+RADIO_PARADISE_PLUGIN_BRANCH|If `RADIO_PARADISE_DOWNLOAD_PLUGIN` is set to `yes`, the branch indicated by this variable will be used. Must be specified if enabling `RADIO_PARADISE_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-radio-paradise`
 PLG_MICRO_HTTP_HOST|IP for the qobuz local HTTP service.
 PLG_MICRO_HTTP_PORT|Port for the qobuz local HTTP service.
 MEDIA_SERVER_FRIENDLY_NAME|Friendly name for the Media Server
-TIDAL_ENABLE|Set to `yes` to enable Tidal support, defaults to `no`
+TIDAL_ENABLE|Set to `YES` to enable Tidal support, defaults to `no`
 TIDAL_TOKEN_TYPE|Tidal token type
 TIDAL_ACCESS_TOKEN|Tidal access token
 TIDAL_REFRESH_TOKEN|Tidal refresh token
