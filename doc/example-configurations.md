@@ -163,6 +163,32 @@ services:
 
 The configuration assumes the credentials to be stored in the `.env` file.
 
+### Radio Paradise
+
+A simple upmpdcli instance for accessing Radio Paradise webradios:
+
+```text
+---
+version: "3"
+
+services:
+  upmpdcli:
+    image: giof71/upmpdcli:latest
+    container_name: upmpdcli-radio-paradise
+    network_mode: host
+    environment:
+      - RENDERER_MODE=NONE
+      - FRIENDLY_NAME=Radio Paradise (upmpdcli)
+      - CHECK_CONTENT_FORMAT=yes
+      - RADIO_PARADISE_ENABLE=yes
+      - RADIO_BROWSER_ENABLE=yes
+      - RADIO_PARADISE_DOWNLOAD_PLUGIN=yes
+      - RADIO_PARADISE_PLUGIN_BRANCH=latest-radio-paradise
+    restart: unless-stopped
+```
+
+Please not that RADIO_PARADISE_DOWNLOAD_PLUGIN is currently mandatory for the plugin to work, until a new upmpdcli release including the plugin is released.
+
 ### Streaming Services
 
 #### Tidal

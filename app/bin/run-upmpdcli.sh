@@ -4,6 +4,28 @@
 # 1 Generic error
 # 2 Invalid RENDERER_MODE value
 
+if [[ "${RADIO_PARADISE_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
+    echo "Downloading updated Radio Paradise plugin"
+    if [[ -n "${RADIO_PARADISE_PLUGIN_BRANCH}" ]]; then
+        echo "  using branch [$RADIO_PARADISE_PLUGIN_BRANCH]"
+        cd /app
+        mkdir -p src
+        cd /app/src
+        git clone https://framagit.org/GioF71/upmpdcli.git --branch ${RADIO_PARADISE_PLUGIN_BRANCH}
+        echo "  copying updated files ..."
+        mkdir -p /usr/share/upmpdcli/cdplugins/radio-paradise
+        cp upmpdcli/src/mediaserver/cdplugins/radio-paradise/* /usr/share/upmpdcli/cdplugins/radio-paradise/
+        echo "  copied, removing repo ..."
+        rm -Rf upmpdcli
+        echo "  repo removed."
+        cd ..
+        rm -Rf src
+        echo "  src directory removed."
+    fi
+    # return to the path
+    cd /app/bin
+fi
+
 if [[ "${SUBSONIC_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     echo "Downloading updated subsonic plugin"
     if [[ -n "${SUBSONIC_PLUGIN_BRANCH}" ]]; then
@@ -255,6 +277,7 @@ if [[ "${UPRCL_ENABLE^^}" == "YES" ||
       "${HRA_ENABLE^^}" == "YES" ||
       "${DEEZER_ENABLE^^}" == "YES" ||
       "${HRA_ENABLE^^}" == "YES" ||
+      "${RADIO_PARADISE_ENABLE^^}" == "YES" ||
       "${QOBUZ_ENABLE^^}" == "YES" ]]; then
     MEDIA_SERVER_ENABLED=1
 fi
@@ -350,6 +373,13 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
         sed -i 's/\#subsonicwhitelistcodecs/subsonicwhitelistcodecs/g' $CONFIG_FILE
         sed -i 's/SUBSONIC_WHITELIST_CODECS/'"$SUBSONIC_WHITELIST_CODECS"'/g' $CONFIG_FILE
     fi
+fi
+
+echo "RADIO_PARADISE_ENABLE=[$RADIO_PARADISE_ENABLE]"
+if [ "${RADIO_PARADISE_ENABLE^^}" == "YES" ]; then
+    echo "Enabling Radio Paradise, processing settings";
+    RADIO_PARADISE_ENABLE=YES
+    sed -i 's/\#radio-paradiseuser/radio-paradiseuser/g' $CONFIG_FILE
 fi
 
 echo "TIDAL_ENABLE=[$TIDAL_ENABLE]"
