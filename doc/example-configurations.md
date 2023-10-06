@@ -181,13 +181,37 @@ services:
       - FRIENDLY_NAME=Radio Paradise (upmpdcli)
       - CHECK_CONTENT_FORMAT=yes
       - RADIO_PARADISE_ENABLE=yes
-      - RADIO_BROWSER_ENABLE=yes
       - RADIO_PARADISE_DOWNLOAD_PLUGIN=yes
       - RADIO_PARADISE_PLUGIN_BRANCH=latest-radio-paradise
     restart: unless-stopped
 ```
 
 Please not that RADIO_PARADISE_DOWNLOAD_PLUGIN is currently mandatory for the plugin to work, until a new upmpdcli release including the plugin is released.
+
+### Mother Earth Radio
+
+A simple upmpdcli instance for accessing Mother Earth Radio webradios:
+
+```text
+---
+version: "3"
+
+services:
+  upmpdcli:
+    image: giof71/upmpdcli:latest
+    container_name: upmpdcli-mother-earth-radio
+    network_mode: host
+    environment:
+      - RENDERER_MODE=NONE
+      - FRIENDLY_NAME=Mother Earth Radio (upmpdcli)
+      - CHECK_CONTENT_FORMAT=yes
+      - MOTHER_EARTH_RADIO_ENABLE=yes
+      - MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN=yes
+      - MOTHER_EARTH_RADIO_PLUGIN_BRANCH=latest-radio-paradise
+    restart: unless-stopped
+```
+
+Please not that MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN is currently mandatory for the plugin to work, until a new upmpdcli release including the plugin is released.
 
 ### Streaming Services
 

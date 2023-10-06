@@ -4,6 +4,28 @@
 # 1 Generic error
 # 2 Invalid RENDERER_MODE value
 
+if [[ "${MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
+    echo "Downloading updated Mother Earth Radio plugin"
+    if [[ -n "${MOTHER_EARTH_RADIO_PLUGIN_BRANCH}" ]]; then
+        echo "  using branch [$MOTHER_EARTH_RADIO_PLUGIN_BRANCH]"
+        cd /app
+        mkdir -p src
+        cd /app/src
+        git clone https://framagit.org/GioF71/upmpdcli.git --branch ${MOTHER_EARTH_RADIO_PLUGIN_BRANCH}
+        echo "  copying updated files ..."
+        mkdir -p /usr/share/upmpdcli/cdplugins/mother-earth-radio
+        cp upmpdcli/src/mediaserver/cdplugins/mother-earth-radio/* /usr/share/upmpdcli/cdplugins/mother-earth-radio/
+        echo "  copied, removing repo ..."
+        rm -Rf upmpdcli
+        echo "  repo removed."
+        cd ..
+        rm -Rf src
+        echo "  src directory removed."
+    fi
+    # return to the path
+    cd /app/bin
+fi
+
 if [[ "${RADIO_PARADISE_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     echo "Downloading updated Radio Paradise plugin"
     if [[ -n "${RADIO_PARADISE_PLUGIN_BRANCH}" ]]; then
@@ -278,6 +300,7 @@ if [[ "${UPRCL_ENABLE^^}" == "YES" ||
       "${DEEZER_ENABLE^^}" == "YES" ||
       "${HRA_ENABLE^^}" == "YES" ||
       "${RADIO_PARADISE_ENABLE^^}" == "YES" ||
+      "${MOTHER_EARTH_RADIO_ENABLE^^}" == "YES" ||
       "${QOBUZ_ENABLE^^}" == "YES" ]]; then
     MEDIA_SERVER_ENABLED=1
 fi
@@ -380,6 +403,13 @@ if [ "${RADIO_PARADISE_ENABLE^^}" == "YES" ]; then
     echo "Enabling Radio Paradise, processing settings";
     RADIO_PARADISE_ENABLE=YES
     sed -i 's/\#radio-paradiseuser/radio-paradiseuser/g' $CONFIG_FILE
+fi
+
+echo "MOTHER_EARTH_RADIO_ENABLE=[$MOTHER_EARTH_RADIO_ENABLE]"
+if [ "${MOTHER_EARTH_RADIO_ENABLE^^}" == "YES" ]; then
+    echo "Enabling Mother Earth Radio, processing settings";
+    MOTHER_EARTH_RADIO_ENABLE=YES
+    sed -i 's/\#mother-earth-radiouser/mother-earth-radiouser/g' $CONFIG_FILE
 fi
 
 echo "TIDAL_ENABLE=[$TIDAL_ENABLE]"
