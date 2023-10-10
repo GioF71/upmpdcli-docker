@@ -310,6 +310,8 @@ TIDAL_EXPIRY_TIME=1694616998.732007
 ```
 
 The tokens will be very long strings. Those values must be used in your docker-compose file, or, even better, through the separate `.env` file.  
+With the latest (0.0.8 tagged on 2023-10-10 as latest-tidal) version of the plugin, you can entirely skip the 4 variables listed a few lines above.  
+If you do so, be sure to monitor the container logs, and follow the Tidal link that will be presented. After you will have granted authorization to the application, the plugin will store a `credentials.json` file in the plugin cache directory. So be sure to use the `/cache` volume, or the credentials won't survire if the container is removed and created again.  
 Never share the tokens on the internet (and also on public git repositories).  
 
 ## Usage examples
