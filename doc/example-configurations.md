@@ -186,7 +186,7 @@ services:
     restart: unless-stopped
 ```
 
-Please not that RADIO_PARADISE_DOWNLOAD_PLUGIN is currently mandatory for the plugin to work, until a new upmpdcli release including the plugin is released.
+Please note that RADIO_PARADISE_DOWNLOAD_PLUGIN is currently mandatory for the plugin to work, until a new upmpdcli release including the plugin is released.
 
 ### Mother Earth Radio
 
@@ -211,7 +211,7 @@ services:
     restart: unless-stopped
 ```
 
-Please not that MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN is currently mandatory for the plugin to work, until a new upmpdcli release including the plugin is released.
+Please note that MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN is currently mandatory for the plugin to work, until a new upmpdcli release including the plugin is released.
 
 ### Streaming Services
 
