@@ -115,7 +115,7 @@ The Dockerfile and the scripts included in this repository have been tested on t
 
 ## Get the image
 
-Getting the image from [Docker Hub](https://hub.docker.com/repository/docker/giof71/upmpdcli) is as simple as typing:
+Getting the image from [Docker Hub](https://hub.docker.com/r/giof71/upmpdcli) is as simple as typing:
 
 `docker pull giof71/upmpdcli`
 
