@@ -17,6 +17,12 @@ Current version is `1.8.3`.
 
 ## News
 
+### Mother Earth Radio
+
+We have a new Mother Earth Radios plugin for upmpdcli. I have contributed it to upmpdcli. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).  
+This plugin has no additional dependencies. See the [configuration example](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#mother-earth-radio) for information on how to create a container which will run this plugin.  
+Please note that the current release of upmpdcli does not include the plugin yet, the suggested configuration will download the python source code from my fork repo.
+
 ### Radio Paradise
 
 We have a new Radio Paradise plugin for upmpdcli. I have contributed it to upmpdcli. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).  
