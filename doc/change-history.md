@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2023-11-04|Add installation of new packages (see issue [#309](https://github.com/GioF71/upmpdcli-docker/issues/309)) 
 2023-11-04|Update to Upmpdcli version 1.8.4, first version with new radio plugins (see issue [#305](https://github.com/GioF71/upmpdcli-docker/issues/305))
 2023-09-18|Update to Upmpdcli version 1.8.3, first version with new Tidal Plugin (see issue [#282](https://github.com/GioF71/upmpdcli-docker/issues/282))
 2023-09-16|Support for upcoming new Tidal Plugin (see issue [#269](https://github.com/GioF71/upmpdcli-docker/issues/269))
