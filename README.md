@@ -13,7 +13,7 @@ A few screenshots for the subsonic plugin on [Kazoo](https://github.com/GioF71/u
 First and foremost, the reference to the awesome project:
 
 [An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).  
-Current version is `1.8.3`.  
+Current version is `1.8.4`.  
 
 ## News
 
@@ -21,13 +21,11 @@ Current version is `1.8.3`.
 
 We have a new Mother Earth Radios plugin for upmpdcli. I have contributed it to upmpdcli. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).  
 This plugin has no additional dependencies. See the [configuration example](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#mother-earth-radio) for information on how to create a container which will run this plugin.  
-Please note that the current release of upmpdcli does not include the plugin yet, the suggested configuration will download the python source code from my fork repo.
 
 ### Radio Paradise
 
 We have a new Radio Paradise plugin for upmpdcli. I have contributed it to upmpdcli. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).  
 This plugin has no additional dependencies. See the [configuration example](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#radio-paradise) for information on how to create a container which will run this plugin.  
-Please note that the current release of upmpdcli does not include the plugin yet, the suggested configuration will download the python source code from my fork repo.
 
 ### Tidal support is back
 
