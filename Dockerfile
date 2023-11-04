@@ -39,6 +39,8 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 			upmpdcli-hra \
 			upmpdcli-qobuz \
 			upmpdcli-radio-browser \
+			upmpdcli-radio-paradise \
+			upmpdcli-mother-earth-radio \
 			upmpdcli-radios \
 			upmpdcli-subsonic \
 			upmpdcli-uprcl; \
