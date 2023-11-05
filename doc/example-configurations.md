@@ -186,8 +186,6 @@ services:
     restart: unless-stopped
 ```
 
-Please note that RADIO_PARADISE_DOWNLOAD_PLUGIN is currently mandatory for the plugin to work, until a new upmpdcli release including the plugin is released.
-
 ### Mother Earth Radio
 
 A simple upmpdcli instance for accessing Mother Earth Radio webradios:
@@ -210,8 +208,6 @@ services:
       - MOTHER_EARTH_RADIO_PLUGIN_BRANCH=latest-radio-paradise
     restart: unless-stopped
 ```
-
-Please note that MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN is currently mandatory for the plugin to work, until a new upmpdcli release including the plugin is released.
 
 ### Streaming Services
 
