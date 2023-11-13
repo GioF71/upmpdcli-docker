@@ -43,6 +43,7 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 			upmpdcli-mother-earth-radio \
 			upmpdcli-radios \
 			upmpdcli-subsonic \
+			upmpdcli-tidal \
 			upmpdcli-uprcl; \
 		fi
 
