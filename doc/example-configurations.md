@@ -68,6 +68,7 @@ The configuration is disabling Watchtower: see [here](#disabling-watchtower).
 
 ### Media Server
 
+The following configurations do not implement the renderer functionality. If you want to create configurations which offer both media server and renderer functionality, change the value for the variable RENDERER_MODE accordingly (possibly set it to `BOTH`).  
 A simple media server configuration:
 
 ```text
