@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        base: [ "jammy", "lunar", "bookworm"]
+        base: [ "jammy", "mantic", "bookworm"]
         build_mode: ["full", "renderer"]
 
     steps:
@@ -35,13 +35,9 @@ jobs:
           echo "REF: ["$ref"]"
 
           declare -A base_images
-          base_images[lunar]=ubuntu:lunar
-          base_images[kinetic]=ubuntu:kinetic
+          base_images[mantic]=ubuntu:mantic
           base_images[jammy]=ubuntu:jammy
-          base_images[focal]=ubuntu:focal
           base_images[bookworm]=debian:bookworm-slim
-          base_images[bullseye]=debian:bullseye-slim
-          base_images[buster]=debian:buster-slim
 
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
 
@@ -53,8 +49,8 @@ jobs:
           declare -A special_tags
           special_tags[jammy-full]="${image_name}:latest,${image_name}:latest-full,${image_name}:stable,${image_name}:ubuntu-lts-full,${image_name}:stable-full"
           special_tags[jammy-renderer]="${image_name}:renderer,${image_name}:latest-renderer,${image_name}:stable-renderer,${image_name}:ubuntu-lts-renderer"
-          special_tags[lunar-full]="${image_name}:ubuntu-current-full"
-          special_tags[lunar-renderer]="${image_name}:ubuntu-current-renderer"
+          special_tags[mantic-full]="${image_name}:ubuntu-current-full"
+          special_tags[mantic-renderer]="${image_name}:ubuntu-current-renderer"
           special_tags[bookworm-full]="${image_name}:debian-stable-full"
           special_tags[bookworm-renderer]="${image_name}:debian-stable-renderer"
           special_tags[bullseye-full]="${image_name}:debian-oldstable-full"

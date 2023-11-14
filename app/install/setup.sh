@@ -11,6 +11,7 @@ if [ "$BUILD_MODE" = "full" ]; then
     declare -A needs_switch
     needs_switch[bookworm-slim]=1
     needs_switch[lunar]=1
+    needs_switch[mantic]=1
     add_switch=0
     if [[ -v needs_switch[$IMAGE_VERSION] ]]; then
         add_switch=${needs_switch[$IMAGE_VERSION]}

@@ -128,8 +128,8 @@ Base Image|Build Mode|Tags
 :---|:---:|:---
 ubuntu:jammy|full|`latest` `latest-full` `stable` `stable-full` `ubuntu-lts-full` `jammy-full` `daily-jammy-full`
 ubuntu:jammy|renderer|`renderer` `latest-renderer` `stable-renderer` `ubuntu-lts-renderer` `jammy-renderer` `daily-jammy-renderer`
-ubuntu:lunar|full|`ubuntu-current-full` `lunar-full` `daily-lunar-full`
-ubuntu:lunar|renderer|`ubuntu-current-renderer` `lunar-renderer` `daily-lunar-renderer`
+ubuntu:mantic|full|`ubuntu-current-full` `mantic-full` `daily-mantic-full`
+ubuntu:mantic|renderer|`ubuntu-current-renderer` `mantic-renderer` `daily-mantic-renderer`
 debian:bookworm-slim|full|`bookworm-full` `daily-bookworm-full`
 debian:bookworm-slim|renderer|`bookworm-renderer` `daily-bookworm-renderer`
 

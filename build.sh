@@ -4,6 +4,7 @@ declare -A base_images
 
 base_images[bookworm]=debian:bookworm-slim
 base_images[bullseye]=debian:bullseye-slim
+base_images[mantic]=ubuntu:mantic
 base_images[lunar]=ubuntu:lunar
 base_images[kinetic]=ubuntu:kinetic
 base_images[jammy]=ubuntu:jammy
