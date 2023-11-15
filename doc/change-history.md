@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2023-11-15|Support different subsonic-connect versions (see issue [#318](https://github.com/GioF71/upmpdcli-docker/issues/318))
 2023-11-14|Switch from `lunar` to `mantic` (see issue [#316](https://github.com/GioF71/upmpdcli-docker/issues/316))
 2023-11-13|Add tidal package to installation list (see issue [#313](https://github.com/GioF71/upmpdcli-docker/issues/313))
 2023-11-04|Add installation of new packages (see issue [#309](https://github.com/GioF71/upmpdcli-docker/issues/309)) 

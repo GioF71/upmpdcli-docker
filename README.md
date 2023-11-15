@@ -53,7 +53,7 @@ I am now a contributor to upmpdcli for this plugin. See the git repository forks
 The plugin uses my [subsonic-connector](https://github.com/GioF71/subsonic-connector) library which in turn is built around [py-sonic](https://github.com/crustymonkey/py-sonic).  
 Everything has been developed and tested against [Navidrome](https://www.navidrome.org/) but should work with other servers hopefully.  
 See [this](https://github.com/navidrome/navidrome/discussions/2324) discussion on the Navidrome repo for updates and further information.  
-The current version of the image includes Subsonic Plugin version `0.2.6`.  
+The current version of the image includes Subsonic Plugin version `0.1.17`.  
 If you use upmpdcli as a renderer for this plugin, you might probably want to setup a scrobbler, so that the Subsonic server can keep track of what you are playing. See [this](https://github.com/GioF71/mpd-subsonic-scrobbler) repository for more details.  
 
 ### Scrobbling
@@ -204,12 +204,16 @@ SUBSONIC_BASE_URL|Subsonic base url. Example: `http://my_navidrome.homelab.local
 SUBSONIC_PORT|Subsonic port, defaults to `4533`
 SUBSONIC_USER|Subsonic username
 SUBSONIC_PASSWORD|Subsonic password
+SUBSONIC_LEGACYAUTH|Subsonic legacy authentication (`true`|`false`), set to `true` when using Lightweight Media Server (LMS) 
 SUBSONIC_ITEMS_PER_PAGE|Number of items per page, defaults to `100`
 SUBSONIC_APPEND_YEAR_TO_ALBUM|If set to `yes` (default), the album year is appended to the album
 SUBSONIC_APPEND_CODECS_TO_ALBUM|If set to `yes` (default), the codecs for the album are appended to the album unless all codecs are in the white list
 SUBSONIC_WHITELIST_CODECS|List of comma-separated whitelist (ideally lossless) codecs. Defaults to `alac,wav,flac,dsf`
 SUBSONIC_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
-SUBSONIC_PLUGIN_BRANCH|If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `SUBSONIC_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-subsonic`
+SUBSONIC_PLUGIN_BRANCH|If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `SUBSONIC_DOWNLOAD_PLUGIN`. Suggested branch name is `next-subsonic`
+SUBSONIC_FORCE_CONNECTOR_VERSION|If set, the specified version of subsonic-connector will be installed over the one included in the image
+SUBSONIC_TRANSCODE_CODEC|If set, the value will be used as the transcode codec
+SUBSONIC_TRANSCODE_MAX_BITRATE|If set, the value will be used as the transcode max bitrate
 RADIO_PARADISE_ENABLE|Enable the Radio Paradise Plugin, set to `yes` to enable
 RADIO_PARADISE_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
 RADIO_PARADISE_PLUGIN_BRANCH|If `RADIO_PARADISE_DOWNLOAD_PLUGIN` is set to `yes`, the branch indicated by this variable will be used. Must be specified if enabling `RADIO_PARADISE_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-radio-paradise`
