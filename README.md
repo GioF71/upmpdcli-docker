@@ -19,8 +19,9 @@ Current version is `1.8.4`.
 
 ### Subsonic Plugin compatibility
 
-The `next-subsonic` branch of the subsonic plugin, which is used with the recently updated suggested configurations, provides better compatibility with other two subsonic servers.  
+The `next-subsonic` branch of the subsonic plugin, which is used with the recently updated [suggested configurations](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#subsonic-server), provides better compatibility with other two subsonic servers.  
 These are [gonic](https://github.com/sentriz/gonic) and [lightweight-media-server or lms](https://hub.docker.com/r/epoupon/lms).  
+Just a quick reminder, with lms you will need to enable subsonic legacy authentication using the new variable `SUBSONIC_LEGACYAUTH`.  
 Thanks to the respective authors for having helped me integrating their servers more easily.
 
 ### Mother Earth Radio
