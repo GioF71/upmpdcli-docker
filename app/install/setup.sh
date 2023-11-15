@@ -10,11 +10,15 @@ echo "IMAGE_VERSION=[$IMAGE_VERSION]"
 if [ "$BUILD_MODE" = "full" ]; then
     declare -A needs_switch
     needs_switch[bookworm-slim]=1
-    needs_switch[lunar]=1
     needs_switch[mantic]=1
     add_switch=0
     if [[ -v needs_switch[$IMAGE_VERSION] ]]; then
         add_switch=${needs_switch[$IMAGE_VERSION]}
+        if [ $add_switch -eq 1 ]; then
+            echo "yes" > /app/conf/pip-install-break-needed
+        else
+            echo "no" > /app/conf/pip-install-break-needed
+        fi
     fi
     pip_upgrade="pip install --no-cache-dir --upgrade pip"
     if [ $add_switch -eq 1 ]; then

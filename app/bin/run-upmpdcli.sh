@@ -348,6 +348,18 @@ echo "SUBSONIC_ENABLE=[$SUBSONIC_ENABLE]"
 if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
     echo "Enabling Subsonic, processing settings";
     SUBSONIC_ENABLE=YES
+    # do we need to download a newer subsonic-connector library?
+    if [[ -n "${SUBSONIC_FORCE_CONNECTOR_VERSION}" ]]; then
+        echo "Installing subsonic-connector version [${SUBSONIC_FORCE_CONNECTOR_VERSION}]"
+        break_needed=`cat /app/conf/pip-install-break-needed`
+        pip_switch=""
+        if [[ "${break_needed}" == "yes" ]]; then
+            pip_switch="--break-system-packages"
+        fi
+        pip_cmd="pip install ${pip_switch} subsonic-connector==${SUBSONIC_FORCE_CONNECTOR_VERSION}"
+        echo "pip_cmd: [${pip_cmd}]"
+        eval $pip_cmd
+    fi
     sed -i 's/\#subsonicuser/subsonicuser/g' $CONFIG_FILE
     echo "SUBSONIC_AUTOSTART=[$SUBSONIC_AUTOSTART]"
     if [[ -z "${SUBSONIC_AUTOSTART^^}" || "${SUBSONIC_AUTOSTART}" == "1" || "${SUBSONIC_AUTOSTART^^}" == "YES" ]]; then
@@ -366,6 +378,10 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
     echo "Setting subsonic password [$SUBSONIC_PASSWORD]"
     sed -i 's/\#subsonicpassword/subsonicpassword/g' $CONFIG_FILE
     sed -i 's/SUBSONIC_PASSWORD/'"$SUBSONIC_PASSWORD"'/g' $CONFIG_FILE
+    if [[ -n "${SUBSONIC_LEGACYAUTH}" ]]; then
+        sed -i 's/\#subsoniclegacyauth/subsoniclegacyauth/g' $CONFIG_FILE
+        sed -i 's/SUBSONIC_LEGACYAUTH/'"$SUBSONIC_LEGACYAUTH"'/g' $CONFIG_FILE
+    fi
     if [[ -n "${SUBSONIC_ITEMS_PER_PAGE}" ]]; then
         sed -i 's/\#subsonicitemsperpage/subsonicitemsperpage/g' $CONFIG_FILE
         sed -i 's/SUBSONIC_ITEMS_PER_PAGE/'"$SUBSONIC_ITEMS_PER_PAGE"'/g' $CONFIG_FILE
@@ -395,6 +411,14 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
     if [[ -n "${SUBSONIC_WHITELIST_CODECS}" ]]; then
         sed -i 's/\#subsonicwhitelistcodecs/subsonicwhitelistcodecs/g' $CONFIG_FILE
         sed -i 's/SUBSONIC_WHITELIST_CODECS/'"$SUBSONIC_WHITELIST_CODECS"'/g' $CONFIG_FILE
+    fi
+    if [[ -n "${SUBSONIC_TRANSCODE_CODEC}" ]]; then
+        sed -i 's/\#subsonictranscodecodec/subsonictranscodecodec/g' $CONFIG_FILE
+        sed -i 's/SUBSONIC_TRANSCODE_CODEC/'"$SUBSONIC_TRANSCODE_CODEC"'/g' $CONFIG_FILE
+    fi
+    if [[ -n "${SUBSONIC_TRANSCODE_MAX_BITRATE}" ]]; then
+        sed -i 's/\#subsonictranscodemaxbitrate/subsonictranscodemaxbitrate/g' $CONFIG_FILE
+        sed -i 's/SUBSONIC_TRANSCODE_MAX_BITRATE/'"$SUBSONIC_TRANSCODE_MAX_BITRATE"'/g' $CONFIG_FILE
     fi
 fi
 
