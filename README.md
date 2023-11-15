@@ -17,6 +17,12 @@ Current version is `1.8.4`.
 
 ## News
 
+### Subsonic Plugin compatibility
+
+The `next-subsonic` branch of the subsonic plugin, which is used with the recently updated suggested configurations, provides better compatibility with other two subsonic servers.  
+These are [gonic](https://github.com/sentriz/gonic) and [lightweight-media-server or lms](https://hub.docker.com/r/epoupon/lms).  
+Thanks to the respective authors for having helped me integrating their servers more easily.
+
 ### Mother Earth Radio
 
 We have a new Mother Earth Radios plugin for upmpdcli. I have contributed it to upmpdcli. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).  
