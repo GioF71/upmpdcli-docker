@@ -272,6 +272,7 @@ set_parameter $CONFIG_FILE MPD_HOST "$MPD_HOST" mpdhost
 set_parameter $CONFIG_FILE MPD_PORT "$MPD_PORT" mpdport
 set_parameter $CONFIG_FILE PLG_MICRO_HTTP_HOST "$PLG_MICRO_HTTP_HOST" plgmicrohttphost
 set_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmicrohttpport
+set_parameter $CONFIG_FILE PLG_PROXY_METHOD "$PLG_PROXY_METHOD" plgproxymethod
 
 set_parameter $CONFIG_FILE OWN_QUEUE "$OWN_QUEUE" ownqueue
 

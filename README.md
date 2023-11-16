@@ -229,6 +229,7 @@ MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downlo
 MOTHER_EARTH_RADIO_PLUGIN_BRANCH|If `MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN` is set to `yes`, the branch indicated by this variable will be used. Must be specified if enabling `MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-mother-earth-radio`
 PLG_MICRO_HTTP_HOST|IP for the qobuz local HTTP service.
 PLG_MICRO_HTTP_PORT|Port for the qobuz local HTTP service.
+PLG_PROXY_METHOD|Proxy method, valid values are `proxy` and `redirect`, defaults to `redirect`
 MEDIA_SERVER_FRIENDLY_NAME|Friendly name for the Media Server
 TIDAL_ENABLE|Set to `YES` to enable Tidal support, defaults to `no`
 TIDAL_TOKEN_TYPE|Tidal token type
