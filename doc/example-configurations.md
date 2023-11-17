@@ -69,7 +69,7 @@ The configuration is disabling Watchtower: see [here](#disabling-watchtower).
 ### Media Server
 
 The following configurations do not implement the renderer functionality. If you want to create configurations which offer both media server and renderer functionality, change the value for the variable RENDERER_MODE accordingly (possibly set it to `BOTH`).  
-I am trying to suggest a distint offset for each type of mediaserver. Remember that this is only needed if you run more than one media server on the same host.  
+I am trying to suggest a distint `PORT_OFFSET` for each type of mediaserver. Remember that this is only needed if you run more than one media server on the same host.  
 
 #### A simple media library configuration using `uprcl`:
 
