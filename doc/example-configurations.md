@@ -8,7 +8,7 @@ A list of considerations that apply to the upcoming configurations are listed in
 
 ### User mode
 
-Using `PUID` and `PGID` is optional, but when using volumes in read-write mode (for example the `/cache` volume), it will help you if you want to have those files created with a specified user. Generally, the main user of a desktop system has uid and gid set to `1000`, but you can verify your user and group id by simply typing `id` from a terminal. The output will indicated the user and group id of the current user.  
+Using `PUID` and `PGID` is optional, but when using volumes in read-write mode (for example the `/cache` volume), it will help you if you want to have those files created with a specified user. Generally, the main user of a desktop system has uid and gid set to `1000`, but you can verify your user and group id by simply typing `id` from a terminal. The output will show the user and group id of the currently logged user.  
 
 ### Media Server mode
 
