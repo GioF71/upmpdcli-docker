@@ -380,8 +380,15 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
     sed -i 's/\#subsonicpassword/subsonicpassword/g' $CONFIG_FILE
     sed -i 's/SUBSONIC_PASSWORD/'"$SUBSONIC_PASSWORD"'/g' $CONFIG_FILE
     if [[ -n "${SUBSONIC_LEGACYAUTH}" ]]; then
+        legacy_auth_value=0
+        if [[ "${SUBSONIC_LEGACYAUTH^^}" == "YES" || "${SUBSONIC_LEGACYAUTH^^}" == "Y" || "${SUBSONIC_LEGACYAUTH^^}" == "TRUE" ]]; then
+            legacy_auth_value=1
+        elif [[ ! ("${SUBSONIC_LEGACYAUTH^^}" == "NO" || "${SUBSONIC_LEGACYAUTH^^}" == "N" || "${SUBSONIC_LEGACYAUTH^^}" == "FALSE") ]]; then
+            echo "Invalid SUBSONIC_LEGACYAUTH [${SUBSONIC_LEGACYAUTH}]"
+            exit 2
+        fi
         sed -i 's/\#subsoniclegacyauth/subsoniclegacyauth/g' $CONFIG_FILE
-        sed -i 's/SUBSONIC_LEGACYAUTH/'"$SUBSONIC_LEGACYAUTH"'/g' $CONFIG_FILE
+        sed -i 's/SUBSONIC_LEGACYAUTH/'"$legacy_auth_value"'/g' $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_ITEMS_PER_PAGE}" ]]; then
         sed -i 's/\#subsonicitemsperpage/subsonicitemsperpage/g' $CONFIG_FILE
