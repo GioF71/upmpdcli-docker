@@ -303,7 +303,7 @@ In order to obtain your set of tidal credentials, execute the following command:
 docker run --rm -it --entrypoint /app/bin/get-tidal-credentials.py giof71/upmpdcli
 ```
 
-You will be presented with an output similar to the following:
+You will be presented with an output similar to the following prompt:
 
 ```text
 Visit https://link.tidal.com/XXXXX to log in, the code will expire in 300 seconds
@@ -323,6 +323,8 @@ The tokens will be very long strings. Those values must be used in your docker-c
 With the latest (0.0.8 tagged on 2023-10-10 as latest-tidal) version of the plugin, you can entirely skip the 4 variables listed a few lines above.  
 If you do so, be sure to monitor the container logs, and follow the Tidal link that will be presented. After you will have granted authorization to the application, the plugin will store a `credentials.json` file in the plugin cache directory. So be sure to use the `/cache` volume, or the credentials won't survire if the container is removed and created again.  
 Never share the tokens on the internet (and also on public git repositories).  
+Remember that currently, the Tidal Plugin actually starts when the first control point (e.g. BubbleUpnp, mConnect) contacts upmpdcli asking for the contents from the Tidal Plugin.  
+So, you will not see the prompt until you try to use the plugin itself.  
 
 ## Usage examples
 
