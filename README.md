@@ -211,7 +211,7 @@ SUBSONIC_BASE_URL|Subsonic base url. Example: `http://my_navidrome.homelab.local
 SUBSONIC_PORT|Subsonic port, defaults to `4533`
 SUBSONIC_USER|Subsonic username
 SUBSONIC_PASSWORD|Subsonic password
-SUBSONIC_LEGACYAUTH|Subsonic legacy authentication (`true`|`false`), set to `true` when using Lightweight Media Server (LMS) (requires subsonic-connector >= 0.2.6)
+SUBSONIC_LEGACYAUTH|Subsonic legacy authentication (`yes`|`no`), set to `true` when using Lightweight Media Server (LMS) (requires subsonic-connector >= 0.2.6)
 SUBSONIC_ITEMS_PER_PAGE|Number of items per page, defaults to `100`
 SUBSONIC_APPEND_YEAR_TO_ALBUM|If set to `yes` (default), the album year is appended to the album
 SUBSONIC_APPEND_CODECS_TO_ALBUM|If set to `yes` (default), the codecs for the album are appended to the album unless all codecs are in the white list

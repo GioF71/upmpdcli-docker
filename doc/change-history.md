@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2023-11-17|Write subsonic legacy auth configuration properly (see issue [#335](https://github.com/GioF71/upmpdcli-docker/issues/335))
 2023-11-16|Add variable PLG_PROXY_METHOD (see issue [#325](https://github.com/GioF71/upmpdcli-docker/issues/325))
 2023-11-15|Clarification about new subsonic features (see issue [#320](https://github.com/GioF71/upmpdcli-docker/issues/320))
 2023-11-15|Support different subsonic-connect versions (see issue [#318](https://github.com/GioF71/upmpdcli-docker/issues/318))
