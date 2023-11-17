@@ -81,6 +81,7 @@ services:
     container_name: upmpdcli-library
     network_mode: host
     environment:
+      - PORT_OFFSET=0
       - PUID=1000
       - PGID=1000
       - RENDERER_MODE=NONE
@@ -116,6 +117,7 @@ services:
     container_name: upmpdcli-radio
     network_mode: host
     environment:
+      - PORT_OFFSET=1
       - RENDERER_MODE=NONE
       - FRIENDLY_NAME=upmpd-radio
       - UPRCL_ENABLE=yes
@@ -148,6 +150,7 @@ services:
     container_name: upmpdcli-subsonic
     network_mode: host
     environment:
+      - PORT_OFFSET=2
       - RENDERER_MODE=NONE
       - FRIENDLY_NAME=upmpdcli-subsonic
       - SUBSONIC_ENABLE=yes
@@ -179,6 +182,7 @@ services:
     container_name: upmpdcli-radio-paradise
     network_mode: host
     environment:
+      - PORT_OFFSET=3
       - RENDERER_MODE=NONE
       - FRIENDLY_NAME=Radio Paradise (upmpdcli)
       - CHECK_CONTENT_FORMAT=yes
@@ -202,6 +206,7 @@ services:
     container_name: upmpdcli-mother-earth-radio
     network_mode: host
     environment:
+      - PORT_OFFSET=4
       - RENDERER_MODE=NONE
       - FRIENDLY_NAME=Mother Earth Radio (upmpdcli)
       - CHECK_CONTENT_FORMAT=yes
@@ -227,6 +232,7 @@ services:
     container_name: upmpdcli-tidal
     network_mode: host
     environment:
+      - PORT_OFFSET=5
       - RENDERER_MODE=NONE
       - FRIENDLY_NAME=Tidal (upmpdcli)
       - TIDAL_ENABLE=yes
@@ -260,6 +266,7 @@ services:
     container_name: upmpdcli-streaming-services
     network_mode: host
     environment:
+      - PORT_OFFSET=6
       - RENDERER_MODE=NONE
       - FRIENDLY_NAME=upmpd-streaming-services
       - QOBUZ_ENABLE=yes
