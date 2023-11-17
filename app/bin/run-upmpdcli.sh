@@ -390,6 +390,17 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
         sed -i 's/\#subsoniclegacyauth/subsoniclegacyauth/g' $CONFIG_FILE
         sed -i 's/SUBSONIC_LEGACYAUTH/'"$legacy_auth_value"'/g' $CONFIG_FILE
     fi
+    if [[ -n "${SUBSONIC_SERVER_SIDE_SCROBBLING}" ]]; then
+        server_side_scrobbling=0
+        if [[ "${SUBSONIC_SERVER_SIDE_SCROBBLING^^}" == "YES" || "${SUBSONIC_SERVER_SIDE_SCROBBLING^^}" == "Y" ]]; then
+            server_side_scrobbling=1
+        elif [[ ! ("${SUBSONIC_SERVER_SIDE_SCROBBLING^^}" == "NO" || "${SUBSONIC_SERVER_SIDE_SCROBBLING^^}" == "N") ]]; then
+            echo "Invalid SUBSONIC_SERVER_SIDE_SCROBBLING [${SUBSONIC_SERVER_SIDE_SCROBBLING}]"
+            exit 2
+        fi
+        sed -i 's/\#subsonicserversidescrobbling/subsonicserversidescrobbling/g' $CONFIG_FILE
+        sed -i 's/SUBSONIC_SERVER_SIDE_SCROBBLING/'"$server_side_scrobbling"'/g' $CONFIG_FILE
+    fi
     if [[ -n "${SUBSONIC_ITEMS_PER_PAGE}" ]]; then
         sed -i 's/\#subsonicitemsperpage/subsonicitemsperpage/g' $CONFIG_FILE
         sed -i 's/SUBSONIC_ITEMS_PER_PAGE/'"$SUBSONIC_ITEMS_PER_PAGE"'/g' $CONFIG_FILE
