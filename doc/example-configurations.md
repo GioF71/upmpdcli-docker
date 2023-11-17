@@ -42,7 +42,7 @@ version: "3"
 services:
   upmpdcli:
     image: giof71/upmpdcli:renderer
-    container_name: upmpdcli
+    container_name: upmpdcli-renderer
     network_mode: host
     environment:
       - PUID=1000
@@ -76,7 +76,7 @@ A simple media server configuration:
 version: "3"
 
 services:
-  upmpdcli-library:
+  upmpdcli:
     image: giof71/upmpdcli
     container_name: upmpdcli-library
     network_mode: host
@@ -111,7 +111,7 @@ A simple radio server configuration:
 version: "3"
 
 services:
-  upmpdcli-radio:
+  upmpdcli:
     image: giof71/upmpdcli
     container_name: upmpdcli-radio
     network_mode: host
@@ -255,7 +255,7 @@ A simple upmpdcli instance for streaming Qobuz:
 version: "3"
 
 services:
-  upmpdcli-streaming-services:
+  upmpdcli:
     image: giof71/upmpdcli
     container_name: upmpdcli-streaming-services
     network_mode: host
