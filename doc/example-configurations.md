@@ -252,7 +252,6 @@ services:
 
 Remember to use a volume for the `/cache` volume, so that the collected playback statistics will be preserved even when the container is recreated.  
 Refer to the section "Obtain Tidal credentials" in the [README.md](https://github.com/GioF71/upmpdcli-docker/blob/main/README.md) for more information on how to retrieve your set of Tidal credentials.  
-Please note that this plugin is still not working, we need to wait the next release of upmpdcli because of some required changes. I will update the documentation as this happens.  
 
 ##### Qobuz
 
