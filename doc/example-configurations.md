@@ -69,7 +69,9 @@ The configuration is disabling Watchtower: see [here](#disabling-watchtower).
 ### Media Server
 
 The following configurations do not implement the renderer functionality. If you want to create configurations which offer both media server and renderer functionality, change the value for the variable RENDERER_MODE accordingly (possibly set it to `BOTH`).  
-A simple media server configuration:
+I am trying to suggest a distint offset for each type of mediaserver. Remember that this is only needed if you run more than one media server on the same host.  
+
+#### A simple media library configuration using `uprcl`:
 
 ```text
 ---
@@ -103,7 +105,7 @@ services:
 
 Note that we are showing how to use multiple directories as media directories under volume `/uprcl/mediadirs`. Of course this is not mandatory, you might have just one volume instead of two if you don't need to combine multiple directories.  
 
-### Radio Server
+#### Radio Server
 
 A simple radio server configuration:
 
@@ -136,7 +138,7 @@ services:
 This configuration disables the renderers (`RENDERER_MODE=NONE`), but this is not mandatory.  
 When you disable renderers, you are essentially creating a pure upnp/dlna server.
 
-### Subsonic Server
+#### Subsonic Server
 
 A simple upmpdcli instance for a Subsonic server:
 
@@ -168,7 +170,7 @@ services:
 
 The configuration assumes the credentials to be stored in the `.env` file.
 
-### Radio Paradise
+#### Radio Paradise
 
 A simple upmpdcli instance for accessing Radio Paradise webradios:
 
@@ -192,7 +194,7 @@ services:
     restart: unless-stopped
 ```
 
-### Mother Earth Radio
+#### Mother Earth Radio
 
 A simple upmpdcli instance for accessing Mother Earth Radio webradios:
 
@@ -216,9 +218,9 @@ services:
     restart: unless-stopped
 ```
 
-### Streaming Services
+#### Streaming Services
 
-#### Tidal
+##### Tidal
 
 A simple upmpdcli instance for streaming Tidal:
 
@@ -252,7 +254,7 @@ Remember to use a volume for the `/cache` volume, so that the collected playback
 Refer to the section "Obtain Tidal credentials" in the [README.md](https://github.com/GioF71/upmpdcli-docker/blob/main/README.md) for more information on how to retrieve your set of Tidal credentials.  
 Please note that this plugin is still not working, we need to wait the next release of upmpdcli because of some required changes. I will update the documentation as this happens.  
 
-#### Qobuz
+##### Qobuz
 
 A simple upmpdcli instance for streaming Qobuz:
 
