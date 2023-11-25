@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2023-11-25|Update to Upmpdcli version 1.8.6 (see issue [#340](https://github.com/GioF71/upmpdcli-docker/issues/340))
 2023-11-17|Support for subsonic server side scrobbling (see issue [#337](https://github.com/GioF71/upmpdcli-docker/issues/337))
 2023-11-17|Write subsonic legacy auth configuration properly (see issue [#335](https://github.com/GioF71/upmpdcli-docker/issues/335))
 2023-11-16|Add variable PLG_PROXY_METHOD (see issue [#325](https://github.com/GioF71/upmpdcli-docker/issues/325))
