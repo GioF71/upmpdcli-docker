@@ -439,6 +439,17 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
         sed -i 's/\#subsonictranscodemaxbitrate/subsonictranscodemaxbitrate/g' $CONFIG_FILE
         sed -i 's/SUBSONIC_TRANSCODE_MAX_BITRATE/'"$SUBSONIC_TRANSCODE_MAX_BITRATE"'/g' $CONFIG_FILE
     fi
+    if [[ -n "${SUBSONIC_ENABLE_INTERNET_RADIOS}" ]]; then
+        sed -i 's/\#subsonictaginitialpageenabledir/subsonictaginitialpageenabledir/g' $CONFIG_FILE
+        enable_ir=1
+        if [[ "${SUBSONIC_ENABLE_INTERNET_RADIOS^^}" == "NO" ]]; then
+            enable_ir=0
+        elif [[ ! "${SUBSONIC_ENABLE_INTERNET_RADIOS^^}" == "YES" ]]; then
+            echo "Invalid SUBSONIC_ENABLE_INTERNET_RADIOS [${SUBSONIC_ENABLE_INTERNET_RADIOS}]"
+            exit 2
+        fi
+        sed -i 's/SUBSONIC_ENABLE_INTERNET_RADIOS/'"$enable_ir"'/g' $CONFIG_FILE
+    fi
 fi
 
 echo "RADIO_PARADISE_ENABLE=[$RADIO_PARADISE_ENABLE]"
