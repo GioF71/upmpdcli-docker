@@ -217,7 +217,8 @@ SUBSONIC_ITEMS_PER_PAGE|Number of items per page, defaults to `100`
 SUBSONIC_APPEND_YEAR_TO_ALBUM|If set to `yes` (default), the album year is appended to the album
 SUBSONIC_APPEND_CODECS_TO_ALBUM|If set to `yes` (default), the codecs for the album are appended to the album unless all codecs are in the white list
 SUBSONIC_WHITELIST_CODECS|List of comma-separated whitelist (ideally lossless) codecs. Defaults to `alac,wav,flac,dsf`
-SUBSONIC_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
+SUBSONIC_ENABLE_INTERNET_RADIOS|Set to `yes` to enable internet radios, disabled by default (requires plugin version >= 0.3.4)
+SUBSONIC_DOWNLOAD_PLUGIN|If set to `yes`, the updated plugin is downloaded from the upstream repo
 SUBSONIC_PLUGIN_BRANCH|If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `SUBSONIC_DOWNLOAD_PLUGIN`. Suggested branch name is `next-subsonic`
 SUBSONIC_FORCE_CONNECTOR_VERSION|If set, the specified version of subsonic-connector will be installed over the one included in the image
 SUBSONIC_TRANSCODE_CODEC|If set, the value will be used as the transcode codec (requires subsonic-connector >= 0.2.6)
