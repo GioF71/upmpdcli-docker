@@ -161,8 +161,8 @@ services:
       - SUBSONIC_USER=${SUBSONIC_USER}
       - SUBSONIC_PASSWORD=${SUBSONIC_PASSWORD}
       - SUBSONIC_DOWNLOAD_PLUGIN=yes
-      - SUBSONIC_PLUGIN_BRANCH=next-subsonic
-      - SUBSONIC_FORCE_CONNECTOR_VERSION=0.2.6
+      - SUBSONIC_PLUGIN_BRANCH=latest-subsonic
+      #- SUBSONIC_FORCE_CONNECTOR_VERSION=0.2.6
     volumes:
       - ./cache:/cache
     restart: unless-stopped
