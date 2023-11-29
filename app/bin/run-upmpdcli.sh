@@ -290,6 +290,13 @@ if [[ -n "${CHECK_CONTENT_FORMAT}" ]]; then
     set_parameter $CONFIG_FILE CHECK_CONTENT_FORMAT "$check_content_format_value" "checkcontentformat"
 fi
 
+echo "WEBSERVER_DOCUMENT_ROOT=[${WEBSERVER_DOCUMENT_ROOT}]"
+if [[ -n "${WEBSERVER_DOCUMENT_ROOT}" ]]; then
+    echo "Setting webserverdocumentroot to [$WEBSERVER_DOCUMENT_ROOT]"
+    sed -i 's/\#webserverdocumentroot/webserverdocumentroot/g' $CONFIG_FILE;
+    sed -i 's+WEBSERVER_DOCUMENT_ROOT+'"$WEBSERVER_DOCUMENT_ROOT"'+g' $CONFIG_FILE
+fi
+
 MEDIA_SERVER_ENABLED=0
 if [[ "${UPRCL_ENABLE^^}" == "YES" || 
       "${RADIO_BROWSER_ENABLE^^}" == "YES" ||
