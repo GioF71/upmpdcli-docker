@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        base: [ "jammy", "mantic", "bookworm"]
+        base: [ "jammy" ]
         build_mode: ["full", "renderer"]
 
     steps:
