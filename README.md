@@ -239,6 +239,7 @@ TIDAL_ACCESS_TOKEN|Tidal access token
 TIDAL_REFRESH_TOKEN|Tidal refresh token
 TIDAL_EXPIRY_TIME|Tidal expiry time
 TIDAL_QUALITY|Possible values are `LOW` (mp3@96k), `HIGH` (mp3@320k), `LOSSLESS` (flac@44.1kHz), `HI_RES` (I believe it's MQA), `HI_RES_LOSSLESS` (flac@hires), defaults to `LOSSLESS`
+TIDAL_PREPEND_NUMBER_IN_ITEM_LIST|Set to `yes` to create item numbers in lists (`[01] Item` instead of `Item`), mostly for kodi, disabled by default
 TIDAL_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
 TIDAL_PLUGIN_BRANCH|If `TIDAL_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `TIDAL_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-tidal`
 QOBUZ_ENABLE|Set to `yes` to enable Qobuz support, defaults to `no`

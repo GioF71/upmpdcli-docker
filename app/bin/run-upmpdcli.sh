@@ -3,6 +3,7 @@
 ## error codes
 # 1 Generic error
 # 2 Invalid RENDERER_MODE value
+# 3 Invalid argument
 
 if [[ "${MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     echo "Downloading updated Mother Earth Radio plugin"
@@ -502,6 +503,17 @@ if [ "${TIDAL_ENABLE^^}" == "YES" ]; then
     echo "Setting Audio Quality [$TIDAL_AUDIO_QUALITY]"
     sed -i 's/\#tidalaudioquality/tidalaudioquality/g' $CONFIG_FILE
     sed -i 's,TIDAL_AUDIO_QUALITY,'"$TIDAL_AUDIO_QUALITY"',g' $CONFIG_FILE
+    if [[ -n "${TIDAL_PREPEND_NUMBER_IN_ITEM_LIST}" ]]; then
+        echo "TIDAL_PREPEND_NUMBER_IN_ITEM_LIST=[${TIDAL_PREPEND_NUMBER_IN_ITEM_LIST}]"
+        if [[ "${TIDAL_PREPEND_NUMBER_IN_ITEM_LIST^^}" == "YES" || "${TIDAL_PREPEND_NUMBER_IN_ITEM_LIST^^}" == "Y" ]]; then
+            #set prependnumberinitemlist
+            sed -i 's/\#tidalprependnumberinitemlist/tidalprependnumberinitemlist/g' $CONFIG_FILE
+            sed -i 's,TIDAL_PREPEND_NUMBER_IN_ITEM_LIST,'"1"',g' $CONFIG_FILE
+        elif [[ "${TIDAL_PREPEND_NUMBER_IN_ITEM_LIST^^}" != "NO" && "${TIDAL_PREPEND_NUMBER_IN_ITEM_LIST^^}" == "N" ]]; then
+            echo "Invalid TIDAL_PREPEND_NUMBER_IN_ITEM_LIST=[${TIDAL_PREPEND_NUMBER_IN_ITEM_LIST}]"
+            exit 3
+        fi
+    fi
 fi
 
 echo "Qobuz Enable [$QOBUZ_ENABLE]"
