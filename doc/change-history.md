@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2023-12-11|Support `prependnumberinitemlist` for Tidal (see issue [#351](https://github.com/GioF71/upmpdcli-docker/issues/351))
 2023-11-29|Dropped bullseye and mantic builds (see issue [#348](https://github.com/GioF71/upmpdcli-docker/issues/348))
 2023-11-29|Add support for webserverdocumentroot (see issue [#346](https://github.com/GioF71/upmpdcli-docker/issues/346))
 2023-11-25|Support enabling internet radios in subsonic (see issue [#344](https://github.com/GioF71/upmpdcli-docker/issues/344))
