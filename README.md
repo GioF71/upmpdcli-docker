@@ -265,7 +265,7 @@ Volume|Description
 :---|:---
 /uprcl/confdir|Uprcl configuration directory
 /uprcl/mediadirs|Uprcl media directories
-/user/config|Location for additional files. Currently: `additional-radio-list.txt` and `recoll.conf.user` as well as credentials for qobuz on `qobuz.txt`, for deezer on `deezer.txt`, for hra on `hra.txt`. The credentials file format is the same as a `.env` file. Ensure to include all the settings related the streaming service.
+/user/config|Location for additional files. Currently: `additional-radio-list.txt` and `recoll.conf.user` as well as credentials for qobuz on `qobuz.txt`, for hra on `hra.txt`. The credentials file format is the same as a `.env` file. Ensure to include all the settings related the streaming service.
 /cache|Runtime information for upmpdcli. Attach a volume to this path in order to maintain consistency across restarts.
 /log|Location for the upmpdcli log file. Enabled using `LOG_ENABLE`
 

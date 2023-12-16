@@ -106,7 +106,6 @@ SOURCE_CONFIG_FILE=/app/conf/upmpdcli.conf
 CONFIG_FILE=/app/conf/current-upmpdcli.conf
 
 QOBUZ_CREDENTIALS_FILE=/user/config/qobuz.txt
-DEEZER_CREDENTIALS_FILE=/user/config/deezer.txt
 HRA_CREDENTIALS_FILE=/user/config/hra.txt
 
 declare -A file_dict
@@ -525,15 +524,6 @@ if [ "${QOBUZ_ENABLE^^}" == "YES" ]; then
     sed -i 's/QOBUZ_USERNAME/'"$QOBUZ_USERNAME"'/g' $CONFIG_FILE;
     sed -i 's/QOBUZ_PASSWORD/'"$QOBUZ_PASSWORD"'/g' $CONFIG_FILE;
     sed -i 's/QOBUZ_FORMAT_ID/'"$QOBUZ_FORMAT_ID"'/g' $CONFIG_FILE;
-fi
-
-echo "Deezer Enable [$DEEZER_ENABLE]"
-if [ "${DEEZER_ENABLE^^}" == "YES" ]; then
-    echo "Processing Deezer settings";
-    sed -i 's/\#deezeruser/deezeruser/g' $CONFIG_FILE;
-    sed -i 's/\#deezerpass/deezerpass/g' $CONFIG_FILE;
-    sed -i 's/DEEZER_USERNAME/'"$DEEZER_USERNAME"'/g' $CONFIG_FILE;
-    sed -i 's/DEEZER_PASSWORD/'"$DEEZER_PASSWORD"'/g' $CONFIG_FILE;
 fi
 
 echo "HRA Enable [$HRA_ENABLE]"

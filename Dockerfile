@@ -35,7 +35,6 @@ RUN apt-get install -y --no-install-recommends iproute2 grep
 RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y \
 			upmpdcli-bbc \
-			upmpdcli-deezer \
 			upmpdcli-hra \
 			upmpdcli-qobuz \
 			upmpdcli-radio-browser \
@@ -123,10 +122,6 @@ ENV QOBUZ_ENABLE no
 ENV QOBUZ_USERNAME qobuz_username
 ENV QOBUZ_PASSWORD qobuz_password
 ENV QOBUZ_FORMAT_ID 5
-
-ENV DEEZER_ENABLE no
-ENV DEEZER_USERNAME deezer_username
-ENV DEEZER_PASSWORD deezer_password
 
 ENV HRA_ENABLE no
 ENV HRA_USERNAME hra_username
