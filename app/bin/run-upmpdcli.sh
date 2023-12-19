@@ -228,7 +228,11 @@ fi
 # Friendly name management
 if [ -n "${FRIENDLY_NAME}" ]; then
     echo "FRIENDLY_NAME=[${FRIENDLY_NAME}], UPNPAV_SKIP_NAME_POSTFIX=[${UPNPAV_SKIP_NAME_POSTFIX}]"
-    UPMPD_FRIENDLY_NAME="${FRIENDLY_NAME}"
+    if [[ -z "${UPMPD_FRIENDLY_NAME}" ]] && [[ $OPENHOME -eq 1 && $UPNPAV -eq 1 ]]; then
+        UPMPD_FRIENDLY_NAME="${FRIENDLY_NAME} (oh)"
+    else
+        UPMPD_FRIENDLY_NAME="${FRIENDLY_NAME}"
+    fi
     echo "UPMPD_FRIENDLY_NAME=[${UPMPD_FRIENDLY_NAME}]"
     if [[ -z "${UPNPAV_SKIP_NAME_POSTFIX}" || "${UPNPAV_SKIP_NAME_POSTFIX^^}" == "YES" ]] && 
           [ "${OPENHOME}" -eq 0 ] && 
