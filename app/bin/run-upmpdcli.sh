@@ -142,15 +142,6 @@ else
     echo "File $QOBUZ_CREDENTIALS_FILE not found."
 fi
 
-if [ -f "$DEEZER_CREDENTIALS_FILE" ]; then
-    echo "Reading $DEEZER_CREDENTIALS_FILE"
-    read_file $DEEZER_CREDENTIALS_FILE
-    DEEZER_USERNAME=$(get_value "DEEZER_USERNAME" $PARAMETER_PRIORITY)
-    DEEZER_PASSWORD=$(get_value "DEEZER_PASSWORD" $PARAMETER_PRIORITY)
-else
-    echo "File $DEEZER_CREDENTIALS_FILE not found."
-fi
-
 if [ -f "$HRA_CREDENTIALS_FILE" ]; then
     echo "Reading $HRA_CREDENTIALS_FILE"
     read_file $HRA_CREDENTIALS_FILE
@@ -308,7 +299,6 @@ if [[ "${UPRCL_ENABLE^^}" == "YES" ||
       "${SUBSONIC_ENABLE^^}" == "YES" ||
       "${TIDAL_ENABLE^^}" == "YES" ||
       "${HRA_ENABLE^^}" == "YES" ||
-      "${DEEZER_ENABLE^^}" == "YES" ||
       "${HRA_ENABLE^^}" == "YES" ||
       "${RADIO_PARADISE_ENABLE^^}" == "YES" ||
       "${MOTHER_EARTH_RADIO_ENABLE^^}" == "YES" ||

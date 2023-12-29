@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2023-12-29|Removed last references to deezer (see [#359](https://github.com/GioF71/upmpdcli-docker/issues/359))
 2023-12-29|Support running as user with `--user` (see [#358](https://github.com/GioF71/upmpdcli-docker/issues/358))
 2023-12-19|Default naming of oh renderer (see [#356](https://github.com/GioF71/upmpdcli-docker/issues/356)) 
 2023-12-16|Dropped support for Deezer (see [#353](https://github.com/GioF71/upmpdcli-docker/issues/353))
