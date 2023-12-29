@@ -594,8 +594,21 @@ if [ ! -w "$cache_directory" ]; then
     echo "Cache directory [${cache_directory}] is not writable"
     mkdir -p /tmp/cache
     cache_directory="/tmp/cache"
+else
+    echo "Cache directory [${cache_directory}] is writable"
 fi
 sed -i 's\CACHE_DIRECTORY\'"$cache_directory"'\g' $CONFIG_FILE
+
+log_directory=/log
+if [ ! -w "$log_directory" ]; then
+    echo "Log directory [${log_directory}] is not writable"
+    mkdir -p /tmp/log
+    log_directory="/tmp/log"
+else
+    echo "Log directory [${log_directory}] is writable"
+fi
+sed -i 's\LOG_DIRECTORY\'"$log_directory"'\g' $CONFIG_FILE
+
 
 cat $CONFIG_FILE
 
