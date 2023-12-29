@@ -5,7 +5,16 @@
 # 2 Invalid RENDERER_MODE value
 # 3 Invalid argument
 
-if [[ "${MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
+current_user_id=$(id -u)
+echo "Current user id is [$current_user_id]"
+
+if [[ "${current_user_id}" != "0" ]]; then
+    echo "Not running as root, will not be able to:"
+    echo "- create users" 
+    echo "- update plugins" 
+fi
+
+if [[ $current_user_id -eq 0 ]] && [[ "${MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     echo "Downloading updated Mother Earth Radio plugin"
     if [[ -n "${MOTHER_EARTH_RADIO_PLUGIN_BRANCH}" ]]; then
         echo "  using branch [$MOTHER_EARTH_RADIO_PLUGIN_BRANCH]"
@@ -27,7 +36,7 @@ if [[ "${MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     cd /app/bin
 fi
 
-if [[ "${RADIO_PARADISE_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
+if [[ $current_user_id -eq 0 ]] && [[ "${RADIO_PARADISE_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     echo "Downloading updated Radio Paradise plugin"
     if [[ -n "${RADIO_PARADISE_PLUGIN_BRANCH}" ]]; then
         echo "  using branch [$RADIO_PARADISE_PLUGIN_BRANCH]"
@@ -49,7 +58,7 @@ if [[ "${RADIO_PARADISE_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     cd /app/bin
 fi
 
-if [[ "${SUBSONIC_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
+if [[ $current_user_id -eq 0 ]] && [[ "${SUBSONIC_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     echo "Downloading updated subsonic plugin"
     if [[ -n "${SUBSONIC_PLUGIN_BRANCH}" ]]; then
         echo "  using branch [$SUBSONIC_PLUGIN_BRANCH]"
@@ -70,7 +79,7 @@ if [[ "${SUBSONIC_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     cd /app/bin
 fi
 
-if [[ "${TIDAL_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
+if [[ $current_user_id -eq 0 ]] && [[ "${TIDAL_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     echo "Downloading updated tidal plugin"
     if [[ -n "${TIDAL_PLUGIN_BRANCH}" ]]; then
         echo "  using branch [$TIDAL_PLUGIN_BRANCH]"
@@ -92,18 +101,8 @@ if [[ "${TIDAL_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     cd /app/bin
 fi
 
-DEFAULT_UID=1000
-DEFAULT_GID=1000
-
-if [[ -z "${PUID}" ]]; then
-    PUID=$DEFAULT_UID
-fi
-if [[ -z "${PGID}" ]]; then
-    PGID=$DEFAULT_GID
-fi
-
 SOURCE_CONFIG_FILE=/app/conf/upmpdcli.conf
-CONFIG_FILE=/app/conf/current-upmpdcli.conf
+CONFIG_FILE=/tmp/current-upmpdcli.conf
 
 QOBUZ_CREDENTIALS_FILE=/user/config/qobuz.txt
 HRA_CREDENTIALS_FILE=/user/config/hra.txt
@@ -586,7 +585,7 @@ MAIN_RADIO_LIST_FILENAME=/usr/share/upmpdcli/radio_scripts/radiolist.conf
 USER_CONF_PATH=/user/config
 ADDITIONAL_RADIO_LIST=additional-radio-list.txt
 
-RADIO_LIST=/app/conf/radiolist.conf
+RADIO_LIST=/tmp/radiolist.conf
 
 ADDITIONAL_RADIO_LIST_FILENAME="$USER_CONF_PATH/$ADDITIONAL_RADIO_LIST"
 cp $MAIN_RADIO_LIST_FILENAME $RADIO_LIST
@@ -600,81 +599,101 @@ else
     echo "No additional radio list file."
 fi
 
+cache_directory=/cache
+if [ ! -w "$cache_directory" ]; then
+    echo "Cache directory [${cache_directory}] is not writable"
+    mkdir -p /tmp/cache
+    cache_directory="/tmp/cache"
+fi
+sed -i 's\CACHE_DIRECTORY\'"$cache_directory"'\g' $CONFIG_FILE
+
 cat $CONFIG_FILE
 
-DEFAULT_USER_NAME=upmpd-user
-DEFAULT_GROUP_NAME=upmpd-user
-DEFAULT_HOME_DIR=/home/$DEFAULT_USER_NAME
+if [[ $current_user_id == 0 ]]; then
+    DEFAULT_UID=1000
+    DEFAULT_GID=1000
 
-USER_NAME=$DEFAULT_USER_NAME
-GROUP_NAME=$DEFAULT_GROUP_NAME
-HOME_DIR=$DEFAULT_HOME_DIR
+    if [[ -z "${PUID}" ]]; then
+        PUID=$DEFAULT_UID
+    fi
+    if [[ -z "${PGID}" ]]; then
+        PGID=$DEFAULT_GID
+    fi
 
-if [ -z "${PUID}" ]; then
-    PUID=$DEFAULT_UID;
-    echo "Setting default value for PUID: ["$PUID"]"
-fi
+    DEFAULT_USER_NAME=upmpd-user
+    DEFAULT_GROUP_NAME=upmpd-user
+    DEFAULT_HOME_DIR=/home/$DEFAULT_USER_NAME
 
-if [ -z "${PGID}" ]; then
-    PGID=$DEFAULT_GID;
-    echo "Setting default value for PGID: ["$PGID"]"
-fi
+    USER_NAME=$DEFAULT_USER_NAME
+    GROUP_NAME=$DEFAULT_GROUP_NAME
+    HOME_DIR=$DEFAULT_HOME_DIR
 
-echo "Ensuring user with uid:[$PUID] gid:[$PGID] exists ...";
+    if [ -z "${PUID}" ]; then
+        PUID=$DEFAULT_UID;
+        echo "Setting default value for PUID: ["$PUID"]"
+    fi
 
-### create group if it does not exist
-if [ ! $(getent group $PGID) ]; then
-    echo "Group with gid [$PGID] does not exist, creating..."
-    groupadd -g $PGID $GROUP_NAME
-    echo "Group [$GROUP_NAME] with gid [$PGID] created."
-else
-    GROUP_NAME=$(getent group $PGID | cut -d: -f1)
-    echo "Group with gid [$PGID] name [$GROUP_NAME] already exists."
-fi
+    if [ -z "${PGID}" ]; then
+        PGID=$DEFAULT_GID;
+        echo "Setting default value for PGID: ["$PGID"]"
+    fi
 
-### create user if it does not exist
-if [ ! $(getent passwd $PUID) ]; then
-    echo "User with uid [$PUID] does not exist, creating..."
-    useradd -g $PGID -u $PUID -M $USER_NAME
-    echo "User [$USER_NAME] with uid [$PUID] created."
-else
-    USER_NAME=$(getent passwd $PUID | cut -d: -f1)
-    echo "user with uid [$PUID] name [$USER_NAME] already exists."
-    HOME_DIR="/home/$USER_NAME"
-fi
+    echo "Ensuring user with uid:[$PUID] gid:[$PGID] exists ...";
 
-### create home directory
-if [ ! -d "$HOME_DIR" ]; then
-    echo "Home directory [$HOME_DIR] not found, creating."
-    mkdir -p $HOME_DIR
+    ### create group if it does not exist
+    if [ ! $(getent group $PGID) ]; then
+        echo "Group with gid [$PGID] does not exist, creating..."
+        groupadd -g $PGID $GROUP_NAME
+        echo "Group [$GROUP_NAME] with gid [$PGID] created."
+    else
+        GROUP_NAME=$(getent group $PGID | cut -d: -f1)
+        echo "Group with gid [$PGID] name [$GROUP_NAME] already exists."
+    fi
+
+    ### create user if it does not exist
+    if [ ! $(getent passwd $PUID) ]; then
+        echo "User with uid [$PUID] does not exist, creating..."
+        useradd -g $PGID -u $PUID -M $USER_NAME
+        echo "User [$USER_NAME] with uid [$PUID] created."
+    else
+        USER_NAME=$(getent passwd $PUID | cut -d: -f1)
+        echo "user with uid [$PUID] name [$USER_NAME] already exists."
+        HOME_DIR="/home/$USER_NAME"
+    fi
+
+    ### create home directory
+    if [ ! -d "$HOME_DIR" ]; then
+        echo "Home directory [$HOME_DIR] not found, creating."
+        mkdir -p $HOME_DIR
+        echo ". done."
+    fi
+
+    # set home to user
+    echo "Setting home directory to [$HOME_DIR] for user [$USER_NAME] ..."
+    usermod -d $HOME_DIR $USER_NAME
+    echo ". done."
+
+    # set shell
+    echo "Setting shell to [/bin/bash] for user [$USER_NAME] ..."
+    usermod -s /bin/bash $USER_NAME
+    echo ". done."
+
+    # set permission for home directory
+    echo "Setting home directory permissions ..."
+    chown -R $USER_NAME:$GROUP_NAME $HOME_DIR
+    echo ". done."
+
+    # Permissions of writable volumes
+    echo "Setting permissions for writable volumes ..."
+    chown -R $USER_NAME:$GROUP_NAME /cache
+    # Fix permission errors on existing files
+    find /cache -type d -exec chmod 755 {} \;
+    find /cache -type f -exec chmod 644 {} \;
+    chown -R $USER_NAME:$GROUP_NAME /uprcl/confdir
+    chown -R $USER_NAME:$GROUP_NAME /user/config
+    chown -R $USER_NAME:$GROUP_NAME /log
     echo ". done."
 fi
-
-# set home to user
-echo "Setting home directory to [$HOME_DIR] for user [$USER_NAME] ..."
-usermod -d $HOME_DIR $USER_NAME
-echo ". done."
-
-# set shell
-echo "Setting shell to [/bin/bash] for user [$USER_NAME] ..."
-usermod -s /bin/bash $USER_NAME
-echo ". done."
-
-# set permission for home directory
-echo "Setting home directory permissions ..."
-chown -R $USER_NAME:$GROUP_NAME $HOME_DIR
-echo ". done."
-
-# Permissions of writable volumes
-echo "Setting permissions for writable volumes ..."
-chown -R $USER_NAME:$GROUP_NAME /cache
-# Fix permission errors on existing files
-find /cache -type d -exec chmod 755 {} \;
-find /cache -type f -exec chmod 644 {} \;
-chown -R $USER_NAME:$GROUP_NAME /uprcl/confdir
-chown -R $USER_NAME:$GROUP_NAME /user/config
-chown -R $USER_NAME:$GROUP_NAME /log
-echo ". done."
 
 build_mode=`cat /app/conf/build_mode.txt`
 
@@ -683,6 +702,12 @@ sleep $STARTUP_DELAY_SEC
 echo "Ready to start."
 
 CMD_LINE="/usr/bin/upmpdcli -c $CONFIG_FILE"
+echo "CMD_LINE=[${CMD_LINE}]"
 
-echo "USER MODE [$USER_NAME] (now mandatory)"
-su - $USER_NAME -c "$CMD_LINE"
+if [[ $current_user_id -eq 0 ]]; then
+    echo "USER MODE [$USER_NAME]"
+    su - $USER_NAME -c "$CMD_LINE"
+else
+    echo "Running as current uid [$current_user_id] ..."
+    eval "$CMD_LINE"
+fi
