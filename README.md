@@ -246,6 +246,9 @@ QOBUZ_ENABLE|Set to `yes` to enable Qobuz support, defaults to `no`
 QOBUZ_USERNAME|Your Qobuz account username
 QOBUZ_PASSWORD|Your Qobuz account password
 QOBUZ_FORMAT_ID|Qobuz format id: 5 for mp3, 7 for FLAC, 27 for hi-res, defaults to `5`
+QOBUZ_RENUM_TRACKS|Renum tracks in albums and playlists, mostly for kodi compatibility, defaults to `1`
+QOBUZ_EXPLICIT_ITEM_NUMBERS|Adds numbers in square brackets in list items, mostly for kodi compatibility, defaults to `0`
+QOBUZ_PREPEND_ARTIST_TO_ALBUM|Adds artist name before album title in lists, mostly for kodi compatibility, defaults to `0`
 HRA_ENABLE|Set to `yes` to enable HRA support, defaults to `no`
 HRA_USERNAME|Your HRA account username
 HRA_PASSWORD|Your HRA account password

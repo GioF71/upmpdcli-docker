@@ -517,6 +517,36 @@ if [ "${QOBUZ_ENABLE^^}" == "YES" ]; then
     sed -i 's/QOBUZ_USERNAME/'"$QOBUZ_USERNAME"'/g' $CONFIG_FILE;
     sed -i 's/QOBUZ_PASSWORD/'"$QOBUZ_PASSWORD"'/g' $CONFIG_FILE;
     sed -i 's/QOBUZ_FORMAT_ID/'"$QOBUZ_FORMAT_ID"'/g' $CONFIG_FILE;
+    if [[ -n "${QOBUZ_RENUM_TRACKS}" ]]; then
+        qobuz_v=${QOBUZ_RENUM_TRACKS}
+        if [[ "${qobuz_v}" == "0" || "${qobuz_v}" == "1" ]]; then
+            sed -i 's/\#qobuzrenumtracks/qobuzrenumtracks/g' $CONFIG_FILE;
+            sed -i 's/QOBUZ_RENUM_TRACKS/'"$QOBUZ_RENUM_TRACKS"'/g' $CONFIG_FILE;
+        else
+            echo "Invalid QOBUZ_RENUM_TRACKS=[${QOBUZ_RENUM_TRACKS}]"
+            exit 3
+        fi
+    fi
+    if [[ -n "${QOBUZ_EXPLICIT_ITEM_NUMBERS}" ]]; then
+        qobuz_v=${QOBUZ_EXPLICIT_ITEM_NUMBERS}
+        if [[ "${qobuz_v}" == "0" || "${qobuz_v}" == "1" ]]; then
+            sed -i 's/\#qobuzexplicititemnumbers/qobuzexplicititemnumbers/g' $CONFIG_FILE;
+            sed -i 's/QOBUZ_EXPLICIT_ITEM_NUMBERS/'"$QOBUZ_EXPLICIT_ITEM_NUMBERS"'/g' $CONFIG_FILE;
+        else
+            echo "Invalid QOBUZ_EXPLICIT_ITEM_NUMBERS=[${QOBUZ_EXPLICIT_ITEM_NUMBERS}]"
+            exit 3
+        fi
+    fi
+    if [[ -n "${QOBUZ_PREPEND_ARTIST_TO_ALBUM}" ]]; then
+        qobuz_v=${QOBUZ_PREPEND_ARTIST_TO_ALBUM}
+        if [[ "${qobuz_v}" == "0" || "${qobuz_v}" == "1" ]]; then
+            sed -i 's/\#qobuzprependartisttoalbum/qobuzprependartisttoalbum/g' $CONFIG_FILE;
+            sed -i 's/QOBUZ_PREPEND_ARTIST_TO_ALBUM/'"$QOBUZ_PREPEND_ARTIST_TO_ALBUM"'/g' $CONFIG_FILE;
+        else
+            echo "Invalid QOBUZ_PREPEND_ARTIST_TO_ALBUM=[${QOBUZ_PREPEND_ARTIST_TO_ALBUM}]"
+            exit 3
+        fi
+    fi
 fi
 
 echo "HRA Enable [$HRA_ENABLE]"
