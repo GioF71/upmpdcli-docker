@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2024-01-05|New config parameters for qobuz plugin (see [#364](https://github.com/GioF71/upmpdcli-docker/issues/364))
 2023-12-29|Verify log directory to be writable (see [#362](https://github.com/GioF71/upmpdcli-docker/issues/362))
 2023-12-29|Removed last references to deezer (see [#359](https://github.com/GioF71/upmpdcli-docker/issues/359))
 2023-12-29|Support running as user with `--user` (see [#358](https://github.com/GioF71/upmpdcli-docker/issues/358))
