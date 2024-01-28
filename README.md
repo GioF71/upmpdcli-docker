@@ -259,6 +259,11 @@ DUMP_ADDITIONAL_RADIO_LIST|Dumps the additional radio file when set to `yes`
 WEBSERVER_DOCUMENT_ROOT|Directory from which the internal HTTP server will directly serve files (e.g. icons), disabled by default
 STARTUP_DELAY_SEC|Delay before starting the application, defaults to `0`. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite if all those services run on the same audio device. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience.
 
+#### About RENDERER_MODE
+
+I used to use `BOTH` for most of my configurations. However since a few weeks ago, I found that if one wants to use BubbleUpnp on a phone/tablet and also uses its cloud libraries, the best choice is to use `UPNPAV` as the `RENDERER_MODE` and then create the OpenHome renderer on top on the av device using BubbleUPnP Server. This allows uninterrupted playback even if the mobile devices goes off, because the BubbleUPnP Server (which should be installed somewhere in your network) will act as a proxy between the control point (mobile) and the renderer.  
+See BubbleUPnP Server documentation [here](https://bubblesoftapps.com/bubbleupnpserver2/).  
+
 ### Volumes
 
 Volume|Description
