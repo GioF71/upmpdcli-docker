@@ -41,7 +41,7 @@ See the [news](https://www.lesbonscomptes.com/upmpdcli/#news) section in the upm
 The plugin is built around [python-tidal](https://github.com/tamland/python-tidal).  
 Building this plugin would not have been possible without this library, so a big thank you goes to [its author](https://github.com/tamland).  
 Also, once again, a big thank you to the upmpdcli author for the support he has provided to help me build this plugin.  
-Remember, this is not, in any way, supported by Tidal. It might stop working at any moment. Consider alternatives as [BubbleUpnp](https://play.google.com/store/apps/details?id=com.bubblesoft.android.bubbleupnp), [mConnect Lite](https://play.google.com/store/apps/details?id=com.conversdigital) (also available on iOS/iPadOS) or similar software which are, to my knowledge, officially supported by Tidal.  
+Remember, this is not, in any way, supported by Tidal. It might stop working at any moment. Consider alternatives as [BubbleUPnP](https://play.google.com/store/apps/details?id=com.bubblesoft.android.bubbleupnp), [mConnect Lite](https://play.google.com/store/apps/details?id=com.conversdigital) (also available on iOS/iPadOS) or similar software which are, to my knowledge, officially supported by Tidal.  
 Thanks to the advancements in the underlying library, you will be able to generate your own set of credentials from a valid username/password combination.  
 A premium account of Tidal will be strictly required.  
 
@@ -261,7 +261,7 @@ STARTUP_DELAY_SEC|Delay before starting the application, defaults to `0`. This c
 
 #### About RENDERER_MODE
 
-I used to use `BOTH` for most of my configurations. However since a few weeks ago, I found that if one wants to use BubbleUpnp on a phone/tablet and also uses its cloud libraries, the best choice is to use `UPNPAV` as the `RENDERER_MODE` and then create the OpenHome renderer on top on the av device using BubbleUPnP Server. This allows uninterrupted playback even if the mobile devices goes off, because the BubbleUPnP Server (which should be installed somewhere in your network) will act as a proxy between the control point (mobile) and the renderer.  
+I used to use `BOTH` for most of my configurations. However since a few weeks ago, I found that if one wants to use BubbleUPnP on a phone/tablet and also uses its cloud libraries, the best choice is to use `UPNPAV` as the `RENDERER_MODE` and then create the OpenHome renderer on top on the av device using BubbleUPnP Server. This allows uninterrupted playback even if the mobile devices goes off, because the BubbleUPnP Server (which should be installed somewhere in your network) will act as a proxy between the control point (mobile) and the renderer.  
 See BubbleUPnP Server documentation [here](https://bubblesoftapps.com/bubbleupnpserver2/).  
 
 ### Volumes
@@ -284,7 +284,7 @@ It is possible to customize the server icon by mounting a local png file to the 
 ```
 
 A square image should be a good choice. Don't use a very big image, because the players which are able to show it, will show it as a small icon, afaik.  
-For example, I searched for a tidal png icon file my Tidal media server, so now BubbleUpnp shows a nice Tidal icon instead of the generic (although beloved) penguin icon.
+For example, I searched for a tidal png icon file my Tidal media server, so now BubbleUPnP shows a nice Tidal icon instead of the generic (although beloved) penguin icon.
 
 ### Additional Radio file
 
@@ -332,7 +332,7 @@ The tokens will be very long strings. Those values must be used in your docker-c
 With the latest (0.0.8 tagged on 2023-10-10 as latest-tidal) version of the plugin, you can entirely skip the 4 variables listed a few lines above.  
 If you do so, be sure to monitor the container logs, and follow the Tidal link that will be presented. After you will have granted authorization to the application, the plugin will store a `credentials.json` file in the plugin cache directory. So be sure to use the `/cache` volume, or the credentials won't survire if the container is removed and created again.  
 Never share the tokens on the internet (and also on public git repositories).  
-Remember that currently, the Tidal Plugin actually starts when the first control point (e.g. BubbleUpnp, mConnect) contacts upmpdcli asking for the contents from the Tidal Plugin.  
+Remember that currently, the Tidal Plugin actually starts when the first control point (e.g. BubbleUPnP, mConnect) contacts upmpdcli asking for the contents from the Tidal Plugin.  
 So, you will not see the prompt until you try to use the plugin itself.  
 
 ## Usage examples
