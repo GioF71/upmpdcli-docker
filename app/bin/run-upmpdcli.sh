@@ -477,18 +477,51 @@ if [ "${TIDAL_ENABLE^^}" == "YES" ]; then
         sed -i 's/\#tidalautostart/tidalautostart/g' $CONFIG_FILE;
         set_parameter $CONFIG_FILE TIDAL_AUTOSTART "$TIDAL_AUTOSTART" tidalautostart
     fi
-    echo "Setting Token Type [$TIDAL_TOKEN_TYPE]"
-    sed -i 's/\#tidaltokentype/tidaltokentype/g' $CONFIG_FILE
-    sed -i 's,TIDAL_TOKEN_TYPE,'"$TIDAL_TOKEN_TYPE"',g' $CONFIG_FILE
-    echo "Setting Access Token [$TIDAL_ACCESS_TOKEN]"
-    sed -i 's/\#tidalaccesstoken/tidalaccesstoken/g' $CONFIG_FILE
-    sed -i 's,TIDAL_ACCESS_TOKEN,'"$TIDAL_ACCESS_TOKEN"',g' $CONFIG_FILE
-    echo "Setting Access Token [$TIDAL_REFRESH_TOKEN]"
-    sed -i 's/\#tidalrefreshtoken/tidalrefreshtoken/g' $CONFIG_FILE
-    sed -i 's,TIDAL_REFRESH_TOKEN,'"$TIDAL_REFRESH_TOKEN"',g' $CONFIG_FILE
-    echo "Setting Token Expiry Time [$TIDAL_EXPIRY_TIME]"
-    sed -i 's/\#tidalexpirytime/tidalexpirytime/g' $CONFIG_FILE
-    sed -i 's,TIDAL_EXPIRY_TIME,'"$TIDAL_EXPIRY_TIME"',g' $CONFIG_FILE
+    if [[ -n "${TIDAL_AUTH_CHALLENGE_TYPE}" ]]; then
+        echo "Setting Token Type [$TIDAL_AUTH_CHALLENGE_TYPE]"
+        sed -i 's/\#tidalauthchallengetype/tidalauthchallengetype/g' $CONFIG_FILE
+        sed -i 's,TIDAL_AUTH_CHALLENGE_TYPE,'"$TIDAL_AUTH_CHALLENGE_TYPE"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_TOKEN_TYPE}" ]]; then
+        echo "Setting Token Type [$TIDAL_TOKEN_TYPE]"
+        sed -i 's/\#tidaltokentype/tidaltokentype/g' $CONFIG_FILE
+        sed -i 's,TIDAL_TOKEN_TYPE,'"$TIDAL_TOKEN_TYPE"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_ACCESS_TOKEN}" ]]; then
+        echo "Setting Access Token [$TIDAL_ACCESS_TOKEN]"
+        sed -i 's/\#tidalaccesstoken/tidalaccesstoken/g' $CONFIG_FILE
+        sed -i 's,TIDAL_ACCESS_TOKEN,'"$TIDAL_ACCESS_TOKEN"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_REFRESH_TOKEN}" ]]; then
+        echo "Setting Refresh Token [$TIDAL_REFRESH_TOKEN]"
+        sed -i 's/\#tidalrefreshtoken/tidalrefreshtoken/g' $CONFIG_FILE
+        sed -i 's,TIDAL_REFRESH_TOKEN,'"$TIDAL_REFRESH_TOKEN"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_EXPIRY_TIME}" ]]; then
+        echo "Setting Token Expiry Time [$TIDAL_EXPIRY_TIME]"
+        sed -i 's/\#tidalexpirytime/tidalexpirytime/g' $CONFIG_FILE
+        sed -i 's,TIDAL_EXPIRY_TIME,'"$TIDAL_EXPIRY_TIME"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_PKCE_TOKEN_TYPE}" ]]; then
+        echo "Setting PKCE Token Type [$TIDAL_PKCE_TOKEN_TYPE]"
+        sed -i 's/\#tidalpkcetokentype/tidalpkcetokentype/g' $CONFIG_FILE
+        sed -i 's,TIDAL_PKCE_TOKEN_TYPE,'"$TIDAL_PKCE_TOKEN_TYPE"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_PKCE_ACCESS_TOKEN}" ]]; then
+        echo "Setting PKCE Access Token [$TIDAL_PKCE_ACCESS_TOKEN]"
+        sed -i 's/\#tidalpkceaccesstoken/tidalpkceaccesstoken/g' $CONFIG_FILE
+        sed -i 's,TIDAL_PKCE_ACCESS_TOKEN,'"$TIDAL_PKCE_ACCESS_TOKEN"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_PKCE_REFRESH_TOKEN}" ]]; then
+        echo "Setting PKCE Refresh Token [$TIDAL_PKCE_REFRESH_TOKEN]"
+        sed -i 's/\#tidalpkcerefreshtoken/tidalpkcerefreshtoken/g' $CONFIG_FILE
+        sed -i 's,TIDAL_PKCE_REFRESH_TOKEN,'"$TIDAL_PKCE_REFRESH_TOKEN"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_PKCE_SESSION_ID}" ]]; then
+        echo "Setting PKCE Session Id [$TIDAL_PKCE_SESSION_ID]"
+        sed -i 's/\#tidalpkcesessionid/tidalpkcesessionid/g' $CONFIG_FILE
+        sed -i 's,TIDAL_PKCE_SESSION_ID,'"$TIDAL_PKCE_SESSION_ID"',g' $CONFIG_FILE
+    fi
     if [[ -z "$TIDAL_AUDIO_QUALITY" ]]; then
         TIDAL_AUDIO_QUALITY="LOSSLESS"   
     fi
