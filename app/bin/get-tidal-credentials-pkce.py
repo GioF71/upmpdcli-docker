@@ -17,6 +17,7 @@
 
 import tidalapi
 from datetime import datetime
+from pathlib import Path
 
 tidal_plugin_name : str = "tidal"
 
@@ -25,8 +26,9 @@ def print_setting(name : str, value : str):
 
 session = tidalapi.Session()
 
+session_file1 = Path("pkce.credentials.json")
 # Will run until you complete the login process
-session.login_pkce()
+session.login_pkce(session_file1, do_pkce = True)
 
 token_type = session.token_type
 session_id = session.session_id
