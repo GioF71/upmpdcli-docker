@@ -676,6 +676,14 @@ sed -i 's\LOG_DIRECTORY\'"$log_directory"'\g' $CONFIG_FILE
 cat $CONFIG_FILE
 
 if [[ $current_user_id == 0 ]]; then
+
+    # create directory as we are root
+    if [[ -n "${WEBSERVER_DOCUMENT_ROOT}" ]]; then
+        echo "Creating directory [${WEBSERVER_DOCUMENT_ROOT}] ..."
+        mkdir -p $WEBSERVER_DOCUMENT_ROOT
+        echo "Created directory [${WEBSERVER_DOCUMENT_ROOT}]."
+    fi
+
     DEFAULT_UID=1000
     DEFAULT_GID=1000
 
@@ -759,6 +767,13 @@ if [[ $current_user_id == 0 ]]; then
     chown -R $USER_NAME:$GROUP_NAME /user/config
     chown -R $USER_NAME:$GROUP_NAME /log
     echo ". done."
+
+    # Correct permissions for WEBSERVER_DOCUMENT_ROOT if set
+    if [[ -n "${WEBSERVER_DOCUMENT_ROOT}" ]]; then
+        echo "Setting permissions for directory [${WEBSERVER_DOCUMENT_ROOT}] ..."
+        chown -R $USER_NAME:$GROUP_NAME $WEBSERVER_DOCUMENT_ROOT
+        echo ". done."
+    fi
 fi
 
 build_mode=`cat /app/conf/build_mode.txt`
