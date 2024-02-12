@@ -13,7 +13,7 @@ A few screenshots for the subsonic plugin on [Kazoo](https://github.com/GioF71/u
 First and foremost, the reference to the awesome project:
 
 [An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).  
-Current version is `1.8.7`.  
+Current version is `1.8.8`.  
 
 ## News
 
