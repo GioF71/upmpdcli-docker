@@ -1,0 +1,9 @@
+{
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/src/mediaserver/cdplugins/pycommon"
+    ],
+    "flake8.args": [
+        "--max-line-length=120",
+        "--ignore=E203,E128,E251,E701,E704,W503,W504"
+    ]
+}
