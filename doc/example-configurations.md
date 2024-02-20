@@ -162,7 +162,7 @@ services:
       - SUBSONIC_PASSWORD=${SUBSONIC_PASSWORD}
       - SUBSONIC_DOWNLOAD_PLUGIN=yes
       - SUBSONIC_PLUGIN_BRANCH=latest-subsonic
-      - SUBSONIC_FORCE_CONNECTOR_VERSION=0.3.1
+      - SUBSONIC_FORCE_CONNECTOR_VERSION=0.3.2
     volumes:
       - ./cache:/cache
     restart: unless-stopped
