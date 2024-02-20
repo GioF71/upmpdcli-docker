@@ -44,7 +44,7 @@ session_id = session.session_id
 access_token = session.access_token
 refresh_token = session.refresh_token
 
-print("Alternative 1: pkce credentials file")
+print("Alternative 1: pkce credentials file, store as /cache/tidal/pkce.credentials.json")
 cred_file = open(file_name, "r")
 cred_dict = json.load(cred_file)
 print(json.dumps(cred_dict, indent=4, sort_keys=True))
