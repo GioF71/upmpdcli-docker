@@ -27,7 +27,7 @@ if [ "$BUILD_MODE" = "full" ]; then
     if [ $add_switch -eq 1 ]; then
         pip_upgrade="$pip_upgrade --break-system-packages"
     fi
-    python_packages=(pyradios py-sonic subsonic-connector==0.2.6 mutagen rdflib mpegdash git+https://github.com/tamland/python-tidal.git@feature/hls-parsing)
+    python_packages=(pyradios py-sonic subsonic-connector==0.2.6 mutagen rdflib mpegdash git+https://github.com/tamland/python-tidal.git)
     for pkg in "${python_packages[@]}"
     do
         echo "Installing ${pkg} with add_switch [$add_switch]..."
