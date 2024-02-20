@@ -655,8 +655,8 @@ fi
 cache_directory=/cache
 if [ ! -w "$cache_directory" ]; then
     echo "Cache directory [${cache_directory}] is not writable"
-    mkdir -p /tmp/cache
     cache_directory="/tmp/cache"
+    mkdir -p /tmp/cache
 else
     echo "Cache directory [${cache_directory}] is writable"
 fi
