@@ -17,6 +17,11 @@ Current version is `1.8.8`.
 
 ## News
 
+### Support for HiRes Tidal in Preview
+
+Good news, Tidal HiRes is coming, even if with a limitation: only the mpd/upmpdcli combination works as a renderer AFAIK.  
+See how to install it in preview [here](https://github.com/GioF71/audio-tools/blob/main/media-servers/tidal-hires/README.md).  
+
 ### Subsonic Plugin compatibility
 
 The `next-subsonic` branch of the subsonic plugin, which is used with the recently updated [suggested configurations](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#subsonic-server), provides better compatibility with other two subsonic servers.  
