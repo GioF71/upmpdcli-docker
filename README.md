@@ -185,10 +185,12 @@ MPD_PORT|The port used by mpd, defaults to `6600`
 UPRCL_HOSTPORT|Set if we own the MPD queue, defaults to `1`, possible values `1` and `0`
 PORT_OFFSET|If set, the offset is applied to the default for `UPNP_PORT` (summed) and to the default `PLG_MICRO_HTTP_PORT` (subtracted). Setting this variable overrides these individual variables.
 UPNPIFACE|UPnP network interface
-ENABLE_AUTO_UPNPIFACE|Allows to automatically set UPNPIFACE, defaults to `yes`, but this does not override an explicitly set `UPNPIFACE` variable
-AUTO_UPNPIFACE_URL|Used by `ENABLE_AUTO_UPNPIFACE`, defaults to `1.1.1.1`
-CHECK_CONTENT_FORMAT|Set to `yes` to enable, see [here](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#checkcontentformat)
+UPNPIP|IP V4 address to use for UPnP, alternative to using an interface name.
 UPNPPORT|UPnP port
+AUTO_UPNPIFACE_URL|Used by `ENABLE_AUTO_UPNPIFACE` and `ENABLE_AUTO_UPNPIP`, defaults to `1.1.1.1`
+ENABLE_AUTO_UPNPIFACE|Allows to automatically set UPNPIFACE, defaults to `no`, but this does not override an explicitly set `UPNPIFACE` variable anyway
+ENABLE_AUTO_UPNPIP|Allows to automatically set UPNPIP, defaults to `yes`, but this does not override an explicitly set `UPNPIP` variable anyway
+CHECK_CONTENT_FORMAT|Set to `yes` to enable, see [here](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#checkcontentformat)
 UPMPD_FRIENDLY_NAME|Name of the upnp renderer (OpenHome), defaults to `upmpd`
 AV_FRIENDLY_NAME|Name of the upnp renderer (UPnP AV mode), defaults to `upmpd-av`
 FRIENDLY_NAME|Name of the renderer, overrides `UPMPD_FRIENDLY_NAME`, `AV_FRIENDLY_NAME` and `MEDIA_SERVER_FRIENDLY_NAME`. The variable `AV_FRIENDLY_NAME` is appended with the postfix `UPNPAV_POSTFIX`, unless UPNPAV is the only enabled renderer. See `UPNPAV_POSTFIX` and `UPNPAV_SKIP_NAME_POSTFIX` for more details.

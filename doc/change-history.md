@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2024-03-05|Automatically set upnpip instead of upnpiface (see issue [#379](https://github.com/GioF71/upmpdcli-docker/issues/379)))
 2024-02-29|Update workflow actions (see issue [#377](https://github.com/GioF71/upmpdcli-docker/issues/377)))
 2024-02-12|Update to Upmpdcli version 1.8.7 (see issue [#371](https://github.com/GioF71/upmpdcli-docker/issues/371))
 2024-01-10|Update to Upmpdcli version 1.8.7 (see issue [#366](https://github.com/GioF71/upmpdcli-docker/issues/366))

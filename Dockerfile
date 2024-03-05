@@ -59,6 +59,8 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y git; \
 	fi
 
+RUN apt-get install -y net-tools
+
 RUN apt-get remove -y software-properties-common
 
 RUN apt-get -y autoremove
@@ -103,6 +105,7 @@ ENV PORT_OFFSET ""
 ENV AUTO_UPNPIFACE_URL ""
 ENV ENABLE_AUTO_UPNPIFACE ""
 ENV UPNPIFACE ""
+ENV UPNPIP ""
 ENV UPNPPORT ""
 
 ENV OWN_QUEUE ""

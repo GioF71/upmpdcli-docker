@@ -175,15 +175,47 @@ if [ "${LOG_ENABLE^^}" == "YES" ]; then
     fi
 fi
 
-if [[ -z "$ENABLE_AUTO_UPNPIFACE" || "$ENABLE_AUTO_UPNPIFACE" == "1" || "${ENABLE_AUTO_UPNPIFACE^^}" == "YES" || "${ENABLE_AUTO_UPNPIFACE^^}" == "Y" ]]; then
-    if [ -z "${UPNPIFACE}" ]; then
-        if [[ -z "${AUTO_UPNPIFACE_URL}" ]]; then
-            AUTO_UPNPIFACE_URL=1.1.1.1
-        fi
-        iface=$(ip route get $AUTO_UPNPIFACE_URL | grep -oP 'dev\s+\K[^ ]+')
+set_upnp_iface=0
+if [[ "$ENABLE_AUTO_UPNPIFACE" == "1" || "${ENABLE_AUTO_UPNPIFACE^^}" == "YES" || "${ENABLE_AUTO_UPNPIFACE^^}" == "Y" ]]; then
+    if [[ -z "${UPNPIFACE}" ]]; then
+        set_upnp_iface=1
+    else
+        echo "Cannot set UPNPIFACE with ENABLE_AUTO_UPNPIFACE enabled"
+        exit 1
+    fi
+fi
+
+set_upnp_ip=0
+if [[ -z "${ENABLE_AUTO_UPNP}" || "$ENABLE_AUTO_UPNPIP" == "1" || "${ENABLE_AUTO_UPNPIP^^}" == "YES" || "${ENABLE_AUTO_UPNPIP^^}" == "Y" ]]; then
+    if [[ -z "${UPNPIP}" ]]; then
+        set_upnp_ip=1
+    else
+        echo "Cannot set UPNPIP with ENABLE_AUTO_UPNPIP enabled"
+        exit 1
+    fi
+fi
+
+#if [[ -z "$ENABLE_AUTO_UPNPIFACE" || "$ENABLE_AUTO_UPNPIFACE" == "1" || "${ENABLE_AUTO_UPNPIFACE^^}" == "YES" || "${ENABLE_AUTO_UPNPIFACE^^}" == "Y" ]]; then
+if [[ set_upnp_iface -eq 1 && set_upnp_ip -eq 1 ]]; then
+    echo "Cannot enable both ENABLE_AUTO_UPNPIFACE and ENABLE_AUTO_UPNPIP"
+    exit 1
+fi
+
+if [[ set_upnp_iface -eq 1 || set_upnp_ip -eq 1 ]]; then
+    if [[ -z "${AUTO_UPNPIFACE_URL}" ]]; then
+        AUTO_UPNPIFACE_URL=1.1.1.1
+    fi
+    iface=$(ip route get $AUTO_UPNPIFACE_URL | grep -oP 'dev\s+\K[^ ]+')
+    select_ip=$(ifconfig $iface | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
+    if [[ set_upnp_iface -eq 1 ]]; then
         echo "Automatically setting UPNPIFACE to ["$iface"]"
         sed -i 's/\#upnpiface/upnpiface/g' $CONFIG_FILE
         sed -i 's/UPNPIFACE/'"$iface"'/g' $CONFIG_FILE
+    fi
+    if [[ set_upnp_ip -eq 1 ]]; then
+        echo "Automatically setting UPNPIP to ["$select_ip"]"
+        sed -i 's/\#upnpip/upnpip/g' $CONFIG_FILE
+        sed -i 's/UPNPIP/'"$select_ip"'/g' $CONFIG_FILE
     fi
 fi
 
@@ -194,6 +226,15 @@ else
     echo "Setting UPNPIFACE to ["$UPNPIFACE"]"
     sed -i 's/\#upnpiface/upnpiface/g' $CONFIG_FILE
     sed -i 's/UPNPIFACE/'"$UPNPIFACE"'/g' $CONFIG_FILE
+fi
+
+echo "UPNPIP=["$UPNPIP"]"
+if [ -z "${UPNPIP}" ]; then
+    echo "UPNPIP not set"
+else 
+    echo "Setting UPNPIP to ["$UPNPIP"]"
+    sed -i 's/\#upnpip/upnpip/g' $CONFIG_FILE
+    sed -i 's/UPNPIP/'"$UPNPIP"'/g' $CONFIG_FILE
 fi
 
 # Renderer mode
