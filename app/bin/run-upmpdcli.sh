@@ -260,7 +260,7 @@ fi
 if [ -n "${FRIENDLY_NAME}" ]; then
     echo "FRIENDLY_NAME=[${FRIENDLY_NAME}], UPNPAV_SKIP_NAME_POSTFIX=[${UPNPAV_SKIP_NAME_POSTFIX}]"
     if [[ -z "${UPMPD_FRIENDLY_NAME}" ]] && [[ $OPENHOME -eq 1 && $UPNPAV -eq 1 ]]; then
-        UPMPD_FRIENDLY_NAME="${FRIENDLY_NAME} (oh)"
+        UPMPD_FRIENDLY_NAME="${FRIENDLY_NAME} (OpenHome)"
     else
         UPMPD_FRIENDLY_NAME="${FRIENDLY_NAME}"
     fi
@@ -277,11 +277,14 @@ if [ -n "${FRIENDLY_NAME}" ]; then
             echo "Invalid UPNPAV_POSTFIX_PREPEND_SPACE [${UPNPAV_POSTFIX_PREPEND_SPACE}]"
             exit 2
         fi
-        AV_POSTFIX="(av)"
+        AV_POSTFIX=""
         if [[ -n "${UPNPAV_POSTFIX}" ]]; then
             AV_POSTFIX=${UPNPAV_POSTFIX}
         fi
-        AV_POSTFIX="$PREPENDED$AV_POSTFIX"
+        # prepend only if AV_POSTFIX is not empty
+        if [[ -n "${AV_POSTFIX}" ]]; then
+            AV_POSTFIX="$PREPENDED$AV_POSTFIX"
+        fi
         AV_FRIENDLY_NAME="${FRIENDLY_NAME}${AV_POSTFIX}"
     fi
     if [[ -z "${OH_PRODUCT_ROOM}" ]]; then
