@@ -25,7 +25,7 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 		apt-get install -y python3 python3-pip; \
 	fi
 
-COPY app/install/* /app/install
+COPY app/install/* /app/install/
 RUN chmod u+x /app/install/*.sh
 RUN /app/install/setup.sh
 
@@ -190,8 +190,8 @@ ENV MEDIA_SERVER_FRIENDLY_NAME ""
 ENV LOG_ENABLE ""
 ENV LOG_LEVEL ""
 
-ENV UPNP_LOG_ENABLE ""
-ENV UPNP_LOG_LEVEL ""
+ENV UPNP_ENABLE ""
+ENV UPNP_LEVEL ""
 
 ENV DUMP_ADDITIONAL_RADIO_LIST ""
 
