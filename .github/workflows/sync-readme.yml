@@ -21,10 +21,11 @@ jobs:
           pass: ${{ secrets.DOCKER_PASSWORD }}
           slug: ${{ secrets.DOCKER_USERNAME }}/upmpdcli
           readme: ./README.md
+          description: Easily run upmpdcli with docker on your devices
       - name: Update repo description
         uses: peter-evans/dockerhub-description@v4
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: ${{ secrets.DOCKER_USERNAME }}/upmpdcli
+          repository: giof71/upmpdcli
           
