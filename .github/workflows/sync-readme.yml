@@ -2,9 +2,8 @@ name: Sync README.md to Docker Hub
 
 on:
   push:
-    tags:
-      - "release/*"
-      - "doc/*"
+    branches:
+      - "main"
 
 jobs:
   sync-readme:
@@ -15,11 +14,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Docker Hub README & description sync
+      - name: Docker Hub README sync
         uses: meeDamian/sync-readme@v1.0.6
         with:
           user: ${{ secrets.DOCKER_USERNAME }}
           pass: ${{ secrets.DOCKER_PASSWORD }}
           slug: ${{ secrets.DOCKER_USERNAME }}/upmpdcli
           readme: ./README.md
-          description: Easily run upmpdcli on your devices
+      - name: Update repo description
+        uses: peter-evans/dockerhub-description@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{ secrets.DOCKER_USERNAME }}/upmpdcli
+          
