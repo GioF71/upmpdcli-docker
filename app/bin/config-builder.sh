@@ -13,6 +13,6 @@ set_parameter() {
         echo "enabling key [$PARAM_KEY]"
         sed -i "s/#${PARAM_KEY}/${PARAM_KEY}/g" $CFG_FILE;
         echo "Setting value for key [${PARAM_KEY}] to [${PARAM_VALUE}]"
-        sed -i "s/${PARAM_NAME}/${PARAM_VALUE}/g" $CFG_FILE;
+        sed -i "s/\b${PARAM_NAME}\b/${PARAM_VALUE}/g" $CFG_FILE;
     fi
 }

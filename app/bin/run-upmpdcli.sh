@@ -167,12 +167,24 @@ fi
 
 cp $SOURCE_CONFIG_FILE $CONFIG_FILE
 
-# log support
+# log file support
 if [ "${LOG_ENABLE^^}" == "YES" ]; then
-    sed -i "s/#logfilename/logfilename/g" $CONFIG_FILE;
-    if [ -n "${LOG_LEVEL}" ]; then
-        set_parameter $CONFIG_FILE LOG_LEVEL "$LOG_LEVEL" loglevel
-    fi
+    sed -i "s/#logfilename/logfilename/g" $CONFIG_FILE
+fi
+
+# log level
+if [ -n "${LOG_LEVEL}" ]; then
+    set_parameter $CONFIG_FILE LOG_LEVEL "$LOG_LEVEL" loglevel
+fi
+
+# upnp log file support
+if [ "${UPNP_LOG_ENABLE^^}" == "YES" ]; then
+    sed -i "s/#upnplogfilename/upnplogfilename/g" $CONFIG_FILE;
+fi
+
+# upnp log level
+if [ -n "${UPNP_LOG_LEVEL}" ]; then
+    set_parameter $CONFIG_FILE UPNP_LOG_LEVEL "$UPNP_LOG_LEVEL" upnploglevel
 fi
 
 set_upnp_iface=0
