@@ -84,8 +84,10 @@ Starting with release `1.6.2`, (since release `2022-12-12`), Kodi support is imp
 
 ## Links
 
-Source: [GitHub](https://github.com/giof71/upmpdcli-docker)  
-Images: [DockerHub](https://hub.docker.com/r/giof71/upmpdcli)
+REPOSITORY TYPE|LINK
+:---|:---
+Git Repository|[GitHub](https://github.com/GioF71/upmpdcli-docker)
+Docker Images|[Docker Hub](https://hub.docker.com/repository/docker/giof71/upmpdcli)
 
 ## Why
 
