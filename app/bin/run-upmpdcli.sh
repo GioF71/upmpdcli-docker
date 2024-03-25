@@ -178,13 +178,13 @@ if [ -n "${LOG_LEVEL}" ]; then
 fi
 
 # upnp log file support
-if [ "${UPNP_ENABLE^^}" == "YES" ]; then
+if [ "${UPNP_LOG_ENABLE^^}" == "YES" ]; then
     sed -i "s/#upnplogfilename/upnplogfilename/g" $CONFIG_FILE;
 fi
 
 # upnp log level
-if [ -n "${UPNP_LEVEL}" ]; then
-    set_parameter $CONFIG_FILE UPNP_LEVEL "$UPNP_LEVEL" upnploglevel
+if [ -n "${UPNP_LOG_LEVEL}" ]; then
+    set_parameter $CONFIG_FILE UPNP_LOG_LEVEL "$UPNP_LOG_LEVEL" upnploglevel
 fi
 
 set_upnp_iface=0
