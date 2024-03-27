@@ -70,6 +70,8 @@ RUN if [ "$USE_APT_PROXY" = "Y" ]; then \
 		rm /etc/apt/apt.conf.d/01proxy; \
 	fi
 
+RUN rm -Rf /app/install
+
 RUN echo $BUILD_MODE > /app/conf/build_mode.txt
 
 FROM scratch
@@ -213,10 +215,10 @@ COPY app/bin/get-version-ext.sh /app/bin/
 COPY app/bin/read-file.sh /app/bin/
 COPY app/bin/get-value.sh /app/bin/
 COPY app/bin/config-builder.sh /app/bin/
-RUN chmod u+x /app/bin/*.sh
+RUN chmod +x /app/bin/*.sh
 
 COPY app/bin/get-tidal-credentials.py /app/bin/
-RUN chmod u+x /app/bin/get-tidal-credentials.py
+RUN chmod +x /app/bin/get-tidal-credentials.py
 
 COPY README.md /app/doc
 
