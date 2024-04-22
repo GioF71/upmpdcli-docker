@@ -483,6 +483,17 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
         fi
         sed -i 's/SUBSONIC_APPEND_CODECS_TO_ALBUM/'"$append_year"'/g' $CONFIG_FILE
     fi
+    if [[ -n "${SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST}" ]]; then
+        sed -i 's/\#subsonicprependnumberinalbumlist/subsonicprependnumberinalbumlist/g' $CONFIG_FILE
+        prepend_number=1
+        if [[ "${SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST^^}" == "NO" ]]; then
+            prepend_number=0
+        elif [[ ! "${SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST^^}" == "YES" ]]; then
+            echo "Invalid SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST [${SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST}]"
+            exit 2
+        fi
+        sed -i 's/SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST/'"$prepend_number"'/g' $CONFIG_FILE
+    fi
     if [[ -n "${SUBSONIC_WHITELIST_CODECS}" ]]; then
         sed -i 's/\#subsonicwhitelistcodecs/subsonicwhitelistcodecs/g' $CONFIG_FILE
         sed -i 's/SUBSONIC_WHITELIST_CODECS/'"$SUBSONIC_WHITELIST_CODECS"'/g' $CONFIG_FILE

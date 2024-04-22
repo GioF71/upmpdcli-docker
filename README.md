@@ -226,6 +226,7 @@ SUBSONIC_SERVER_SIDE_SCROBBLING|Subsonic server side scrobbling, set to `yes` if
 SUBSONIC_ITEMS_PER_PAGE|Number of items per page, defaults to `100`
 SUBSONIC_APPEND_YEAR_TO_ALBUM|If set to `yes` (default), the album year is appended to the album
 SUBSONIC_APPEND_CODECS_TO_ALBUM|If set to `yes` (default), the codecs for the album are appended to the album unless all codecs are in the white list
+SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST|If set to `yes`, the album in albums list will be numbered, mostly for Kodi, defaults to `no`
 SUBSONIC_WHITELIST_CODECS|List of comma-separated whitelist (ideally lossless) codecs. Defaults to `alac,wav,flac,dsf`
 SUBSONIC_ENABLE_INTERNET_RADIOS|Set to `yes` to enable internet radios, disabled by default (requires plugin version >= 0.3.4)
 SUBSONIC_DOWNLOAD_PLUGIN|If set to `yes`, the updated plugin is downloaded from the upstream repo
