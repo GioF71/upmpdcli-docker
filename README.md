@@ -13,14 +13,15 @@ A few screenshots for the subsonic plugin on [Kazoo](https://github.com/GioF71/u
 First and foremost, the reference to the awesome project:
 
 [An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).  
-Current version is `1.8.8`.  
+Current version is `1.8.10`.  
 
 ## News
 
-### Support for HiRes Tidal in Preview
+### Support for HiRes Tidal
 
-Good news, Tidal HiRes is coming, even if with a limitation: only the mpd/upmpdcli combination works as a renderer AFAIK.  
-See how to install it in preview [here](https://github.com/GioF71/audio-tools/blob/main/media-servers/tidal-hires/README.md).  
+Good news, Tidal HiRes is now available.  
+You need to consider that there is a limitation: only the mpd/upmpdcli combination, as well as gmrender-resurrect, works as a renderer with the Tidal plugin in pkce mode, AFAIK.  
+A simple installation guide for a mediaserver upmpdcli instance for Tidal Hires is [here](https://github.com/GioF71/audio-tools/blob/main/media-servers/tidal-hires/README.md).  
 
 ### Subsonic Plugin compatibility
 
@@ -225,6 +226,7 @@ SUBSONIC_SERVER_SIDE_SCROBBLING|Subsonic server side scrobbling, set to `yes` if
 SUBSONIC_ITEMS_PER_PAGE|Number of items per page, defaults to `100`
 SUBSONIC_APPEND_YEAR_TO_ALBUM|If set to `yes` (default), the album year is appended to the album
 SUBSONIC_APPEND_CODECS_TO_ALBUM|If set to `yes` (default), the codecs for the album are appended to the album unless all codecs are in the white list
+SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST|If set to `yes`, the album in albums list will be numbered, mostly for Kodi, defaults to `no`
 SUBSONIC_WHITELIST_CODECS|List of comma-separated whitelist (ideally lossless) codecs. Defaults to `alac,wav,flac,dsf`
 SUBSONIC_ENABLE_INTERNET_RADIOS|Set to `yes` to enable internet radios, disabled by default (requires plugin version >= 0.3.4)
 SUBSONIC_DOWNLOAD_PLUGIN|If set to `yes`, the updated plugin is downloaded from the upstream repo
@@ -243,11 +245,16 @@ PLG_MICRO_HTTP_PORT|Port for the qobuz local HTTP service.
 PLG_PROXY_METHOD|Proxy method, valid values are `proxy` and `redirect`, defaults to `redirect`
 MEDIA_SERVER_FRIENDLY_NAME|Friendly name for the Media Server
 TIDAL_ENABLE|Set to `YES` to enable Tidal support, defaults to `no`
-TIDAL_TOKEN_TYPE|Tidal token type
-TIDAL_ACCESS_TOKEN|Tidal access token
-TIDAL_REFRESH_TOKEN|Tidal refresh token
-TIDAL_EXPIRY_TIME|Tidal expiry time
-TIDAL_QUALITY|Possible values are `LOW` (mp3@96k), `HIGH` (mp3@320k), `LOSSLESS` (flac@44.1kHz), `HI_RES` (I believe it's MQA), `HI_RES_LOSSLESS` (flac@hires), defaults to `LOSSLESS`
+TIDAL_AUTH_CHALLENGE_TYPE|Default login challenge type, `OAUTH2` (default) or `PKCE`
+TIDAL_QUALITY|Possible values are `LOW` (mp3@96k), `HIGH` (mp3@320k), `LOSSLESS` (flac 44.1kHz), `HI_RES` (I believe it's MQA), `HI_RES_LOSSLESS` (flac@hires), defaults to `LOSSLESS`
+TIDAL_TOKEN_TYPE|Tidal oauth2 token type
+TIDAL_ACCESS_TOKEN|Tidal oauth2 access token
+TIDAL_REFRESH_TOKEN|Tidal oauth2 refresh token
+TIDAL_EXPIRY_TIME|Tidal oauth2 expiry time
+TIDAL_PKCE_TOKEN_TYPE|Tidal pkce token type
+TIDAL_PKCE_ACCESS_TOKEN|Tidal pkce access token
+TIDAL_PKCE_REFRESH_TOKEN|Tidal pkce refresh token
+TIDAL_PKCE_SESSION_ID|Tidal pkce session id
 TIDAL_PREPEND_NUMBER_IN_ITEM_LIST|Set to `yes` to create item numbers in lists (`[01] Item` instead of `Item`), mostly for kodi, disabled by default
 TIDAL_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
 TIDAL_PLUGIN_BRANCH|If `TIDAL_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `TIDAL_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-tidal`
@@ -289,7 +296,7 @@ Volume|Description
 
 It is possible to customize the server icon by mounting a local png file to the container file `/usr/share/upmpdcli/icon.png`. Just put a suitable png file in the same directory of the compose file, then, assuming the icon is called `my-icon.png`, you would want to add an entry to the volumes section, similar to this:
 
-```
+```text
     volumes:
       - ./my-icon.png:/usr/share/upmpdcli/icon.png:ro
 ```
@@ -316,6 +323,8 @@ Only the `url` line is mandatory.
 Refer to the file [radiolist.conf](https://github.com/GioF71/upmpdcli-docker/blob/main/app/reference/radiolist.conf) from the git repository for further details.
 
 ### Obtain Tidal credentials
+
+#### OAUTH2 Mode
 
 In order to obtain your set of tidal credentials, execute the following command:
 
@@ -345,6 +354,12 @@ If you do so, be sure to monitor the container logs, and follow the Tidal link t
 Never share the tokens on the internet (and also on public git repositories).  
 Remember that currently, the Tidal Plugin actually starts when the first control point (e.g. BubbleUPnP, mConnect) contacts upmpdcli asking for the contents from the Tidal Plugin.  
 So, you will not see the prompt until you try to use the plugin itself.  
+
+#### PKCE Mode
+
+Getting credentials for PKCE mode is slightly different from OAUTH2 mode.  
+The `challenge` mode, available during while the plugin is running, does not work for pkce mode, because a user input is required, and there is currently no way to make the plugin accept that user input, AFAIK.  
+So the suggested strategy is described [here](https://github.com/GioF71/audio-tools/blob/main/media-servers/tidal-hires/README.md).  
 
 ## Usage examples
 

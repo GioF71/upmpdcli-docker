@@ -7,6 +7,9 @@ echo "BASE_IMAGE=[$BASE_IMAGE]"
 IMAGE_VERSION=$(echo $BASE_IMAGE | cut -d ":" -f 2)
 echo "IMAGE_VERSION=[$IMAGE_VERSION]"
 
+apt-get update
+apt-get install -y git
+
 if [ "$BUILD_MODE" = "full" ]; then
     declare -A needs_switch
     needs_switch[bookworm-slim]=1
@@ -24,7 +27,7 @@ if [ "$BUILD_MODE" = "full" ]; then
     if [ $add_switch -eq 1 ]; then
         pip_upgrade="$pip_upgrade --break-system-packages"
     fi
-    python_packages=(pyradios py-sonic subsonic-connector==0.2.6 mutagen tidalapi==0.7.3)
+    python_packages=(pyradios py-sonic subsonic-connector==0.3.2 mutagen rdflib mpegdash tidalapi==0.7.6)
     for pkg in "${python_packages[@]}"
     do
         echo "Installing ${pkg} with add_switch [$add_switch]..."

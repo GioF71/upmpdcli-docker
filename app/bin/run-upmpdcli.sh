@@ -483,6 +483,17 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
         fi
         sed -i 's/SUBSONIC_APPEND_CODECS_TO_ALBUM/'"$append_year"'/g' $CONFIG_FILE
     fi
+    if [[ -n "${SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST}" ]]; then
+        sed -i 's/\#subsonicprependnumberinalbumlist/subsonicprependnumberinalbumlist/g' $CONFIG_FILE
+        prepend_number=1
+        if [[ "${SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST^^}" == "NO" ]]; then
+            prepend_number=0
+        elif [[ ! "${SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST^^}" == "YES" ]]; then
+            echo "Invalid SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST [${SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST}]"
+            exit 2
+        fi
+        sed -i 's/SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST/'"$prepend_number"'/g' $CONFIG_FILE
+    fi
     if [[ -n "${SUBSONIC_WHITELIST_CODECS}" ]]; then
         sed -i 's/\#subsonicwhitelistcodecs/subsonicwhitelistcodecs/g' $CONFIG_FILE
         sed -i 's/SUBSONIC_WHITELIST_CODECS/'"$SUBSONIC_WHITELIST_CODECS"'/g' $CONFIG_FILE
@@ -533,18 +544,51 @@ if [ "${TIDAL_ENABLE^^}" == "YES" ]; then
         sed -i 's/\#tidalautostart/tidalautostart/g' $CONFIG_FILE;
         set_parameter $CONFIG_FILE TIDAL_AUTOSTART "$TIDAL_AUTOSTART" tidalautostart
     fi
-    echo "Setting Token Type [$TIDAL_TOKEN_TYPE]"
-    sed -i 's/\#tidaltokentype/tidaltokentype/g' $CONFIG_FILE
-    sed -i 's,TIDAL_TOKEN_TYPE,'"$TIDAL_TOKEN_TYPE"',g' $CONFIG_FILE
-    echo "Setting Access Token [$TIDAL_ACCESS_TOKEN]"
-    sed -i 's/\#tidalaccesstoken/tidalaccesstoken/g' $CONFIG_FILE
-    sed -i 's,TIDAL_ACCESS_TOKEN,'"$TIDAL_ACCESS_TOKEN"',g' $CONFIG_FILE
-    echo "Setting Access Token [$TIDAL_REFRESH_TOKEN]"
-    sed -i 's/\#tidalrefreshtoken/tidalrefreshtoken/g' $CONFIG_FILE
-    sed -i 's,TIDAL_REFRESH_TOKEN,'"$TIDAL_REFRESH_TOKEN"',g' $CONFIG_FILE
-    echo "Setting Token Expiry Time [$TIDAL_EXPIRY_TIME]"
-    sed -i 's/\#tidalexpirytime/tidalexpirytime/g' $CONFIG_FILE
-    sed -i 's,TIDAL_EXPIRY_TIME,'"$TIDAL_EXPIRY_TIME"',g' $CONFIG_FILE
+    if [[ -n "${TIDAL_AUTH_CHALLENGE_TYPE}" ]]; then
+        echo "Setting Token Type [$TIDAL_AUTH_CHALLENGE_TYPE]"
+        sed -i 's/\#tidalauthchallengetype/tidalauthchallengetype/g' $CONFIG_FILE
+        sed -i 's,TIDAL_AUTH_CHALLENGE_TYPE,'"$TIDAL_AUTH_CHALLENGE_TYPE"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_TOKEN_TYPE}" ]]; then
+        echo "Setting Token Type [$TIDAL_TOKEN_TYPE]"
+        sed -i 's/\#tidaltokentype/tidaltokentype/g' $CONFIG_FILE
+        sed -i 's,TIDAL_TOKEN_TYPE,'"$TIDAL_TOKEN_TYPE"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_ACCESS_TOKEN}" ]]; then
+        echo "Setting Access Token [$TIDAL_ACCESS_TOKEN]"
+        sed -i 's/\#tidalaccesstoken/tidalaccesstoken/g' $CONFIG_FILE
+        sed -i 's,TIDAL_ACCESS_TOKEN,'"$TIDAL_ACCESS_TOKEN"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_REFRESH_TOKEN}" ]]; then
+        echo "Setting Refresh Token [$TIDAL_REFRESH_TOKEN]"
+        sed -i 's/\#tidalrefreshtoken/tidalrefreshtoken/g' $CONFIG_FILE
+        sed -i 's,TIDAL_REFRESH_TOKEN,'"$TIDAL_REFRESH_TOKEN"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_EXPIRY_TIME}" ]]; then
+        echo "Setting Token Expiry Time [$TIDAL_EXPIRY_TIME]"
+        sed -i 's/\#tidalexpirytime/tidalexpirytime/g' $CONFIG_FILE
+        sed -i 's,TIDAL_EXPIRY_TIME,'"$TIDAL_EXPIRY_TIME"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_PKCE_TOKEN_TYPE}" ]]; then
+        echo "Setting PKCE Token Type [$TIDAL_PKCE_TOKEN_TYPE]"
+        sed -i 's/\#tidalpkcetokentype/tidalpkcetokentype/g' $CONFIG_FILE
+        sed -i 's,TIDAL_PKCE_TOKEN_TYPE,'"$TIDAL_PKCE_TOKEN_TYPE"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_PKCE_ACCESS_TOKEN}" ]]; then
+        echo "Setting PKCE Access Token [$TIDAL_PKCE_ACCESS_TOKEN]"
+        sed -i 's/\#tidalpkceaccesstoken/tidalpkceaccesstoken/g' $CONFIG_FILE
+        sed -i 's,TIDAL_PKCE_ACCESS_TOKEN,'"$TIDAL_PKCE_ACCESS_TOKEN"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_PKCE_REFRESH_TOKEN}" ]]; then
+        echo "Setting PKCE Refresh Token [$TIDAL_PKCE_REFRESH_TOKEN]"
+        sed -i 's/\#tidalpkcerefreshtoken/tidalpkcerefreshtoken/g' $CONFIG_FILE
+        sed -i 's,TIDAL_PKCE_REFRESH_TOKEN,'"$TIDAL_PKCE_REFRESH_TOKEN"',g' $CONFIG_FILE
+    fi
+    if [[ -n "${TIDAL_PKCE_SESSION_ID}" ]]; then
+        echo "Setting PKCE Session Id [$TIDAL_PKCE_SESSION_ID]"
+        sed -i 's/\#tidalpkcesessionid/tidalpkcesessionid/g' $CONFIG_FILE
+        sed -i 's,TIDAL_PKCE_SESSION_ID,'"$TIDAL_PKCE_SESSION_ID"',g' $CONFIG_FILE
+    fi
     if [[ -z "$TIDAL_AUDIO_QUALITY" ]]; then
         TIDAL_AUDIO_QUALITY="LOSSLESS"   
     fi
@@ -678,8 +722,8 @@ fi
 cache_directory=/cache
 if [ ! -w "$cache_directory" ]; then
     echo "Cache directory [${cache_directory}] is not writable"
-    mkdir -p /tmp/cache
     cache_directory="/tmp/cache"
+    mkdir -p /tmp/cache
 else
     echo "Cache directory [${cache_directory}] is writable"
 fi
@@ -699,6 +743,14 @@ sed -i 's\LOG_DIRECTORY\'"$log_directory"'\g' $CONFIG_FILE
 cat $CONFIG_FILE
 
 if [[ $current_user_id == 0 ]]; then
+
+    # create directory as we are root
+    if [[ -n "${WEBSERVER_DOCUMENT_ROOT}" ]]; then
+        echo "Creating directory [${WEBSERVER_DOCUMENT_ROOT}] ..."
+        mkdir -p $WEBSERVER_DOCUMENT_ROOT
+        echo "Created directory [${WEBSERVER_DOCUMENT_ROOT}]."
+    fi
+
     DEFAULT_UID=1000
     DEFAULT_GID=1000
 
@@ -782,6 +834,13 @@ if [[ $current_user_id == 0 ]]; then
     chown -R $USER_NAME:$GROUP_NAME /user/config
     chown -R $USER_NAME:$GROUP_NAME /log
     echo ". done."
+
+    # Correct permissions for WEBSERVER_DOCUMENT_ROOT if set
+    if [[ -n "${WEBSERVER_DOCUMENT_ROOT}" ]]; then
+        echo "Setting permissions for directory [${WEBSERVER_DOCUMENT_ROOT}] ..."
+        chown -R $USER_NAME:$GROUP_NAME $WEBSERVER_DOCUMENT_ROOT
+        echo ". done."
+    fi
 fi
 
 build_mode=`cat /app/conf/build_mode.txt`
