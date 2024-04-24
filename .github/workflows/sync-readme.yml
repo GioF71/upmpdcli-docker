@@ -20,6 +20,6 @@ jobs:
           user: ${{ secrets.DOCKER_USERNAME }}
           pass: ${{ secrets.DOCKER_PASSWORD }}
           slug: ${{ secrets.DOCKER_USERNAME }}/upmpdcli
-          readme: ./README.md
+          readme: ./README.dockerhub.md
           description: Easily run upmpdcli with docker on your devices
           
