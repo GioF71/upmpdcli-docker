@@ -13,7 +13,7 @@ DEBIAN_VERSION=$(echo $IMAGE_FULL_NAME | cut -d "-" -f 1)
 echo "DEBIAN_VERSION=[$DEBIAN_VERSION]"
 
 apt-get update
-apt-get install -y wget
+apt-get install -y wget git
 
 GPG_KEY_FILE="/usr/share/keyrings/lesbonscomptes.gpg"
 

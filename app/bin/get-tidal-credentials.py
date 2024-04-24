@@ -20,8 +20,10 @@ from datetime import datetime
 
 tidal_plugin_name : str = "tidal"
 
+
 def print_setting(name : str, value : str):
     print(f"{name}={value}")
+
 
 session = tidalapi.Session()
 # Will run until you visit the printed url and link your account
@@ -29,7 +31,7 @@ session.login_oauth_simple()
 
 token_type = session.token_type
 access_token = session.access_token
-refresh_token = session.refresh_token # Not needed if you don't care about refreshing
+refresh_token = session.refresh_token
 expiry_time = session.expiry_time
 
 storable_expiry_time = datetime.timestamp(expiry_time)
@@ -39,4 +41,3 @@ print_setting("TIDAL_TOKEN_TYPE", token_type)
 print_setting("TIDAL_ACCESS_TOKEN", access_token)
 print_setting("TIDAL_REFRESH_TOKEN", refresh_token)
 print_setting("TIDAL_EXPIRY_TIME", storable_expiry_time)
-
