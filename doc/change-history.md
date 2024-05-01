@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2024-05-01|Support for `subsonictitle` (see issue [#398](https://github.com/GioF71/upmpdcli-docker/issues/398))
 2024-04-24|Update to Upmpdcli version 1.8.10 (see issue [#393](https://github.com/GioF71/upmpdcli-docker/issues/393))
 2024-03-27|Fix executable shell files for user mode (see issue [#390](https://github.com/GioF71/upmpdcli-docker/issues/390)))
 2024-03-24|Add support for upnp log file and level (see issue [#383](https://github.com/GioF71/upmpdcli-docker/issues/383)))

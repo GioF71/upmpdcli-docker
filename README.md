@@ -216,6 +216,7 @@ BBC_ENABLE|Enable BBC plugin. Set to `yes` to enable
 BBC_PROGRAMME_DAYS|Past days in BBC Sounds catalog listing. This controls how many days are listed in the station displays.
 RADIO_BROWSER_ENABLE|Enable the Radio Browser plugin. Set to `yes` to enable
 SUBSONIC_ENABLE|Enable the Subsonic plugin. Set to `yes` to enable
+SUBSONIC_TITLE|Title of the Subsonic plugin, defaults to `Subsonic`
 SUBSONIC_AUTOSTART|Autostart Subsonic plugin, defaults to `1`
 SUBSONIC_BASE_URL|Subsonic base url. Example: `http://my_navidrome.homelab.local`
 SUBSONIC_PORT|Subsonic port, defaults to `4533`

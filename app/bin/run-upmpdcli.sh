@@ -424,6 +424,12 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
         sed -i 's/\#subsonicautostart/subsonicautostart/g' $CONFIG_FILE;
         set_parameter $CONFIG_FILE SUBSONIC_AUTOSTART "$SUBSONIC_AUTOSTART" subsonicautostart
     fi
+    if [[ -n "${SUBSONIC_TITLE}" ]]; then
+        echo "SUBSONIC_TITLE=[$SUBSONIC_TITLE]"
+        sed -i 's/\#subsonicuser/subsonicuser/g' $CONFIG_FILE
+        sed -i 's/\#subsonictitle/subsonictitle/g' $CONFIG_FILE;
+        set_parameter $CONFIG_FILE SUBSONIC_TITLE "$SUBSONIC_TITLE" subsonictitle
+    fi
     echo "Setting subsonic base_url [$SUBSONIC_BASE_URL]"
     sed -i 's/\#subsonicbaseurl/subsonicbaseurl/g' $CONFIG_FILE
     sed -i 's,SUBSONIC_BASE_URL,'"$SUBSONIC_BASE_URL"',g' $CONFIG_FILE
