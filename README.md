@@ -295,9 +295,22 @@ Volume|Description
 :---|:---
 /uprcl/confdir|Uprcl configuration directory
 /uprcl/mediadirs|Uprcl media directories
-/user/config|Location for additional files. Currently: `additional-radio-list.txt` and `recoll.conf.user` as well as credentials for qobuz on `qobuz.txt`, for hra on `hra.txt`. The credentials file format is the same as a `.env` file. Ensure to include all the settings related the streaming service.
+/user/config|Location for additional files. See [User Config Volume](#user-config-volume) for details.
 /cache|Runtime information for upmpdcli. Attach a volume to this path in order to maintain consistency across restarts.
 /log|Location for the upmpdcli log file. Enabled using `LOG_ENABLE`
+
+#### User Config Volume
+
+FILE|DESCRIPTION
+:---|:---
+additional-radio-list.txt|Additional Radios
+recoll.conf.user|Recoll configuration (used by upcrl)
+qobuz.txt|Qobuz Credentials
+hra.txt|HRA Credentials, format is like a .env file. Make sure you include all the settings related the streaming service.
+upmpdcli-additional.txt|Configuration snippet, will be appended to upmpdcli.conf.
+
+For `qobuz.txt` and `hra.txt`, the format of the file must be like a `.env` file, where all the settings which are related to the service must be listed. Mixed configurations (so part in variables, part in these files) are not supported.  
+The upmpdcli-additional.txt is a simple list of lines with a `key = value` synthax.
 
 ### Custom icon
 

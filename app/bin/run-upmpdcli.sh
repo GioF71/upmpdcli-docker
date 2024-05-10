@@ -107,6 +107,8 @@ CONFIG_FILE=/tmp/current-upmpdcli.conf
 QOBUZ_CREDENTIALS_FILE=/user/config/qobuz.txt
 HRA_CREDENTIALS_FILE=/user/config/hra.txt
 
+UPMPDCLI_ADDITIONAL_FILE=/user/config/upmpdcli-additional.txt
+
 declare -A file_dict
 
 source read-file.sh
@@ -745,6 +747,12 @@ else
 fi
 sed -i 's\LOG_DIRECTORY\'"$log_directory"'\g' $CONFIG_FILE
 
+if [ -f $UPMPDCLI_ADDITIONAL_FILE ]; then
+    echo "File [$UPMPDCLI_ADDITIONAL_FILE] is available, appending to [$CONFIG_FILE] ..."
+    cat $UPMPDCLI_ADDITIONAL_FILE >> $CONFIG_FILE
+    sed -i -e '$a\' $CONFIG_FILE
+    echo "Done."
+fi
 
 cat $CONFIG_FILE
 
