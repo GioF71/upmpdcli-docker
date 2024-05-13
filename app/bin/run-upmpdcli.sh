@@ -539,6 +539,7 @@ if [ "${MOTHER_EARTH_RADIO_ENABLE^^}" == "YES" ]; then
     echo "Enabling Mother Earth Radio, processing settings";
     MOTHER_EARTH_RADIO_ENABLE=YES
     sed -i 's/\#mother-earth-radiouser/mother-earth-radiouser/g' $CONFIG_FILE
+    sed -i 's/\#mother-earth-radiotitle/mother-earth-radiotitle/g' $CONFIG_FILE
 fi
 
 echo "TIDAL_ENABLE=[$TIDAL_ENABLE]"
