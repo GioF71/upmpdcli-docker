@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2024-05-13|Set title for Mother Earth Radio (see issue [#407](https://github.com/GioF71/upmpdcli-docker/issues/407))
 2024-05-10|Support for config file snippet (see issue [#401](https://github.com/GioF71/upmpdcli-docker/issues/401))
 2024-05-01|Support for `subsonictitle` (see issue [#398](https://github.com/GioF71/upmpdcli-docker/issues/398))
 2024-04-24|Update to Upmpdcli version 1.8.10 (see issue [#393](https://github.com/GioF71/upmpdcli-docker/issues/393))
