@@ -532,6 +532,7 @@ if [ "${RADIO_PARADISE_ENABLE^^}" == "YES" ]; then
     echo "Enabling Radio Paradise, processing settings";
     RADIO_PARADISE_ENABLE=YES
     sed -i 's/\#radio-paradiseuser/radio-paradiseuser/g' $CONFIG_FILE
+    sed -i 's/\#radio-paradisetitle/radio-paradisetitle/g' $CONFIG_FILE
 fi
 
 echo "MOTHER_EARTH_RADIO_ENABLE=[$MOTHER_EARTH_RADIO_ENABLE]"
