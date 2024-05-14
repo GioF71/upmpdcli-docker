@@ -401,6 +401,7 @@ if [ "${RADIO_BROWSER_ENABLE^^}" == "YES" ]; then
     echo "Enabling Radio Browser";
     RADIO_BROWSER_ENABLE=YES
     sed -i 's/\#radio-browseruser/radio-browseruser/g' $CONFIG_FILE;
+    sed -i 's/\#radio-browsertitle/radio-browsertitle/g' $CONFIG_FILE
 fi
 
 echo "SUBSONIC_ENABLE=[$SUBSONIC_ENABLE]"
