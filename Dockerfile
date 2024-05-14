@@ -1,6 +1,6 @@
-ARG BASE_IMAGE="${BASE_IMAGE:-ubuntu:jammy}"
+ARG BASE_IMAGE="${BASE_IMAGE:-ubuntu:noble}"
 FROM ${BASE_IMAGE} AS BASE
-ARG BASE_IMAGE="${BASE_IMAGE:-ubuntu:jammy}"
+ARG BASE_IMAGE="${BASE_IMAGE:-ubuntu:noble}"
 ARG USE_PPA="${USE_PPA:-upnpp1}"
 ARG BUILD_MODE="${BUILD_MODE:-full}"
 ARG USE_APT_PROXY

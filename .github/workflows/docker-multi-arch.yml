@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        base: [ "jammy" ]
+        base: [ "noble" ]
         build_mode: ["full", "renderer"]
 
     steps:
@@ -35,6 +35,7 @@ jobs:
           echo "REF: ["$ref"]"
 
           declare -A base_images
+          base_images[noble]=ubuntu:noble
           base_images[mantic]=ubuntu:mantic
           base_images[lunar]=ubuntu:lunar
           base_images[kinetic]=ubuntu:kinetic
@@ -49,8 +50,8 @@ jobs:
           echo "Building build_key: ["$build_key"]";
 
           declare -A special_tags
-          special_tags[jammy-full]="${image_name}:latest,${image_name}:latest-full,${image_name}:stable,${image_name}:ubuntu-lts-full,${image_name}:stable-full"
-          special_tags[jammy-renderer]="${image_name}:renderer,${image_name}:latest-renderer,${image_name}:stable-renderer,${image_name}:ubuntu-lts-renderer"
+          special_tags[noble-full]="${image_name}:latest,${image_name}:latest-full,${image_name}:stable,${image_name}:ubuntu-lts-full,${image_name}:stable-full"
+          special_tags[noble-renderer]="${image_name}:renderer,${image_name}:latest-renderer,${image_name}:stable-renderer,${image_name}:ubuntu-lts-renderer"
           special_tags[mantic-full]="${image_name}:ubuntu-current-full"
           special_tags[mantic-renderer]="${image_name}:ubuntu-current-renderer"
           special_tags[bookworm-full]="${image_name}:debian-stable-full"

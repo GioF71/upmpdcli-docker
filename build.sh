@@ -4,13 +4,14 @@ declare -A base_images
 
 base_images[bookworm]=debian:bookworm-slim
 base_images[bullseye]=debian:bullseye-slim
+base_images[noble]=ubuntu:noble
 base_images[mantic]=ubuntu:mantic
 base_images[lunar]=ubuntu:lunar
 base_images[kinetic]=ubuntu:kinetic
 base_images[jammy]=ubuntu:jammy
 base_images[focal]=ubuntu:focal
 
-DEFAULT_BASE_IMAGE=jammy
+DEFAULT_BASE_IMAGE=noble
 DEFAULT_TAG=local
 DEFAULT_USE_PROXY=N
 DEFAULT_PPA=upnpp1
