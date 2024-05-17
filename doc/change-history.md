@@ -2,6 +2,8 @@
 
 Change Date|Major Changes
 ---|---
+2024-05-17|Support title for Qobuz (see issue [#412](https://github.com/GioF71/upmpdcli-docker/issues/412))
+2024-05-17|Support title for Tidal (see issue [#410](https://github.com/GioF71/upmpdcli-docker/issues/410))
 2024-05-14|Set title for Radio Broswer (see issue [#413](https://github.com/GioF71/upmpdcli-docker/issues/413))
 2024-05-14|Set title for Radio Paradise (see issue [#411](https://github.com/GioF71/upmpdcli-docker/issues/411))
 2024-05-14|Switch to ubuntu noble (see issue [#409](https://github.com/GioF71/upmpdcli-docker/issues/409))
