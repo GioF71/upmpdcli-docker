@@ -169,6 +169,10 @@ fi
 
 cp $SOURCE_CONFIG_FILE $CONFIG_FILE
 
+# set fixed value
+echo "radiolist = /tmp/radiolist.conf" >> $CONFIG_FILE
+echo "upradiostitle = Upmpdcli Radio List" >> $CONFIG_FILE
+
 # log file support
 if [ "${LOG_ENABLE^^}" == "YES" ]; then
     sed -i "s/#logfilename/logfilename/g" $CONFIG_FILE
@@ -548,70 +552,61 @@ echo "TIDAL_ENABLE=[$TIDAL_ENABLE]"
 if [ "${TIDAL_ENABLE^^}" == "YES" ]; then
     echo "Enabling new Tidal, processing settings";
     TIDAL_ENABLE=YES
-    sed -i 's/\#tidaluser/tidaluser/g' $CONFIG_FILE
+    echo "tidaluser = tidaluser" >> $CONFIG_FILE
+    if [[ -n "${TIDAL_TITLE}" ]]; then
+        echo "tidaltitle = ${TIDAL_TITLE}" >> $CONFIG_FILE
+    fi
     echo "TIDAL_AUTOSTART=[$TIDAL_AUTOSTART]"
     if [[ -z "${TIDAL_AUTOSTART^^}" || "${TIDAL_AUTOSTART}" == "1" || "${SUBSONIC_AUTOSTART^^}" == "YES" ]]; then
         TIDAL_AUTOSTART=1
-        sed -i 's/\#tidalautostart/tidalautostart/g' $CONFIG_FILE;
-        set_parameter $CONFIG_FILE TIDAL_AUTOSTART "$TIDAL_AUTOSTART" tidalautostart
+        echo "tidalautostart = $TIDAL_AUTOSTART" >> $CONFIG_FILE
     fi
     if [[ -n "${TIDAL_AUTH_CHALLENGE_TYPE}" ]]; then
         echo "Setting Token Type [$TIDAL_AUTH_CHALLENGE_TYPE]"
-        sed -i 's/\#tidalauthchallengetype/tidalauthchallengetype/g' $CONFIG_FILE
-        sed -i 's,TIDAL_AUTH_CHALLENGE_TYPE,'"$TIDAL_AUTH_CHALLENGE_TYPE"',g' $CONFIG_FILE
+        echo "tidalauthchallengetype = $TIDAL_AUTH_CHALLENGE_TYPE" >> $CONFIG_FILE
     fi
     if [[ -n "${TIDAL_TOKEN_TYPE}" ]]; then
         echo "Setting Token Type [$TIDAL_TOKEN_TYPE]"
-        sed -i 's/\#tidaltokentype/tidaltokentype/g' $CONFIG_FILE
-        sed -i 's,TIDAL_TOKEN_TYPE,'"$TIDAL_TOKEN_TYPE"',g' $CONFIG_FILE
+        echo "tidaltokentype = $TIDAL_TOKEN_TYPE" >> $CONFIG_FILE
     fi
     if [[ -n "${TIDAL_ACCESS_TOKEN}" ]]; then
         echo "Setting Access Token [$TIDAL_ACCESS_TOKEN]"
-        sed -i 's/\#tidalaccesstoken/tidalaccesstoken/g' $CONFIG_FILE
-        sed -i 's,TIDAL_ACCESS_TOKEN,'"$TIDAL_ACCESS_TOKEN"',g' $CONFIG_FILE
+        echo "tidalaccesstoken = $TIDAL_ACCESS_TOKEN" >> $CONFIG_FILE
     fi
     if [[ -n "${TIDAL_REFRESH_TOKEN}" ]]; then
         echo "Setting Refresh Token [$TIDAL_REFRESH_TOKEN]"
-        sed -i 's/\#tidalrefreshtoken/tidalrefreshtoken/g' $CONFIG_FILE
-        sed -i 's,TIDAL_REFRESH_TOKEN,'"$TIDAL_REFRESH_TOKEN"',g' $CONFIG_FILE
+        echo "tidalrefreshtoken = $TIDAL_REFRESH_TOKEN" >> $CONFIG_FILE
     fi
     if [[ -n "${TIDAL_EXPIRY_TIME}" ]]; then
         echo "Setting Token Expiry Time [$TIDAL_EXPIRY_TIME]"
-        sed -i 's/\#tidalexpirytime/tidalexpirytime/g' $CONFIG_FILE
-        sed -i 's,TIDAL_EXPIRY_TIME,'"$TIDAL_EXPIRY_TIME"',g' $CONFIG_FILE
+        echo "tidalexpirytime = $TIDAL_EXPIRY_TIME" >> $CONFIG_FILE
     fi
     if [[ -n "${TIDAL_PKCE_TOKEN_TYPE}" ]]; then
         echo "Setting PKCE Token Type [$TIDAL_PKCE_TOKEN_TYPE]"
-        sed -i 's/\#tidalpkcetokentype/tidalpkcetokentype/g' $CONFIG_FILE
-        sed -i 's,TIDAL_PKCE_TOKEN_TYPE,'"$TIDAL_PKCE_TOKEN_TYPE"',g' $CONFIG_FILE
+        echo "tidalpkcetokentype = $TIDAL_PKCE_TOKEN_TYPE" >> $CONFIG_FILE
     fi
     if [[ -n "${TIDAL_PKCE_ACCESS_TOKEN}" ]]; then
         echo "Setting PKCE Access Token [$TIDAL_PKCE_ACCESS_TOKEN]"
-        sed -i 's/\#tidalpkceaccesstoken/tidalpkceaccesstoken/g' $CONFIG_FILE
-        sed -i 's,TIDAL_PKCE_ACCESS_TOKEN,'"$TIDAL_PKCE_ACCESS_TOKEN"',g' $CONFIG_FILE
+        echo "tidalpkceaccesstoken = $TIDAL_PKCE_ACCESS_TOKEN" >> $CONFIG_FILE
     fi
     if [[ -n "${TIDAL_PKCE_REFRESH_TOKEN}" ]]; then
         echo "Setting PKCE Refresh Token [$TIDAL_PKCE_REFRESH_TOKEN]"
-        sed -i 's/\#tidalpkcerefreshtoken/tidalpkcerefreshtoken/g' $CONFIG_FILE
-        sed -i 's,TIDAL_PKCE_REFRESH_TOKEN,'"$TIDAL_PKCE_REFRESH_TOKEN"',g' $CONFIG_FILE
+        echo "tidalpkcerefreshtoken = $TIDAL_PKCE_REFRESH_TOKEN" >> $CONFIG_FILE
     fi
     if [[ -n "${TIDAL_PKCE_SESSION_ID}" ]]; then
         echo "Setting PKCE Session Id [$TIDAL_PKCE_SESSION_ID]"
-        sed -i 's/\#tidalpkcesessionid/tidalpkcesessionid/g' $CONFIG_FILE
-        sed -i 's,TIDAL_PKCE_SESSION_ID,'"$TIDAL_PKCE_SESSION_ID"',g' $CONFIG_FILE
+        echo "tidalpkcesessionid = $TIDAL_PKCE_SESSION_ID" >> $CONFIG_FILE
     fi
     if [[ -z "$TIDAL_AUDIO_QUALITY" ]]; then
         TIDAL_AUDIO_QUALITY="LOSSLESS"   
     fi
     echo "Setting Audio Quality [$TIDAL_AUDIO_QUALITY]"
-    sed -i 's/\#tidalaudioquality/tidalaudioquality/g' $CONFIG_FILE
-    sed -i 's,TIDAL_AUDIO_QUALITY,'"$TIDAL_AUDIO_QUALITY"',g' $CONFIG_FILE
+    echo "tidalaudioquality = $TIDAL_AUDIO_QUALITY" >> $CONFIG_FILE
     if [[ -n "${TIDAL_PREPEND_NUMBER_IN_ITEM_LIST}" ]]; then
         echo "TIDAL_PREPEND_NUMBER_IN_ITEM_LIST=[${TIDAL_PREPEND_NUMBER_IN_ITEM_LIST}]"
         if [[ "${TIDAL_PREPEND_NUMBER_IN_ITEM_LIST^^}" == "YES" || "${TIDAL_PREPEND_NUMBER_IN_ITEM_LIST^^}" == "Y" ]]; then
             #set prependnumberinitemlist
-            sed -i 's/\#tidalprependnumberinitemlist/tidalprependnumberinitemlist/g' $CONFIG_FILE
-            sed -i 's,TIDAL_PREPEND_NUMBER_IN_ITEM_LIST,'"1"',g' $CONFIG_FILE
+            echo "tidalprependnumberinitemlist = 1" >> $CONFIG_FILE
         elif [[ "${TIDAL_PREPEND_NUMBER_IN_ITEM_LIST^^}" != "NO" && "${TIDAL_PREPEND_NUMBER_IN_ITEM_LIST^^}" == "N" ]]; then
             echo "Invalid TIDAL_PREPEND_NUMBER_IN_ITEM_LIST=[${TIDAL_PREPEND_NUMBER_IN_ITEM_LIST}]"
             exit 3
@@ -622,6 +617,9 @@ fi
 echo "Qobuz Enable [$QOBUZ_ENABLE]"
 if [ "${QOBUZ_ENABLE^^}" == "YES" ]; then
     echo "Processing Qobuz settings";
+    if [[ -n "${QOBUZ_TITLE}" ]]; then
+        echo "qobuztitle = ${QOBUZ_TITLE}" >> $CONFIG_FILE
+    fi
     sed -i 's/\#qobuzuser/qobuzuser/g' $CONFIG_FILE;
     sed -i 's/\#qobuzpass/qobuzpass/g' $CONFIG_FILE;
     sed -i 's/\#qobuzformatid/qobuzformatid/g' $CONFIG_FILE;
@@ -676,8 +674,6 @@ if [ "${UPRCL_ENABLE^^}" == "YES" ]; then
     sed -i 's/\#uprclconfdir/uprclconfdir/g' $CONFIG_FILE;
     echo "enabling uprclconfdir"
     sed -i 's/#uprclconfdir/'"uprclconfdir"'/g' $CONFIG_FILE;
-    echo "enabling cachedir"
-    sed -i 's/#cachedir/'"cachedir"'/g' $CONFIG_FILE;
     echo "enabling uprclmediadirs"
     sed -i 's/#uprclmediadirs/'"uprclmediadirs"'/g' $CONFIG_FILE;
     echo "UPRCL_TITLE [$UPRCL_TITLE]"
@@ -738,7 +734,7 @@ if [ ! -w "$cache_directory" ]; then
 else
     echo "Cache directory [${cache_directory}] is writable"
 fi
-sed -i 's\CACHE_DIRECTORY\'"$cache_directory"'\g' $CONFIG_FILE
+echo "cachedir = $cache_directory" >> $CONFIG_FILE
 
 log_directory=/log
 if [ ! -w "$log_directory" ]; then
