@@ -173,26 +173,6 @@ cp $SOURCE_CONFIG_FILE $CONFIG_FILE
 echo "radiolist = /tmp/radiolist.conf" >> $CONFIG_FILE
 echo "upradiostitle = Upmpdcli Radio List" >> $CONFIG_FILE
 
-# log file support
-if [ "${LOG_ENABLE^^}" == "YES" ]; then
-    sed -i "s/#logfilename/logfilename/g" $CONFIG_FILE
-fi
-
-# log level
-if [ -n "${LOG_LEVEL}" ]; then
-    set_parameter $CONFIG_FILE LOG_LEVEL "$LOG_LEVEL" loglevel
-fi
-
-# upnp log file support
-if [ "${UPNP_LOG_ENABLE^^}" == "YES" ]; then
-    sed -i "s/#upnplogfilename/upnplogfilename/g" $CONFIG_FILE;
-fi
-
-# upnp log level
-if [ -n "${UPNP_LOG_LEVEL}" ]; then
-    set_parameter $CONFIG_FILE UPNP_LOG_LEVEL "$UPNP_LOG_LEVEL" upnploglevel
-fi
-
 set_upnp_iface=0
 if [[ "$ENABLE_AUTO_UPNPIFACE" == "1" || "${ENABLE_AUTO_UPNPIFACE^^}" == "YES" || "${ENABLE_AUTO_UPNPIFACE^^}" == "Y" ]]; then
     if [[ -z "${UPNPIFACE}" ]]; then
@@ -227,13 +207,11 @@ if [[ set_upnp_iface -eq 1 || set_upnp_ip -eq 1 ]]; then
     select_ip=$(ifconfig $iface | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
     if [[ set_upnp_iface -eq 1 ]]; then
         echo "Automatically setting UPNPIFACE to ["$iface"]"
-        sed -i 's/\#upnpiface/upnpiface/g' $CONFIG_FILE
-        sed -i 's/UPNPIFACE/'"$iface"'/g' $CONFIG_FILE
+        echo "upnpiface = $iface" >> $CONFIG_FILE
     fi
     if [[ set_upnp_ip -eq 1 ]]; then
         echo "Automatically setting UPNPIP to ["$select_ip"]"
-        sed -i 's/\#upnpip/upnpip/g' $CONFIG_FILE
-        sed -i 's/UPNPIP/'"$select_ip"'/g' $CONFIG_FILE
+        echo "upnpip = $select_ip" >> $CONFIG_FILE
     fi
 fi
 
@@ -242,8 +220,7 @@ if [ -z "${UPNPIFACE}" ]; then
     echo "UPNPIFACE not set"
 else 
     echo "Setting UPNPIFACE to ["$UPNPIFACE"]"
-    sed -i 's/\#upnpiface/upnpiface/g' $CONFIG_FILE
-    sed -i 's/UPNPIFACE/'"$UPNPIFACE"'/g' $CONFIG_FILE
+    echo "upnpiface = $UPNPIFACE" >> $CONFIG_FILE
 fi
 
 echo "UPNPIP=["$UPNPIP"]"
@@ -251,8 +228,7 @@ if [ -z "${UPNPIP}" ]; then
     echo "UPNPIP not set"
 else 
     echo "Setting UPNPIP to ["$UPNPIP"]"
-    sed -i 's/\#upnpip/upnpip/g' $CONFIG_FILE
-    sed -i 's/UPNPIP/'"$UPNPIP"'/g' $CONFIG_FILE
+    echo "upnpip = $UPNPIP" >> $CONFIG_FILE
 fi
 
 # Renderer mode
@@ -305,32 +281,55 @@ if [ -n "${FRIENDLY_NAME}" ]; then
         fi
         AV_FRIENDLY_NAME="${FRIENDLY_NAME}${AV_POSTFIX}"
     fi
-    if [[ -z "${OH_PRODUCT_ROOM}" ]]; then
-        OH_PRODUCT_ROOM="${AV_FRIENDLY_NAME}"
-    fi
     echo "AV_FRIENDLY_NAME=[${AV_FRIENDLY_NAME}]"
     echo "OH_PRODUCT_ROOM=[${OH_PRODUCT_ROOM}]"
     MEDIA_SERVER_FRIENDLY_NAME="${FRIENDLY_NAME}"
     echo "MEDIA_SERVER_FRIENDLY_NAME=[${MEDIA_SERVER_FRIENDLY_NAME}]"
 fi
 
-set_parameter $CONFIG_FILE UPNPPORT "$UPNPPORT" upnpport
-set_parameter $CONFIG_FILE UPNPAV "$UPNPAV" upnpav
-set_parameter $CONFIG_FILE OPENHOME "$OPENHOME" openhome
+if [[ -n "${UPNPPORT}" ]]; then
+    echo "upnpport = $UPNPPORT" >> $CONFIG_FILE
+fi
+
+echo "upnpav = ${UPNPAV}" >> $CONFIG_FILE
+echo "openhome = ${OPENHOME}" >> $CONFIG_FILE
+
 if [ "${OPENHOME}" -eq 1 ]; then
-    set_parameter $CONFIG_FILE UPMPD_FRIENDLY_NAME "$UPMPD_FRIENDLY_NAME" friendlyname
+    echo "friendlyname = ${UPMPD_FRIENDLY_NAME}" >> $CONFIG_FILE
 fi
 if [ "${UPNPAV}" -eq 1 ]; then
-    set_parameter $CONFIG_FILE AV_FRIENDLY_NAME "$AV_FRIENDLY_NAME" avfriendlyname
-    set_parameter $CONFIG_FILE OH_PRODUCT_ROOM "$OH_PRODUCT_ROOM" ohproductroom
+    echo "avfriendlyname = ${AV_FRIENDLY_NAME}" >> $CONFIG_FILE
 fi
-set_parameter $CONFIG_FILE MPD_HOST "$MPD_HOST" mpdhost
-set_parameter $CONFIG_FILE MPD_PORT "$MPD_PORT" mpdport
+if [ "${OPENHOME}" -eq 1 ] || [ "${UPNPAV}" -eq 1 ]; then
+    if [[ -n "${OH_PRODUCT_ROOM}" ]]; then
+        echo "ohproductroom = ${OH_PRODUCT_ROOM}" >> $CONFIG_FILE
+    elif [ "${OPENHOME}" -eq 1 ]; then
+        echo "ohproductroom = ${UPMPD_FRIENDLY_NAME}" >> $CONFIG_FILE
+    elif [ "${UPNPAV}" -eq 1 ]; then
+        echo "ohproductroom = ${AV_FRIENDLY_NAME}" >> $CONFIG_FILE
+    fi
+fi
+
+if [[ -n "${MPD_HOST}" ]]; then
+    echo "mpdhost = $MPD_HOST" >> $CONFIG_FILE
+fi
+if [[ -n "${MPD_PORT}" ]]; then
+    echo "mpdport = $MPD_PORT" >> $CONFIG_FILE
+fi
+if [[ -n "${MPD_PASSWORD}" ]]; then
+    echo "mpdpassword = $MPD_PASSWORD" >> $CONFIG_FILE
+fi
+if [[ -n "${MPD_TIMEOUT_MS}" ]]; then
+    echo "mpdtimeoutms = $MPD_TIMEOUT_MS" >> $CONFIG_FILE
+fi
+if [[ -n "${OWN_QUEUE}" ]]; then
+    echo "ownqueue = $OWN_QUEUE" >> $CONFIG_FILE
+fi
+
 set_parameter $CONFIG_FILE PLG_MICRO_HTTP_HOST "$PLG_MICRO_HTTP_HOST" plgmicrohttphost
 set_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmicrohttpport
 set_parameter $CONFIG_FILE PLG_PROXY_METHOD "$PLG_PROXY_METHOD" plgproxymethod
 
-set_parameter $CONFIG_FILE OWN_QUEUE "$OWN_QUEUE" ownqueue
 
 echo "CHECK_CONTENT_FORMAT=[${CHECK_CONTENT_FORMAT}]"
 if [[ -n "${CHECK_CONTENT_FORMAT}" ]]; then
@@ -349,8 +348,7 @@ fi
 echo "WEBSERVER_DOCUMENT_ROOT=[${WEBSERVER_DOCUMENT_ROOT}]"
 if [[ -n "${WEBSERVER_DOCUMENT_ROOT}" ]]; then
     echo "Setting webserverdocumentroot to [$WEBSERVER_DOCUMENT_ROOT]"
-    sed -i 's/\#webserverdocumentroot/webserverdocumentroot/g' $CONFIG_FILE;
-    sed -i 's+WEBSERVER_DOCUMENT_ROOT+'"$WEBSERVER_DOCUMENT_ROOT"'+g' $CONFIG_FILE
+    echo "webserverdocumentroot = $WEBSERVER_DOCUMENT_ROOT" >> $CONFIG_FILE
 fi
 
 MEDIA_SERVER_ENABLED=0
@@ -378,11 +376,10 @@ echo "RADIOS_ENABLE=[$RADIOS_ENABLE]"
 if [ "${RADIOS_ENABLE^^}" == "YES" ]; then
     echo "Enabling Radios";
     RADIOS_ENABLE=YES
-    sed -i 's/\#upradiosuser/upradiosuser/g' $CONFIG_FILE;
+    echo "upradiosuser = upradiosuser" >> $CONFIG_FILE
     if [[ -z "${RADIOS_AUTOSTART}" || "${RADIOS_AUTOSTART}" == "1" || "${RADIOS_AUTOSTART^^}" == "YES" ]]; then
         RADIOS_AUTOSTART=1
-        sed -i 's/\#upradiosautostart/upradiosautostart/g' $CONFIG_FILE;
-        set_parameter $CONFIG_FILE RADIOS_AUTOSTART "$RADIOS_AUTOSTART" upradiosautostart
+        echo "upradiosautostart = $RADIOS_AUTOSTART" >> $CONFIG_FILE
     fi
 fi
 
@@ -390,13 +387,13 @@ echo "BBC_ENABLE=[$BBC_ENABLE]"
 if [ "${BBC_ENABLE^^}" == "YES" ]; then
     echo "Enabling BBC";
     BBC_ENABLE=YES
-    sed -i 's/\#bbcuser/bbcuser/g' $CONFIG_FILE;
+    echo "bbcuser = bbcuser" >> $CONFIG_FILE
+    echo "bbctitle = BBC" >> $CONFIG_FILE
     if [[ -n "${BBC_PROGRAMME_DAYS}" ]]; then
         if ! [[ $BBC_PROGRAMME_DAYS =~ '^[0-9]+$' ]]; then
             echo "BBC_PROGRAMME_DAYS [$BBC_PROGRAMME_DAYS] is not a number, ignored."
         fi
-        sed -i 's/\#bbcprogrammedays/bbcprogrammedays/g' $CONFIG_FILE;
-        sed -i 's/BBC_PROGRAMME_DAYS/'"$BBC_PROGRAMME_DAYS"'/g' $CONFIG_FILE
+        echo "bbcprogrammedays = $BBC_PROGRAMME_DAYS" >> $CONFIG_FILE
     fi
 fi
 
@@ -404,8 +401,8 @@ echo "RADIO_BROWSER_ENABLE=[$RADIO_BROWSER_ENABLE]"
 if [ "${RADIO_BROWSER_ENABLE^^}" == "YES" ]; then
     echo "Enabling Radio Browser";
     RADIO_BROWSER_ENABLE=YES
-    sed -i 's/\#radio-browseruser/radio-browseruser/g' $CONFIG_FILE;
-    sed -i 's/\#radio-browsertitle/radio-browsertitle/g' $CONFIG_FILE
+    echo "radio-browseruser = radio-browseruser" >> $CONFIG_FILE
+    echo "radio-browsertitle = Radio Browser" >> $CONFIG_FILE
 fi
 
 echo "SUBSONIC_ENABLE=[$SUBSONIC_ENABLE]"
@@ -424,30 +421,23 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
         echo "pip_cmd: [${pip_cmd}]"
         eval $pip_cmd
     fi
-    sed -i 's/\#subsonicuser/subsonicuser/g' $CONFIG_FILE
     echo "SUBSONIC_AUTOSTART=[$SUBSONIC_AUTOSTART]"
     if [[ -z "${SUBSONIC_AUTOSTART^^}" || "${SUBSONIC_AUTOSTART}" == "1" || "${SUBSONIC_AUTOSTART^^}" == "YES" ]]; then
         SUBSONIC_AUTOSTART=1
-        sed -i 's/\#subsonicautostart/subsonicautostart/g' $CONFIG_FILE;
-        set_parameter $CONFIG_FILE SUBSONIC_AUTOSTART "$SUBSONIC_AUTOSTART" subsonicautostart
+        echo "subsonicautostart = $SUBSONIC_AUTOSTART" >> $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_TITLE}" ]]; then
         echo "SUBSONIC_TITLE=[$SUBSONIC_TITLE]"
-        sed -i 's/\#subsonicuser/subsonicuser/g' $CONFIG_FILE
-        sed -i 's/\#subsonictitle/subsonictitle/g' $CONFIG_FILE;
-        set_parameter $CONFIG_FILE SUBSONIC_TITLE "$SUBSONIC_TITLE" subsonictitle
+        echo "subsonictitle = ${SUBSONIC_TITLE}" >> $CONFIG_FILE
     fi
     echo "Setting subsonic base_url [$SUBSONIC_BASE_URL]"
-    sed -i 's/\#subsonicbaseurl/subsonicbaseurl/g' $CONFIG_FILE
-    sed -i 's,SUBSONIC_BASE_URL,'"$SUBSONIC_BASE_URL"',g' $CONFIG_FILE
+    echo "subsonicbaseurl = ${SUBSONIC_BASE_URL}" >> $CONFIG_FILE
     echo "Setting subsonic port [$SUBSONIC_PORT]"
-    sed -i 's/\#subsonicport/subsonicport/g' $CONFIG_FILE
-    sed -i 's/SUBSONIC_PORT/'"$SUBSONIC_PORT"'/g' $CONFIG_FILE
+    echo "subsonicport = $SUBSONIC_PORT" >> $CONFIG_FILE
     echo "Setting subsonic username [$SUBSONIC_USER]"
-    sed -i 's/SUBSONIC_USER/'"$SUBSONIC_USER"'/g' $CONFIG_FILE
+    echo "subsonicuser = $SUBSONIC_USER" >> $CONFIG_FILE
     echo "Setting subsonic password [$SUBSONIC_PASSWORD]"
-    sed -i 's/\#subsonicpassword/subsonicpassword/g' $CONFIG_FILE
-    sed -i 's/SUBSONIC_PASSWORD/'"$SUBSONIC_PASSWORD"'/g' $CONFIG_FILE
+    echo "subsonicpassword = ${SUBSONIC_PASSWORD}" >> $CONFIG_FILE
     if [[ -n "${SUBSONIC_LEGACYAUTH}" ]]; then
         legacy_auth_value=0
         if [[ "${SUBSONIC_LEGACYAUTH^^}" == "YES" || "${SUBSONIC_LEGACYAUTH^^}" == "Y" || "${SUBSONIC_LEGACYAUTH^^}" == "TRUE" ]]; then
@@ -456,8 +446,7 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
             echo "Invalid SUBSONIC_LEGACYAUTH [${SUBSONIC_LEGACYAUTH}]"
             exit 2
         fi
-        sed -i 's/\#subsoniclegacyauth/subsoniclegacyauth/g' $CONFIG_FILE
-        sed -i 's/SUBSONIC_LEGACYAUTH/'"$legacy_auth_value"'/g' $CONFIG_FILE
+        echo "subsoniclegacyauth = $legacy_auth_value" >> $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_SERVER_SIDE_SCROBBLING}" ]]; then
         server_side_scrobbling=0
@@ -467,15 +456,12 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
             echo "Invalid SUBSONIC_SERVER_SIDE_SCROBBLING [${SUBSONIC_SERVER_SIDE_SCROBBLING}]"
             exit 2
         fi
-        sed -i 's/\#subsonicserversidescrobbling/subsonicserversidescrobbling/g' $CONFIG_FILE
-        sed -i 's/SUBSONIC_SERVER_SIDE_SCROBBLING/'"$server_side_scrobbling"'/g' $CONFIG_FILE
+        echo "subsonicserversidescrobbling = $server_side_scrobbling" >> $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_ITEMS_PER_PAGE}" ]]; then
-        sed -i 's/\#subsonicitemsperpage/subsonicitemsperpage/g' $CONFIG_FILE
-        sed -i 's/SUBSONIC_ITEMS_PER_PAGE/'"$SUBSONIC_ITEMS_PER_PAGE"'/g' $CONFIG_FILE
+        echo "subsonicitemsperpage = $SUBSONIC_ITEMS_PER_PAGE" >> $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_APPEND_YEAR_TO_ALBUM}" ]]; then
-        sed -i 's/\#subsonicappendyeartoalbum/subsonicappendyeartoalbum/g' $CONFIG_FILE
         append_year=1
         if [[ "${SUBSONIC_APPEND_YEAR_TO_ALBUM^^}" == "NO" ]]; then
             append_year=0
@@ -483,21 +469,19 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
             echo "Invalid SUBSONIC_APPEND_YEAR_TO_ALBUM [${SUBSONIC_APPEND_YEAR_TO_ALBUM}]"
             exit 2
         fi
-        sed -i 's/SUBSONIC_APPEND_YEAR_TO_ALBUM/'"$append_year"'/g' $CONFIG_FILE
+        echo "subsonicappendyeartoalbum = $append_year" >> $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_APPEND_CODECS_TO_ALBUM}" ]]; then
-        sed -i 's/\#subsonicappendcodecstoalbum/subsonicappendcodecstoalbum/g' $CONFIG_FILE
-        append_year=1
+        append_codecs=1
         if [[ "${SUBSONIC_APPEND_CODECS_TO_ALBUM^^}" == "NO" ]]; then
-            append_year=0
+            append_codecs=0
         elif [[ ! "${SUBSONIC_APPEND_CODECS_TO_ALBUM^^}" == "YES" ]]; then
             echo "Invalid SUBSONIC_APPEND_CODECS_TO_ALBUM [${SUBSONIC_APPEND_CODECS_TO_ALBUM}]"
             exit 2
         fi
-        sed -i 's/SUBSONIC_APPEND_CODECS_TO_ALBUM/'"$append_year"'/g' $CONFIG_FILE
+        echo "subsonicappendcodecstoalbum = $append_codecs" >> $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST}" ]]; then
-        sed -i 's/\#subsonicprependnumberinalbumlist/subsonicprependnumberinalbumlist/g' $CONFIG_FILE
         prepend_number=1
         if [[ "${SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST^^}" == "NO" ]]; then
             prepend_number=0
@@ -505,22 +489,18 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
             echo "Invalid SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST [${SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST}]"
             exit 2
         fi
-        sed -i 's/SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST/'"$prepend_number"'/g' $CONFIG_FILE
+        echo "subsonicprependnumberinalbumlist = $prepend_number" >> $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_WHITELIST_CODECS}" ]]; then
-        sed -i 's/\#subsonicwhitelistcodecs/subsonicwhitelistcodecs/g' $CONFIG_FILE
-        sed -i 's/SUBSONIC_WHITELIST_CODECS/'"$SUBSONIC_WHITELIST_CODECS"'/g' $CONFIG_FILE
+        echo "subsonicwhitelistcodecs = ${$SUBSONIC_WHITELIST_CODECS}" >> $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_TRANSCODE_CODEC}" ]]; then
-        sed -i 's/\#subsonictranscodecodec/subsonictranscodecodec/g' $CONFIG_FILE
-        sed -i 's/SUBSONIC_TRANSCODE_CODEC/'"$SUBSONIC_TRANSCODE_CODEC"'/g' $CONFIG_FILE
+        echo "subsonictranscodecodec = $SUBSONIC_TRANSCODE_CODEC" >> $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_TRANSCODE_MAX_BITRATE}" ]]; then
-        sed -i 's/\#subsonictranscodemaxbitrate/subsonictranscodemaxbitrate/g' $CONFIG_FILE
-        sed -i 's/SUBSONIC_TRANSCODE_MAX_BITRATE/'"$SUBSONIC_TRANSCODE_MAX_BITRATE"'/g' $CONFIG_FILE
+        echo "subsonictranscodemaxbitrate = $SUBSONIC_TRANSCODE_MAX_BITRATE" >> $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_ENABLE_INTERNET_RADIOS}" ]]; then
-        sed -i 's/\#subsonictaginitialpageenabledir/subsonictaginitialpageenabledir/g' $CONFIG_FILE
         enable_ir=1
         if [[ "${SUBSONIC_ENABLE_INTERNET_RADIOS^^}" == "NO" ]]; then
             enable_ir=0
@@ -528,7 +508,7 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
             echo "Invalid SUBSONIC_ENABLE_INTERNET_RADIOS [${SUBSONIC_ENABLE_INTERNET_RADIOS}]"
             exit 2
         fi
-        sed -i 's/SUBSONIC_ENABLE_INTERNET_RADIOS/'"$enable_ir"'/g' $CONFIG_FILE
+        echo "subsonictaginitialpageenabledir = $enable_ir" >> $CONFIG_FILE
     fi
 fi
 
@@ -536,16 +516,18 @@ echo "RADIO_PARADISE_ENABLE=[$RADIO_PARADISE_ENABLE]"
 if [ "${RADIO_PARADISE_ENABLE^^}" == "YES" ]; then
     echo "Enabling Radio Paradise, processing settings";
     RADIO_PARADISE_ENABLE=YES
-    sed -i 's/\#radio-paradiseuser/radio-paradiseuser/g' $CONFIG_FILE
-    sed -i 's/\#radio-paradisetitle/radio-paradisetitle/g' $CONFIG_FILE
+    echo "radio-paradiseuser = radioparadise" >> $CONFIG_FILE
+    echo "radio-paradisetitle = Radio Paradise" >> $CONFIG_FILE
 fi
 
 echo "MOTHER_EARTH_RADIO_ENABLE=[$MOTHER_EARTH_RADIO_ENABLE]"
 if [ "${MOTHER_EARTH_RADIO_ENABLE^^}" == "YES" ]; then
     echo "Enabling Mother Earth Radio, processing settings";
     MOTHER_EARTH_RADIO_ENABLE=YES
-    sed -i 's/\#mother-earth-radiouser/mother-earth-radiouser/g' $CONFIG_FILE
-    sed -i 's/\#mother-earth-radiotitle/mother-earth-radiotitle/g' $CONFIG_FILE
+    # sed -i 's/\#mother-earth-radiouser/mother-earth-radiouser/g' $CONFIG_FILE
+    # sed -i 's/\#mother-earth-radiotitle/mother-earth-radiotitle/g' $CONFIG_FILE
+    echo "mother-earth-radiouser = motherearthradio" >> $CONFIG_FILE
+    echo "mother-earth-radiotitle = Mother Earth Radio" >> $CONFIG_FILE
 fi
 
 echo "TIDAL_ENABLE=[$TIDAL_ENABLE]"
@@ -620,17 +602,15 @@ if [ "${QOBUZ_ENABLE^^}" == "YES" ]; then
     if [[ -n "${QOBUZ_TITLE}" ]]; then
         echo "qobuztitle = ${QOBUZ_TITLE}" >> $CONFIG_FILE
     fi
-    sed -i 's/\#qobuzuser/qobuzuser/g' $CONFIG_FILE;
-    sed -i 's/\#qobuzpass/qobuzpass/g' $CONFIG_FILE;
-    sed -i 's/\#qobuzformatid/qobuzformatid/g' $CONFIG_FILE;
-    sed -i 's/QOBUZ_USERNAME/'"$QOBUZ_USERNAME"'/g' $CONFIG_FILE;
-    sed -i 's/QOBUZ_PASSWORD/'"$QOBUZ_PASSWORD"'/g' $CONFIG_FILE;
-    sed -i 's/QOBUZ_FORMAT_ID/'"$QOBUZ_FORMAT_ID"'/g' $CONFIG_FILE;
+    echo "qobuzuser = $QOBUZ_USERNAME" >> $CONFIG_FILE
+    echo "qobuzpass = $QOBUZ_PASSWORD" >> $CONFIG_FILE
+    if [[ -n "${QOBUZ_FORMAT_ID}" ]]; then
+        echo "qobuzformatid = $QOBUZ_FORMAT_ID" >> $CONFIG_FILE
+    fi
     if [[ -n "${QOBUZ_RENUM_TRACKS}" ]]; then
         qobuz_v=${QOBUZ_RENUM_TRACKS}
         if [[ "${qobuz_v}" == "0" || "${qobuz_v}" == "1" ]]; then
-            sed -i 's/\#qobuzrenumtracks/qobuzrenumtracks/g' $CONFIG_FILE;
-            sed -i 's/QOBUZ_RENUM_TRACKS/'"$QOBUZ_RENUM_TRACKS"'/g' $CONFIG_FILE;
+            echo "qobuzrenumtracks = $QOBUZ_RENUM_TRACKS" >> $CONFIG_FILE
         else
             echo "Invalid QOBUZ_RENUM_TRACKS=[${QOBUZ_RENUM_TRACKS}]"
             exit 3
@@ -639,8 +619,7 @@ if [ "${QOBUZ_ENABLE^^}" == "YES" ]; then
     if [[ -n "${QOBUZ_EXPLICIT_ITEM_NUMBERS}" ]]; then
         qobuz_v=${QOBUZ_EXPLICIT_ITEM_NUMBERS}
         if [[ "${qobuz_v}" == "0" || "${qobuz_v}" == "1" ]]; then
-            sed -i 's/\#qobuzexplicititemnumbers/qobuzexplicititemnumbers/g' $CONFIG_FILE;
-            sed -i 's/QOBUZ_EXPLICIT_ITEM_NUMBERS/'"$QOBUZ_EXPLICIT_ITEM_NUMBERS"'/g' $CONFIG_FILE;
+            echo "qobuzexplicititemnumbers = $QOBUZ_EXPLICIT_ITEM_NUMBERS" >> $CONFIG_FILE
         else
             echo "Invalid QOBUZ_EXPLICIT_ITEM_NUMBERS=[${QOBUZ_EXPLICIT_ITEM_NUMBERS}]"
             exit 3
@@ -649,8 +628,7 @@ if [ "${QOBUZ_ENABLE^^}" == "YES" ]; then
     if [[ -n "${QOBUZ_PREPEND_ARTIST_TO_ALBUM}" ]]; then
         qobuz_v=${QOBUZ_PREPEND_ARTIST_TO_ALBUM}
         if [[ "${qobuz_v}" == "0" || "${qobuz_v}" == "1" ]]; then
-            sed -i 's/\#qobuzprependartisttoalbum/qobuzprependartisttoalbum/g' $CONFIG_FILE;
-            sed -i 's/QOBUZ_PREPEND_ARTIST_TO_ALBUM/'"$QOBUZ_PREPEND_ARTIST_TO_ALBUM"'/g' $CONFIG_FILE;
+            echo "qobuzprependartisttoalbum = $QOBUZ_PREPEND_ARTIST_TO_ALBUM" >> $CONFIG_FILE
         else
             echo "Invalid QOBUZ_PREPEND_ARTIST_TO_ALBUM=[${QOBUZ_PREPEND_ARTIST_TO_ALBUM}]"
             exit 3
@@ -744,7 +722,26 @@ if [ ! -w "$log_directory" ]; then
 else
     echo "Log directory [${log_directory}] is writable"
 fi
-sed -i 's\LOG_DIRECTORY\'"$log_directory"'\g' $CONFIG_FILE
+
+# log file support
+if [[ "${LOG_ENABLE^^}" == "YES" ]]; then
+    echo "logfilename = $log_directory/upmpdcli.log"
+fi
+
+# log level
+if [[ -n "${LOG_LEVEL}" ]]; then
+    echo "loglevel = $LOG_LEVEL" >> $CONFIG_FILE
+fi
+
+# upnp log file support
+if [[ "${UPNP_LOG_ENABLE^^}" == "YES" ]]; then
+    echo "upnplogfilename = $log_directory/upnp.log" >> $CONFIG_FILE
+fi
+
+# upnp log level
+if [[ -n "${UPNP_LOG_LEVEL}" ]]; then
+    echo "upnploglevel = $UPNP_LOG_LEVEL" >> $CONFIG_FILE
+fi
 
 if [ -f $UPMPDCLI_ADDITIONAL_FILE ]; then
     echo "File [$UPMPDCLI_ADDITIONAL_FILE] is available, appending to [$CONFIG_FILE] ..."

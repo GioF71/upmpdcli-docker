@@ -189,6 +189,8 @@ PUID|User id. Used when UPRCL is enabled. Defaults to `1000` when required
 PGID|Group id. Used when UPRCL is enabled. Defaults to `1000` when required
 MPD_HOST|The host where mpd runs, defaults to `localhost`
 MPD_PORT|The port used by mpd, defaults to `6600`
+MPD_PASSWORD|The password for the mpd connection
+MPD_TIMEOUT_MS|MPD timeout in milliseconds
 UPRCL_HOSTPORT|Set if we own the MPD queue, defaults to `1`, possible values `1` and `0`
 PORT_OFFSET|If set, the offset is applied to the default for `UPNP_PORT` (summed) and to the default `PLG_MICRO_HTTP_PORT` (subtracted). Setting this variable overrides these individual variables.
 UPNPIFACE|UPnP network interface
@@ -286,8 +288,11 @@ STARTUP_DELAY_SEC|Delay before starting the application, defaults to `0`. This c
 
 #### About RENDERER_MODE
 
-I used to use `BOTH` for most of my configurations. However since a few weeks ago, I found that if one wants to use BubbleUPnP on a phone/tablet and also uses its cloud libraries, the best choice is to use `UPNPAV` as the `RENDERER_MODE` and then create the OpenHome renderer on top on the av device using BubbleUPnP Server. This allows uninterrupted playback even if the mobile devices goes off, because the BubbleUPnP Server (which should be installed somewhere in your network) will act as a proxy between the control point (mobile) and the renderer.  
+I used to use `BOTH` for most of my configurations. However since a few weeks ago, I found that if one wants to use BubbleUPnP on a phone/tablet and also uses its cloud libraries, one choice is to use `UPNPAV` as the `RENDERER_MODE` and then create the OpenHome renderer on top on the av device using BubbleUPnP Server. This allows uninterrupted playback even if the mobile devices goes off, because the BubbleUPnP Server (which should be installed somewhere in your network) will act as a proxy between the control point (mobile) and the renderer.  
 See BubbleUPnP Server documentation [here](https://bubblesoftapps.com/bubbleupnpserver2/).  
+Alternatively, if you just need a OpenHome renderer, the best option is to use `OPENHOME`.  
+If you plan to use both OpenHome and non-OpenHome control points (like BubbleUPnP and mConnect) and decide to use `BOTH`, be careful: control points can start to fight each other if you switch from one to the other without stopping playback and/or clearing the playlists first.  
+Recently, for this purpose, I ended up creating two distinct pairs of mpd/upmpdcli, one configured as `OPENHOME` and one configured as `UPNPAV`, so opening mConnect would not destroy an existing playlist built on BubbleUPnp. Obviously in this case the synchronization object is the audio device, it this is shared by the two players.  
 
 ### Volumes
 
