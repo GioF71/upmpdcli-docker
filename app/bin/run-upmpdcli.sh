@@ -281,9 +281,6 @@ if [ -n "${FRIENDLY_NAME}" ]; then
         fi
         AV_FRIENDLY_NAME="${FRIENDLY_NAME}${AV_POSTFIX}"
     fi
-    if [[ -z "${OH_PRODUCT_ROOM}" ]]; then
-        OH_PRODUCT_ROOM="${AV_FRIENDLY_NAME}"
-    fi
     echo "AV_FRIENDLY_NAME=[${AV_FRIENDLY_NAME}]"
     echo "OH_PRODUCT_ROOM=[${OH_PRODUCT_ROOM}]"
     MEDIA_SERVER_FRIENDLY_NAME="${FRIENDLY_NAME}"
@@ -294,15 +291,25 @@ if [[ -n "${UPNPPORT}" ]]; then
     echo "upnpport = $UPNPPORT" >> $CONFIG_FILE
 fi
 
-set_parameter $CONFIG_FILE UPNPAV "$UPNPAV" upnpav
-set_parameter $CONFIG_FILE OPENHOME "$OPENHOME" openhome
+echo "upnpav = ${UPNPAV}" >> $CONFIG_FILE
+echo "openhome = ${OPENHOME}" >> $CONFIG_FILE
+
 if [ "${OPENHOME}" -eq 1 ]; then
-    set_parameter $CONFIG_FILE UPMPD_FRIENDLY_NAME "$UPMPD_FRIENDLY_NAME" friendlyname
+    echo "friendlyname = ${UPMPD_FRIENDLY_NAME}" >> $CONFIG_FILE
 fi
 if [ "${UPNPAV}" -eq 1 ]; then
-    set_parameter $CONFIG_FILE AV_FRIENDLY_NAME "$AV_FRIENDLY_NAME" avfriendlyname
-    set_parameter $CONFIG_FILE OH_PRODUCT_ROOM "$OH_PRODUCT_ROOM" ohproductroom
+    echo "avfriendlyname = ${AV_FRIENDLY_NAME}" >> $CONFIG_FILE
 fi
+if [ "${OPENHOME}" -eq 1 ] || [ "${UPNPAV}" -eq 1 ]; then
+    if [[ -n "${OH_PRODUCT_ROOM}" ]]; then
+        echo "ohproductroom = ${OH_PRODUCT_ROOM}" >> $CONFIG_FILE
+    elif [ "${OPENHOME}" -eq 1 ]; then
+        echo "ohproductroom = ${UPMPD_FRIENDLY_NAME}" >> $CONFIG_FILE
+    elif [ "${UPNPAV}" -eq 1 ]; then
+        echo "ohproductroom = ${AV_FRIENDLY_NAME}" >> $CONFIG_FILE
+    fi
+fi
+
 if [[ -n "${MPD_HOST}" ]]; then
     echo "mpdhost = $MPD_HOST" >> $CONFIG_FILE
 fi
