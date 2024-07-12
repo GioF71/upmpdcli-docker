@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2024-07-12|Add script for generating tidal oauth2 credentials (see issue [#425](https://github.com/GioF71/upmpdcli-docker/issues/425))
 2024-06-13|Automatically set ohproductroom to friendlyname if not explicitly set
 2024-06-13|Add support for MPD password and timeout
 2024-05-17|Support title for Qobuz (see issue [#412](https://github.com/GioF71/upmpdcli-docker/issues/412))
