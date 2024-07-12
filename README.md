@@ -191,7 +191,7 @@ MPD_HOST|The host where mpd runs, defaults to `localhost`
 MPD_PORT|The port used by mpd, defaults to `6600`
 MPD_PASSWORD|The password for the mpd connection
 MPD_TIMEOUT_MS|MPD timeout in milliseconds
-UPRCL_HOSTPORT|Set if we own the MPD queue, defaults to `1`, possible values `1` and `0`
+OWN_QUEUE|Set if we own the MPD queue, defaults to `1`, possible values `1` and `0`
 PORT_OFFSET|If set, the offset is applied to the default for `UPNP_PORT` (summed) and to the default `PLG_MICRO_HTTP_PORT` (subtracted). Setting this variable overrides these individual variables.
 UPNPIFACE|UPnP network interface
 UPNPIP|IP V4 address to use for UPnP, alternative to using an interface name.

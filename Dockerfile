@@ -233,7 +233,9 @@ RUN chmod +x /app/bin/*.sh
 COPY app/bin/get-tidal-credentials.py /app/bin/
 RUN chmod +x /app/bin/get-tidal-credentials.py
 
+COPY app/bin/get-tidal-credentials-oauth2.py /app/bin/
 COPY app/bin/get-tidal-credentials-pkce.py /app/bin/
+RUN chmod u+x /app/bin/get-tidal-credentials-oauth2.py
 RUN chmod u+x /app/bin/get-tidal-credentials-pkce.py
 
 COPY README.md /app/doc
