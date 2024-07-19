@@ -342,7 +342,7 @@ if [[ -n "${CHECK_CONTENT_FORMAT}" ]]; then
         exit 2
     fi
     echo "Setting checkcontentformat to [$check_content_format_value]"
-    set_parameter $CONFIG_FILE CHECK_CONTENT_FORMAT "$check_content_format_value" "checkcontentformat"
+    set_parameter $CONFIG_FILE CHECK_CONTENT_FORMAT "$check_content_format_value" checkcontentformat
 fi
 
 echo "WEBSERVER_DOCUMENT_ROOT=[${WEBSERVER_DOCUMENT_ROOT}]"
@@ -639,50 +639,44 @@ fi
 echo "HRA Enable [$HRA_ENABLE]"
 if [ "${HRA_ENABLE^^}" == "YES" ]; then
     echo "Processing HRA settings";
-    sed -i 's/\#hrauser/hrauser/g' $CONFIG_FILE;
-    sed -i 's/\#hrapass/hrapass/g' $CONFIG_FILE;
-    sed -i 's/\#hralang/hralang/g' $CONFIG_FILE;
-    sed -i 's/HRA_USERNAME/'"$HRA_USERNAME"'/g' $CONFIG_FILE;
-    sed -i 's/HRA_PASSWORD/'"$HRA_PASSWORD"'/g' $CONFIG_FILE;
-    sed -i 's/HRA_LANG/'"$HRA_LANG"'/g' $CONFIG_FILE;
+    echo "hrauser = $HRA_USERNAME" >> $CONFIG_FILE
+    echo "hrapass = $HRA_PASSWORD" >> $CONFIG_FILE
+    if [[ -n "${HRA_LANG}" ]]; then 
+        echo "hralang = $HRA_LANG" >> $CONFIG_FILE
+    fi
 fi
 
 echo "UPRCL_ENABLE [$UPRCL_ENABLE]"
 if [ "${UPRCL_ENABLE^^}" == "YES" ]; then
-    sed -i 's/\#uprclconfdir/uprclconfdir/g' $CONFIG_FILE;
     echo "enabling uprclconfdir"
-    sed -i 's/#uprclconfdir/'"uprclconfdir"'/g' $CONFIG_FILE;
+    echo "uprclconfdir = /uprcl/confdir" >> $CONFIG_FILE
     echo "enabling uprclmediadirs"
-    sed -i 's/#uprclmediadirs/'"uprclmediadirs"'/g' $CONFIG_FILE;
+    echo "uprclmediadirs = /uprcl/mediadirs" >> $CONFIG_FILE
     echo "UPRCL_TITLE [$UPRCL_TITLE]"
     if [ -n "${UPRCL_TITLE}" ]; then
         echo "Setting uprcltitle $UPRCL_TITLE"
-        sed -i 's/#uprcltitle/'"uprcltitle"'/g' $CONFIG_FILE;
-        sed -i 's/UPRCL_TITLE/'"$UPRCL_TITLE"'/g' $CONFIG_FILE;
+        echo "uprcltitle = $UPRCL_TITLE" >> $CONFIG_FILE
     fi
     # set UPRCL_USER if not empty
     echo "UPRCL_USER [$UPRCL_USER]"
     if [ -n "${UPRCL_USER}" ]; then
         echo "Setting uprcluser $UPRCL_USER"
-        sed -i 's/#uprcluser/'"uprcluser"'/g' $CONFIG_FILE;
-        sed -i 's/UPRCL_USER/'"$UPRCL_USER"'/g' $CONFIG_FILE;
+        echo "uprcluser = $UPRCL_USER" >> $CONFIG_FILE
     fi
     echo "UPRCL_HOSTPORT [$UPRCL_HOSTPORT]"
     if [ -n "${UPRCL_HOSTPORT}" ]; then
         echo "Setting uprclhostport $UPRCL_HOSTPORT"
-        sed -i 's/#uprclhostport/'"uprclhostport"'/g' $CONFIG_FILE;
-        sed -i 's/UPRCL_HOSTPORT/'"$UPRCL_HOSTPORT"'/g' $CONFIG_FILE;
+        echo "uprclhostport = $UPRCL_HOSTPORT" >> $CONFIG_FILE
     fi
     echo "UPRCL_AUTOSTART [$UPRCL_AUTOSTART]"
     if [[ -z "${UPRCL_AUTOSTART}" || "${UPRCL_AUTOSTART}" == "1" || "${UPRCL_AUTOSTART^^}" == "YES" ]]; then
         UPRCL_AUTOSTART=1
         echo "Setting uprclautostart $UPRCL_AUTOSTART"
-        sed -i 's/#uprclautostart/'"uprclautostart"'/g' $CONFIG_FILE;
-        sed -i 's/UPRCL_AUTOSTART/'"$UPRCL_AUTOSTART"'/g' $CONFIG_FILE;
+        echo "uprclautostart = $UPRCL_AUTOSTART" >> $CONFIG_FILE
     fi
     UPRCL_USER_CONFIG_FILE="/user/config/recoll.conf.user"
     if [ -f "$UPRCL_USER_CONFIG_FILE" ]; then
-        sed -i 's/#uprclconfrecolluser/'"uprclconfrecolluser"'/g' $CONFIG_FILE;
+        echo "uprclconfrecolluser = /user/config/recoll.conf.user" >> $CONFIG_FILE
     fi
 fi
 
@@ -836,10 +830,27 @@ if [[ $current_user_id == 0 ]]; then
 
     # Permissions of writable volumes
     echo "Setting permissions for writable volumes ..."
-    chown -R $USER_NAME:$GROUP_NAME /cache
-    # Fix permission errors on existing files
-    find /cache -type d -exec chmod 755 {} \;
-    find /cache -type f -exec chmod 644 {} \;
+    skip_cache_chown=0
+    if [[ "${SKIP_CHOWN_CACHE^^}" == "YES" ]] || [[ "${SKIP_CHOWN_CACHE^^}" == "Y" ]]; then
+        skip_cache_chown=1
+    else
+        if [[ -n "${SKIP_CHOWN_CACHE}" ]]; then
+            # must be NO now
+            if [[ "${SKIP_CHOWN_CACHE^^}" != "NO" ]] && [[ "${SKIP_CHOWN_CACHE^^}" != "N" ]]; then
+                echo "Invalid SKIP_CHOWN_CACHE=[${SKIP_CHOWN_CACHE}]"
+                exit 1
+            fi
+        fi
+    fi
+    if [ $skip_cache_chown -eq 0 ]; then
+        chown -R $USER_NAME:$GROUP_NAME /cache
+        # Fix permission errors on existing files
+        find /cache -type d -exec chmod 755 {} \;
+        find /cache -type f -exec chmod 644 {} \;
+    else
+        echo "Not executing ownership changes to /cache because SKIP_CHOWN_CACHE=[${SKIP_CHOWN_CACHE}]"
+    fi
+    # uprcl and under
     chown -R $USER_NAME:$GROUP_NAME /uprcl/confdir
     chown -R $USER_NAME:$GROUP_NAME /user/config
     chown -R $USER_NAME:$GROUP_NAME /log
