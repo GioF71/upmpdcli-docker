@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2024-07-19|Add `SKIP_CHOWN_CACHE` to skip chown on possibly crowded /cache
 2024-07-12|Add script for generating tidal oauth2 credentials (see issue [#425](https://github.com/GioF71/upmpdcli-docker/issues/425))
 2024-06-13|Automatically set ohproductroom to friendlyname if not explicitly set
 2024-06-13|Add support for MPD password and timeout
@@ -25,7 +26,7 @@ Change Date|Major Changes
 2023-12-29|Verify log directory to be writable (see [#362](https://github.com/GioF71/upmpdcli-docker/issues/362))
 2023-12-29|Removed last references to deezer (see [#359](https://github.com/GioF71/upmpdcli-docker/issues/359))
 2023-12-29|Support running as user with `--user` (see [#358](https://github.com/GioF71/upmpdcli-docker/issues/358))
-2023-12-19|Default naming of oh renderer (see [#356](https://github.com/GioF71/upmpdcli-docker/issues/356)) 
+2023-12-19|Default naming of oh renderer (see [#356](https://github.com/GioF71/upmpdcli-docker/issues/356))
 2023-12-16|Dropped support for Deezer (see [#353](https://github.com/GioF71/upmpdcli-docker/issues/353))
 2023-12-11|Support `prependnumberinitemlist` for Tidal (see issue [#351](https://github.com/GioF71/upmpdcli-docker/issues/351))
 2023-11-29|Dropped bullseye and mantic builds (see issue [#348](https://github.com/GioF71/upmpdcli-docker/issues/348))
