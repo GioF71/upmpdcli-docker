@@ -210,6 +210,7 @@ UPNPAV_POSTFIX_PREPEND_SPACE|Option to add a space before a custom `UPNPAV_POSTF
 UPNPAV_SKIP_NAME_POSTFIX|If not set or set to `yes`, and if only `UPNPAV` renderer is enabled, the `UPNPAV_POSTFIX` postfix is not appended to `FRIENDLY_NAME`
 OPENHOME|Enable OpenHome services (`0`/`1`), defaults to `1`
 OH_PRODUCT_ROOM|Sets `ohproductroom`, defaults to same value calculated for AV_FRIENDLY_NAME if upnp-av is enabled
+SKIP_CHOWN_CACHE|If set to yes, the script with not chown `/cache`, this ight be useful with plugins using lots of files in this volume
 UPRCL_ENABLE|Enable local music support (uprcl). Set to `yes` to enable
 UPRCL_AUTOSTART|Autostart UPRCL, defaults to `1`
 UPRCL_USER|Username for `uprcl`
