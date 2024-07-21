@@ -5,6 +5,8 @@
 # 2 Invalid RENDERER_MODE value
 # 3 Invalid argument
 
+USER_CONF_PATH=/user/config
+
 current_user_id=$(id -u)
 echo "Current user id is [$current_user_id]"
 
@@ -169,9 +171,35 @@ fi
 
 cp $SOURCE_CONFIG_FILE $CONFIG_FILE
 
-# set fixed value
-echo "radiolist = /tmp/radiolist.conf" >> $CONFIG_FILE
-echo "upradiostitle = Upmpdcli Radio List" >> $CONFIG_FILE
+RADIO_LIST=/tmp/radiolist.conf
+
+MAIN_RADIO_LIST_FILENAME=/usr/share/upmpdcli/radio_scripts/radiolist.conf
+ADDITIONAL_RADIO_LIST=additional-radio-list.txt
+
+ADDITIONAL_RADIO_LIST_FILENAME="$USER_CONF_PATH/$ADDITIONAL_RADIO_LIST"
+cp $MAIN_RADIO_LIST_FILENAME $RADIO_LIST
+if [ -f "$ADDITIONAL_RADIO_LIST_FILENAME" ]; then
+    echo "Adding additional radio list file"
+    if [ "${DUMP_ADDITIONAL_RADIO_LIST^^}" == "YES" ]; then
+        cat $ADDITIONAL_RADIO_LIST_FILENAME
+    fi
+    cat $ADDITIONAL_RADIO_LIST_FILENAME >> $RADIO_LIST
+else
+    echo "No additional radio list file."
+fi
+
+enable_openhome_radio_service=0
+if [[ -z "${ENABLE_OPENHOME_RADIO_SERVICE}" ]] || [[ "${ENABLE_OPENHOME_RADIO_SERVICE^^}" == "YES" || "${ENABLE_OPENHOME_RADIO_SERVICE^^}" == "Y" ]]; then
+    enable_openhome_radio_service=1
+elif [[ "${ENABLE_OPENHOME_RADIO_SERVICE^^}" != "NO" && "${ENABLE_OPENHOME_RADIO_SERVICE^^}" != "N" ]]; then
+    echo "Invalid ENABLE_OPENHOME_RADIO_SERVICE=[${ENABLE_OPENHOME_RADIO_SERVICE}]"
+    exit 1
+fi
+
+if [ $enable_openhome_radio_service -eq 1 ]; then
+    echo "radiolist = ${RADIO_LIST}" >> $CONFIG_FILE
+    echo "upradiostitle = Upmpdcli Radio List" >> $CONFIG_FILE
+fi
 
 set_upnp_iface=0
 if [[ "$ENABLE_AUTO_UPNPIFACE" == "1" || "${ENABLE_AUTO_UPNPIFACE^^}" == "YES" || "${ENABLE_AUTO_UPNPIFACE^^}" == "Y" ]]; then
@@ -678,24 +706,6 @@ if [ "${UPRCL_ENABLE^^}" == "YES" ]; then
     if [ -f "$UPRCL_USER_CONFIG_FILE" ]; then
         echo "uprclconfrecolluser = /user/config/recoll.conf.user" >> $CONFIG_FILE
     fi
-fi
-
-MAIN_RADIO_LIST_FILENAME=/usr/share/upmpdcli/radio_scripts/radiolist.conf
-USER_CONF_PATH=/user/config
-ADDITIONAL_RADIO_LIST=additional-radio-list.txt
-
-RADIO_LIST=/tmp/radiolist.conf
-
-ADDITIONAL_RADIO_LIST_FILENAME="$USER_CONF_PATH/$ADDITIONAL_RADIO_LIST"
-cp $MAIN_RADIO_LIST_FILENAME $RADIO_LIST
-if [ -f "$ADDITIONAL_RADIO_LIST_FILENAME" ]; then
-    echo "Adding additional radio list file"
-    if [ "${DUMP_ADDITIONAL_RADIO_LIST^^}" == "YES" ]; then
-        cat $ADDITIONAL_RADIO_LIST_FILENAME
-    fi
-    cat $ADDITIONAL_RADIO_LIST_FILENAME >> $RADIO_LIST
-else
-    echo "No additional radio list file."
 fi
 
 cache_directory=/cache
