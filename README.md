@@ -31,7 +31,7 @@ A simple installation guide for a mediaserver upmpdcli instance for Tidal Hires 
 
 ### Subsonic Plugin compatibility
 
-The `latest-subsonic` branch of the subsonic plugin, which is used with the recently updated [suggested configurations](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#subsonic-server), provides good compatibility with Navidrome, [Lightweight Music Server](https://hub.docker.com/r/epoupon/lms) and [Gonic](https://github.com/sentriz/gonic).  
+The `latest-subsonic` branch of the subsonic plugin, which is used with the recently updated [suggested configurations](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#subsonic-server), provides good compatibility with [Navidrome](https://github.com/navidrome/navidrome), [Lightweight Music Server](https://github.com/epoupon/lms)) and [Gonic](https://github.com/sentriz/gonic).  
 Just a quick reminder, with Lightweight Media Server you will need to enable subsonic legacy authentication using the new variable `SUBSONIC_LEGACYAUTH`.  
 Thanks to the respective authors for having helped me integrating their servers more easily.
 
