@@ -19,7 +19,7 @@ Please note that support goal is limited to cover running costs for subscription
 First and foremost, the reference to the awesome project:
 
 [An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).  
-Current version is `1.8.11`.  
+Current version is `1.8.16`.  
 
 ## News (newest first)
 
@@ -71,7 +71,7 @@ I am now a contributor to upmpdcli for this plugin. See the git repository forks
 The plugin uses my [subsonic-connector](https://github.com/GioF71/subsonic-connector) library which in turn is built around [py-sonic](https://github.com/crustymonkey/py-sonic).  
 Everything has been developed and tested against [Navidrome](https://www.navidrome.org/) but should work with other servers hopefully.  
 See [this](https://github.com/navidrome/navidrome/discussions/2324) discussion on the Navidrome repo for updates and further information.  
-The current version of the image includes Subsonic Plugin version `0.1.17`.  
+The current version of the image includes Subsonic Plugin version `0.6.3`.  
 If you use upmpdcli as a renderer for this plugin, you might probably want to setup a scrobbler, so that the Subsonic server can keep track of what you are playing. See [this](https://github.com/GioF71/mpd-subsonic-scrobbler) repository for more details.  
 
 ### Scrobbling
