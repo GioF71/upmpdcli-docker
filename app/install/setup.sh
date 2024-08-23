@@ -8,17 +8,18 @@ IMAGE_VERSION=$(echo $BASE_IMAGE | cut -d ":" -f 2)
 echo "IMAGE_VERSION=[$IMAGE_VERSION]"
 
 apt-get update
-apt-get install -y git
 
 if [[ "$BASE_IMAGE" == ubuntu* ]]; then
     echo "Setup for ubuntu"
-    /app/install/setup-ubuntu.sh
+    IMAGE_VERSION=$IMAGE_VERSION /app/install/setup-ubuntu.sh
 elif [[ "$BASE_IMAGE" == debian* ]]; then
     echo "Setup for debian"
     /app/install/setup-debian.sh
 else
     exit 1
 fi
+
+apt-get install -y git
 
 if [ "$BUILD_MODE" = "full" ]; then
     declare -A needs_switch

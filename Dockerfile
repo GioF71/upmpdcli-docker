@@ -1,7 +1,8 @@
 ARG BASE_IMAGE="${BASE_IMAGE:-ubuntu:noble}"
 FROM ${BASE_IMAGE} AS base
 ARG BASE_IMAGE="${BASE_IMAGE:-ubuntu:noble}"
-ARG USE_PPA="${USE_PPA:-upnpp1}"
+ARG PPA_NAME="${PPA_NAME:-upnpp1}"
+ARG PPA_KEY="${PPA_KEY:-bd1ec68cab92bbd56698f1c507971a38c8a2ca38}"
 ARG BUILD_MODE="${BUILD_MODE:-full}"
 ARG USE_APT_PROXY
 
@@ -60,8 +61,6 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 	fi
 
 RUN apt-get install -y net-tools
-
-RUN apt-get remove -y software-properties-common
 
 RUN apt-get -y autoremove
 RUN	rm -rf /var/lib/apt/lists/*

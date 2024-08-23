@@ -77,8 +77,9 @@ echo "Proxy: ["$use_proxy"]"
 cmd_line="docker build . ${cache_mode} \
     --build-arg BASE_IMAGE=${select_base_image} \
     --build-arg USE_APT_PROXY=${use_proxy} \
-    --build-arg USE_PPA=${ppa} \
+    --build-arg PPA_NAME=${ppa} \
     --build-arg BUILD_MODE=${build_mode} \
+    --progress=plain \
     -t giof71/upmpdcli:$tag"
 
 echo "cmd_line=[$cmd_line]"
