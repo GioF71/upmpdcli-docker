@@ -10,6 +10,16 @@ echo "IMAGE_VERSION=[$IMAGE_VERSION]"
 apt-get update
 apt-get install -y git
 
+if [[ "$BASE_IMAGE" == ubuntu* ]]; then
+    echo "Setup for ubuntu"
+    /app/install/setup-ubuntu.sh
+elif [[ "$BASE_IMAGE" == debian* ]]; then
+    echo "Setup for debian"
+    /app/install/setup-debian.sh
+else
+    exit 1
+fi
+
 if [ "$BUILD_MODE" = "full" ]; then
     declare -A needs_switch
     needs_switch[bookworm-slim]=1
@@ -42,12 +52,3 @@ if [ "$BUILD_MODE" = "full" ]; then
     done
 fi
 
-if [[ "$BASE_IMAGE" == ubuntu* ]]; then
-    echo "Setup for ubuntu"
-    /app/install/setup-ubuntu.sh
-elif [[ "$BASE_IMAGE" == debian* ]]; then
-    echo "Setup for debian"
-    /app/install/setup-debian.sh
-else
-    exit 1
-fi
