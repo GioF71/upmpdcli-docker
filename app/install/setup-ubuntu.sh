@@ -13,3 +13,5 @@ cp /app/install/ubuntu.${PPA_NAME}.list /etc/apt/sources.list.d/${PPA_NAME}.list
 sed -i "s/UBUNTU_VERSION/${IMAGE_VERSION}/g" /etc/apt/sources.list.d/${PPA_NAME}.list
 cat /etc/apt/sources.list.d/${PPA_NAME}.list
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ${PPA_KEY}
+# apt-key adv --keyserver keyserver.ubuntu.com --recv-keys bd1ec68cab92bbd56698f1c507971a38c8a2ca38
+apt-get update
