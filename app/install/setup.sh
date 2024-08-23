@@ -11,7 +11,7 @@ apt-get update
 
 if [[ "$BASE_IMAGE" == ubuntu* ]]; then
     echo "Setup for ubuntu"
-    IMAGE_VERSION=$IMAGE_VERSION /app/install/setup-ubuntu.sh
+    IMAGE_VERSION=$IMAGE_VERSION PPA_KEY=$PPA_KEY /app/install/setup-ubuntu.sh
 elif [[ "$BASE_IMAGE" == debian* ]]; then
     echo "Setup for debian"
     /app/install/setup-debian.sh
