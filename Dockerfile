@@ -1,7 +1,6 @@
 ARG BASE_IMAGE="${BASE_IMAGE:-ubuntu:noble}"
 FROM ${BASE_IMAGE} AS base
 ARG BASE_IMAGE="${BASE_IMAGE:-ubuntu:noble}"
-ARG USE_PPA="${USE_PPA:-upnpp1}"
 ARG BUILD_MODE="${BUILD_MODE:-full}"
 ARG USE_APT_PROXY
 
@@ -20,8 +19,10 @@ RUN if [ "$USE_APT_PROXY" = "Y" ]; then \
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+RUN apt-get update
+RUN apt-get install -y ca-certificates
+
 RUN if [ "$BUILD_MODE" = "full" ]; then \
-		apt-get update; \
 		apt-get install -y python3 python3-pip; \
 	fi
 
@@ -60,8 +61,6 @@ RUN if [ "$BUILD_MODE" = "full" ]; then \
 	fi
 
 RUN apt-get install -y net-tools
-
-RUN apt-get remove -y software-properties-common
 
 RUN apt-get -y autoremove
 RUN	rm -rf /var/lib/apt/lists/*
