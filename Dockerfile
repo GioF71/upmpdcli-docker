@@ -21,8 +21,10 @@ RUN if [ "$USE_APT_PROXY" = "Y" ]; then \
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+RUN apt-get update
+RUN apt-get install -y ca-certificates
+
 RUN if [ "$BUILD_MODE" = "full" ]; then \
-		apt-get update; \
 		apt-get install -y python3 python3-pip; \
 	fi
 
