@@ -2,7 +2,8 @@
 
 Change Date|Major Changes
 ---|---
-2024-07-21|Add support for disabling OpenHome Radio Service (see issue [#429](https://github.com/GioF71/upmpdcli-docker/issues/429))
+2024-08-24|Fix arm-only image build issue (see issue [#436](https://github.com/GioF71/upmpdcli-docker/issues/436))
+2024-08-21|Bump to upmpdcli version 1.8.6
 2024-07-19|Add `SKIP_CHOWN_CACHE` to skip chown on possibly crowded /cache
 2024-07-12|Add script for generating tidal oauth2 credentials (see issue [#425](https://github.com/GioF71/upmpdcli-docker/issues/425))
 2024-06-13|Automatically set ohproductroom to friendlyname if not explicitly set

@@ -1,0 +1,2 @@
+deb https://ppa.launchpadcontent.net/jean-francois-dockes/upnpp1/ubuntu UBUNTU_VERSION main 
+deb-src https://ppa.launchpadcontent.net/jean-francois-dockes/upnpp1/ubuntu UBUNTU_VERSION main 
