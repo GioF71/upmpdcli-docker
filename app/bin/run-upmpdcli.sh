@@ -885,8 +885,8 @@ echo "CMD_LINE=[${CMD_LINE}]"
 
 if [[ $current_user_id -eq 0 ]]; then
     echo "USER MODE [$USER_NAME]"
-    su - $USER_NAME -c "$CMD_LINE"
+    exec su - $USER_NAME -c "$CMD_LINE"
 else
     echo "Running as current uid [$current_user_id] ..."
-    eval "$CMD_LINE"
+    eval "exec $CMD_LINE"
 fi
