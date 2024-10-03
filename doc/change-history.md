@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2024-10-03|Fix ENABLE_AUTO_UPNPIP support (see issue [#440](https://github.com/GioF71/upmpdcli-docker/issues/440))
 2024-09-26|Use exec in order to get rid of bash processes
 2024-08-24|Fix arm-only image build issue (see issue [#436](https://github.com/GioF71/upmpdcli-docker/issues/436))
 2024-08-21|Bump to upmpdcli version 1.8.6
