@@ -212,7 +212,7 @@ if [[ "$ENABLE_AUTO_UPNPIFACE" == "1" || "${ENABLE_AUTO_UPNPIFACE^^}" == "YES" |
 fi
 
 set_upnp_ip=0
-if [[ -z "${ENABLE_AUTO_UPNP}" || "$ENABLE_AUTO_UPNPIP" == "1" || "${ENABLE_AUTO_UPNPIP^^}" == "YES" || "${ENABLE_AUTO_UPNPIP^^}" == "Y" ]]; then
+if [[ -z "${ENABLE_AUTO_UPNPIP}" || "$ENABLE_AUTO_UPNPIP" == "1" || "${ENABLE_AUTO_UPNPIP^^}" == "YES" || "${ENABLE_AUTO_UPNPIP^^}" == "Y" ]]; then
     if [[ -z "${UPNPIP}" ]]; then
         set_upnp_ip=1
     else
