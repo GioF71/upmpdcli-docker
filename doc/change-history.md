@@ -2,10 +2,11 @@
 
 Change Date|Major Changes
 ---|---
+2024-10-15|Bump to upmpdcli version 1.8.18 (see issue [#442](https://github.com/GioF71/upmpdcli-docker/issues/442))
 2024-10-03|Fix ENABLE_AUTO_UPNPIP support (see issue [#440](https://github.com/GioF71/upmpdcli-docker/issues/440))
 2024-09-26|Use exec in order to get rid of bash processes
 2024-08-24|Fix arm-only image build issue (see issue [#436](https://github.com/GioF71/upmpdcli-docker/issues/436))
-2024-08-21|Bump to upmpdcli version 1.8.6
+2024-08-21|Bump to upmpdcli version 1.8.16
 2024-07-19|Add `SKIP_CHOWN_CACHE` to skip chown on possibly crowded /cache
 2024-07-12|Add script for generating tidal oauth2 credentials (see issue [#425](https://github.com/GioF71/upmpdcli-docker/issues/425))
 2024-06-13|Automatically set ohproductroom to friendlyname if not explicitly set
