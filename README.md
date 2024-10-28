@@ -267,6 +267,7 @@ TIDAL_PKCE_SESSION_ID|Tidal pkce session id
 TIDAL_PREPEND_NUMBER_IN_ITEM_LIST|Set to `yes` to create item numbers in lists (`[01] Item` instead of `Item`), mostly for kodi, disabled by default
 TIDAL_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
 TIDAL_PLUGIN_BRANCH|If `TIDAL_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `TIDAL_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-tidal`
+TIDAL_FORCE_TIDALAPI_VERSION|If set, the specified version of tidalapi will be installed over the one included in the image. See note below.
 QOBUZ_ENABLE|Set to `yes` to enable Qobuz support, defaults to `no`
 QOBUZ_TITLE|Set the title for Qobuz plugin, defaults to `Qobuz`
 QOBUZ_USERNAME|Your Qobuz account username
@@ -286,6 +287,8 @@ UPNP_LOG_LEVEL|Sets the log level for upnp, if not set the upmpdcli default will
 DUMP_ADDITIONAL_RADIO_LIST|Dumps the additional radio file when set to `yes`
 WEBSERVER_DOCUMENT_ROOT|Directory from which the internal HTTP server will directly serve files (e.g. icons), disabled by default
 STARTUP_DELAY_SEC|Delay before starting the application, defaults to `0`. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite if all those services run on the same audio device. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience.
+
+When using the variable `TIDAL_DOWNLOAD_PLUGIN`, `TIDAL_PLUGIN_BRANCH`, `TIDAL_FORCE_TIDALAPI_VERSION`, make sure you verify the intercompatibility. For example, the code currently at the `next-tidal` branch requires [tidalapi version 0.8.0](https://github.com/tamland/python-tidal/releases/tag/v0.8.0).  
 
 #### About RENDERER_MODE
 
