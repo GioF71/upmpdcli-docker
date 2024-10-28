@@ -33,7 +33,7 @@ file_path : str = os.path.join("/tmp", tmp_directory)
 if not os.path.exists(file_path):
     os.makedirs(file_path)
 
-file_name = f"{file_path}/credentials.json"
+file_name = f"{file_path}/oauth2.credentials.json"
 
 session = tidalapi.Session()
 # Will run until you visit the printed url and link your account
