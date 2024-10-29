@@ -635,6 +635,15 @@ if [[ "${TIDAL_ENABLE^^}" == "YES" ]]; then
             exit 3
         fi
     fi
+    # image caching
+    if [[ -n "${TIDAL_ENABLE_IMAGE_CACHING}" ]]; then
+        if [[ "${TIDAL_ENABLE_IMAGE_CACHING^^}" == "YES" || "${TIDAL_ENABLE_IMAGE_CACHING^^}" == "Y" ]]; then
+            echo "tidalenableimagecaching = 1" >> $CONFIG_FILE
+        elif [[ "${TIDAL_ENABLE_IMAGE_CACHING^^}" != "NO" && "${TIDAL_ENABLE_IMAGE_CACHING^^}" == "N" ]]; then
+            echo "Invalid TIDAL_ENABLE_IMAGE_CACHING=[${TIDAL_ENABLE_IMAGE_CACHING}]"
+            exit 3
+        fi
+    fi
 fi
 
 echo "Qobuz Enable [$QOBUZ_ENABLE]"

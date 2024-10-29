@@ -255,7 +255,7 @@ MEDIA_SERVER_FRIENDLY_NAME|Friendly name for the Media Server
 TIDAL_ENABLE|Set to `YES` to enable Tidal support, defaults to `no`
 TIDAL_TITLE|Set the title for Tidal plugin, defaults to `Tidal`
 TIDAL_AUTH_CHALLENGE_TYPE|Default login challenge type, `OAUTH2` (default) or `PKCE`
-TIDAL_QUALITY|Possible values are `LOW` (mp3@96k), `HIGH` (mp3@320k), `LOSSLESS` (flac 44.1kHz), `HI_RES` (I believe it's MQA), `HI_RES_LOSSLESS` (flac@hires), defaults to `LOSSLESS`
+TIDAL_AUDIO_QUALITY|Possible values are `LOW` (mp3@96k), `HIGH` (mp3@320k), `LOSSLESS` (flac 44.1kHz), `HI_RES` (I believe it's MQA), `HI_RES_LOSSLESS` (flac@hires), defaults to `LOSSLESS`
 TIDAL_TOKEN_TYPE|Tidal oauth2 token type
 TIDAL_ACCESS_TOKEN|Tidal oauth2 access token
 TIDAL_REFRESH_TOKEN|Tidal oauth2 refresh token
@@ -268,6 +268,7 @@ TIDAL_PREPEND_NUMBER_IN_ITEM_LIST|Set to `yes` to create item numbers in lists (
 TIDAL_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
 TIDAL_PLUGIN_BRANCH|If `TIDAL_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `TIDAL_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-tidal`
 TIDAL_FORCE_TIDALAPI_VERSION|If set, the specified version of tidalapi will be installed over the one included in the image. See note below.
+TIDAL_ENABLE_IMAGE_CACHING|If set to `yes`, you can enable caching of album and artist images. This can consume some disk space, so the default is `no`.
 QOBUZ_ENABLE|Set to `yes` to enable Qobuz support, defaults to `no`
 QOBUZ_TITLE|Set the title for Qobuz plugin, defaults to `Qobuz`
 QOBUZ_USERNAME|Your Qobuz account username
