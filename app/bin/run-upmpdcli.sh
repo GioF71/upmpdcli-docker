@@ -136,7 +136,7 @@ if [[ -n $ENABLE_UPRCL ]]; then
     fi
 fi
 
-if [ -f "$QOBUZ_CREDENTIALS_FILE" ]; then
+if [[ -f "$QOBUZ_CREDENTIALS_FILE" ]]; then
     echo "Reading $QOBUZ_CREDENTIALS_FILE"
     read_file $QOBUZ_CREDENTIALS_FILE
     QOBUZ_USERNAME=$(get_value "QOBUZ_USERNAME" $PARAMETER_PRIORITY)
@@ -146,7 +146,7 @@ else
     echo "File $QOBUZ_CREDENTIALS_FILE not found."
 fi
 
-if [ -f "$HRA_CREDENTIALS_FILE" ]; then
+if [[ -f "$HRA_CREDENTIALS_FILE" ]]; then
     echo "Reading $HRA_CREDENTIALS_FILE"
     read_file $HRA_CREDENTIALS_FILE
     HRA_USERNAME=$(get_value "HRA_USERNAME" $PARAMETER_PRIORITY)
@@ -178,9 +178,9 @@ ADDITIONAL_RADIO_LIST=additional-radio-list.txt
 
 ADDITIONAL_RADIO_LIST_FILENAME="$USER_CONF_PATH/$ADDITIONAL_RADIO_LIST"
 cp $MAIN_RADIO_LIST_FILENAME $RADIO_LIST
-if [ -f "$ADDITIONAL_RADIO_LIST_FILENAME" ]; then
+if [[ -f "$ADDITIONAL_RADIO_LIST_FILENAME" ]]; then
     echo "Adding additional radio list file"
-    if [ "${DUMP_ADDITIONAL_RADIO_LIST^^}" == "YES" ]; then
+    if [[ "${DUMP_ADDITIONAL_RADIO_LIST^^}" == "YES" ]]; then
         cat $ADDITIONAL_RADIO_LIST_FILENAME
     fi
     cat $ADDITIONAL_RADIO_LIST_FILENAME >> $RADIO_LIST
@@ -196,7 +196,7 @@ elif [[ "${ENABLE_OPENHOME_RADIO_SERVICE^^}" != "NO" && "${ENABLE_OPENHOME_RADIO
     exit 1
 fi
 
-if [ $enable_openhome_radio_service -eq 1 ]; then
+if [[ $enable_openhome_radio_service -eq 1 ]]; then
     echo "radiolist = ${RADIO_LIST}" >> $CONFIG_FILE
     echo "upradiostitle = Upmpdcli Radio List" >> $CONFIG_FILE
 fi
@@ -221,13 +221,12 @@ if [[ -z "${ENABLE_AUTO_UPNPIP}" || "$ENABLE_AUTO_UPNPIP" == "1" || "${ENABLE_AU
     fi
 fi
 
-#if [[ -z "$ENABLE_AUTO_UPNPIFACE" || "$ENABLE_AUTO_UPNPIFACE" == "1" || "${ENABLE_AUTO_UPNPIFACE^^}" == "YES" || "${ENABLE_AUTO_UPNPIFACE^^}" == "Y" ]]; then
-if [[ set_upnp_iface -eq 1 && set_upnp_ip -eq 1 ]]; then
+if [[ $set_upnp_iface -eq 1 && $set_upnp_ip -eq 1 ]]; then
     echo "Cannot enable both ENABLE_AUTO_UPNPIFACE and ENABLE_AUTO_UPNPIP"
     exit 1
 fi
 
-if [[ set_upnp_iface -eq 1 || set_upnp_ip -eq 1 ]]; then
+if [[ $set_upnp_iface -eq 1 || $set_upnp_ip -eq 1 ]]; then
     if [[ -z "${AUTO_UPNPIFACE_URL}" ]]; then
         AUTO_UPNPIFACE_URL=1.1.1.1
     fi
@@ -244,7 +243,7 @@ if [[ set_upnp_iface -eq 1 || set_upnp_ip -eq 1 ]]; then
 fi
 
 echo "UPNPIFACE=["$UPNPIFACE"]"
-if [ -z "${UPNPIFACE}" ]; then
+if [[ -z "${UPNPIFACE}" ]]; then
     echo "UPNPIFACE not set"
 else 
     echo "Setting UPNPIFACE to ["$UPNPIFACE"]"
@@ -252,7 +251,7 @@ else
 fi
 
 echo "UPNPIP=["$UPNPIP"]"
-if [ -z "${UPNPIP}" ]; then
+if [[ -z "${UPNPIP}" ]]; then
     echo "UPNPIP not set"
 else 
     echo "Setting UPNPIP to ["$UPNPIP"]"
@@ -260,18 +259,18 @@ else
 fi
 
 # Renderer mode
-if [ -n "${RENDERER_MODE}" ]; then
+if [[ -n "${RENDERER_MODE}" ]]; then
     echo "RENDERER_MODE = [${RENDERER_MODE}]"
     UPNPAV=0
     OPENHOME=0
-    if [ "${RENDERER_MODE^^}" == "OPENHOME" ]; then
+    if [[ "${RENDERER_MODE^^}" == "OPENHOME" ]]; then
         OPENHOME=1
-    elif [ "${RENDERER_MODE^^}" == "UPNPAV" ]; then
+    elif [[ "${RENDERER_MODE^^}" == "UPNPAV" ]]; then
         UPNPAV=1
-    elif [ "${RENDERER_MODE^^}" == "BOTH" ]; then
+    elif [[ "${RENDERER_MODE^^}" == "BOTH" ]]; then
         UPNPAV=1
         OPENHOME=1
-    elif [ "${RENDERER_MODE^^}" != "NONE" ]; then
+    elif [[ "${RENDERER_MODE^^}" != "NONE" ]]; then
         echo "Invalid RENDERER_MODE [${RENDERER_MODE}]"
         exit 2
     fi
@@ -279,7 +278,7 @@ if [ -n "${RENDERER_MODE}" ]; then
 fi
 
 # Friendly name management
-if [ -n "${FRIENDLY_NAME}" ]; then
+if [[ -n "${FRIENDLY_NAME}" ]]; then
     echo "FRIENDLY_NAME=[${FRIENDLY_NAME}], UPNPAV_SKIP_NAME_POSTFIX=[${UPNPAV_SKIP_NAME_POSTFIX}]"
     if [[ -z "${UPMPD_FRIENDLY_NAME}" ]] && [[ $OPENHOME -eq 1 && $UPNPAV -eq 1 ]]; then
         UPMPD_FRIENDLY_NAME="${FRIENDLY_NAME} (OpenHome)"
@@ -322,18 +321,18 @@ fi
 echo "upnpav = ${UPNPAV}" >> $CONFIG_FILE
 echo "openhome = ${OPENHOME}" >> $CONFIG_FILE
 
-if [ "${OPENHOME}" -eq 1 ]; then
+if [[ "${OPENHOME}" -eq 1 ]]; then
     echo "friendlyname = ${UPMPD_FRIENDLY_NAME}" >> $CONFIG_FILE
 fi
-if [ "${UPNPAV}" -eq 1 ]; then
+if [[ "${UPNPAV}" -eq 1 ]]; then
     echo "avfriendlyname = ${AV_FRIENDLY_NAME}" >> $CONFIG_FILE
 fi
-if [ "${OPENHOME}" -eq 1 ] || [ "${UPNPAV}" -eq 1 ]; then
+if [[ "${OPENHOME}" -eq 1 ]] || [[ "${UPNPAV}" -eq 1 ]]; then
     if [[ -n "${OH_PRODUCT_ROOM}" ]]; then
         echo "ohproductroom = ${OH_PRODUCT_ROOM}" >> $CONFIG_FILE
-    elif [ "${OPENHOME}" -eq 1 ]; then
+    elif [[ "${OPENHOME}" -eq 1 ]]; then
         echo "ohproductroom = ${UPMPD_FRIENDLY_NAME}" >> $CONFIG_FILE
-    elif [ "${UPNPAV}" -eq 1 ]; then
+    elif [[ "${UPNPAV}" -eq 1 ]]; then
         echo "ohproductroom = ${AV_FRIENDLY_NAME}" >> $CONFIG_FILE
     fi
 fi
@@ -395,13 +394,13 @@ if [[ "${UPRCL_ENABLE^^}" == "YES" ||
 fi
 
 echo "MEDIA_SERVER_ENABLED=[${MEDIA_SERVER_ENABLED}]"
-if [ "${MEDIA_SERVER_ENABLED}" -eq 1 ]; then
+if [[ "${MEDIA_SERVER_ENABLED}" -eq 1 ]]; then
     echo "Setting msfriendlyname to [${MEDIA_SERVER_FRIENDLY_NAME}]"
     set_parameter $CONFIG_FILE MEDIA_SERVER_FRIENDLY_NAME "$MEDIA_SERVER_FRIENDLY_NAME" msfriendlyname
 fi
 
 echo "RADIOS_ENABLE=[$RADIOS_ENABLE]"
-if [ "${RADIOS_ENABLE^^}" == "YES" ]; then
+if [[ "${RADIOS_ENABLE^^}" == "YES" ]]; then
     echo "Enabling Radios";
     RADIOS_ENABLE=YES
     echo "upradiosuser = upradiosuser" >> $CONFIG_FILE
@@ -412,7 +411,7 @@ if [ "${RADIOS_ENABLE^^}" == "YES" ]; then
 fi
 
 echo "BBC_ENABLE=[$BBC_ENABLE]"
-if [ "${BBC_ENABLE^^}" == "YES" ]; then
+if [[ "${BBC_ENABLE^^}" == "YES" ]]; then
     echo "Enabling BBC";
     BBC_ENABLE=YES
     echo "bbcuser = bbcuser" >> $CONFIG_FILE
@@ -426,7 +425,7 @@ if [ "${BBC_ENABLE^^}" == "YES" ]; then
 fi
 
 echo "RADIO_BROWSER_ENABLE=[$RADIO_BROWSER_ENABLE]"
-if [ "${RADIO_BROWSER_ENABLE^^}" == "YES" ]; then
+if [[ "${RADIO_BROWSER_ENABLE^^}" == "YES" ]]; then
     echo "Enabling Radio Browser";
     RADIO_BROWSER_ENABLE=YES
     echo "radio-browseruser = radio-browseruser" >> $CONFIG_FILE
@@ -434,7 +433,7 @@ if [ "${RADIO_BROWSER_ENABLE^^}" == "YES" ]; then
 fi
 
 echo "SUBSONIC_ENABLE=[$SUBSONIC_ENABLE]"
-if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
+if [[ "${SUBSONIC_ENABLE^^}" == "YES" ]]; then
     echo "Enabling Subsonic, processing settings";
     SUBSONIC_ENABLE=YES
     # do we need to download a newer subsonic-connector library?
@@ -541,7 +540,7 @@ if [ "${SUBSONIC_ENABLE^^}" == "YES" ]; then
 fi
 
 echo "RADIO_PARADISE_ENABLE=[$RADIO_PARADISE_ENABLE]"
-if [ "${RADIO_PARADISE_ENABLE^^}" == "YES" ]; then
+if [[ "${RADIO_PARADISE_ENABLE^^}" == "YES" ]]; then
     echo "Enabling Radio Paradise, processing settings";
     RADIO_PARADISE_ENABLE=YES
     echo "radio-paradiseuser = radioparadise" >> $CONFIG_FILE
@@ -549,7 +548,7 @@ if [ "${RADIO_PARADISE_ENABLE^^}" == "YES" ]; then
 fi
 
 echo "MOTHER_EARTH_RADIO_ENABLE=[$MOTHER_EARTH_RADIO_ENABLE]"
-if [ "${MOTHER_EARTH_RADIO_ENABLE^^}" == "YES" ]; then
+if [[ "${MOTHER_EARTH_RADIO_ENABLE^^}" == "YES" ]]; then
     echo "Enabling Mother Earth Radio, processing settings";
     MOTHER_EARTH_RADIO_ENABLE=YES
     # sed -i 's/\#mother-earth-radiouser/mother-earth-radiouser/g' $CONFIG_FILE
@@ -559,9 +558,23 @@ if [ "${MOTHER_EARTH_RADIO_ENABLE^^}" == "YES" ]; then
 fi
 
 echo "TIDAL_ENABLE=[$TIDAL_ENABLE]"
-if [ "${TIDAL_ENABLE^^}" == "YES" ]; then
+if [[ "${TIDAL_ENABLE^^}" == "YES" ]]; then
     echo "Enabling new Tidal, processing settings";
     TIDAL_ENABLE=YES
+
+    # do we need to download a newer tidal-api library?
+    if [[ -n "${TIDAL_FORCE_TIDALAPI_VERSION}" ]]; then
+        echo "Installing tidalapi version [${TIDAL_FORCE_TIDALAPI_VERSION}]"
+        break_needed=`cat /app/conf/pip-install-break-needed`
+        pip_switch=""
+        if [[ "${break_needed}" == "yes" ]]; then
+            pip_switch="--break-system-packages"
+        fi
+        pip_cmd="pip install ${pip_switch} tidalapi==${TIDAL_FORCE_TIDALAPI_VERSION}"
+        echo "pip_cmd: [${pip_cmd}]"
+        eval $pip_cmd
+    fi
+
     echo "tidaluser = tidaluser" >> $CONFIG_FILE
     if [[ -n "${TIDAL_TITLE}" ]]; then
         echo "tidaltitle = ${TIDAL_TITLE}" >> $CONFIG_FILE
@@ -622,10 +635,19 @@ if [ "${TIDAL_ENABLE^^}" == "YES" ]; then
             exit 3
         fi
     fi
+    # image caching
+    if [[ -n "${TIDAL_ENABLE_IMAGE_CACHING}" ]]; then
+        if [[ "${TIDAL_ENABLE_IMAGE_CACHING^^}" == "YES" || "${TIDAL_ENABLE_IMAGE_CACHING^^}" == "Y" ]]; then
+            echo "tidalenableimagecaching = 1" >> $CONFIG_FILE
+        elif [[ "${TIDAL_ENABLE_IMAGE_CACHING^^}" != "NO" && "${TIDAL_ENABLE_IMAGE_CACHING^^}" == "N" ]]; then
+            echo "Invalid TIDAL_ENABLE_IMAGE_CACHING=[${TIDAL_ENABLE_IMAGE_CACHING}]"
+            exit 3
+        fi
+    fi
 fi
 
 echo "Qobuz Enable [$QOBUZ_ENABLE]"
-if [ "${QOBUZ_ENABLE^^}" == "YES" ]; then
+if [[ "${QOBUZ_ENABLE^^}" == "YES" ]]; then
     echo "Processing Qobuz settings";
     if [[ -n "${QOBUZ_TITLE}" ]]; then
         echo "qobuztitle = ${QOBUZ_TITLE}" >> $CONFIG_FILE
@@ -665,7 +687,7 @@ if [ "${QOBUZ_ENABLE^^}" == "YES" ]; then
 fi
 
 echo "HRA Enable [$HRA_ENABLE]"
-if [ "${HRA_ENABLE^^}" == "YES" ]; then
+if [[ "${HRA_ENABLE^^}" == "YES" ]]; then
     echo "Processing HRA settings";
     echo "hrauser = $HRA_USERNAME" >> $CONFIG_FILE
     echo "hrapass = $HRA_PASSWORD" >> $CONFIG_FILE
@@ -675,24 +697,24 @@ if [ "${HRA_ENABLE^^}" == "YES" ]; then
 fi
 
 echo "UPRCL_ENABLE [$UPRCL_ENABLE]"
-if [ "${UPRCL_ENABLE^^}" == "YES" ]; then
+if [[ "${UPRCL_ENABLE^^}" == "YES" ]]; then
     echo "enabling uprclconfdir"
     echo "uprclconfdir = /uprcl/confdir" >> $CONFIG_FILE
     echo "enabling uprclmediadirs"
     echo "uprclmediadirs = /uprcl/mediadirs" >> $CONFIG_FILE
     echo "UPRCL_TITLE [$UPRCL_TITLE]"
-    if [ -n "${UPRCL_TITLE}" ]; then
+    if [[ -n "${UPRCL_TITLE}" ]]; then
         echo "Setting uprcltitle $UPRCL_TITLE"
         echo "uprcltitle = $UPRCL_TITLE" >> $CONFIG_FILE
     fi
     # set UPRCL_USER if not empty
     echo "UPRCL_USER [$UPRCL_USER]"
-    if [ -n "${UPRCL_USER}" ]; then
+    if [[ -n "${UPRCL_USER}" ]]; then
         echo "Setting uprcluser $UPRCL_USER"
         echo "uprcluser = $UPRCL_USER" >> $CONFIG_FILE
     fi
     echo "UPRCL_HOSTPORT [$UPRCL_HOSTPORT]"
-    if [ -n "${UPRCL_HOSTPORT}" ]; then
+    if [[ -n "${UPRCL_HOSTPORT}" ]]; then
         echo "Setting uprclhostport $UPRCL_HOSTPORT"
         echo "uprclhostport = $UPRCL_HOSTPORT" >> $CONFIG_FILE
     fi
@@ -703,13 +725,13 @@ if [ "${UPRCL_ENABLE^^}" == "YES" ]; then
         echo "uprclautostart = $UPRCL_AUTOSTART" >> $CONFIG_FILE
     fi
     UPRCL_USER_CONFIG_FILE="/user/config/recoll.conf.user"
-    if [ -f "$UPRCL_USER_CONFIG_FILE" ]; then
+    if [[ -f "$UPRCL_USER_CONFIG_FILE" ]]; then
         echo "uprclconfrecolluser = /user/config/recoll.conf.user" >> $CONFIG_FILE
     fi
 fi
 
 cache_directory=/cache
-if [ ! -w "$cache_directory" ]; then
+if [[ ! -w "$cache_directory" ]]; then
     echo "Cache directory [${cache_directory}] is not writable"
     cache_directory="/tmp/cache"
     mkdir -p /tmp/cache
@@ -719,7 +741,7 @@ fi
 echo "cachedir = $cache_directory" >> $CONFIG_FILE
 
 log_directory=/log
-if [ ! -w "$log_directory" ]; then
+if [[ ! -w "$log_directory" ]]; then
     echo "Log directory [${log_directory}] is not writable"
     mkdir -p /tmp/log
     log_directory="/tmp/log"
@@ -747,7 +769,7 @@ if [[ -n "${UPNP_LOG_LEVEL}" ]]; then
     echo "upnploglevel = $UPNP_LOG_LEVEL" >> $CONFIG_FILE
 fi
 
-if [ -f $UPMPDCLI_ADDITIONAL_FILE ]; then
+if [[ -f $UPMPDCLI_ADDITIONAL_FILE ]]; then
     echo "File [$UPMPDCLI_ADDITIONAL_FILE] is available, appending to [$CONFIG_FILE] ..."
     cat $UPMPDCLI_ADDITIONAL_FILE >> $CONFIG_FILE
     sed -i -e '$a\' $CONFIG_FILE
@@ -783,12 +805,12 @@ if [[ $current_user_id == 0 ]]; then
     GROUP_NAME=$DEFAULT_GROUP_NAME
     HOME_DIR=$DEFAULT_HOME_DIR
 
-    if [ -z "${PUID}" ]; then
+    if [[ -z "${PUID}" ]]; then
         PUID=$DEFAULT_UID;
         echo "Setting default value for PUID: ["$PUID"]"
     fi
 
-    if [ -z "${PGID}" ]; then
+    if [[ -z "${PGID}" ]]; then
         PGID=$DEFAULT_GID;
         echo "Setting default value for PGID: ["$PGID"]"
     fi
@@ -796,7 +818,7 @@ if [[ $current_user_id == 0 ]]; then
     echo "Ensuring user with uid:[$PUID] gid:[$PGID] exists ...";
 
     ### create group if it does not exist
-    if [ ! $(getent group $PGID) ]; then
+    if [[ ! $(getent group $PGID) ]]; then
         echo "Group with gid [$PGID] does not exist, creating..."
         groupadd -g $PGID $GROUP_NAME
         echo "Group [$GROUP_NAME] with gid [$PGID] created."
@@ -806,7 +828,7 @@ if [[ $current_user_id == 0 ]]; then
     fi
 
     ### create user if it does not exist
-    if [ ! $(getent passwd $PUID) ]; then
+    if [[ ! $(getent passwd $PUID) ]]; then
         echo "User with uid [$PUID] does not exist, creating..."
         useradd -g $PGID -u $PUID -M $USER_NAME
         echo "User [$USER_NAME] with uid [$PUID] created."
@@ -817,7 +839,7 @@ if [[ $current_user_id == 0 ]]; then
     fi
 
     ### create home directory
-    if [ ! -d "$HOME_DIR" ]; then
+    if [[ ! -d "$HOME_DIR" ]]; then
         echo "Home directory [$HOME_DIR] not found, creating."
         mkdir -p $HOME_DIR
         echo ". done."
@@ -852,7 +874,7 @@ if [[ $current_user_id == 0 ]]; then
             fi
         fi
     fi
-    if [ $skip_cache_chown -eq 0 ]; then
+    if [[ $skip_cache_chown -eq 0 ]]; then
         chown -R $USER_NAME:$GROUP_NAME /cache
         # Fix permission errors on existing files
         find /cache -type d -exec chmod 755 {} \;
