@@ -19,14 +19,14 @@ Please note that support goal is limited to cover running costs for subscription
 First and foremost, the reference to the awesome project:
 
 [An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).  
-Current version is `1.8.18`.  
+Current version is `1.9.0`.  
 
 ## News (newest first)
 
 ### Support for HiRes Tidal
 
 Good news, Tidal HiRes is now available.  
-You need to consider that there is a limitation: only the mpd/upmpdcli combination, as well as gmrender-resurrect, works as a renderer with the Tidal plugin in pkce mode, AFAIK.  
+You need to consider that there is a limitation: only the mpd/upmpdcli combination and mrender-resurrect work properly as renderers with the Tidal plugin using HI_RES_LOSSLESS quality mode, AFAIK.  
 A simple installation guide for a mediaserver upmpdcli instance for Tidal Hires is [here](https://github.com/GioF71/audio-tools/blob/main/media-servers/tidal-hires/README.md).  
 
 ### Subsonic Plugin compatibility
@@ -255,15 +255,7 @@ MEDIA_SERVER_FRIENDLY_NAME|Friendly name for the Media Server
 TIDAL_ENABLE|Set to `YES` to enable Tidal support, defaults to `no`
 TIDAL_TITLE|Set the title for Tidal plugin, defaults to `Tidal`
 TIDAL_AUTH_CHALLENGE_TYPE|Default login challenge type, `OAUTH2` (default) or `PKCE`
-TIDAL_AUDIO_QUALITY|Possible values are `LOW` (mp3@96k), `HIGH` (mp3@320k), `LOSSLESS` (flac 44.1kHz), `HI_RES` (I believe it's MQA), `HI_RES_LOSSLESS` (flac@hires), defaults to `LOSSLESS`
-TIDAL_TOKEN_TYPE|Tidal oauth2 token type
-TIDAL_ACCESS_TOKEN|Tidal oauth2 access token
-TIDAL_REFRESH_TOKEN|Tidal oauth2 refresh token
-TIDAL_EXPIRY_TIME|Tidal oauth2 expiry time
-TIDAL_PKCE_TOKEN_TYPE|Tidal pkce token type
-TIDAL_PKCE_ACCESS_TOKEN|Tidal pkce access token
-TIDAL_PKCE_REFRESH_TOKEN|Tidal pkce refresh token
-TIDAL_PKCE_SESSION_ID|Tidal pkce session id
+TIDAL_AUDIO_QUALITY|Possible values are `LOW` (mp3@96k), `HIGH` (mp3@320k), `LOSSLESS` (flac 44.1kHz), `HI_RES_LOSSLESS` (flac@hires), defaults to `LOSSLESS`
 TIDAL_PREPEND_NUMBER_IN_ITEM_LIST|Set to `yes` to create item numbers in lists (`[01] Item` instead of `Item`), mostly for kodi, disabled by default
 TIDAL_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
 TIDAL_PLUGIN_BRANCH|If `TIDAL_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `TIDAL_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-tidal`
@@ -289,7 +281,7 @@ DUMP_ADDITIONAL_RADIO_LIST|Dumps the additional radio file when set to `yes`
 WEBSERVER_DOCUMENT_ROOT|Directory from which the internal HTTP server will directly serve files (e.g. icons), disabled by default
 STARTUP_DELAY_SEC|Delay before starting the application, defaults to `0`. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite if all those services run on the same audio device. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience.
 
-When using the variable `TIDAL_DOWNLOAD_PLUGIN`, `TIDAL_PLUGIN_BRANCH`, `TIDAL_FORCE_TIDALAPI_VERSION`, make sure you verify the intercompatibility. For example, the code currently at the `next-tidal` branch requires [tidalapi version 0.8.0](https://github.com/tamland/python-tidal/releases/tag/v0.8.0).  
+When using the variable `TIDAL_DOWNLOAD_PLUGIN`, `TIDAL_PLUGIN_BRANCH`, `TIDAL_FORCE_TIDALAPI_VERSION`, make sure you verify the intercompatibility. For example, the code currently at the `next-tidal` branch requires [tidalapi version 0.8.1](https://github.com/tamland/python-tidal/releases/tag/v0.8.1).  
 
 #### About RENDERER_MODE
 
@@ -356,10 +348,12 @@ Refer to the file [radiolist.conf](https://github.com/GioF71/upmpdcli-docker/blo
 
 #### OAUTH2 Mode
 
+##### Create json file
+
 In order to obtain your set of tidal credentials, execute the following command:
 
-```text
-docker run --rm -it --entrypoint /app/bin/get-tidal-credentials.py giof71/upmpdcli
+```code
+docker run --rm -it --entrypoint /app/bin/get_tidal_credentials.py giof71/upmpdcli
 ```
 
 You will be presented with an output similar to the following prompt:
@@ -368,28 +362,30 @@ You will be presented with an output similar to the following prompt:
 Visit https://link.tidal.com/XXXXX to log in, the code will expire in 300 seconds
 ```
 
-Open the link in the browser, login to Tidal and authorize the application. Once that is done, you will be greeted with an output like the following:
+Open the link in the browser, login to Tidal and authorize the application. Once that is done, you will be greeted with an output which include the contents of a json file, which should be stored in the tidal plugin cache directory with the name `oauth2.credentials.json`.  
 
-```text
-Environment variables:
-TIDAL_TOKEN_TYPE=Bearer
-TIDAL_ACCESS_TOKEN=your-tidal-token
-TIDAL_REFRESH_TOKEN=your-refresh-token
-TIDAL_EXPIRY_TIME=1694616998.732007
+###### Create json file, a bit more advanced
+
+The previous command will leave most settings of the get_tidal_credentials.py program to defaults, so the resulting file will be written to a `/tmp/oauth2.credentials.json` file.  
+If you mount the `/tmp` directory to some local directory, you can have the file written directly where you want (ideally directly to the `/cache/tidal` directory in the container).  
+Also, you can instruct the command to run in user mode by adding e.g. `--user 1000:1000`  but make sure you replace `1000:1000` with the preferred uid:gid.  
+Example with user mode and using the `./cache/tidal` directory, provided that the directory exists:
+
+```code
+docker run --user 1000:1000 --rm -it -v $(pwd)/cache/tidal:/tmp --entrypoint /app/bin/get_tidal_credentials.py giof71/upmpdcli
 ```
 
-The tokens will be very long strings. Those values must be used in your docker-compose file, or, even better, through the separate `.env` file.  
-With the latest (0.0.8 tagged on 2023-10-10 as latest-tidal) version of the plugin, you can entirely skip the 4 variables listed a few lines above.  
-If you do so, be sure to monitor the container logs, and follow the Tidal link that will be presented. After you will have granted authorization to the application, the plugin will store a `credentials.json` file in the plugin cache directory. So be sure to use the `/cache` volume, or the credentials won't survire if the container is removed and created again.  
+In any case, be sure to change the ownership of the copied file according to the uid/gid used to run the upmpdcli container.  
+
+##### OAUTH Challenge
+
+With the latest (branch: latest-tidal) version of the plugin, you can entirely skip the the step before, if you are able to monitor the application logs.  
+With docker, this should be as easy as using a `docker-compose logs -f`.  
+Open a control point an try to acccess the Tidal media server. The logs will present a link, and you will have to follow instructions, similarly to what is described in the previous paragraph.  
+After you will have granted authorization to the application, the plugin will store a `oauth2.credentials.json` file in the plugin cache directory. So be sure to use the `/cache` volume, or the credentials won't survive if the container is removed and created again.  
 Never share the tokens on the internet (and also on public git repositories).  
-Remember that currently, the Tidal Plugin actually starts when the first control point (e.g. BubbleUPnP, mConnect) contacts upmpdcli asking for the contents from the Tidal Plugin.  
+Remember that currently, the Tidal Plugin actually starts when a control point (e.g. BubbleUPnP, mConnect) contacts upmpdcli asking for contents from the Tidal Plugin.  
 So, you will not see the prompt until you try to use the plugin itself.  
-
-#### PKCE Mode
-
-Getting credentials for PKCE mode is slightly different from OAUTH2 mode.  
-The `challenge` mode, available during while the plugin is running, does not work for pkce mode, because a user input is required, and there is currently no way to make the plugin accept that user input, AFAIK.  
-So the suggested strategy is described [here](https://github.com/GioF71/audio-tools/blob/main/media-servers/tidal-hires/README.md).  
 
 ## Usage examples
 
