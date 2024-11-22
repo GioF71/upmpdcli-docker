@@ -168,7 +168,6 @@ ENV SUBSONIC_ENABLE_INTERNET_RADIOS=""
 
 ENV TIDAL_ENABLE=""
 ENV TIDAL_TITLE=""
-ENV TIDAL_AUTH_CHALLENGE_TYPE=""
 ENV TIDAL_AUDIO_QUALITY=""
 ENV TIDAL_PREPEND_NUMBER_IN_ITEM_LIST=""
 ENV TIDAL_DOWNLOAD_PLUGIN=""
@@ -224,13 +223,8 @@ COPY app/bin/get-value.sh /app/bin/
 COPY app/bin/config-builder.sh /app/bin/
 RUN chmod +x /app/bin/*.sh
 
-COPY app/bin/get-tidal-credentials.py /app/bin/
-RUN chmod +x /app/bin/get-tidal-credentials.py
-
-COPY app/bin/get-tidal-credentials-oauth2.py /app/bin/
-COPY app/bin/get-tidal-credentials-pkce.py /app/bin/
-RUN chmod u+x /app/bin/get-tidal-credentials-oauth2.py
-RUN chmod u+x /app/bin/get-tidal-credentials-pkce.py
+COPY app/bin/get_tidal_credentials.py /app/bin/
+RUN chmod +x /app/bin/get_tidal_credentials.py
 
 COPY README.md /app/doc
 
