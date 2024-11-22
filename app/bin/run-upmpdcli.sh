@@ -584,42 +584,6 @@ if [[ "${TIDAL_ENABLE^^}" == "YES" ]]; then
         TIDAL_AUTOSTART=1
         echo "tidalautostart = $TIDAL_AUTOSTART" >> $CONFIG_FILE
     fi
-    if [[ -n "${TIDAL_AUTH_CHALLENGE_TYPE}" ]]; then
-        echo "Setting Token Type [$TIDAL_AUTH_CHALLENGE_TYPE]"
-        echo "tidalauthchallengetype = $TIDAL_AUTH_CHALLENGE_TYPE" >> $CONFIG_FILE
-    fi
-    if [[ -n "${TIDAL_TOKEN_TYPE}" ]]; then
-        echo "Setting Token Type [$TIDAL_TOKEN_TYPE]"
-        echo "tidaltokentype = $TIDAL_TOKEN_TYPE" >> $CONFIG_FILE
-    fi
-    if [[ -n "${TIDAL_ACCESS_TOKEN}" ]]; then
-        echo "Setting Access Token [$TIDAL_ACCESS_TOKEN]"
-        echo "tidalaccesstoken = $TIDAL_ACCESS_TOKEN" >> $CONFIG_FILE
-    fi
-    if [[ -n "${TIDAL_REFRESH_TOKEN}" ]]; then
-        echo "Setting Refresh Token [$TIDAL_REFRESH_TOKEN]"
-        echo "tidalrefreshtoken = $TIDAL_REFRESH_TOKEN" >> $CONFIG_FILE
-    fi
-    if [[ -n "${TIDAL_EXPIRY_TIME}" ]]; then
-        echo "Setting Token Expiry Time [$TIDAL_EXPIRY_TIME]"
-        echo "tidalexpirytime = $TIDAL_EXPIRY_TIME" >> $CONFIG_FILE
-    fi
-    if [[ -n "${TIDAL_PKCE_TOKEN_TYPE}" ]]; then
-        echo "Setting PKCE Token Type [$TIDAL_PKCE_TOKEN_TYPE]"
-        echo "tidalpkcetokentype = $TIDAL_PKCE_TOKEN_TYPE" >> $CONFIG_FILE
-    fi
-    if [[ -n "${TIDAL_PKCE_ACCESS_TOKEN}" ]]; then
-        echo "Setting PKCE Access Token [$TIDAL_PKCE_ACCESS_TOKEN]"
-        echo "tidalpkceaccesstoken = $TIDAL_PKCE_ACCESS_TOKEN" >> $CONFIG_FILE
-    fi
-    if [[ -n "${TIDAL_PKCE_REFRESH_TOKEN}" ]]; then
-        echo "Setting PKCE Refresh Token [$TIDAL_PKCE_REFRESH_TOKEN]"
-        echo "tidalpkcerefreshtoken = $TIDAL_PKCE_REFRESH_TOKEN" >> $CONFIG_FILE
-    fi
-    if [[ -n "${TIDAL_PKCE_SESSION_ID}" ]]; then
-        echo "Setting PKCE Session Id [$TIDAL_PKCE_SESSION_ID]"
-        echo "tidalpkcesessionid = $TIDAL_PKCE_SESSION_ID" >> $CONFIG_FILE
-    fi
     if [[ -z "$TIDAL_AUDIO_QUALITY" ]]; then
         TIDAL_AUDIO_QUALITY="LOSSLESS"   
     fi
