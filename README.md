@@ -26,7 +26,7 @@ Current version is `1.9.0`.
 ### Support for HiRes Tidal
 
 Good news, Tidal HiRes is now available.  
-You need to consider that there is a limitation: only the mpd/upmpdcli combination and mrender-resurrect work properly as renderers with the Tidal plugin using HI_RES_LOSSLESS quality mode, AFAIK.  
+You need to consider that there is a limitation: only the mpd/upmpdcli combination and gmrender-resurrect work properly as renderers with the Tidal plugin using HI_RES_LOSSLESS quality mode, AFAIK.  
 A simple installation guide for a mediaserver upmpdcli instance for Tidal Hires is [here](https://github.com/GioF71/audio-tools/blob/main/media-servers/tidal-hires/README.md).  
 
 ### Subsonic Plugin compatibility
