@@ -218,6 +218,7 @@ UPRCL_TITLE|Title for the media server, defaults to `Local Music`
 ENABLE_OPENHOME_RADIO_SERVICE|OpenHome Radio Service, enabled by default, set to `no` to disable
 ENABLE_UPRCL|Enable local music support (uprcl). Set to `yes` to enable (Deprecated, use UPRCL_ENABLE)
 RADIOS_ENABLE|Enable Radios plugin. Set to `yes` to enable
+RADIOS_TITLE|Title of the Radios plugin, defaults to `Upmpdcli Radio List`
 RADIOS_AUTOSTART|Start Radios on startup, defaults to `1`
 BBC_ENABLE|Enable BBC plugin. Set to `yes` to enable
 BBC_PROGRAMME_DAYS|Past days in BBC Sounds catalog listing. This controls how many days are listed in the station displays.
