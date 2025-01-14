@@ -198,7 +198,7 @@ fi
 
 if [[ $enable_openhome_radio_service -eq 1 ]]; then
     echo "radiolist = ${RADIO_LIST}" >> $CONFIG_FILE
-    echo "upradiostitle = Upmpdcli Radio List" >> $CONFIG_FILE
+    echo "upradiostitle = ${RADIOS_TITLE}" >> $CONFIG_FILE
 fi
 
 set_upnp_iface=0

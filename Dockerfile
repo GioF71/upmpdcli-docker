@@ -138,6 +138,7 @@ ENV HRA_USERNAME="hra_username"
 ENV HRA_PASSWORD="hra_password"
 ENV HRA_LANG="en"
 
+ENV RADIOS_TITLE="Upmpdcli Radio List"
 ENV RADIOS_ENABLE=""
 ENV RADIOS_AUTOSTART=""
 
