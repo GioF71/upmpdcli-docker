@@ -608,6 +608,33 @@ if [[ "${TIDAL_ENABLE^^}" == "YES" ]]; then
             exit 3
         fi
     fi
+    # favorite actions
+    if [[ -n "${TIDAL_ALLOW_FAVORITE_ACTIONS}" ]]; then
+        if [[ "${TIDAL_ALLOW_FAVORITE_ACTIONS^^}" == "YES" || "${TIDAL_ALLOW_FAVORITE_ACTIONS^^}" == "Y" ]]; then
+            echo "tidalallowfavoriteactions = 1" >> $CONFIG_FILE
+        elif [[ "${TIDAL_ALLOW_FAVORITE_ACTIONS^^}" != "NO" && "${TIDAL_ALLOW_FAVORITE_ACTIONS^^}" == "N" ]]; then
+            echo "Invalid TIDAL_ALLOW_FAVORITE_ACTIONS=[${TIDAL_ALLOW_FAVORITE_ACTIONS}]"
+            exit 3
+        fi
+    fi
+    # booknark actions
+    if [[ -n "${TIDAL_ALLOW_BOOKMARK_ACTIONS}" ]]; then
+        if [[ "${TIDAL_ALLOW_BOOKMARK_ACTIONS^^}" == "YES" || "${TIDAL_ALLOW_BOOKMARK_ACTIONS^^}" == "Y" ]]; then
+            echo "tidalallowbookmarkactions = 1" >> $CONFIG_FILE
+        elif [[ "${TIDAL_ALLOW_BOOKMARK_ACTIONS^^}" != "NO" && "${TIDAL_ALLOW_BOOKMARK_ACTIONS^^}" == "N" ]]; then
+            echo "Invalid TIDAL_ALLOW_BOOKMARK_ACTIONS=[${TIDAL_ALLOW_BOOKMARK_ACTIONS}]"
+            exit 3
+        fi
+    fi
+    # favorite actions
+    if [[ -n "${TIDAL_ALLOW_STATISTICS_ACTIONS}" ]]; then
+        if [[ "${TIDAL_ALLOW_STATISTICS_ACTIONS^^}" == "YES" || "${TIDAL_ALLOW_STATISTICS_ACTIONS^^}" == "Y" ]]; then
+            echo "tidalallowstatisticsactions = 1" >> $CONFIG_FILE
+        elif [[ "${TIDAL_ALLOW_STATISTICS_ACTIONS^^}" != "NO" && "${TIDAL_ALLOW_STATISTICS_ACTIONS^^}" == "N" ]]; then
+            echo "Invalid TIDAL_ALLOW_STATISTICS_ACTIONS=[${TIDAL_ALLOW_STATISTICS_ACTIONS}]"
+            exit 3
+        fi
+    fi
 fi
 
 echo "Qobuz Enable [$QOBUZ_ENABLE]"

@@ -262,6 +262,9 @@ TIDAL_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the
 TIDAL_PLUGIN_BRANCH|If `TIDAL_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `TIDAL_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-tidal`
 TIDAL_FORCE_TIDALAPI_VERSION|If set, the specified version of tidalapi will be installed over the one included in the image. See note below.
 TIDAL_ENABLE_IMAGE_CACHING|If set to `yes`, you can enable caching of album and artist images. This can consume some disk space, so the default is `no`.
+TIDAL_ALLOW_FAVORITE_ACTIONS|Allow the creation of entries that can manipulate the favorites
+TIDAL_ALLOW_BOOKMARK_ACTIONS|Allow the creation of entries that can manipulate the bookmarks (local favorites)
+TIDAL_ALLOW_STATISTICS_ACTIONS|Allow the creation of entries that can remove entries from the playback statistics
 QOBUZ_ENABLE|Set to `yes` to enable Qobuz support, defaults to `no`
 QOBUZ_TITLE|Set the title for Qobuz plugin, defaults to `Qobuz`
 QOBUZ_USERNAME|Your Qobuz account username
