@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2025-02-06|Add support for some new tidal configuration variables (see issue [#453](https://github.com/GioF71/upmpdcli-docker/issues/453))
 2024-11-22|Build with version 1.9.0, adapt documentation (see issue [#448](https://github.com/GioF71/upmpdcli-docker/issues/448))
 2024-10-29|Add support for tidal image caching (see issue [#446](https://github.com/GioF71/upmpdcli-docker/issues/446))
 2024-10-28|Add support for forcing the tidalapi version (`TIDAL_FORCE_TIDALAPI_VERSION`) (see issue [#444](https://github.com/GioF71/upmpdcli-docker/issues/444))
