@@ -10,7 +10,7 @@ docker buildx build . \
     --build-arg BASE_IMAGE=ubuntu:noble \
     --build-arg BUILD_MODE=full \
     --tag giof71/upmpdcli:noble-full \
-    --tag giof71/upmpdcli:noble-full${TODAY} \
+    --tag giof71/upmpdcli:noble-full-${TODAY} \
     --tag giof71/upmpdcli:latest \
     --tag giof71/upmpdcli:latest-full \
     --tag giof71/upmpdcli:stable \
