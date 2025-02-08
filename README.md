@@ -19,7 +19,7 @@ Please note that support goal is limited to cover running costs for subscription
 First and foremost, the reference to the awesome project:
 
 [An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).  
-Current version is `1.9.0`.  
+Current version is `1.9.1`.  
 
 ## News (newest first)
 
@@ -285,7 +285,7 @@ DUMP_ADDITIONAL_RADIO_LIST|Dumps the additional radio file when set to `yes`
 WEBSERVER_DOCUMENT_ROOT|Directory from which the internal HTTP server will directly serve files (e.g. icons), disabled by default
 STARTUP_DELAY_SEC|Delay before starting the application, defaults to `0`. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite if all those services run on the same audio device. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience.
 
-When using the variable `TIDAL_DOWNLOAD_PLUGIN`, `TIDAL_PLUGIN_BRANCH`, `TIDAL_FORCE_TIDALAPI_VERSION`, make sure you verify the intercompatibility. For example, the code currently at the `next-tidal` branch requires [tidalapi version 0.8.1](https://github.com/tamland/python-tidal/releases/tag/v0.8.1).  
+When using the variable `TIDAL_DOWNLOAD_PLUGIN`, `TIDAL_PLUGIN_BRANCH`, `TIDAL_FORCE_TIDALAPI_VERSION`, make sure you verify the intercompatibility. For example, the code currently at the `next-tidal` branch requires [tidalapi version 0.8.3](https://github.com/tamland/python-tidal/releases/tag/v0.8.3).  
 
 #### About RENDERER_MODE
 
