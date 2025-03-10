@@ -488,15 +488,15 @@ if [[ "${SUBSONIC_ENABLE^^}" == "YES" ]]; then
     if [[ -n "${SUBSONIC_ITEMS_PER_PAGE}" ]]; then
         echo "subsonicitemsperpage = $SUBSONIC_ITEMS_PER_PAGE" >> $CONFIG_FILE
     fi
-    if [[ -n "${SUBSONIC_APPEND_YEAR_TO_ALBUM}" ]]; then
+    if [[ -n "${SUBSONIC_APPEND_YEAR_TO_ALBUM_CONTAINER}" ]]; then
         append_year=1
-        if [[ "${SUBSONIC_APPEND_YEAR_TO_ALBUM^^}" == "NO" ]]; then
+        if [[ "${SUBSONIC_APPEND_YEAR_TO_ALBUM_CONTAINER^^}" == "NO" ]]; then
             append_year=0
-        elif [[ ! "${SUBSONIC_APPEND_YEAR_TO_ALBUM^^}" == "YES" ]]; then
-            echo "Invalid SUBSONIC_APPEND_YEAR_TO_ALBUM [${SUBSONIC_APPEND_YEAR_TO_ALBUM}]"
+        elif [[ ! "${SUBSONIC_APPEND_YEAR_TO_ALBUM_CONTAINER^^}" == "YES" ]]; then
+            echo "Invalid SUBSONIC_APPEND_YEAR_TO_ALBUM_CONTAINER [${SUBSONIC_APPEND_YEAR_TO_ALBUM_CONTAINER}]"
             exit 2
         fi
-        echo "subsonicappendyeartoalbum = $append_year" >> $CONFIG_FILE
+        echo "subsonicappendyeartoalbumcontainer = $append_year" >> $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_APPEND_CODECS_TO_ALBUM}" ]]; then
         append_codecs=1
