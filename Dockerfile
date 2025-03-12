@@ -1,77 +1,70 @@
-ARG BASE_IMAGE="${BASE_IMAGE:-ubuntu:noble}"
+ARG BASE_IMAGE="${BASE_IMAGE:-debian:stable-slim}"
 FROM ${BASE_IMAGE} AS base
-ARG BASE_IMAGE="${BASE_IMAGE:-ubuntu:noble}"
-ARG BUILD_MODE="${BUILD_MODE:-full}"
-ARG USE_APT_PROXY
-
-RUN mkdir -p /app/conf
-RUN mkdir -p /app/install
-
-COPY app/conf/01proxy /app/conf/
-
-RUN if [ "$USE_APT_PROXY" = "Y" ]; then \
-		echo "Using apt proxy"; \
-		cp /app/conf/01proxy /etc/apt/apt.conf.d/01proxy; \
-		echo /etc/apt/apt.conf.d/01proxy; \
-	else \
-		echo "Building without proxy"; \
-	fi
 
 ARG DEBIAN_FRONTEND=noninteractive
-
 RUN apt-get update
-RUN apt-get install -y ca-certificates
 
-RUN if [ "$BUILD_MODE" = "full" ]; then \
-		apt-get install -y python3 python3-pip; \
-	fi
+RUN apt-get -y install \
+    ca-certificates \
+    bash \
+    curl \
+    net-tools \
+    iproute2 \
+    grep \
+    git \
+    build-essential \
+    meson \
+    pkg-config \
+    cmake \
+    libexpat1-dev \
+    libmicrohttpd-dev \
+    libjsoncpp-dev \
+    libmpdclient-dev
 
-COPY app/install/* /app/install/
-RUN chmod u+x /app/install/*.sh
-RUN /app/install/setup.sh
+# create build directory
+WORKDIR /build
 
-RUN apt-get install -y upmpdcli
-RUN apt-get install -y --no-install-recommends iproute2 grep
+# build npupnp
+RUN git clone https://framagit.org/medoc92/npupnp.git
+WORKDIR /build/npupnp
+RUN meson setup --prefix /usr build
+WORKDIR /build/npupnp/build
+RUN ninja
+RUN meson install
 
-RUN if [ "$BUILD_MODE" = "full" ]; then \
-		apt-get install -y \
-			upmpdcli-bbc \
-			upmpdcli-hra \
-			upmpdcli-qobuz \
-			upmpdcli-radio-browser \
-			upmpdcli-radio-paradise \
-			upmpdcli-mother-earth-radio \
-			upmpdcli-radios \
-			upmpdcli-subsonic \
-			upmpdcli-tidal \
-			upmpdcli-uprcl; \
-		fi
+# build libupnpp
+WORKDIR /build
+RUN git clone https://framagit.org/medoc92/libupnpp.git
+WORKDIR /build/libupnpp
+RUN meson setup --prefix /usr build
+WORKDIR /build/libupnpp/build
+RUN ninja
+RUN meson install
 
-RUN if [ "$BUILD_MODE" = "full" ]; then \
-		apt-get install -y \
-			recollcmd; \
-		fi
+# build upmpdcli
+ARG BRANCH_NAME=upmpdcli-v1.9.3
+RUN echo "Using branch [${BRANCH_NAME}}] for upmpdcli ..."
+WORKDIR /build
+RUN git clone --depth 1 --branch ${BRANCH_NAME} https://framagit.org/medoc92/upmpdcli.git
 
-RUN if [ "$BUILD_MODE" = "full" ]; then \
-		apt-get install -y exiftool; \
-	fi
+WORKDIR /build/upmpdcli
+RUN meson setup --prefix /usr build
+WORKDIR /build/upmpdcli/build
+RUN ninja
+RUN meson install
 
-RUN if [ "$BUILD_MODE" = "full" ]; then \
-		apt-get install -y git; \
-	fi
+ARG BUILD_MODE=full
 
-RUN apt-get install -y net-tools
+WORKDIR /install
+COPY app/install/* /install/
+RUN chmod +x /install/*.sh
+RUN if [ "${BUILD_MODE}" = "full" ]; then /bin/sh -c /install/mediaserver-libraries.sh; fi
+RUN if [ "${BUILD_MODE}" = "full" ]; then /bin/sh -c /install/mediaserver-python-packages.sh; fi
 
+RUN apt-get -y remove pkg-config meson cmake build-essential libexpat1-dev
 RUN apt-get -y autoremove
-RUN	rm -rf /var/lib/apt/lists/*
-
-RUN if [ "$USE_APT_PROXY" = "Y" ]; then \
-		rm /etc/apt/apt.conf.d/01proxy; \
-	fi
-
-RUN rm -Rf /app/install
-
-RUN echo $BUILD_MODE > /app/conf/build_mode.txt
+RUN	rm -Rf /var/lib/apt/lists/*
+RUN rm -Rf /build
 
 FROM scratch
 COPY --from=base / /
