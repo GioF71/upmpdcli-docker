@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        base: [ "noble" ]
+        base: [ "stable" ]
         build_mode: ["full", "renderer"]
 
     steps:
@@ -41,6 +41,7 @@ jobs:
           base_images[kinetic]=ubuntu:kinetic
           base_images[jammy]=ubuntu:jammy
           base_images[bookworm]=debian:bookworm-slim
+          base_images[stable]=debian:stable-slim
 
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
 
@@ -114,7 +115,7 @@ jobs:
           fi
           echo "Building tags: ["${tags}"]"
           echo "RELEASE_TAGS=${tags}" >> $GITHUB_OUTPUT
-          echo "BASE_IMAGE=${select_base_image}" >> $GITHUB_OUTPUT
+          echo "USE_BASE_IMAGE=${select_base_image}" >> $GITHUB_OUTPUT
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -137,7 +138,7 @@ jobs:
           context: .
           build-args: |
             USE_APT_PROXY=N
-            BASE_IMAGE=${{ steps.prepare.outputs.BASE_IMAGE }}
+            USE_BASE_IMAGE=${{ steps.prepare.outputs.USE_BASE_IMAGE }}
             BUILD_MODE=${{ matrix.build_mode }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
           push: true

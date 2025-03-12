@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2025-03-12|Build from source code (see issue [#462](https://github.com/GioF71/upmpdcli-docker/issues/462))
 2025-03-10|Build with version 1.9.2 (see issue [#460](https://github.com/GioF71/upmpdcli-docker/issues/460))
 2025-02-08|Build with version 1.9.1, adapt documentation (see issue [#456](https://github.com/GioF71/upmpdcli-docker/issues/456))
 2025-02-08|Bump to [subsonic-connector 0.3.7](https://pypi.org/project/subsonic-connector/0.3.7)

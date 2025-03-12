@@ -2,6 +2,7 @@
 
 declare -A base_images
 
+base_images[stable]=debian:stable-slim
 base_images[bookworm]=debian:bookworm-slim
 base_images[bullseye]=debian:bullseye-slim
 base_images[noble]=ubuntu:noble
@@ -11,22 +12,19 @@ base_images[kinetic]=ubuntu:kinetic
 base_images[jammy]=ubuntu:jammy
 base_images[focal]=ubuntu:focal
 
-DEFAULT_BASE_IMAGE=noble
+DEFAULT_BASE_IMAGE=stable
 DEFAULT_TAG=local
-DEFAULT_USE_PROXY=N
 DEFAULT_BUILD_MODE=full
 
 DEFAULT_CACHE_MODE=""
 
 tag=$DEFAULT_TAG
-use_proxy=$DEFAULT_USE_PROXY
 
-while getopts b:t:p:m:c: flag
+while getopts b:t:m:c: flag
 do
     case "${flag}" in
         b) base_image=${OPTARG};;
         t) tag=${OPTARG};;
-        p) proxy=${OPTARG};;
         m) build_mode=${OPTARG};;
         c) cache_mode=${OPTARG};;
     esac
@@ -34,18 +32,11 @@ done
 
 echo "base_image: $base_image";
 echo "tag: $tag";
-echo "proxy: $proxy";
 echo "build_mode: $build_mode";
 echo "cache_mode: $cache_mode";
 
 if [ -z "${base_image}" ]; then
   base_image=$DEFAULT_BASE_IMAGE
-fi
-
-if [ -z "${proxy}" ]; then
-  use_proxy="N"
-else
-  use_proxy=$proxy
 fi
 
 if [[ -z ${base_images[$base_image]} ]]; then
@@ -66,11 +57,9 @@ fi
 echo "Base Image: ["$select_base_image"]"
 echo "Tag: ["$tag"]"
 echo "Build Mode: ["$build_mode"]"
-echo "Proxy: ["$use_proxy"]"
 
 cmd_line="docker build . ${cache_mode} \
     --build-arg BASE_IMAGE=${select_base_image} \
-    --build-arg USE_APT_PROXY=${use_proxy} \
     --build-arg BUILD_MODE=${build_mode} \
     --progress=plain \
     -t giof71/upmpdcli:$tag"

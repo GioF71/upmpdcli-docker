@@ -5,6 +5,9 @@
 # 2 Invalid RENDERER_MODE value
 # 3 Invalid argument
 
+# display upmpdcli version.
+upmpdcli -v
+
 USER_CONF_PATH=/user/config
 
 current_user_id=$(id -u)
