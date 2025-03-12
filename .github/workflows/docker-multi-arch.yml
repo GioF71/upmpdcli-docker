@@ -51,6 +51,8 @@ jobs:
           echo "Building build_key: ["$build_key"]";
 
           declare -A special_tags
+          special_tags[stable-full]="${image_name}:latest,${image_name}:latest-full,${image_name}:stable,${image_name}:debian-stable-full,${image_name}:stable-full"
+          special_tags[stable-renderer]="${image_name}:renderer,${image_name}:latest-renderer,${image_name}:debian-stable-renderer,${image_name}:stable-renderer"
           special_tags[noble-full]="${image_name}:latest,${image_name}:latest-full,${image_name}:stable,${image_name}:ubuntu-lts-full,${image_name}:stable-full"
           special_tags[noble-renderer]="${image_name}:renderer,${image_name}:latest-renderer,${image_name}:stable-renderer,${image_name}:ubuntu-lts-renderer"
           special_tags[mantic-full]="${image_name}:ubuntu-current-full"
