@@ -26,7 +26,7 @@ Current version is `1.9.3`.
 ### Support for HiRes Tidal
 
 Good news, Tidal HiRes is now available.  
-You need to consider that there is a limitation: only the mpd/upmpdcli combination and gmrender-resurrect work properly as renderers with the Tidal plugin using HI_RES_LOSSLESS quality mode, AFAIK.  
+You need to consider that there is a limitation: only the mpd/upmpdcli combination and gmrender-resurrect work properly as renderers with the Tidal plugin using HI_RES_LOSSLESS quality mode, AFAIK. Other players will still play, but will fallback to standard (LOSSLESS) quality. We are leveraging [this change](https://framagit.org/medoc92/upmpdcli/-/commit/2c742f13eb81c4fd1bf3270fa24877e04aadbaed) for the implementation of this feature.  
 A simple installation guide for a mediaserver upmpdcli instance for Tidal Hires is [here](https://github.com/GioF71/audio-tools/blob/main/media-servers/tidal-hires/README.md).  
 
 ### Subsonic Plugin compatibility
@@ -238,6 +238,7 @@ SUBSONIC_APPEND_CODECS_TO_ALBUM|If set to `yes` (default), the codecs for the al
 SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST|If set to `yes`, the album in albums list will be numbered, mostly for Kodi, defaults to `no`
 SUBSONIC_WHITELIST_CODECS|List of comma-separated whitelist (ideally lossless) codecs. Defaults to `alac,wav,flac,dsf`
 SUBSONIC_ENABLE_INTERNET_RADIOS|Set to `yes` to enable internet radios, disabled by default (requires plugin version >= 0.3.4)
+SUBSONIC_ENABLE_IMAGE_CACHING|Set to `yes` to enable image caching, disabled by default (requires WEBSERVER_DOCUMENT_ROOT and plugin version >= 0.7.2)
 SUBSONIC_DOWNLOAD_PLUGIN|If set to `yes`, the updated plugin is downloaded from the upstream repo
 SUBSONIC_PLUGIN_BRANCH|If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `SUBSONIC_DOWNLOAD_PLUGIN`. Suggested branch name is `next-subsonic`
 SUBSONIC_FORCE_CONNECTOR_VERSION|If set, the specified version of subsonic-connector will be installed over the one included in the image

@@ -540,6 +540,16 @@ if [[ "${SUBSONIC_ENABLE^^}" == "YES" ]]; then
         fi
         echo "subsonictaginitialpageenabledir = $enable_ir" >> $CONFIG_FILE
     fi
+    if [[ -n "${SUBSONIC_ENABLE_IMAGE_CACHING}" ]]; then
+        enable_ic=1
+        if [[ "${SUBSONIC_ENABLE_IMAGE_CACHING^^}" == "NO" ]]; then
+            enable_ic=0
+        elif [[ ! "${SUBSONIC_ENABLE_IMAGE_CACHING^^}" == "YES" ]]; then
+            echo "Invalid SUBSONIC_ENABLE_IMAGE_CACHING [${SUBSONIC_ENABLE_IMAGE_CACHING}]"
+            exit 2
+        fi
+        echo "subsonicenableimagecaching = $enable_ic" >> $CONFIG_FILE
+    fi
 fi
 
 echo "RADIO_PARADISE_ENABLE=[$RADIO_PARADISE_ENABLE]"
