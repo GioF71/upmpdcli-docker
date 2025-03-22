@@ -1,4 +1,4 @@
-ARG BASE_IMAGE="${BASE_IMAGE:-debian:stable-slim}"
+ARG BASE_IMAGE="${BASE_IMAGE:-giof71/upmpdcli:lib}"
 FROM ${BASE_IMAGE} AS base
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -23,23 +23,6 @@ RUN apt-get -y install \
 
 # create build directory
 WORKDIR /build
-
-# build npupnp
-RUN git clone https://framagit.org/medoc92/npupnp.git
-WORKDIR /build/npupnp
-RUN meson setup --prefix /usr build
-WORKDIR /build/npupnp/build
-RUN ninja
-RUN meson install
-
-# build libupnpp
-WORKDIR /build
-RUN git clone https://framagit.org/medoc92/libupnpp.git
-WORKDIR /build/libupnpp
-RUN meson setup --prefix /usr build
-WORKDIR /build/libupnpp/build
-RUN ninja
-RUN meson install
 
 # select upmpdcli branch, default to the latest tagged release
 ARG BRANCH_NAME=upmpdcli-v1.9.3
