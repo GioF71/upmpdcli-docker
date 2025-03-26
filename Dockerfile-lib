@@ -8,6 +8,7 @@ RUN apt-get -y install \
     ca-certificates \
     bash \
     curl \
+    libcurl4-openssl-dev \
     net-tools \
     iproute2 \
     grep \
