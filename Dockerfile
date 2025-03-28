@@ -26,7 +26,7 @@ RUN apt-get -y install \
 WORKDIR /build
 
 # build npupnp
-RUN git clone https://framagit.org/medoc92/npupnp.git
+RUN git clone --depth 1 --branch libnpupnp-v6.2.1 https://framagit.org/medoc92/npupnp.git
 WORKDIR /build/npupnp
 RUN meson setup --prefix /usr build
 WORKDIR /build/npupnp/build
