@@ -1,0 +1,12 @@
+[submodule "upmpdcli-master"]
+	path = upmpdcli-master
+	url = https://framagit.org/medoc92/upmpdcli.git
+[submodule "upmpdcli-release"]
+	path = upmpdcli-release
+	url = https://framagit.org/medoc92/upmpdcli.git
+[submodule "npupnp"]
+	path = npupnp
+	url = https://framagit.org/medoc92/npupnp.git
+[submodule "libupnpp"]
+	path = libupnpp
+	url = https://framagit.org/medoc92/libupnpp.git

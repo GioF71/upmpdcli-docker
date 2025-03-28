@@ -35,7 +35,7 @@ RUN meson install
 
 # build libupnpp
 WORKDIR /build
-RUN git clone --depth 1 --branch libupnpp-v0.26.8 https://framagit.org/medoc92/libupnpp.git
+RUN git clone --depth 1 --branch libupnpp-v1.0.1 https://framagit.org/medoc92/libupnpp.git
 WORKDIR /build/libupnpp
 RUN meson setup --prefix /usr build
 WORKDIR /build/libupnpp/build
