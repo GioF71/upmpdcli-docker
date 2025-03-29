@@ -26,7 +26,7 @@ RUN apt-get -y install \
 WORKDIR /build
 
 # build npupnp
-RUN git clone --depth 1 --branch libnpupnp-v6.2.1 https://framagit.org/medoc92/npupnp.git
+COPY npupnp /build/npupnp
 WORKDIR /build/npupnp
 RUN meson setup --prefix /usr build
 WORKDIR /build/npupnp/build
@@ -35,21 +35,17 @@ RUN meson install
 
 # build libupnpp
 WORKDIR /build
-RUN git clone --depth 1 --branch libupnpp-v1.0.1 https://framagit.org/medoc92/libupnpp.git
+COPY libupnpp /build/libupnpp
 WORKDIR /build/libupnpp
 RUN meson setup --prefix /usr build
 WORKDIR /build/libupnpp/build
 RUN ninja
 RUN meson install
 
-# select upmpdcli branch, default to the latest tagged release
-ARG BRANCH_NAME=upmpdcli-v1.9.3
-RUN echo "Using branch [${BRANCH_NAME}] for upmpdcli ..."
-
+ARG UPMPDCLI_SELECTOR=release
 # build upmpdcli
 WORKDIR /build
-RUN git clone --depth 1 --branch ${BRANCH_NAME} https://framagit.org/medoc92/upmpdcli.git
-
+COPY upmpdcli-${UPMPDCLI_SELECTOR} /build/upmpdcli
 WORKDIR /build/upmpdcli
 RUN meson setup --prefix /usr build
 WORKDIR /build/upmpdcli/build
@@ -64,7 +60,7 @@ RUN chmod +x /install/*.sh
 RUN if [ "${BUILD_MODE}" = "full" ]; then /bin/sh -c /install/install-libraries.sh; fi
 RUN if [ "${BUILD_MODE}" = "full" ]; then /bin/sh -c /install/install-mediaserver-python-packages.sh; fi
 
-RUN apt-get -y remove pkg-config meson cmake build-essential libexpat1-dev
+RUN apt-get -y remove pkg-config meson cmake build-essential
 RUN apt-get -y autoremove
 RUN	rm -Rf /var/lib/apt/lists/*
 RUN rm -Rf /build

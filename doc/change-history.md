@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2025-03-29|Review build process using git modules (see issue [#477](https://github.com/GioF71/upmpdcli-docker/issues/477))
 2025-03-26|Fix proxy method not working adding libcurl4-openssl-dev (see issue [#469](https://github.com/GioF71/upmpdcli-docker/issues/469))
 2025-03-22|Bump to [subsonic-connector 0.3.9](https://pypi.org/project/subsonic-connector/0.3.9)
 2025-03-19|New variable for subsonic image caching SUBSONIC_ENABLE_IMAGE_CACHING

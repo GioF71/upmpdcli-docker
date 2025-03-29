@@ -8,6 +8,7 @@ on:
       - "devel/*"
       - "feature/*"
       - "daily/*"
+      - "master/*"
 
 jobs:
   release:
@@ -21,6 +22,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: Prepare for Docker Build
         id: prepare
@@ -45,6 +48,8 @@ jobs:
 
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
 
+          # unless we are build from a tag "master"
+          upmpdcli_selector=release
           echo "image_name=["$image_name"]"
 
           build_key="${{ matrix.base }}-${{ matrix.build_mode }}";
@@ -110,6 +115,19 @@ jobs:
             elif [ "${tag_type}" = "feature" ]; then
               echo "feature tag";
               tags="${image_name}:feature-${tag_name}-${build_key}";
+            elif [ "${tag_type}" = "master" ]; then
+              echo "master build tag";
+              upmpdcli_selector=master
+              tags="${image_name}:master-${tag_name}-${build_key}";
+              # add full, renderer, and simply master
+              if [ "${build_mode}" = "full" ]; then
+                tags="$tags,${image_name}:master";
+                tags="$tags,${image_name}:master-full";
+                tags="$tags,${image_name}:master-full-${tag_name}";
+              elif [ "${build_mode}" = "renderer" ]; then
+                tags="$tags,${image_name}:master-renderer";
+                tags="$tags,${image_name}:master-renderer-${tag_name}";
+              fi
             elif [ "${tag_type}" = "daily" ]; then
               echo "daily build";
               tags="${tags},${image_name}:daily-${build_key}";
@@ -118,6 +136,7 @@ jobs:
           echo "Building tags: ["${tags}"]"
           echo "RELEASE_TAGS=${tags}" >> $GITHUB_OUTPUT
           echo "USE_BASE_IMAGE=${select_base_image}" >> $GITHUB_OUTPUT
+          echo "UPMPDCLI_SELECTOR=${upmpdcli_selector}" >> $GITHUB_OUTPUT
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -142,6 +161,7 @@ jobs:
             USE_APT_PROXY=N
             USE_BASE_IMAGE=${{ steps.prepare.outputs.USE_BASE_IMAGE }}
             BUILD_MODE=${{ matrix.build_mode }}
+            UPMPDCLI_SELECTOR=${{ steps.prepare.outputs.UPMPDCLI_SELECTOR }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
           push: true
           tags: ${{ steps.prepare.outputs.RELEASE_TAGS }}
