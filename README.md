@@ -23,6 +23,15 @@ Current version is `1.9.3`.
 
 ## News (newest first)
 
+### Download variables deprecated
+
+We can now avoid to download plugin at runtime. Just use updated master images (see below).  
+
+### New 'master' builds
+
+As we are now building from source, it is easy to build images that are up-to-date with the upstream master branch.  
+Such images are [here](https://hub.docker.com/r/giof71/upmpdcli/tags?name=master).  
+
 ### Support for HiRes Tidal
 
 Good news, Tidal HiRes is now available.  
@@ -240,16 +249,16 @@ SUBSONIC_WHITELIST_CODECS|List of comma-separated whitelist (ideally lossless) c
 SUBSONIC_ENABLE_INTERNET_RADIOS|Set to `yes` to enable internet radios, disabled by default (requires plugin version >= 0.3.4)
 SUBSONIC_ENABLE_IMAGE_CACHING|Set to `yes` to enable image caching, disabled by default (requires WEBSERVER_DOCUMENT_ROOT and plugin version >= 0.7.2)
 SUBSONIC_DOWNLOAD_PLUGIN|If set to `yes`, the updated plugin is downloaded from the upstream repo
-SUBSONIC_PLUGIN_BRANCH|If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `SUBSONIC_DOWNLOAD_PLUGIN`. Suggested branch name is `next-subsonic`
+SUBSONIC_PLUGIN_BRANCH|If `SUBSONIC_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `SUBSONIC_DOWNLOAD_PLUGIN`. Suggested branch name is `next-subsonic`, but the feature is now deprecated: use master images instead
 SUBSONIC_FORCE_CONNECTOR_VERSION|If set, the specified version of subsonic-connector will be installed over the one included in the image
 SUBSONIC_TRANSCODE_CODEC|If set, the value will be used as the transcode codec (requires subsonic-connector >= 0.2.6)
 SUBSONIC_TRANSCODE_MAX_BITRATE|If set, the value will be used as the transcode max bitrate (requires subsonic-connector >= 0.2.6)
 RADIO_PARADISE_ENABLE|Enable the Radio Paradise Plugin, set to `yes` to enable
 RADIO_PARADISE_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
-RADIO_PARADISE_PLUGIN_BRANCH|If `RADIO_PARADISE_DOWNLOAD_PLUGIN` is set to `yes`, the branch indicated by this variable will be used. Must be specified if enabling `RADIO_PARADISE_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-radio-paradise`
+RADIO_PARADISE_PLUGIN_BRANCH|If `RADIO_PARADISE_DOWNLOAD_PLUGIN` is set to `yes`, the branch indicated by this variable will be used. Must be specified if enabling `RADIO_PARADISE_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-radio-paradise`, but the feature is now deprecated: use master images instead
 MOTHER_EARTH_RADIO_ENABLE|Enable the Mother Earth Radio Plugin, set to `yes` to enable
 MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
-MOTHER_EARTH_RADIO_PLUGIN_BRANCH|If `MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN` is set to `yes`, the branch indicated by this variable will be used. Must be specified if enabling `MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-mother-earth-radio`
+MOTHER_EARTH_RADIO_PLUGIN_BRANCH|If `MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN` is set to `yes`, the branch indicated by this variable will be used. Must be specified if enabling `MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-mother-earth-radio`, but the feature is now deprecated: use master images instead
 PLG_MICRO_HTTP_HOST|IP for the qobuz local HTTP service.
 PLG_MICRO_HTTP_PORT|Port for the qobuz local HTTP service.
 PLG_PROXY_METHOD|Proxy method, valid values are `proxy` and `redirect`, defaults to `redirect`
@@ -260,7 +269,7 @@ TIDAL_AUTH_CHALLENGE_TYPE|Default login challenge type, `OAUTH2` (default) or `P
 TIDAL_AUDIO_QUALITY|Possible values are `LOW` (mp3@96k), `HIGH` (mp3@320k), `LOSSLESS` (flac 44.1kHz), `HI_RES_LOSSLESS` (flac@hires), defaults to `LOSSLESS`
 TIDAL_PREPEND_NUMBER_IN_ITEM_LIST|Set to `yes` to create item numbers in lists (`[01] Item` instead of `Item`), mostly for kodi, disabled by default
 TIDAL_DOWNLOAD_PLUGIN|If set to `YES`, the updated plugin is downloaded from the upstream repo
-TIDAL_PLUGIN_BRANCH|If `TIDAL_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `TIDAL_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-tidal`
+TIDAL_PLUGIN_BRANCH|If `TIDAL_DOWNLOAD_PLUGIN`, the branch indicated by this variable will be used. Must be specified if enabling `TIDAL_DOWNLOAD_PLUGIN`. Suggested branch name is `latest-tidal`, but the feature is now deprecated: use master images instead
 TIDAL_FORCE_TIDALAPI_VERSION|If set, the specified version of tidalapi will be installed over the one included in the image. See note below.
 TIDAL_ENABLE_IMAGE_CACHING|If set to `yes`, you can enable caching of album and artist images. This can consume some disk space, so the default is `no`.
 TIDAL_ALLOW_FAVORITE_ACTIONS|Allow the creation of entries that can manipulate the favorites
@@ -286,7 +295,8 @@ DUMP_ADDITIONAL_RADIO_LIST|Dumps the additional radio file when set to `yes`
 WEBSERVER_DOCUMENT_ROOT|Directory from which the internal HTTP server will directly serve files (e.g. icons), disabled by default
 STARTUP_DELAY_SEC|Delay before starting the application, defaults to `0`. This can be useful if your container is set up to start automatically, so that you can resolve race conditions with mpd and with squeezelite if all those services run on the same audio device. I experienced issues with my Asus Tinkerboard, while the Raspberry Pi has never really needed this. Your mileage may vary. Feel free to report your personal experience.
 
-When using the variable `TIDAL_DOWNLOAD_PLUGIN`, `TIDAL_PLUGIN_BRANCH`, `TIDAL_FORCE_TIDALAPI_VERSION`, make sure you verify the intercompatibility. For example, the code currently at the `next-tidal` branch requires [tidalapi version 0.8.3](https://github.com/tamland/python-tidal/releases/tag/v0.8.3).  
+When using the (now deprecated) variables `TIDAL_DOWNLOAD_PLUGIN`, `TIDAL_PLUGIN_BRANCH`, `TIDAL_FORCE_TIDALAPI_VERSION`, make sure you verify the intercompatibility. For example, the code currently at the `next-tidal` branch requires [tidalapi version 0.8.3](https://github.com/tamland/python-tidal/releases/tag/v0.8.3).  
+Instead of using these *DOWNLOAD* variables, look for *master* images [here](https://hub.docker.com/r/giof71/upmpdcli/tags?name=master).  
 
 #### About RENDERER_MODE
 
