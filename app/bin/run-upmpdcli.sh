@@ -648,6 +648,15 @@ if [[ "${TIDAL_ENABLE^^}" == "YES" ]]; then
             exit 3
         fi
     fi
+    # agent whitelist TIDAL_ENABLE_USER_AGENT_WHITELIST
+    if [[ -n "${TIDAL_ENABLE_USER_AGENT_WHITELIST}" ]]; then
+        if [[ "${TIDAL_ENABLE_USER_AGENT_WHITELIST^^}" == "YES" || "${TIDAL_ENABLE_USER_AGENT_WHITELIST^^}" == "Y" ]]; then
+            echo "tidalenableuseragentwhitelist = 1" >> $CONFIG_FILE
+        elif [[ "${TIDAL_ENABLE_USER_AGENT_WHITELIST^^}" != "NO" && "${TIDAL_ENABLE_USER_AGENT_WHITELIST^^}" == "N" ]]; then
+            echo "Invalid TIDAL_ENABLE_USER_AGENT_WHITELIST=[${TIDAL_ENABLE_USER_AGENT_WHITELIST}]"
+            exit 3
+        fi
+    fi
 fi
 
 echo "Qobuz Enable [$QOBUZ_ENABLE]"
