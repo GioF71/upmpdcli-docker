@@ -652,7 +652,9 @@ if [[ "${TIDAL_ENABLE^^}" == "YES" ]]; then
     if [[ -n "${TIDAL_ENABLE_USER_AGENT_WHITELIST}" ]]; then
         if [[ "${TIDAL_ENABLE_USER_AGENT_WHITELIST^^}" == "YES" || "${TIDAL_ENABLE_USER_AGENT_WHITELIST^^}" == "Y" ]]; then
             echo "tidalenableuseragentwhitelist = 1" >> $CONFIG_FILE
-        elif [[ "${TIDAL_ENABLE_USER_AGENT_WHITELIST^^}" != "NO" && "${TIDAL_ENABLE_USER_AGENT_WHITELIST^^}" == "N" ]]; then
+        elif [[ "${TIDAL_ENABLE_USER_AGENT_WHITELIST^^}" == "NO" || "${TIDAL_ENABLE_USER_AGENT_WHITELIST^^}" == "N" ]]; then
+            echo "tidalenableuseragentwhitelist = 0" >> $CONFIG_FILE
+        else
             echo "Invalid TIDAL_ENABLE_USER_AGENT_WHITELIST=[${TIDAL_ENABLE_USER_AGENT_WHITELIST}]"
             exit 3
         fi
