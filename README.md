@@ -275,6 +275,7 @@ TIDAL_ENABLE_IMAGE_CACHING|If set to `yes`, you can enable caching of album and 
 TIDAL_ALLOW_FAVORITE_ACTIONS|Allow the creation of entries that can manipulate the favorites
 TIDAL_ALLOW_BOOKMARK_ACTIONS|Allow the creation of entries that can manipulate the bookmarks (local favorites)
 TIDAL_ALLOW_STATISTICS_ACTIONS|Allow the creation of entries that can remove entries from the playback statistics
+TIDAL_ENABLE_USER_AGENT_WHITELIST|Enables the agent whitelist for hi-res support, default is `yes`
 QOBUZ_ENABLE|Set to `yes` to enable Qobuz support, defaults to `no`
 QOBUZ_TITLE|Set the title for Qobuz plugin, defaults to `Qobuz`
 QOBUZ_USERNAME|Your Qobuz account username
