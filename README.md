@@ -46,6 +46,8 @@ edge|tidal|0.8.5
 
 Good news, Tidal HiRes is now available.  
 You need to consider that there is a limitation: only the mpd/upmpdcli combination and gmrender-resurrect work properly as renderers with the Tidal plugin using HI_RES_LOSSLESS quality mode, AFAIK. Other players will still play, but will fallback to standard (LOSSLESS) quality. We are leveraging [this change](https://framagit.org/medoc92/upmpdcli/-/commit/2c742f13eb81c4fd1bf3270fa24877e04aadbaed) for the implementation of this feature.  
+With the latest `master` and `edge` builds though, we should be able to stream Tidal in HiRes to the WiiM Pro and WiiM Pro Plus.  
+If there are users willing to try with user-agent whitelisting disabled `TIDAL_ENABLE_USER_AGENT_WHITELIST=no`, we might be able to find and properly whitelist other streamers.  
 A simple installation guide for a mediaserver upmpdcli instance for Tidal Hires is [here](https://github.com/GioF71/audio-tools/blob/main/media-servers/tidal-hires/README.md).  
 
 ### Subsonic Plugin compatibility
