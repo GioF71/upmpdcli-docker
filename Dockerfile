@@ -55,10 +55,18 @@ RUN meson install
 ARG BUILD_MODE=full
 
 WORKDIR /install
-COPY app/install/* /install/
-RUN chmod +x /install/*.sh
+COPY app/install/install-libraries.sh /install/
+RUN chmod +x /install/install-libraries.sh
 RUN if [ "${BUILD_MODE}" = "full" ]; then /bin/sh -c /install/install-libraries.sh; fi
-RUN if [ "${BUILD_MODE}" = "full" ]; then /bin/sh -c /install/install-mediaserver-python-packages.sh; fi
+COPY app/install/*pyradios.sh /install/
+RUN chmod +x /install/*.sh
+RUN if [ "${BUILD_MODE}" = "full" ]; then /bin/sh -c /install/install-mediaserver-python-packages-pyradios.sh; fi
+COPY app/install/*tidal.sh /install/
+RUN chmod +x /install/*.sh
+RUN if [ "${BUILD_MODE}" = "full" ]; then /bin/sh -c /install/install-mediaserver-python-packages-tidal.sh; fi
+COPY app/install/*subsonic.sh /install/
+RUN chmod +x /install/*.sh
+RUN if [ "${BUILD_MODE}" = "full" ]; then /bin/sh -c /install/install-mediaserver-python-packages-subsonic.sh; fi
 
 RUN apt-get -y remove pkg-config meson cmake build-essential
 RUN apt-get -y autoremove

@@ -9,6 +9,7 @@ on:
       - "feature/*"
       - "daily/*"
       - "master/*"
+      - "edge/*"
 
 jobs:
   release:
@@ -48,7 +49,7 @@ jobs:
 
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
 
-          # unless we are build from a tag "master"
+          # unless we are build from a tag "master" or "edge"
           upmpdcli_selector=release
           echo "image_name=["$image_name"]"
 
@@ -127,6 +128,19 @@ jobs:
               elif [ "${build_mode}" = "renderer" ]; then
                 tags="$tags,${image_name}:master-renderer";
                 tags="$tags,${image_name}:master-renderer-${tag_name}";
+              fi
+            elif [ "${tag_type}" = "edge" ]; then
+              echo "edge build tag";
+              upmpdcli_selector=edge
+              tags="${image_name}:edge-${tag_name}-${build_key}";
+              # add full, renderer, and simply edge
+              if [ "${build_mode}" = "full" ]; then
+                tags="$tags,${image_name}:edge";
+                tags="$tags,${image_name}:edge-full";
+                tags="$tags,${image_name}:edge-full-${tag_name}";
+              elif [ "${build_mode}" = "renderer" ]; then
+                tags="$tags,${image_name}:edge-renderer";
+                tags="$tags,${image_name}:edge-renderer-${tag_name}";
               fi
             elif [ "${tag_type}" = "daily" ]; then
               echo "daily build";

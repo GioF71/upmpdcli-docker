@@ -10,3 +10,6 @@
 [submodule "libupnpp"]
 	path = libupnpp
 	url = https://framagit.org/medoc92/libupnpp.git
+[submodule "upmpdcli-edge"]
+	path = upmpdcli-edge
+	url = https://github.com/GioF71/upmpdcli-plugins
