@@ -27,10 +27,20 @@ Current version is `1.9.3`.
 
 We can now avoid to download plugin at runtime. Just use updated master images (see below).  
 
-### New 'master' builds
+### New 'master' and 'edge' builds
 
-As we are now building from source, it is easy to build images that are up-to-date with the upstream master branch.  
+As we are now building from source, it is easy to build images that are up-to-date with the upstream branchs.  
 Such images are [here](https://hub.docker.com/r/giof71/upmpdcli/tags?name=master).  
+See the following table for the versions of the plugins in the various images:
+
+BUILD_TYPE|PLUGIN|VERSION
+:---|:---|:---
+release|subsonic|0.7.1
+release|tidal|0.8.1
+master|subsonic|0.7.9
+master|tidal|0.8.5
+edge|subsonic|0.8.0
+edge|tidal|0.8.5
 
 ### Support for HiRes Tidal
 
