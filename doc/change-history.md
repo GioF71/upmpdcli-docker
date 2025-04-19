@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2025-04-19|Tidal Plugin 0.8.5 for master builds (see issue [#496](https://github.com/GioF71/upmpdcli-docker/issues/496))
 2025-04-19|Add missing dependency for pyradios (see issue [#494](https://github.com/GioF71/upmpdcli-docker/issues/494))
 2025-04-19|Support edge builds for faster plugin release (see issue [#492](https://github.com/GioF71/upmpdcli-docker/issues/492))
 2025-04-17|Allow user to disable Tidal agent whitelist (see issue [#488](https://github.com/GioF71/upmpdcli-docker/issues/488))
