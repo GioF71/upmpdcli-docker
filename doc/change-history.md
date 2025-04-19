@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2025-04-19|Support edge builds for faster plugin release (see issue [#492](https://github.com/GioF71/upmpdcli-docker/issues/492))
 2025-04-17|Allow user to disable Tidal agent whitelist (see issue [#488](https://github.com/GioF71/upmpdcli-docker/issues/488))
 2025-03-29|Review build process using git modules (see issue [#477](https://github.com/GioF71/upmpdcli-docker/issues/477))
 2025-03-26|Fix proxy method not working adding libcurl4-openssl-dev (see issue [#469](https://github.com/GioF71/upmpdcli-docker/issues/469))
