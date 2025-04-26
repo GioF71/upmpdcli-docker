@@ -68,6 +68,9 @@ COPY app/install/*subsonic.sh /install/
 RUN chmod +x /install/*.sh
 RUN if [ "${BUILD_MODE}" = "full" ]; then /bin/sh -c /install/install-mediaserver-python-packages-subsonic.sh; fi
 
+RUN mkdir -p /app/conf
+RUN echo "${BUILD_MODE}" > /app/conf/build_mode.txt
+
 RUN apt-get -y remove pkg-config meson cmake build-essential
 RUN apt-get -y autoremove
 RUN	rm -Rf /var/lib/apt/lists/*
