@@ -25,7 +25,7 @@ Current version is `1.9.3`.
 
 ### Download variables deprecated
 
-We can now avoid to download plugin at runtime. Just use updated master images (see below).  
+We can now avoid to download plugin at runtime. Just use updated master/edge images (see below).  
 
 ### New 'master' and 'edge' builds
 
