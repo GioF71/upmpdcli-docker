@@ -19,6 +19,13 @@ if [[ "${current_user_id}" != "0" ]]; then
     echo "- update plugins" 
 fi
 
+if [[ -n "${RADIO_PARADISE_DOWNLOAD_PLUGIN}" ]] ||
+    [[ -n "${TIDAL_DOWNLOAD_PLUGIN}" ]] ||
+    [[ -n "${SUBSONIC_DOWNLOAD_PLUGIN}" ]] ||
+    [[ -n "{MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN}" ]]; then
+    echo "Plugin downloading is deprecated. Use master/edge images instead."
+fi
+
 if [[ $current_user_id -eq 0 ]] && [[ "${MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     echo "Downloading updated Mother Earth Radio plugin"
     if [[ -n "${MOTHER_EARTH_RADIO_PLUGIN_BRANCH}" ]]; then
