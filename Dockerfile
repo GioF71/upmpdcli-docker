@@ -57,7 +57,7 @@ ARG BUILD_MODE=full
 WORKDIR /install
 COPY app/install/install-libraries.sh /install/
 RUN chmod +x /install/install-libraries.sh
-RUN if [ "${BUILD_MODE}" = "full" ]; then /bin/sh -c /install/install-libraries.sh; fi
+RUN /bin/sh -c /install/install-libraries.sh
 COPY app/install/*pyradios.sh /install/
 RUN chmod +x /install/*.sh
 RUN if [ "${BUILD_MODE}" = "full" ]; then /bin/sh -c /install/install-mediaserver-python-packages-pyradios.sh; fi
