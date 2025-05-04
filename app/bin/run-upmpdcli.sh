@@ -23,7 +23,7 @@ if [[ -n "${RADIO_PARADISE_DOWNLOAD_PLUGIN}" ]] ||
     [[ -n "${TIDAL_DOWNLOAD_PLUGIN}" ]] ||
     [[ -n "${SUBSONIC_DOWNLOAD_PLUGIN}" ]] ||
     [[ -n "{MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN}" ]]; then
-    echo "Plugin downloading is deprecated. Use master/edge images instead."
+    echo "WARNING: Plugin downloading is deprecated. Use master/edge images instead."
 fi
 
 if [[ $current_user_id -eq 0 ]] && [[ "${MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
@@ -36,7 +36,7 @@ if [[ $current_user_id -eq 0 ]] && [[ "${MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN^^}" 
         git clone https://framagit.org/GioF71/upmpdcli.git --branch ${MOTHER_EARTH_RADIO_PLUGIN_BRANCH}
         echo "  copying updated files ..."
         mkdir -p /usr/share/upmpdcli/cdplugins/mother-earth-radio
-        cp upmpdcli/src/mediaserver/cdplugins/mother-earth-radio/* /usr/share/upmpdcli/cdplugins/mother-earth-radio/
+        cp -r upmpdcli/src/mediaserver/cdplugins/mother-earth-radio/* /usr/share/upmpdcli/cdplugins/mother-earth-radio/
         echo "  copied, removing repo ..."
         rm -Rf upmpdcli
         echo "  repo removed."
@@ -58,7 +58,7 @@ if [[ $current_user_id -eq 0 ]] && [[ "${RADIO_PARADISE_DOWNLOAD_PLUGIN^^}" == "
         git clone https://framagit.org/GioF71/upmpdcli.git --branch ${RADIO_PARADISE_PLUGIN_BRANCH}
         echo "  copying updated files ..."
         mkdir -p /usr/share/upmpdcli/cdplugins/radio-paradise
-        cp upmpdcli/src/mediaserver/cdplugins/radio-paradise/* /usr/share/upmpdcli/cdplugins/radio-paradise/
+        cp -r upmpdcli/src/mediaserver/cdplugins/radio-paradise/* /usr/share/upmpdcli/cdplugins/radio-paradise/
         echo "  copied, removing repo ..."
         rm -Rf upmpdcli
         echo "  repo removed."
@@ -79,7 +79,7 @@ if [[ $current_user_id -eq 0 ]] && [[ "${SUBSONIC_DOWNLOAD_PLUGIN^^}" == "YES" ]
         cd /app/src
         git clone https://framagit.org/GioF71/upmpdcli.git --branch ${SUBSONIC_PLUGIN_BRANCH}
         echo "  copying updated files ..."
-        cp upmpdcli/src/mediaserver/cdplugins/subsonic/* /usr/share/upmpdcli/cdplugins/subsonic/
+        cp -r upmpdcli/src/mediaserver/cdplugins/subsonic/* /usr/share/upmpdcli/cdplugins/subsonic/
         echo "  copied, removing repo ..."
         rm -Rf upmpdcli
         echo "  repo removed."
@@ -101,7 +101,7 @@ if [[ $current_user_id -eq 0 ]] && [[ "${TIDAL_DOWNLOAD_PLUGIN^^}" == "YES" ]]; 
         git clone https://framagit.org/GioF71/upmpdcli.git --branch ${TIDAL_PLUGIN_BRANCH}
         echo "  copying updated files ..."
         mkdir -p /usr/share/upmpdcli/cdplugins/tidal
-        cp upmpdcli/src/mediaserver/cdplugins/tidal/* /usr/share/upmpdcli/cdplugins/tidal/
+        cp -r upmpdcli/src/mediaserver/cdplugins/tidal/* /usr/share/upmpdcli/cdplugins/tidal/
         echo "  copied, removing repo ..."
         rm -Rf upmpdcli
         echo "  repo removed."
