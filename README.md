@@ -35,8 +35,8 @@ See the following table for the versions of the plugins in the various images:
 
 BUILD_TYPE|PLUGIN|VERSION
 :---|:---|:---
-release|subsonic|0.7.1
-release|tidal|0.8.1
+release|subsonic|0.8.1
+release|tidal|0.8.6
 master|subsonic|0.8.1
 master|tidal|0.8.6
 edge|subsonic|0.8.1
