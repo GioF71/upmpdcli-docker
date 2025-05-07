@@ -19,10 +19,10 @@ if [[ "${current_user_id}" != "0" ]]; then
     echo "- update plugins" 
 fi
 
-if [[ -n "${RADIO_PARADISE_DOWNLOAD_PLUGIN}" ]] ||
-    [[ -n "${TIDAL_DOWNLOAD_PLUGIN}" ]] ||
-    [[ -n "${SUBSONIC_DOWNLOAD_PLUGIN}" ]] ||
-    [[ -n "{MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN}" ]]; then
+if [[ "${RADIO_PARADISE_DOWNLOAD_PLUGIN^^}" == "YES" ]] ||
+    [[ "${TIDAL_DOWNLOAD_PLUGIN^^}" == "YES" ]] ||
+    [[ "${SUBSONIC_DOWNLOAD_PLUGIN^^}" == "YES" ]] ||
+    [[ "${MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
     echo "WARNING: Plugin downloading is deprecated. Use master/edge images instead."
 fi
 
