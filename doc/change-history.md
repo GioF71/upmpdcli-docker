@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2025-05-08|Bump to release 1.9.5 (see issue [#520](https://github.com/GioF71/upmpdcli-docker/issues/520))
 2025-05-07|Fix download plugin deprecation check (see issue [#518](https://github.com/GioF71/upmpdcli-docker/issues/518))
 2025-04-19|Add plugin version table (see issue [#498](https://github.com/GioF71/upmpdcli-docker/issues/498))
 2025-04-19|Tidal Plugin 0.8.5 for master builds (see issue [#496](https://github.com/GioF71/upmpdcli-docker/issues/496))
