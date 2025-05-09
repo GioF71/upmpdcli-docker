@@ -115,7 +115,7 @@ jobs:
             elif [ "${tag_type}" = "devel" ]; then
               echo "devel tag";
               tags="${image_name}:devel-${tag_name}-${build_key}";
-            elif [ "${tag_type}" = "edge-feature" ]; then
+            elif [ "${tag_type}" = "edgefeature" ]; then
               echo "feature tag on edge";
               upmpdcli_selector=edge
               tags="${image_name}:edgefeature-${tag_name}-${build_key}";
