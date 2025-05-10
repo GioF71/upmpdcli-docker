@@ -79,7 +79,7 @@ version: "3"
 
 services:
   upmpdcli:
-    image: giof71/upmpdcli
+    image: giof71/upmpdcli:edge
     container_name: upmpdcli-library
     network_mode: host
     environment:
@@ -148,7 +148,7 @@ version: "3"
 
 services:
   upmpdcli:
-    image: giof71/upmpdcli
+    image: giof71/upmpdcli:edge
     container_name: upmpdcli-subsonic
     network_mode: host
     environment:
@@ -161,9 +161,6 @@ services:
       - SUBSONIC_SERVER_PATH=${SUBSONIC_SERVER_PATH:-}
       - SUBSONIC_USER=${SUBSONIC_USER}
       - SUBSONIC_PASSWORD=${SUBSONIC_PASSWORD}
-      - SUBSONIC_DOWNLOAD_PLUGIN=yes
-      - SUBSONIC_PLUGIN_BRANCH=latest-subsonic
-      - SUBSONIC_FORCE_CONNECTOR_VERSION=0.3.7
     volumes:
       - ./cache:/cache
     restart: unless-stopped
@@ -181,7 +178,7 @@ version: "3"
 
 services:
   upmpdcli:
-    image: giof71/upmpdcli:latest
+    image: giof71/upmpdcli:edge
     container_name: upmpdcli-radio-paradise
     network_mode: host
     environment:
@@ -190,8 +187,6 @@ services:
       - FRIENDLY_NAME=Radio Paradise (upmpdcli)
       - CHECK_CONTENT_FORMAT=yes
       - RADIO_PARADISE_ENABLE=yes
-      - RADIO_PARADISE_DOWNLOAD_PLUGIN=yes
-      - RADIO_PARADISE_PLUGIN_BRANCH=latest-radio-paradise
     restart: unless-stopped
 ```
 
@@ -205,7 +200,7 @@ version: "3"
 
 services:
   upmpdcli:
-    image: giof71/upmpdcli:latest
+    image: giof71/upmpdcli:edge
     container_name: upmpdcli-mother-earth-radio
     network_mode: host
     environment:
@@ -214,8 +209,6 @@ services:
       - FRIENDLY_NAME=Mother Earth Radio (upmpdcli)
       - CHECK_CONTENT_FORMAT=yes
       - MOTHER_EARTH_RADIO_ENABLE=yes
-      - MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN=yes
-      - MOTHER_EARTH_RADIO_PLUGIN_BRANCH=latest-radio-paradise
     restart: unless-stopped
 ```
 
@@ -231,7 +224,7 @@ version: "3"
 
 services:
   upmpdcli:
-    image: giof71/upmpdcli:latest
+    image: giof71/upmpdcli:edge
     container_name: upmpdcli-tidal
     network_mode: host
     environment:
@@ -244,8 +237,6 @@ services:
       - TIDAL_REFRESH_TOKEN=${TIDAL_REFRESH_TOKEN}
       - TIDAL_EXPIRY_TIME=${TIDAL_EXPIRY_TIME}
       - TIDAL_AUDIO_QUALITY=${TIDAL_AUDIO_QUALITY}
-      - TIDAL_DOWNLOAD_PLUGIN=yes
-      - TIDAL_PLUGIN_BRANCH=latest-tidal
     volumes:
       - ./cache:/cache
     restart: unless-stopped
@@ -264,7 +255,7 @@ version: "3"
 
 services:
   upmpdcli:
-    image: giof71/upmpdcli
+    image: giof71/upmpdcli:edge
     container_name: upmpdcli-streaming-services
     network_mode: host
     environment:
@@ -289,4 +280,3 @@ QOBUZ_FORMAT_ID=27
 ```
 
 Alternatively, those values can be passed as individual environment variables.  
-

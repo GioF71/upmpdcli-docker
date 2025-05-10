@@ -14,103 +14,14 @@ current_user_id=$(id -u)
 echo "Current user id is [$current_user_id]"
 
 if [[ "${current_user_id}" != "0" ]]; then
-    echo "Not running as root, will not be able to:"
-    echo "- create users" 
-    echo "- update plugins" 
+    echo "Not running as root, will not be able to create users" 
 fi
 
-if [[ "${RADIO_PARADISE_DOWNLOAD_PLUGIN^^}" == "YES" ]] ||
-    [[ "${TIDAL_DOWNLOAD_PLUGIN^^}" == "YES" ]] ||
-    [[ "${SUBSONIC_DOWNLOAD_PLUGIN^^}" == "YES" ]] ||
-    [[ "${MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
-    echo "WARNING: Plugin downloading is deprecated. Use master/edge images instead."
-fi
-
-if [[ $current_user_id -eq 0 ]] && [[ "${MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
-    echo "Downloading updated Mother Earth Radio plugin"
-    if [[ -n "${MOTHER_EARTH_RADIO_PLUGIN_BRANCH}" ]]; then
-        echo "  using branch [$MOTHER_EARTH_RADIO_PLUGIN_BRANCH]"
-        cd /app
-        mkdir -p src
-        cd /app/src
-        git clone https://framagit.org/GioF71/upmpdcli.git --branch ${MOTHER_EARTH_RADIO_PLUGIN_BRANCH}
-        echo "  copying updated files ..."
-        mkdir -p /usr/share/upmpdcli/cdplugins/mother-earth-radio
-        cp -r upmpdcli/src/mediaserver/cdplugins/mother-earth-radio/* /usr/share/upmpdcli/cdplugins/mother-earth-radio/
-        echo "  copied, removing repo ..."
-        rm -Rf upmpdcli
-        echo "  repo removed."
-        cd ..
-        rm -Rf src
-        echo "  src directory removed."
-    fi
-    # return to the path
-    cd /app/bin
-fi
-
-if [[ $current_user_id -eq 0 ]] && [[ "${RADIO_PARADISE_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
-    echo "Downloading updated Radio Paradise plugin"
-    if [[ -n "${RADIO_PARADISE_PLUGIN_BRANCH}" ]]; then
-        echo "  using branch [$RADIO_PARADISE_PLUGIN_BRANCH]"
-        cd /app
-        mkdir -p src
-        cd /app/src
-        git clone https://framagit.org/GioF71/upmpdcli.git --branch ${RADIO_PARADISE_PLUGIN_BRANCH}
-        echo "  copying updated files ..."
-        mkdir -p /usr/share/upmpdcli/cdplugins/radio-paradise
-        cp -r upmpdcli/src/mediaserver/cdplugins/radio-paradise/* /usr/share/upmpdcli/cdplugins/radio-paradise/
-        echo "  copied, removing repo ..."
-        rm -Rf upmpdcli
-        echo "  repo removed."
-        cd ..
-        rm -Rf src
-        echo "  src directory removed."
-    fi
-    # return to the path
-    cd /app/bin
-fi
-
-if [[ $current_user_id -eq 0 ]] && [[ "${SUBSONIC_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
-    echo "Downloading updated subsonic plugin"
-    if [[ -n "${SUBSONIC_PLUGIN_BRANCH}" ]]; then
-        echo "  using branch [$SUBSONIC_PLUGIN_BRANCH]"
-        cd /app
-        mkdir -p src
-        cd /app/src
-        git clone https://framagit.org/GioF71/upmpdcli.git --branch ${SUBSONIC_PLUGIN_BRANCH}
-        echo "  copying updated files ..."
-        cp -r upmpdcli/src/mediaserver/cdplugins/subsonic/* /usr/share/upmpdcli/cdplugins/subsonic/
-        echo "  copied, removing repo ..."
-        rm -Rf upmpdcli
-        echo "  repo removed."
-        cd ..
-        rm -Rf src
-        echo "  src directory removed."
-    fi
-    # return to the path
-    cd /app/bin
-fi
-
-if [[ $current_user_id -eq 0 ]] && [[ "${TIDAL_DOWNLOAD_PLUGIN^^}" == "YES" ]]; then
-    echo "Downloading updated tidal plugin"
-    if [[ -n "${TIDAL_PLUGIN_BRANCH}" ]]; then
-        echo "  using branch [$TIDAL_PLUGIN_BRANCH]"
-        cd /app
-        mkdir -p src
-        cd /app/src
-        git clone https://framagit.org/GioF71/upmpdcli.git --branch ${TIDAL_PLUGIN_BRANCH}
-        echo "  copying updated files ..."
-        mkdir -p /usr/share/upmpdcli/cdplugins/tidal
-        cp -r upmpdcli/src/mediaserver/cdplugins/tidal/* /usr/share/upmpdcli/cdplugins/tidal/
-        echo "  copied, removing repo ..."
-        rm -Rf upmpdcli
-        echo "  repo removed."
-        cd ..
-        rm -Rf src
-        echo "  src directory removed."
-    fi
-    # return to the path
-    cd /app/bin
+if [[ -n "${RADIO_PARADISE_DOWNLOAD_PLUGIN}" ]] ||
+    [[ -n "${TIDAL_DOWNLOAD_PLUGIN}" ]] ||
+    [[ -n "${SUBSONIC_DOWNLOAD_PLUGIN}" ]] ||
+    [[ -n "${MOTHER_EARTH_RADIO_DOWNLOAD_PLUGIN}" ]]; then
+    echo "Plugin downloading has been removed! Use master/edge images instead."
 fi
 
 SOURCE_CONFIG_FILE=/app/conf/upmpdcli.conf
@@ -447,17 +358,6 @@ if [[ "${SUBSONIC_ENABLE^^}" == "YES" ]]; then
     echo "Enabling Subsonic, processing settings";
     SUBSONIC_ENABLE=YES
     # do we need to download a newer subsonic-connector library?
-    if [[ -n "${SUBSONIC_FORCE_CONNECTOR_VERSION}" ]]; then
-        echo "Installing subsonic-connector version [${SUBSONIC_FORCE_CONNECTOR_VERSION}]"
-        break_needed=`cat /app/conf/pip-install-break-needed`
-        pip_switch=""
-        if [[ "${break_needed}" == "yes" ]]; then
-            pip_switch="--break-system-packages"
-        fi
-        pip_cmd="pip install ${pip_switch} subsonic-connector==${SUBSONIC_FORCE_CONNECTOR_VERSION}"
-        echo "pip_cmd: [${pip_cmd}]"
-        eval $pip_cmd
-    fi
     echo "SUBSONIC_AUTOSTART=[$SUBSONIC_AUTOSTART]"
     if [[ -z "${SUBSONIC_AUTOSTART^^}" || "${SUBSONIC_AUTOSTART}" == "1" || "${SUBSONIC_AUTOSTART^^}" == "YES" ]]; then
         SUBSONIC_AUTOSTART=1
@@ -584,20 +484,6 @@ echo "TIDAL_ENABLE=[$TIDAL_ENABLE]"
 if [[ "${TIDAL_ENABLE^^}" == "YES" ]]; then
     echo "Enabling new Tidal, processing settings";
     TIDAL_ENABLE=YES
-
-    # do we need to download a newer tidal-api library?
-    if [[ -n "${TIDAL_FORCE_TIDALAPI_VERSION}" ]]; then
-        echo "Installing tidalapi version [${TIDAL_FORCE_TIDALAPI_VERSION}]"
-        break_needed=`cat /app/conf/pip-install-break-needed`
-        pip_switch=""
-        if [[ "${break_needed}" == "yes" ]]; then
-            pip_switch="--break-system-packages"
-        fi
-        pip_cmd="pip install ${pip_switch} tidalapi==${TIDAL_FORCE_TIDALAPI_VERSION}"
-        echo "pip_cmd: [${pip_cmd}]"
-        eval $pip_cmd
-    fi
-
     echo "tidaluser = tidaluser" >> $CONFIG_FILE
     if [[ -n "${TIDAL_TITLE}" ]]; then
         echo "tidaltitle = ${TIDAL_TITLE}" >> $CONFIG_FILE
