@@ -39,7 +39,7 @@ release|subsonic|0.8.1
 release|tidal|0.8.6
 master|subsonic|0.8.1
 master|tidal|0.8.6
-edge|subsonic|0.8.1
+edge|subsonic|0.8.2
 edge|tidal|0.8.6
 
 ### Support for HiRes Tidal
@@ -249,6 +249,7 @@ SUBSONIC_TITLE|Title of the Subsonic plugin, defaults to `Subsonic`
 SUBSONIC_AUTOSTART|Autostart Subsonic plugin, defaults to `1`
 SUBSONIC_BASE_URL|Subsonic base url. Example: `http://my_navidrome.homelab.local`
 SUBSONIC_PORT|Subsonic port, defaults to `4533`
+SUBSONIC_SERVER_PATH|Subsonic server path, optional, specify only if needed
 SUBSONIC_USER|Subsonic username
 SUBSONIC_PASSWORD|Subsonic password
 SUBSONIC_LEGACYAUTH|Subsonic legacy authentication, set to `yes` when using Lightweight Media Server (LMS) (requires subsonic-connector >= 0.2.6)

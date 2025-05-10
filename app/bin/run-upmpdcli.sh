@@ -485,6 +485,9 @@ if [[ "${SUBSONIC_ENABLE^^}" == "YES" ]]; then
         fi
         echo "subsoniclegacyauth = $legacy_auth_value" >> $CONFIG_FILE
     fi
+    if [[ -n "${SUBSONIC_SERVER_PATH}" ]]; then
+        echo "subsonicserverpath = ${SUBSONIC_SERVER_PATH}" >> $CONFIG_FILE
+    fi
     if [[ -n "${SUBSONIC_SERVER_SIDE_SCROBBLING}" ]]; then
         server_side_scrobbling=0
         if [[ "${SUBSONIC_SERVER_SIDE_SCROBBLING^^}" == "YES" || "${SUBSONIC_SERVER_SIDE_SCROBBLING^^}" == "Y" ]]; then
