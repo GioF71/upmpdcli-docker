@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2025-05-11|Submodule `master` updated to Tidal Plugin 0.8.7
 2025-05-10|Submodule `edge` updated to Tidal Plugin 0.8.7
 2025-05-10|Removed all plugin download options
 2025-05-10|Submodule `edge` and `master` updated to Subsonic Plugin 0.8.2 (see issue [#522](https://github.com/GioF71/upmpdcli-docker/issues/522))

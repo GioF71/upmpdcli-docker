@@ -38,7 +38,7 @@ BUILD_TYPE|PLUGIN|VERSION
 release|subsonic|0.8.1
 release|tidal|0.8.6
 master|subsonic|0.8.2
-master|tidal|0.8.6
+master|tidal|0.8.7
 edge|subsonic|0.8.2
 edge|tidal|0.8.7
 
