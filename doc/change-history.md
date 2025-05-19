@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2025-05-19|Submodules `edge` and `master` updated to Tidal Plugin 0.8.8
 2025-05-11|Submodule `master` updated to Tidal Plugin 0.8.7
 2025-05-10|Submodule `edge` updated to Tidal Plugin 0.8.7
 2025-05-10|Removed all plugin download options
