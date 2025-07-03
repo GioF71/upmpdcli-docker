@@ -186,6 +186,6 @@ jobs:
             USE_BASE_IMAGE=${{ steps.prepare.outputs.USE_BASE_IMAGE }}
             BUILD_MODE=${{ matrix.build_mode }}
             UPMPDCLI_SELECTOR=${{ steps.prepare.outputs.UPMPDCLI_SELECTOR }}
-          platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
+          platforms: linux/amd64,linux/arm64/v8,linux/arm/v7,linux/arm/v6
           push: true
           tags: ${{ steps.prepare.outputs.RELEASE_TAGS }}

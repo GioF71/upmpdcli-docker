@@ -30,7 +30,7 @@ We can now avoid to download plugin at runtime. Just use updated master/edge ima
 ### New 'master' and 'edge' builds
 
 As we are now building from source, it is easy to build images that are up-to-date with the upstream branchs.  
-Such images are [here](https://hub.docker.com/r/giof71/upmpdcli/tags?name=master).  
+Link for those images: [master](https://hub.docker.com/r/giof71/upmpdcli/tags?name=master), [edge](https://hub.docker.com/r/giof71/upmpdcli/tags?name=edge).  
 See the following table for the versions of the plugins in the various images:
 
 BUILD_TYPE|PLUGIN|VERSION
@@ -39,7 +39,7 @@ release|subsonic|0.8.1
 release|tidal|0.8.6
 master|subsonic|0.8.4
 master|tidal|0.8.9.1
-edge|subsonic|0.8.4
+edge|subsonic|0.8.5
 edge|tidal|0.8.9.1
 
 ### Support for HiRes Tidal
