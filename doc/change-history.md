@@ -3,6 +3,8 @@
 Change Date|Major Changes
 ---|---
 2025-07-26|Submodule `edge` updated to Subsonic Plugin 0.8.7
+2025-07-14|Submodule `master` updated to Subsonic Plugin 0.8.6
+2025-07-14|Submodule `edge` updated to Subsonic Plugin 0.8.6
 2025-07-04|Submodule `master` updated to Subsonic Plugin 0.8.5
 2025-07-03|Submodule `edge` updated to Subsonic Plugin 0.8.5
 2025-06-14|Submodule `master` updated to Tidal Plugin 0.8.9.1 (Hotfix) and Subsonic Plugin 0.8.4
