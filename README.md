@@ -1,6 +1,6 @@
 # upmpdcli-docker
 
-A Docker image for upmpdcli.  
+A Docker image for [upmpdcli](https://www.lesbonscomptes.com/upmpdcli/).  
 There is built-in support for [Tidal](https://tidal.com/), [Qobuz](https://www.qobuz.com/), [subsonic servers](https://github.com/navidrome/navidrome/discussions/2324), [RadioBrowser](https://www.radio-browser.info/), [Radio Paradise](https://radioparadise.com/), [Mother Earth Radio](https://motherearthradio.de/), and custom radios.  
 A few screenshots for the subsonic plugin on [Kazoo](https://github.com/GioF71/upmpdcli-docker/tree/main/doc/screenshots/kazoo) and [Upplay](https://github.com/GioF71/upmpdcli-docker/tree/main/doc/screenshots/upplay) are now available.  
 
@@ -39,7 +39,7 @@ release|subsonic|0.8.1
 release|tidal|0.8.6
 master|subsonic|0.8.6
 master|tidal|0.8.9.1
-edge|subsonic|0.8.7
+edge|subsonic|0.8.8
 edge|tidal|0.8.9.2
 
 ### Support for HiRes Tidal
