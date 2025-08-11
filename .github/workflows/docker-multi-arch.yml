@@ -37,6 +37,9 @@ jobs:
           ref_name=${{ github.ref_name }}
           echo "REF_NAME: ["$ref_name"]"
 
+          build_mode=${{ matrix.build_mode }}
+          echo "BUILD_MODE: [$$build_mode]"
+
           ref=${{ github.ref }}
           echo "REF: ["$ref"]"
 
@@ -50,6 +53,10 @@ jobs:
           base_images[stable]=debian:stable-slim
 
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
+          select_platforms="linux/amd64,linux/arm64/v8,linux/arm/v7"
+          if [ "$build_mode" == "renderer" ]; then
+            select_platforms="$select_platforms,linux/arm/v6"
+          fi
 
           # unless we are build from a tag "master" or "edge"
           upmpdcli_selector=release
@@ -161,6 +168,7 @@ jobs:
           echo "RELEASE_TAGS=${tags}" >> $GITHUB_OUTPUT
           echo "USE_BASE_IMAGE=${select_base_image}" >> $GITHUB_OUTPUT
           echo "UPMPDCLI_SELECTOR=${upmpdcli_selector}" >> $GITHUB_OUTPUT
+          echo "SELECT_PLATFORMS=${select_platforms}" >> $GITHUB_OUTPUT
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -186,6 +194,6 @@ jobs:
             USE_BASE_IMAGE=${{ steps.prepare.outputs.USE_BASE_IMAGE }}
             BUILD_MODE=${{ matrix.build_mode }}
             UPMPDCLI_SELECTOR=${{ steps.prepare.outputs.UPMPDCLI_SELECTOR }}
-          platforms: linux/amd64,linux/arm64/v8,linux/arm/v7,linux/arm/v6
+          platforms: ${{ steps.prepare.outputs.SELECT_PLATFORMS }}
           push: true
           tags: ${{ steps.prepare.outputs.RELEASE_TAGS }}

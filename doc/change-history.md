@@ -2,6 +2,8 @@
 
 Change Date|Major Changes
 ---|---
+2025-08-11|Submodule `edge` updated to Subsonic Plugin 0.8.9
+2025-08-11|Fix full build, avoiding linux/arm/v6 platform, due to unavailable packages (see [#552](https://github.com/GioF71/upmpdcli-docker/issues/552))
 2025-08-02|Submodule `master` updated to Subsonic Plugin 0.8.8 and Tidal Plugin 0.8.9.2 (Hotfix)
 2025-07-30|Submodule `edge` updated to Subsonic Plugin 0.8.8
 2025-07-27|Submodule `edge` updated to Tidal Plugin 0.8.9.2 (Hotfix)
