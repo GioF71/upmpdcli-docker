@@ -191,7 +191,7 @@ jobs:
           context: .
           build-args: |
             USE_APT_PROXY=N
-            USE_BASE_IMAGE=${{ steps.prepare.outputs.USE_BASE_IMAGE }}
+            BASE_IMAGE=${{ steps.prepare.outputs.USE_BASE_IMAGE }}
             BUILD_MODE=${{ matrix.build_mode }}
             UPMPDCLI_SELECTOR=${{ steps.prepare.outputs.UPMPDCLI_SELECTOR }}
           platforms: ${{ steps.prepare.outputs.SELECT_PLATFORMS }}
