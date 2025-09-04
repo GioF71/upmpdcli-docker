@@ -37,9 +37,9 @@ BUILD_TYPE|PLUGIN|VERSION
 :---|:---|:---
 release|subsonic|0.8.1
 release|tidal|0.8.6
-master|subsonic|0.8.8
+master|subsonic|0.8.10
 master|tidal|0.8.9.2
-edge|subsonic|0.8.9
+edge|subsonic|0.8.10
 edge|tidal|0.8.9.2
 
 ### Support for HiRes Tidal
