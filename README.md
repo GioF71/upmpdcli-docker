@@ -231,7 +231,7 @@ OH_PRODUCT_ROOM|Sets `ohproductroom`, defaults to same value calculated for AV_F
 SKIP_CHOWN_CACHE|If set to yes, the script with not chown `/cache`, this ight be useful with plugins using lots of files in this volume
 UPRCL_ENABLE|Enable local music support (uprcl). Set to `yes` to enable
 UPRCL_AUTOSTART|Autostart UPRCL, defaults to `1`
-UPRCL_USER|Username for `uprcl` (please not that uprcl is not available on images on Docker Hub for architectures other than amd64, arm64/v8 and arm/v7). You can still build the image by yourself using the build.sh script though.
+UPRCL_USER|Username for `uprcl` (please note that uprcl is not available on images on Docker Hub for architectures other than amd64, arm64/v8 and arm/v7). You can still build the image by yourself using the build.sh script though.
 UPRCL_HOSTPORT|Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
 UPRCL_TITLE|Title for the media server, defaults to `Local Music`
 ENABLE_OPENHOME_RADIO_SERVICE|OpenHome Radio Service, enabled by default, set to `no` to disable
