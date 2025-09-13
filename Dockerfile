@@ -2,79 +2,104 @@ ARG BASE_IMAGE="${BASE_IMAGE:-debian:stable-slim}"
 FROM ${BASE_IMAGE} AS base
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update
+ARG BUILD_MODE=full
+ARG FORCE_COMPILE_RECOLL=no
+ARG INSTALL_RECOLL=yes
+# compiling is allowed by default
+ARG ALLOW_COMPILE_RECOLL=yes
 
-RUN apt-get -y install \
-    ca-certificates \
-    bash \
-    curl \
-    libcurl4-openssl-dev \
-    net-tools \
-    iproute2 \
-    grep \
-    git \
-    build-essential \
-    meson \
-    pkg-config \
-    cmake \
-    libexpat1-dev \
-    libmicrohttpd-dev \
-    libjsoncpp-dev \
-    libmpdclient-dev
+RUN echo "BUILD_MODE=[$BUILD_MODE}]" && \
+    echo "FORCE_COMPILE_RECOLL=[${FORCE_COMPILE_RECOLL}]" && \
+    echo "INSTALL_RECOLL=[${INSTALL_RECOLL}]" && \
+    echo "ALLOW_COMPILE_RECOLL=[${ALLOW_COMPILE_RECOLL}]"
 
-# create build directory
-WORKDIR /build
+COPY app/bin/apt-get-install /usr/bin
+RUN chmod +x /usr/bin/apt-get-install
+
+# this one will also execute apt-get update
+COPY app/install/setup-repositories.sh /install/
+COPY app/install/install-initial-dependencies.sh /install/
+RUN chmod +x /install/setup-repositories.sh && \
+    /install/setup-repositories.sh && \
+    rm /install/setup-repositories.sh && \
+    chmod +x /install/install-initial-dependencies.sh && \
+    /install/install-initial-dependencies.sh && \
+    rm /install/install-initial-dependencies.sh
 
 # build npupnp
 COPY npupnp /build/npupnp
-WORKDIR /build/npupnp
-RUN meson setup --prefix /usr build
-WORKDIR /build/npupnp/build
-RUN ninja
-RUN meson install
+RUN cd /build/npupnp && \
+    meson setup --prefix /usr build && \
+    cd /build/npupnp/build && \
+    ninja && meson install && \
+    cd / && \
+    rm -Rf /build/npupnp
 
 # build libupnpp
-WORKDIR /build
 COPY libupnpp /build/libupnpp
-WORKDIR /build/libupnpp
-RUN meson setup --prefix /usr build
-WORKDIR /build/libupnpp/build
-RUN ninja
-RUN meson install
+RUN cd /build/libupnpp && \
+    meson setup --prefix /usr build && \
+    cd /build/libupnpp/build && \
+    ninja && meson install && \
+    cd / && \
+    rm -Rf /build/libupnpp
 
 ARG UPMPDCLI_SELECTOR=release
 # build upmpdcli
-WORKDIR /build
 COPY upmpdcli-${UPMPDCLI_SELECTOR} /build/upmpdcli
-WORKDIR /build/upmpdcli
-RUN meson setup --prefix /usr build
-WORKDIR /build/upmpdcli/build
-RUN ninja
-RUN meson install
+RUN cd /build/upmpdcli && \
+    meson setup --prefix /usr build && \
+    cd /build/upmpdcli/build && \
+    ninja && \
+    meson install && \
+    cd / && \
+    rm -Rf /build/upmpdcli
 
-ARG BUILD_MODE=full
-
-WORKDIR /install
+# common libraries
 COPY app/install/install-libraries.sh /install/
-RUN chmod +x /install/install-libraries.sh
-RUN /bin/sh -c /install/install-libraries.sh
-COPY app/install/*pyradios.sh /install/
-RUN chmod +x /install/*.sh
-RUN if [ "${BUILD_MODE}" = "full" ]; then /bin/sh -c /install/install-mediaserver-python-packages-pyradios.sh; fi
-COPY app/install/*tidal.sh /install/
-RUN chmod +x /install/*.sh
-RUN if [ "${BUILD_MODE}" = "full" ]; then /bin/sh -c /install/install-mediaserver-python-packages-tidal.sh; fi
-COPY app/install/*subsonic.sh /install/
-RUN chmod +x /install/*.sh
-RUN if [ "${BUILD_MODE}" = "full" ]; then /bin/sh -c /install/install-mediaserver-python-packages-subsonic.sh; fi
+RUN chmod +x /install/install-libraries.sh && \
+    /install/install-libraries.sh
 
-RUN mkdir -p /app/conf
-RUN echo "${BUILD_MODE}" > /app/conf/build_mode.txt
+# radios
+COPY app/install/install-mediaserver-python-packages-pyradios.sh /install/
+RUN chmod +x /install/install-mediaserver-python-packages-pyradios.sh && \
+    /install/install-mediaserver-python-packages-pyradios.sh
 
-RUN apt-get -y remove pkg-config meson cmake build-essential
-RUN apt-get -y autoremove
-RUN	rm -Rf /var/lib/apt/lists/*
-RUN rm -Rf /build
+# tidal
+COPY app/install/install-mediaserver-python-packages-tidal.sh /install/
+RUN chmod +x /install/install-mediaserver-python-packages-tidal.sh && \
+    /install/install-mediaserver-python-packages-tidal.sh
+
+# subsonic
+COPY app/install/install-mediaserver-python-packages-subsonic.sh /install/
+RUN chmod +x /install/install-mediaserver-python-packages-subsonic.sh && \
+    /install/install-mediaserver-python-packages-subsonic.sh
+
+# recoll
+# copy recoll repository, will be used by install-recoll.sh
+COPY recoll /build/recoll
+# execute recoll installation (via packages, or via compile)
+COPY app/install/install-recoll.sh /install/
+RUN chmod +x /install/install-recoll.sh && \
+    /install/install-recoll.sh
+# recoll-tools
+COPY app/install/install-recoll-tools.sh /install/
+RUN chmod +x /install/install-recoll-tools.sh && \
+    /install/install-recoll-tools.sh
+
+# get rid of unnecessary stuff
+RUN apt-get -y -qq -o=Dpkg::Use-Pty=0 remove pkg-config meson cmake build-essential && \
+    apt-get -y -qq -o=Dpkg::Use-Pty=0 autoremove && \
+    rm -Rf /var/lib/apt/lists/* && \
+    rm -Rf /build && \
+    rm /usr/bin/apt-get-install && \
+    rm -rf /install
+
+# keep track of how the build has been done
+RUN mkdir -p /app/conf && \
+    echo "${BUILD_MODE}" > /app/conf/build_mode.txt && \
+    echo "${INSTALL_RECOLL}" > /app/conf/install_recoll.txt && \
+    echo "${FORCE_COMPILE_RECOLL}" > /app/conf/force_compile_recoll.txt
 
 FROM scratch
 COPY --from=base / /

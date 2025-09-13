@@ -167,10 +167,8 @@ Please find a list of the currently built images in the following table.
 
 Base Image|Build Mode|Tags
 :---|:---:|:---
-ubuntu:noble|full|`latest` `latest-full` `stable` `stable-full` `ubuntu-lts-full` `noble-full` `daily-noble-full`
-ubuntu:noble|renderer|`renderer` `latest-renderer` `stable-renderer` `ubuntu-lts-renderer` `noble-renderer` `daily-noble-renderer`
-debian:bookworm-slim|full|`bookworm-full` `daily-bookworm-full`
-debian:bookworm-slim|renderer|`bookworm-renderer` `daily-bookworm-renderer`
+debian:stable-slim|full|`stable-full` `daily-stable-full`
+debian:stable-slim|renderer|`stable-renderer` `daily-stable-renderer`
 
 ## Usage
 
@@ -233,7 +231,7 @@ OH_PRODUCT_ROOM|Sets `ohproductroom`, defaults to same value calculated for AV_F
 SKIP_CHOWN_CACHE|If set to yes, the script with not chown `/cache`, this ight be useful with plugins using lots of files in this volume
 UPRCL_ENABLE|Enable local music support (uprcl). Set to `yes` to enable
 UPRCL_AUTOSTART|Autostart UPRCL, defaults to `1`
-UPRCL_USER|Username for `uprcl`
+UPRCL_USER|Username for `uprcl` (please not that uprcl is not available on images on Docker Hub for architectures other than amd64, arm64/v8 and arm/v7). You can still build the image by yourself using the build.sh script though.
 UPRCL_HOSTPORT|Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
 UPRCL_TITLE|Title for the media server, defaults to `Local Music`
 ENABLE_OPENHOME_RADIO_SERVICE|OpenHome Radio Service, enabled by default, set to `no` to disable

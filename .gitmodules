@@ -13,3 +13,6 @@
 [submodule "upmpdcli-edge"]
 	path = upmpdcli-edge
 	url = https://github.com/GioF71/upmpdcli-plugins
+[submodule "recoll"]
+	path = recoll
+	url = https://framagit.org/medoc92/recoll
