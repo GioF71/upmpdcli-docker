@@ -44,19 +44,17 @@ jobs:
           echo "REF: ["$ref"]"
 
           declare -A base_images
-          base_images[noble]=ubuntu:noble
-          base_images[mantic]=ubuntu:mantic
-          base_images[lunar]=ubuntu:lunar
-          base_images[kinetic]=ubuntu:kinetic
-          base_images[jammy]=ubuntu:jammy
-          base_images[bookworm]=debian:bookworm-slim
+          base_images[trixie]=debian:trixie-slim
           base_images[stable]=debian:stable-slim
 
           image_name="${{secrets.DOCKER_USERNAME}}/upmpdcli"
-          select_platforms="linux/amd64,linux/arm64/v8,linux/arm/v7"
-          if [ "$build_mode" == "renderer" ]; then
-            select_platforms="$select_platforms,linux/arm/v6"
-          fi
+          select_platforms="linux/amd64,linux/arm64/v8,linux/arm/v7,linux/arm/v5"
+
+          # we want recoll by default
+          install_recoll=yes
+
+          # we do not want to compile recoll by default
+          force_compile_recoll=no
 
           # unless we are build from a tag "master" or "edge"
           upmpdcli_selector=release
@@ -68,14 +66,8 @@ jobs:
           declare -A special_tags
           special_tags[stable-full]="${image_name}:latest,${image_name}:latest-full,${image_name}:stable,${image_name}:debian-stable-full,${image_name}:stable-full"
           special_tags[stable-renderer]="${image_name}:renderer,${image_name}:latest-renderer,${image_name}:debian-stable-renderer,${image_name}:stable-renderer"
-          special_tags[noble-full]="${image_name}:latest,${image_name}:latest-full,${image_name}:stable,${image_name}:ubuntu-lts-full,${image_name}:stable-full"
-          special_tags[noble-renderer]="${image_name}:renderer,${image_name}:latest-renderer,${image_name}:stable-renderer,${image_name}:ubuntu-lts-renderer"
-          special_tags[mantic-full]="${image_name}:ubuntu-current-full"
-          special_tags[mantic-renderer]="${image_name}:ubuntu-current-renderer"
-          special_tags[bookworm-full]="${image_name}:debian-stable-full"
-          special_tags[bookworm-renderer]="${image_name}:debian-stable-renderer"
-          special_tags[bullseye-full]="${image_name}:debian-oldstable-full"
-          special_tags[bullseye-renderer]="${image_name}:debian-oldstable-renderer"
+          special_tags[trixie-full]="${image_name}:debian-trixie-full"
+          special_tags[trixie-renderer]="${image_name}:debian-trixie-renderer"
 
           base=${{ matrix.base }}
           build_mode=${{ matrix.build_mode }}
@@ -168,6 +160,8 @@ jobs:
           echo "RELEASE_TAGS=${tags}" >> $GITHUB_OUTPUT
           echo "USE_BASE_IMAGE=${select_base_image}" >> $GITHUB_OUTPUT
           echo "UPMPDCLI_SELECTOR=${upmpdcli_selector}" >> $GITHUB_OUTPUT
+          echo "INSTALL_RECOLL=${install_recoll}" >> $GITHUB_OUTPUT
+          echo "FORCE_COMPILE_RECOLL=${force_compile_recoll}" >> $GITHUB_OUTPUT
           echo "SELECT_PLATFORMS=${select_platforms}" >> $GITHUB_OUTPUT
 
       - name: Set up QEMU
@@ -194,6 +188,9 @@ jobs:
             BASE_IMAGE=${{ steps.prepare.outputs.USE_BASE_IMAGE }}
             BUILD_MODE=${{ matrix.build_mode }}
             UPMPDCLI_SELECTOR=${{ steps.prepare.outputs.UPMPDCLI_SELECTOR }}
+            INSTALL_RECOLL=${{ steps.prepare.outputs.INSTALL_RECOLL }}
+            FORCE_COMPILE_RECOLL=${{ steps.prepare.outputs.FORCE_COMPILE_RECOLL }}
+            ALLOW_COMPILE_RECOLL=no
           platforms: ${{ steps.prepare.outputs.SELECT_PLATFORMS }}
           push: true
           tags: ${{ steps.prepare.outputs.RELEASE_TAGS }}
