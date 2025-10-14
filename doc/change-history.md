@@ -2,6 +2,9 @@
 
 Change Date|Major Changes
 ---|---
+2025-10-14|Submodule `master` updated to Subsonic Plugin 0.8.12 (nice performance bump!)
+2025-10-14|Bump to [subsonic-connector 0.3.10](https://pypi.org/project/subsonic-connector/0.3.10) for submodule `master`
+2025-10-14|Submodule `recoll` updated to version 1.43.6
 2025-10-14|Submodule `edge` updated to Subsonic Plugin 0.8.12 (nice performance bump!)
 2025-10-14|Bump to [subsonic-connector 0.3.10](https://pypi.org/project/subsonic-connector/0.3.10) for submodule `edge`
 2025-10-04|Submodule `master` updated to Subsonic Plugin 0.8.11
