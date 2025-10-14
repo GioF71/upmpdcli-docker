@@ -2,6 +2,8 @@
 
 Change Date|Major Changes
 ---|---
+2025-10-14|Submodule `edge` updated to Subsonic Plugin 0.8.12 (nice performance bump!)
+2025-10-14|Bump to [subsonic-connector 0.3.10](https://pypi.org/project/subsonic-connector/0.3.10) for submodule `edge`
 2025-10-04|Submodule `master` updated to Subsonic Plugin 0.8.11
 2025-10-03|Submodule `edge` updated to Subsonic Plugin 0.8.11
 2025-09-13|Restored trixie (debian stable), recoll not included in published linux/arm/v5 images (see [#558](https://github.com/GioF71/upmpdcli-docker/issues/558))
