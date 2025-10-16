@@ -54,7 +54,7 @@ jobs:
           install_recoll=yes
 
           # we do not want to compile recoll by default
-          force_compile_recoll=no
+          compile_recoll=no
 
           # unless we are build from a tag "master" or "edge"
           upmpdcli_selector=release
@@ -161,7 +161,7 @@ jobs:
           echo "USE_BASE_IMAGE=${select_base_image}" >> $GITHUB_OUTPUT
           echo "UPMPDCLI_SELECTOR=${upmpdcli_selector}" >> $GITHUB_OUTPUT
           echo "INSTALL_RECOLL=${install_recoll}" >> $GITHUB_OUTPUT
-          echo "FORCE_COMPILE_RECOLL=${force_compile_recoll}" >> $GITHUB_OUTPUT
+          echo "COMPILE_RECOLL=${compile_recoll}" >> $GITHUB_OUTPUT
           echo "SELECT_PLATFORMS=${select_platforms}" >> $GITHUB_OUTPUT
 
       - name: Set up QEMU
@@ -189,7 +189,7 @@ jobs:
             BUILD_MODE=${{ matrix.build_mode }}
             UPMPDCLI_SELECTOR=${{ steps.prepare.outputs.UPMPDCLI_SELECTOR }}
             INSTALL_RECOLL=${{ steps.prepare.outputs.INSTALL_RECOLL }}
-            FORCE_COMPILE_RECOLL=${{ steps.prepare.outputs.FORCE_COMPILE_RECOLL }}
+            COMPILE_RECOLL=${{ steps.prepare.outputs.COMPILE_RECOLL }}
             ALLOW_COMPILE_RECOLL=no
           platforms: ${{ steps.prepare.outputs.SELECT_PLATFORMS }}
           push: true

@@ -4,7 +4,7 @@ set -ex
 
 echo "BUILD_MODE=[${BUILD_MODE}]"
 echo "INSTALL_RECOLL=[$INSTALL_RECOLL]"
-echo "FORCE_COMPILE_RECOLL=[$FORCE_COMPILE_RECOLL]"
+echo "COMPILE_RECOLL=[$COMPILE_RECOLL]"
 ARCH=`dpkg --print-architecture`
 echo "ARCH=[$ARCH]"
 
