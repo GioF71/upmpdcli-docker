@@ -3,13 +3,13 @@ FROM ${BASE_IMAGE} AS base
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG BUILD_MODE=full
-ARG FORCE_COMPILE_RECOLL=no
+ARG COMPILE_RECOLL=no
 ARG INSTALL_RECOLL=yes
 # compiling is allowed by default
 ARG ALLOW_COMPILE_RECOLL=yes
 
 RUN echo "BUILD_MODE=[$BUILD_MODE}]" && \
-    echo "FORCE_COMPILE_RECOLL=[${FORCE_COMPILE_RECOLL}]" && \
+    echo "COMPILE_RECOLL=[${COMPILE_RECOLL}]" && \
     echo "INSTALL_RECOLL=[${INSTALL_RECOLL}]" && \
     echo "ALLOW_COMPILE_RECOLL=[${ALLOW_COMPILE_RECOLL}]"
 
@@ -99,7 +99,7 @@ RUN apt-get -y -qq -o=Dpkg::Use-Pty=0 remove pkg-config meson cmake build-essent
 RUN mkdir -p /app/conf && \
     echo "${BUILD_MODE}" > /app/conf/build_mode.txt && \
     echo "${INSTALL_RECOLL}" > /app/conf/install_recoll.txt && \
-    echo "${FORCE_COMPILE_RECOLL}" > /app/conf/force_compile_recoll.txt
+    echo "${COMPILE_RECOLL}" > /app/conf/compile_recoll.txt
 
 FROM scratch
 COPY --from=base / /
