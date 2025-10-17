@@ -4,7 +4,6 @@ declare -A base_images
 
 base_images[stable]=debian:stable-slim
 base_images[trixie]=debian:trixie-slim
-base_images[lib]=giof71/upmpdcli:lib
 
 DEFAULT_BASE_IMAGE=stable
 DEFAULT_TAG=local
