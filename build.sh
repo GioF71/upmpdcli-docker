@@ -4,14 +4,13 @@ declare -A base_images
 
 base_images[stable]=debian:stable-slim
 base_images[trixie]=debian:trixie-slim
-base_images[lib]=giof71/upmpdcli:lib
 
 DEFAULT_BASE_IMAGE=stable
 DEFAULT_TAG=local
 DEFAULT_BUILD_MODE=full
 DEFAULT_INSTALL_RECOLL=yes
 # avoiding compile is faster to build
-DEFAULT_FORCE_COMPILE_RECOLL=yes
+DEFAULT_COMPILE_RECOLL=no
 
 DEFAULT_CACHE_MODE=""
 
@@ -27,7 +26,7 @@ do
         d) docker_file=${OPTARG};;
         s) upmpdcli_selector=${OPTARG};;
         r) install_recoll=${OPTARG};;
-        f) force_compile_recoll=${OPTARG};;
+        f) compile_recoll=${OPTARG};;
     esac
 done
 
@@ -38,7 +37,7 @@ echo "cache_mode [$cache_mode]"
 echo "docker_file [$docker_file]"
 echo "upmpdcli_selector [$upmpdcli_selector]"
 echo "install_recoll: $install_recoll"
-echo "force_compile_recoll: $force_compile_recoll"
+echo "compile_recoll: $compile_recoll"
 
 if [ -z "${base_image}" ]; then
   base_image=$DEFAULT_BASE_IMAGE
@@ -80,15 +79,15 @@ else
     fi
 fi
 
-if [[ -z "${force_compile_recoll}" ]]; then
-  force_compile_recoll=$DEFAULT_FORCE_COMPILE_RECOLL
+if [[ -z "${compile_recoll}" ]]; then
+  compile_recoll=$DEFAULT_COMPILE_RECOLL
 else
-    if [[ "${force_compile_recoll^^}" == "YES" ]] || [[ "${force_compile_recoll^^}" == "Y" ]]; then
-        force_compile_recoll="yes"
-    elif [[ "${force_compile_recoll^^}" == "NO" ]] || [[ "${force_compile_recoll^^}" == "N" ]]; then
-        force_compile_recoll="no"
+    if [[ "${compile_recoll^^}" == "YES" ]] || [[ "${compile_recoll^^}" == "Y" ]]; then
+        compile_recoll="yes"
+    elif [[ "${compile_recoll^^}" == "NO" ]] || [[ "${compile_recoll^^}" == "N" ]]; then
+        compile_recoll="no"
     else
-        echo "Invalid force_compile_recoll=[$force_compile_recoll], must be yes or no"
+        echo "Invalid compile_recoll=[$compile_recoll], must be yes or no"
         exit 1
     fi
 fi
@@ -97,14 +96,14 @@ echo "Base Image: ["$select_base_image"]"
 echo "Tag: ["$tag"]"
 echo "Build Mode: ["$build_mode"]"
 echo "Install Recoll: ["$install_recoll"]"
-echo "Force compile Recoll: ["$force_compile_recoll"]"
+echo "Force compile Recoll: ["$compile_recoll"]"
 
 cmd_line="docker build . ${cache_mode} \
     -f ${docker_file} \
     --build-arg BASE_IMAGE=${select_base_image} \
     --build-arg BUILD_MODE=${build_mode} \
     --build-arg INSTALL_RECOLL=${install_recoll} \
-    --build-arg FORCE_COMPILE_RECOLL=${force_compile_recoll} \
+    --build-arg COMPILE_RECOLL=${compile_recoll} \
     --build-arg UPMPDCLI_SELECTOR=${upmpdcli_selector} \
     --progress=plain \
     -t giof71/upmpdcli:$tag"
