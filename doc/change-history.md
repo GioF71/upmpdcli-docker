@@ -2,6 +2,9 @@
 
 Change Date|Major Changes
 ---|---
+2025-10-30|Submodule `edge` updated to Subsonic Plugin 0.8.13
+2025-10-18|Submodule `edge` updated to Subsonic Plugin 0.8.13b3
+2025-10-17|Submodule `edge` updated to Subsonic Plugin 0.8.13b2
 2025-10-16|Bump to [tidalapi 0.8.8](https://github.com/tamland/python-tidal/releases/tag/v0.8.8)
 2025-10-14|Submodule `master` updated to Subsonic Plugin 0.8.12 (nice performance bump!)
 2025-10-14|Bump to [subsonic-connector 0.3.10](https://pypi.org/project/subsonic-connector/0.3.10) for submodule `master`
