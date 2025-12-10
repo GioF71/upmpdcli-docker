@@ -2,6 +2,8 @@
 
 Change Date|Major Changes
 ---|---
+2025-12-10|Submodule `master` updated to master branch updates, including Subsonic Plugin 0.8.17
+2025-12-10|Submodule `edge` updated to master branch updates (still Subsonic Plugin 0.8.17)
 2025-12-09|Submodule `edge` updated to Subsonic Plugin 0.8.17
 2025-12-08|Submodule `edge` updated to Subsonic Plugin 0.8.16
 2025-11-25|Submodule `master` updated to Subsonic Plugin 0.8.15
