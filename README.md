@@ -252,7 +252,7 @@ SUBSONIC_USER|Subsonic username
 SUBSONIC_PASSWORD|Subsonic password
 SUBSONIC_LEGACYAUTH|Subsonic legacy authentication, set to `yes` when using Lightweight Media Server (LMS) (requires subsonic-connector >= 0.2.6)
 SUBSONIC_SERVER_SIDE_SCROBBLING|Subsonic server side scrobbling, set to `yes` if you want to enable
-SUBSONIC_ITEMS_PER_PAGE|Number of items per page, defaults to `100`
+SUBSONIC_ITEMS_PER_PAGE|Number of items per page, defaults to `20`
 SUBSONIC_APPEND_YEAR_TO_ALBUM_CONTAINER|If set to `yes` (default), the album year is appended to the album
 SUBSONIC_APPEND_CODECS_TO_ALBUM|If set to `yes` (default), the codecs for the album are appended to the album unless all codecs are in the white list
 SUBSONIC_PREPEND_NUMBER_IN_ALBUM_LIST|If set to `yes`, the album in albums list will be numbered, mostly for Kodi, defaults to `no`
