@@ -19,7 +19,7 @@ Please note that support goal is limited to cover running costs for subscription
 First and foremost, the reference to the awesome project:
 
 [An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).  
-Current version is `1.9.8`.  
+Current version is `1.9.10`.  
 
 ## News (newest first)
 
@@ -35,7 +35,7 @@ See the following table for the versions of the plugins in the various images:
 
 BUILD_TYPE|PLUGIN|VERSION
 :---|:---|:---
-release|subsonic|0.8.25
+release|subsonic|0.8.29
 release|tidal|0.8.10
 master|subsonic|0.8.29
 master|tidal|0.8.10

@@ -2,13 +2,14 @@
 
 Change Date|Major Changes
 ---|---
+2026-01-09|Bump to upmpdcli release 1.9.10
 2026-01-05|Documentation: `UPNPPORT` instead of `UPNP_PORT`
 2025-12-30|Submodule `master` updated to Subsonic Plugin 0.8.29
 2025-12-29|Submodule `edge` updated to Subsonic Plugin 0.8.29
 2025-12-28|Submodule `edge` updated to Subsonic Plugin 0.8.28
 2025-12-24|Submodule `edge` updated to Subsonic Plugin 0.8.27
 2025-12-22|Submodule `edge` updated to Subsonic Plugin 0.8.26
-2025-12-22|Bump to release 1.9.8
+2025-12-22|Bump to upmpdcli release 1.9.8
 2025-12-20|Submodule `master` updated to Subsonic Plugin 0.8.25
 2025-12-19|Submodule `edge` updated to Subsonic Plugin 0.8.25
 2025-12-18|Submodule `master` updated to Subsonic Plugin 0.8.24
