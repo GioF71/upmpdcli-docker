@@ -52,7 +52,7 @@ A simple installation guide for a mediaserver upmpdcli instance for Tidal Hires 
 
 ### Subsonic Plugin compatibility
 
-The `latest-subsonic` branch of the subsonic plugin, which is used with the recently updated [suggested configurations](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#subsonic-server), provides good compatibility with [Navidrome](https://github.com/navidrome/navidrome), [Lightweight Music Server](https://github.com/epoupon/lms)) and [Gonic](https://github.com/sentriz/gonic).  
+The `latest-subsonic` branch of the subsonic plugin, which is used with the recently updated [suggested configurations](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#subsonic-server), provides good compatibility with [Navidrome](https://github.com/navidrome/navidrome), [Lightweight Music Server](https://github.com/epoupon/lms) and [Gonic](https://github.com/sentriz/gonic).  
 Just a quick reminder, with Lightweight Media Server you will need to enable subsonic legacy authentication using the new variable `SUBSONIC_LEGACYAUTH`.  
 Thanks to the respective authors for having helped me integrating their servers more easily.
 
@@ -79,7 +79,7 @@ A premium account of Tidal will be strictly required.
 
 ### BBC
 
-Since release 2023-07-05, support the upmpdcli [`BBC Sounds`](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#UPMPDCLI-MS-BBC) plugin has been enabled.
+Since release 2023-07-05, support for the upmpdcli [`BBC Sounds`](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#UPMPDCLI-MS-BBC) plugin has been enabled.
 
 ### Radios
 
@@ -117,7 +117,7 @@ Docker Images|[Docker Hub](https://hub.docker.com/r/giof71/upmpdcli)
 
 ## Why
 
-I prepared this Dockerfile Because I wanted to be able to install upmpdcli easily on any machine (provided the architecture is amd64 or arm). Also I wanted to be able to configure and govern the parameter easily, maybe through a webapp like Portainer.
+I prepared this Dockerfile because I wanted to be able to install upmpdcli easily on any machine (provided the architecture is amd64 or arm). Also I wanted to be able to configure and govern the parameters easily, maybe through a webapp like Portainer.
 
 ## Prerequisites
 
@@ -173,7 +173,7 @@ debian:stable-slim|renderer|`stable-renderer` `daily-stable-renderer`
 
 Say your mpd host is "mpd.local", you can start upmpdcli by typing
 
-`docker run -d --rm --net host -e MPD_HOST:mpd.local giof71/upmpdcli:stable`
+`docker run -d --rm --net host -e MPD_HOST=mpd.local giof71/upmpdcli:stable`
 
 Note that we have used the *MPD_HOST* environment variable so that upmpdcli can use the mpd instance running on *mpd.local*.
 
@@ -223,14 +223,14 @@ FRIENDLY_NAME|Name of the renderer, overrides `UPMPD_FRIENDLY_NAME`, `AV_FRIENDL
 RENDERER_MODE|If set, this variable overrides `UPNPAV` and `OPENHOME`. Possible values are `NONE`, `OPENHOME`, `UPNPAV` and `BOTH`
 UPNPAV|Enable UPnP AV services (`0`/`1`), defaults to `0`
 UPNPAV_POSTFIX|The postfix to be appended to the `FRIENDLY_NAME`, defaults to an empty string
-UPNPAV_POSTFIX_PREPEND_SPACE|Option to add a space before a custom `UPNPAV_POSTFIX`, enabled by default. Set to `no` di disable
-UPNPAV_SKIP_NAME_POSTFIX|If not set or set to `yes`, and if only `UPNPAV` renderer is enabled, the `UPNPAV_POSTFIX` postfix is not appended to `FRIENDLY_NAME`
+UPNPAV_POSTFIX_PREPEND_SPACE|Option to add a space before a custom `UPNPAV_POSTFIX`, enabled by default. Set to `no` to disable
+UPNPAV_SKIP_NAME_POSTFIX|If the variable is not set or set to `yes`, and if only `UPNPAV` renderer mode is enabled, the `UPNPAV_POSTFIX` postfix is not appended to `FRIENDLY_NAME`
 OPENHOME|Enable OpenHome services (`0`/`1`), defaults to `1`
 OH_PRODUCT_ROOM|Sets `ohproductroom`, defaults to same value calculated for AV_FRIENDLY_NAME if upnp-av is enabled
-SKIP_CHOWN_CACHE|If set to yes, the script with not chown `/cache`, this ight be useful with plugins using lots of files in this volume
+SKIP_CHOWN_CACHE|If set to yes, the script will not chown `/cache`, this might be useful with plugins using lots of files in this volume
 UPRCL_ENABLE|Enable local music support (uprcl). Set to `yes` to enable
 UPRCL_AUTOSTART|Autostart UPRCL, defaults to `1`
-UPRCL_USER|Username for `uprcl` (please note that uprcl is not available on images on Docker Hub for architectures other than amd64, arm64/v8 and arm/v7). You can still build the image by yourself using the build.sh script though.
+UPRCL_USER|Username for `uprcl`. Please note that uprcl is not available on images on Docker Hub for architectures other than amd64, arm64/v8 and arm/v7. You can still build the image by yourself using the build.sh script though.
 UPRCL_HOSTPORT|Hostname and port for uprcl. Currently required when enabling UPRCL. Format: `<ip:port>`. Example value: `192.168.1.8:9090`.
 UPRCL_TITLE|Title for the media server, defaults to `Local Music`
 ENABLE_OPENHOME_RADIO_SERVICE|OpenHome Radio Service, enabled by default, set to `no` to disable
@@ -249,7 +249,7 @@ SUBSONIC_PORT|Subsonic port, defaults to `4533`
 SUBSONIC_SERVER_PATH|Subsonic server path, optional, specify only if needed. Requires Subsonic Plugin >= 0.8.2.
 SUBSONIC_USER|Subsonic username
 SUBSONIC_PASSWORD|Subsonic password
-SUBSONIC_LEGACYAUTH|Subsonic legacy authentication, set to `yes` when using Lightweight Media Server (LMS) (requires subsonic-connector >= 0.2.6)
+SUBSONIC_LEGACYAUTH|Subsonic legacy authentication, set to `yes` when using Lightweight Media Server (requires subsonic-connector >= 0.2.6)
 SUBSONIC_SERVER_SIDE_SCROBBLING|Subsonic server side scrobbling, set to `yes` if you want to enable
 SUBSONIC_ITEMS_PER_PAGE|Number of items per page, defaults to `20`
 SUBSONIC_APPEND_YEAR_TO_ALBUM_CONTAINER|If set to `yes` (default), the album year is appended to the album
@@ -260,8 +260,8 @@ SUBSONIC_ENABLE_INTERNET_RADIOS|Set to `yes` to enable internet radios, disabled
 SUBSONIC_ENABLE_IMAGE_CACHING|Set to `yes` to enable image caching, disabled by default (requires WEBSERVER_DOCUMENT_ROOT and plugin version >= 0.7.2)
 SUBSONIC_TRANSCODE_CODEC|If set, the value will be used as the transcode codec (requires subsonic-connector >= 0.2.6)
 SUBSONIC_TRANSCODE_MAX_BITRATE|If set, the value will be used as the transcode max bitrate (requires subsonic-connector >= 0.2.6)
-RADIO_PARADISE_ENABLE|Enable the Radio Paradise Plugin, set to `yes` to enable
-MOTHER_EARTH_RADIO_ENABLE|Enable the Mother Earth Radio Plugin, set to `yes` to enable
+RADIO_PARADISE_ENABLE|Set to `yes` to enable the `Radio Paradise` plugin
+MOTHER_EARTH_RADIO_ENABLE|Set to `yes` to enable the `Mother Earth Radio` plugin
 PLG_MICRO_HTTP_HOST|IP for the qobuz local HTTP service.
 PLG_MICRO_HTTP_PORT|Port for the qobuz local HTTP service.
 PLG_PROXY_METHOD|Proxy method, valid values are `proxy` and `redirect`, defaults to `redirect`
