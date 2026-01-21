@@ -3,7 +3,7 @@
 Change Date|Major Changes
 ---|---
 2026-01-26|Submodule `edge` updated to upmpdcli 1.9.11
-2026-01-26|Submodule `edge` updated to Tidal Plugin 0.8.10
+2026-01-26|Submodule `edge` updated to Tidal Plugin 0.8.11
 2026-01-26|Bump to [tidalapi 0.8.11](https://github.com/tamland/python-tidal/releases/tag/v0.8.11) for submodule `edge`
 2026-01-09|Bump to upmpdcli release 1.9.10
 2026-01-05|Documentation: `UPNPPORT` instead of `UPNP_PORT`
