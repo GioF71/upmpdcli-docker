@@ -19,7 +19,7 @@ Please note that support goal is limited to cover running costs for subscription
 First and foremost, the reference to the awesome project:
 
 [An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).  
-Current version is `1.9.11`.  
+Current version is `1.9.12`.  
 
 ## News (newest first)
 

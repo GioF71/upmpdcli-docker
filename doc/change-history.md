@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2026-01-26|Submodules `release`, `master` and `edge` updated to upmpdcli 1.9.12
 2026-01-23|Submodules `release` and `master` updated to upmpdcli 1.9.11
 2026-01-23|Submodules `release` and `master` updated to Tidal Plugin 0.8.11
 2026-01-21|Submodule `edge` updated to upmpdcli 1.9.11
