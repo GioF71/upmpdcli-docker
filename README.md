@@ -39,7 +39,7 @@ release|subsonic|0.8.29
 release|tidal|0.8.11
 master|subsonic|0.8.29
 master|tidal|0.8.11
-edge|subsonic|0.8.29
+edge|subsonic|0.9.1
 edge|tidal|0.8.11
 
 ### Support for HiRes Tidal
