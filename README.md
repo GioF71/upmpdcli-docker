@@ -30,7 +30,7 @@ We can now avoid to download plugin at runtime. Just use updated master/edge ima
 ### New 'master' and 'edge' builds
 
 As we are now building from source, it is easy to build images that are up-to-date with the upstream branches.  
-Link for those images: [master](https://hub.docker.com/r/giof71/upmpdcli/tags?name=master), [edge](https://hub.docker.com/r/giof71/upmpdcli/tags?name=edge).  
+Links for those images: [master](https://hub.docker.com/r/giof71/upmpdcli/tags?name=master), [edge](https://hub.docker.com/r/giof71/upmpdcli/tags?name=edge).  
 See the following table for the versions of the plugins in the various images:
 
 BUILD_TYPE|PLUGIN|VERSION
