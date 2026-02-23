@@ -2,7 +2,11 @@
 
 Change Date|Major Changes
 ---|---
-2026-01-21|Submodule `edge`, `master` and `release` updated to upmpdcli 1.9.13
+2026-02-23|Submodule `edge` updated to Subsonic Plugin 0.9.4
+2026-01-26|Submodules `release`, `master` and `edge` updated to upmpdcli 1.9.14 (includes subsonic plugin 0.9.3)
+2026-02-19|Submodule `edge` updated to subsonic-connector 0.3.11
+2026-02-19|Submodule `master` updated to Subsonic Plugin 0.9.3 and Tidal Plugin 0.8.12
+2026-02-18|Submodule `edge`, `master` and `release` updated to upmpdcli 1.9.13
 2026-02-18|Submodule `edge` updated to Subsonic Plugin 0.9.3 and Tidal Plugin 0.8.12
 2026-02-18|Submodule `master` updated to Subsonic Plugin 0.9.2 and Tidal Plugin 0.8.11
 2026-02-15|Submodule ``edge` updated to Subsonic Plugin 0.9.2
