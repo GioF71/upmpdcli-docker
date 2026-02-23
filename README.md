@@ -35,11 +35,11 @@ See the following table for the versions of the plugins in the various images:
 
 BUILD_TYPE|PLUGIN|VERSION
 :---|:---|:---
-release|subsonic|0.9.2
-release|tidal|0.8.11
-master|subsonic|0.9.2
-master|tidal|0.8.11
-edge|subsonic|0.9.3
+release|subsonic|0.9.3
+release|tidal|0.8.12
+master|subsonic|0.9.3
+master|tidal|0.8.12
+edge|subsonic|0.9.4
 edge|tidal|0.8.12
 
 ### Support for HiRes Tidal
