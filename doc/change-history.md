@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2026-03-11|Submodule `edge` updated to Mother Earth Radio Plugin 0.0.5
 2026-03-06|Submodule `edge` updated to Subsonic Plugin 0.9.7
 2026-03-06|Submodule `master` updated to Subsonic Plugin 0.9.6
 2026-03-02|Submodule `master` updated to Subsonic Plugin 0.9.5
