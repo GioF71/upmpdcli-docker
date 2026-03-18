@@ -37,8 +37,10 @@ BUILD_TYPE|PLUGIN|VERSION
 :---|:---|:---
 release|subsonic|0.9.3
 release|tidal|0.8.12
+release|mother earth radio|0.0.4
 master|subsonic|0.9.6
 master|tidal|0.8.12
+master|mother earth radio|0.0.5
 edge|subsonic|0.9.7
 edge|tidal|0.8.12
 edge|mother earth radio|0.0.5
