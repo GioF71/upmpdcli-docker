@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2026-03-20|Submodule `edge` updated to Subsonic Plugin 0.9.8
 2026-03-18|Add python-request to renderer builds [#637](https://github.com/GioF71/upmpdcli-docker/issues/637)
 2026-03-11|Submodule `edge` updated to Mother Earth Radio Plugin 0.0.5
 2026-03-06|Submodule `edge` updated to Subsonic Plugin 0.9.7
