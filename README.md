@@ -35,10 +35,10 @@ See the following table for the versions of the plugins in the various images:
 
 BUILD_TYPE|PLUGIN|VERSION
 :---|:---|:---
-release|subsonic|0.9.3
+release|subsonic|0.9.8
 release|tidal|0.8.12
-release|mother earth radio|0.0.4
-master|subsonic|0.9.6
+release|mother earth radio|0.0.5
+master|subsonic|0.9.8
 master|tidal|0.8.12
 master|mother earth radio|0.0.5
 edge|subsonic|0.9.8
