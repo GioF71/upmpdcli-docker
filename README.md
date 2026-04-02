@@ -41,7 +41,7 @@ release|mother earth radio|0.0.5
 master|subsonic|0.9.8
 master|tidal|0.8.12
 master|mother earth radio|0.0.5
-edge|subsonic|0.9.8
+edge|subsonic|0.9.9
 edge|tidal|0.8.12
 edge|mother earth radio|0.0.5
 
