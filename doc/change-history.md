@@ -2,7 +2,7 @@
 
 Change Date|Major Changes
 ---|---
-2026-04-02|Submodules `master` and `edge` updated to Subsonic Plugin 0.9.9
+2026-04-02|Submodule `edge` updated to Subsonic Plugin 0.9.9
 2026-04-02|Fixed [#642](https://github.com/GioF71/upmpdcli-docker/issues/642) in incoming `edge` build
 2026-03-21|Submodules `release`, `master` and `edge` updated to upmpdcli 1.9.15 (includes subsonic plugin 0.9.8)
 2026-03-20|Submodule `edge` updated to Subsonic Plugin 0.9.8
