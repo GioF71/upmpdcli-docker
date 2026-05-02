@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# avoid silent failures
+set -e
+
 ## error codes
 # 1 Generic error
 # 2 Invalid RENDERER_MODE value
@@ -16,6 +19,20 @@ echo "Current user id is [$current_user_id]"
 if [[ "${current_user_id}" != "0" ]]; then
     echo "Not running as root, will not be able to create users" 
 fi
+
+DEFAULT_UID=1000
+DEFAULT_GID=1000
+
+if [[ -z "${PUID}" ]]; then
+    PUID=$DEFAULT_UID
+    echo "Setting default value for PUID: ["$PUID"]"
+fi
+if [[ -z "${PGID}" ]]; then
+    PGID=$DEFAULT_GID
+    echo "Setting default value for PGID: ["$PGID"]"
+fi
+
+echo "PUID=[${PUID}] PGID=[${PGID}]"
 
 if [[ -n "${RADIO_PARADISE_DOWNLOAD_PLUGIN}" ]] ||
     [[ -n "${TIDAL_DOWNLOAD_PLUGIN}" ]] ||
@@ -277,7 +294,6 @@ fi
 set_parameter $CONFIG_FILE PLG_MICRO_HTTP_HOST "$PLG_MICRO_HTTP_HOST" plgmicrohttphost
 set_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmicrohttpport
 set_parameter $CONFIG_FILE PLG_PROXY_METHOD "$PLG_PROXY_METHOD" plgproxymethod
-
 
 echo "CHECK_CONTENT_FORMAT=[${CHECK_CONTENT_FORMAT}]"
 if [[ -n "${CHECK_CONTENT_FORMAT}" ]]; then
@@ -641,23 +657,45 @@ if [[ "${UPRCL_ENABLE^^}" == "YES" ]]; then
     fi
 fi
 
+cache_dir_created=0
 cache_directory=/cache
 if [[ ! -w "$cache_directory" ]]; then
     echo "Cache directory [${cache_directory}] is not writable"
     cache_directory="/tmp/cache"
+    echo "Creating cache directory [$cache_directory] ..."
     mkdir -p /tmp/cache
+    cache_dir_created=1
+    echo "Cache directory [$cache_directory] created successfully"
+    if [ $current_user_id -eq 0 ]; then
+        echo "Setting ownership to [$cache_directory] ..."
+        chown -R $PUID:$PGID $cache_directory
+        echo "Setting ownership to [$cache_directory] Done"
+    else
+        echo "Not setting ownership to [$cache_directory] (uid is [$current_user_id])."
+    fi
 else
-    echo "Cache directory [${cache_directory}] is writable"
+    echo "Cache directory [$cache_directory] is writable"
 fi
 echo "cachedir = $cache_directory" >> $CONFIG_FILE
 
+log_dir_created=0
 log_directory=/log
 if [[ ! -w "$log_directory" ]]; then
-    echo "Log directory [${log_directory}] is not writable"
+    echo "Log directory [$log_directory] is not writable"
+    echo "Creating log directory [$log_directory] ..."
     mkdir -p /tmp/log
+    log_dir_created=1
     log_directory="/tmp/log"
+    echo "Log directory [$log_directory] created successfully."
+    if [ $current_user_id -eq 0 ]; then
+        echo "Setting ownership to [$log_directory] ..."
+        chown -R $PUID:$PGID $log_directory
+        echo "Setting ownership to [$log_directory] Done"
+    else
+        echo "Not setting ownership to [$log_directory] (uid is [$current_user_id])."
+    fi
 else
-    echo "Log directory [${log_directory}] is writable"
+    echo "Log directory [$log_directory] is writable"
 fi
 
 # log file support
@@ -698,16 +736,6 @@ if [[ $current_user_id == 0 ]]; then
         echo "Created directory [${WEBSERVER_DOCUMENT_ROOT}]."
     fi
 
-    DEFAULT_UID=1000
-    DEFAULT_GID=1000
-
-    if [[ -z "${PUID}" ]]; then
-        PUID=$DEFAULT_UID
-    fi
-    if [[ -z "${PGID}" ]]; then
-        PGID=$DEFAULT_GID
-    fi
-
     DEFAULT_USER_NAME=upmpd-user
     DEFAULT_GROUP_NAME=upmpd-user
     DEFAULT_HOME_DIR=/home/$DEFAULT_USER_NAME
@@ -715,16 +743,6 @@ if [[ $current_user_id == 0 ]]; then
     USER_NAME=$DEFAULT_USER_NAME
     GROUP_NAME=$DEFAULT_GROUP_NAME
     HOME_DIR=$DEFAULT_HOME_DIR
-
-    if [[ -z "${PUID}" ]]; then
-        PUID=$DEFAULT_UID;
-        echo "Setting default value for PUID: ["$PUID"]"
-    fi
-
-    if [[ -z "${PGID}" ]]; then
-        PGID=$DEFAULT_GID;
-        echo "Setting default value for PGID: ["$PGID"]"
-    fi
 
     echo "Ensuring user with uid:[$PUID] gid:[$PGID] exists ...";
 
@@ -797,6 +815,15 @@ if [[ $current_user_id == 0 ]]; then
     chown -R $USER_NAME:$GROUP_NAME /uprcl/confdir
     chown -R $USER_NAME:$GROUP_NAME /user/config
     chown -R $USER_NAME:$GROUP_NAME /log
+    if [[ $cache_dir_created -eq 1 ]]; then
+        echo "Changing ownership of /tmp/cache ..."
+        chown -R $USER_NAME:$GROUP_NAME /tmp/cache
+    fi
+    if [[ $log_dir_created -eq 1 ]]; then
+        echo "Changing ownership of /tmp/log ..."
+        chown -R $USER_NAME:$GROUP_NAME /tmp/log
+    fi
+
     echo ". done."
 
     # Correct permissions for WEBSERVER_DOCUMENT_ROOT if set
