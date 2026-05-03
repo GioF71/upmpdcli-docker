@@ -8,6 +8,10 @@ set -e
 # 2 Invalid RENDERER_MODE value
 # 3 Invalid argument
 
+# show how the image was built
+build_mode=`cat /app/conf/build_mode.txt`
+echo "Image build mode: [${build_mode}]"
+
 # display upmpdcli version.
 upmpdcli -v
 
@@ -725,7 +729,9 @@ if [[ -f $UPMPDCLI_ADDITIONAL_FILE ]]; then
     echo "Done."
 fi
 
+echo "=== <Configuration file> [$CONFIG_FILE] ==="
 cat $CONFIG_FILE
+echo "=== EOF <Configuration file> [$CONFIG_FILE] EOF ==="
 
 if [[ $current_user_id == 0 ]]; then
 
@@ -834,19 +840,19 @@ if [[ $current_user_id == 0 ]]; then
     fi
 fi
 
-build_mode=`cat /app/conf/build_mode.txt`
-
-echo "About to sleep for $STARTUP_DELAY_SEC second(s)"
-sleep $STARTUP_DELAY_SEC
-echo "Ready to start."
+if [[ -n "${STARTUP_DELAY_SEC}" ]] && [[ ${STARTUP_DELAY_SEC} != "0" ]]; then
+    echo "About to sleep for $STARTUP_DELAY_SEC second(s)"
+    sleep $STARTUP_DELAY_SEC
+    echo "Ready to start."
+fi
 
 CMD_LINE="/usr/bin/upmpdcli -c $CONFIG_FILE"
 echo "CMD_LINE=[${CMD_LINE}]"
 
 if [[ $current_user_id -eq 0 ]]; then
-    echo "USER MODE [$USER_NAME]"
+    echo "Running in USER MODE [$USER_NAME] ($PUID:$PGID) ..."
     exec su - $USER_NAME -c "$CMD_LINE"
 else
     echo "Running as current uid [$current_user_id] ..."
-    eval "exec $CMD_LINE"
+    exec $CMD_LINE
 fi
