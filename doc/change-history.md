@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2026-05-03|A few improvements to the startup script (see [this issue](https://framagit.org/medoc92/upmpdcli/-/issues/164))
 2026-04-26|Submodule `master` updated to Subsonic Plugin 0.9.12
 2026-04-26|Submodule `edge` updated to Subsonic Plugin 0.9.13
 2026-04-20|Submodule `edge` updated to Subsonic Plugin 0.9.12
