@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2026-05-04|Submodule `master` updated to Subsonic Plugin 0.9.14
 2026-05-04|Submodule `edge` updated to Subsonic Plugin 0.9.14
 2026-05-04|Submodule `master` updated to Subsonic Plugin 0.9.13
 2026-05-04|Avoid chown on /user/config (not needed) (see [#662](https://github.com/GioF71/upmpdcli-docker/issues/662))
