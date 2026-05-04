@@ -819,7 +819,6 @@ if [[ $current_user_id == 0 ]]; then
     fi
     # uprcl and under
     chown -R $USER_NAME:$GROUP_NAME /uprcl/confdir
-    chown -R $USER_NAME:$GROUP_NAME /user/config
     chown -R $USER_NAME:$GROUP_NAME /log
     if [[ $cache_dir_created -eq 1 ]]; then
         echo "Changing ownership of /tmp/cache ..."
