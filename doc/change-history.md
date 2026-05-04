@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2026-05-04|Submodule `master` updated to Subsonic Plugin 0.9.13
 2026-05-04|Avoid chown on /user/config (not needed) (see [#662](https://github.com/GioF71/upmpdcli-docker/issues/662))
 2026-05-03|A few improvements to the startup script (see [this issue](https://framagit.org/medoc92/upmpdcli/-/issues/164))
 2026-04-26|Submodule `master` updated to Subsonic Plugin 0.9.12
