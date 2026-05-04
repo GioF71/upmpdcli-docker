@@ -2,6 +2,70 @@
 
 Change Date|Major Changes
 ---|---
+2026-05-04|Submodule `edge` updated to Subsonic Plugin 0.9.14
+2026-05-04|Submodule `master` updated to Subsonic Plugin 0.9.13
+2026-05-04|Avoid chown on /user/config (not needed) (see [#662](https://github.com/GioF71/upmpdcli-docker/issues/662))
+2026-05-03|A few improvements to the startup script (see [this issue](https://framagit.org/medoc92/upmpdcli/-/issues/164))
+2026-04-26|Submodule `master` updated to Subsonic Plugin 0.9.12
+2026-04-26|Submodule `edge` updated to Subsonic Plugin 0.9.13
+2026-04-20|Submodule `edge` updated to Subsonic Plugin 0.9.12
+2026-04-19|Submodule `edge` and `master` updated to Subsonic Plugin 0.9.11
+2026-04-18|Submodule `edge` updated to Subsonic Plugin 0.9.10
+2026-04-18|Submodules `release`, `master` and `edge` updated to upmpdcli 1.9.17
+2026-04-16|Submodules `release`, `master` and `edge` updated to upmpdcli 1.9.16
+2026-04-02|Submodule `edge` updated to Subsonic Plugin 0.9.9
+2026-04-02|Fixed [#642](https://github.com/GioF71/upmpdcli-docker/issues/642) in incoming `edge` build
+2026-03-21|Submodules `release`, `master` and `edge` updated to upmpdcli 1.9.15 (includes subsonic plugin 0.9.8)
+2026-03-20|Submodule `edge` updated to Subsonic Plugin 0.9.8
+2026-03-18|Add python-request to renderer builds [#637](https://github.com/GioF71/upmpdcli-docker/issues/637)
+2026-03-11|Submodule `edge` updated to Mother Earth Radio Plugin 0.0.5
+2026-03-06|Submodule `edge` updated to Subsonic Plugin 0.9.7
+2026-03-06|Submodule `master` updated to Subsonic Plugin 0.9.6
+2026-03-02|Submodule `master` updated to Subsonic Plugin 0.9.5
+2026-03-02|Submodule `edge` updated to Subsonic Plugin 0.9.6
+2026-02-24|Submodule `edge` updated to Subsonic Plugin 0.9.5
+2026-02-24|Submodule `master` updated to Subsonic Plugin 0.9.4
+2026-02-23|Submodule `edge` updated to Subsonic Plugin 0.9.4
+2026-01-26|Submodules `release`, `master` and `edge` updated to upmpdcli 1.9.14 (includes subsonic plugin 0.9.3)
+2026-02-19|Submodule `edge` updated to subsonic-connector 0.3.12
+2026-02-19|Submodule `master` updated to Subsonic Plugin 0.9.3 and Tidal Plugin 0.8.12
+2026-02-18|Submodule `edge`, `master` and `release` updated to upmpdcli 1.9.13
+2026-02-18|Submodule `edge` updated to Subsonic Plugin 0.9.3 and Tidal Plugin 0.8.12
+2026-02-18|Submodule `master` updated to Subsonic Plugin 0.9.2 and Tidal Plugin 0.8.11
+2026-02-15|Submodule ``edge` updated to Subsonic Plugin 0.9.2
+2026-02-14|Submodule ``edge` updated to Subsonic Plugin 0.9.1
+2026-01-26|Submodules `release`, `master` and `edge` updated to upmpdcli 1.9.12
+2026-01-23|Submodules `release` and `master` updated to upmpdcli 1.9.11
+2026-01-23|Submodules `release` and `master` updated to Tidal Plugin 0.8.11
+2026-01-21|Submodule `edge` updated to upmpdcli 1.9.11
+2026-01-21|Submodule `edge` updated to Tidal Plugin 0.8.11
+2026-01-21|Bump to [tidalapi 0.8.11](https://github.com/tamland/python-tidal/releases/tag/v0.8.11) for submodule `edge`
+2026-01-09|Bump to upmpdcli release 1.9.10
+2026-01-05|Documentation: `UPNPPORT` instead of `UPNP_PORT`
+2025-12-30|Submodule `master` updated to Subsonic Plugin 0.8.29
+2025-12-29|Submodule `edge` updated to Subsonic Plugin 0.8.29
+2025-12-28|Submodule `edge` updated to Subsonic Plugin 0.8.28
+2025-12-24|Submodule `edge` updated to Subsonic Plugin 0.8.27
+2025-12-22|Submodule `edge` updated to Subsonic Plugin 0.8.26
+2025-12-22|Bump to upmpdcli release 1.9.8
+2025-12-20|Submodule `master` updated to Subsonic Plugin 0.8.25
+2025-12-20|Bump to [tidalapi 0.8.10](https://github.com/tamland/python-tidal/releases/tag/v0.8.10) for submodule `edge`
+2025-12-19|Submodule `edge` updated to Subsonic Plugin 0.8.25
+2025-12-18|Submodule `master` updated to Subsonic Plugin 0.8.24
+2025-12-17|Submodule `edge` updated to Subsonic Plugin 0.8.24
+2025-12-16|Submodule `edge` updated to Subsonic Plugin 0.8.23
+2025-12-14|Submodule `edge` updated to Subsonic Plugin 0.8.22
+2025-12-14|Submodule `edge` updated to Subsonic Plugin 0.8.21
+2025-12-13|Submodule `edge` updated to Subsonic Plugin 0.8.20
+2025-12-13|Submodule `edge` updated to Subsonic Plugin 0.8.19
+2025-12-12|Submodule `master` updated to Subsonic Plugin 0.8.18
+2025-12-12|Submodule `edge` updated to Subsonic Plugin 0.8.18
+2025-12-10|Submodule `master` updated to master branch updates, including Subsonic Plugin 0.8.17
+2025-12-10|Submodule `edge` updated to master branch updates (still Subsonic Plugin 0.8.17)
+2025-12-09|Submodule `edge` updated to Subsonic Plugin 0.8.17
+2025-12-08|Submodule `edge` updated to Subsonic Plugin 0.8.16
+2025-11-25|Submodule `master` updated to Subsonic Plugin 0.8.15
+2025-11-24|Submodule `edge` updated to Subsonic Plugin 0.8.15
 2025-11-10|Submodule `master` updated to Subsonic Plugin 0.8.14
 2025-11-10|Submodule `edge` updated to Subsonic Plugin 0.8.14
 2025-10-30|Submodule `edge` updated to Subsonic Plugin 0.8.13
