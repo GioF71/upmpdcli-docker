@@ -452,7 +452,7 @@ if [[ "${SUBSONIC_ENABLE^^}" == "YES" ]]; then
         echo "subsonicprependnumberinalbumlist = $prepend_number" >> $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_WHITELIST_CODECS}" ]]; then
-        echo "subsonicwhitelistcodecs = ${$SUBSONIC_WHITELIST_CODECS}" >> $CONFIG_FILE
+        echo "subsonicwhitelistcodecs = ${SUBSONIC_WHITELIST_CODECS}" >> $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_TRANSCODE_CODEC}" ]]; then
         echo "subsonictranscodecodec = $SUBSONIC_TRANSCODE_CODEC" >> $CONFIG_FILE
