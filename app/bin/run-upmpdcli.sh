@@ -48,7 +48,6 @@ fi
 SOURCE_CONFIG_FILE=/app/conf/upmpdcli.conf
 CONFIG_FILE=/tmp/current-upmpdcli.conf
 
-QOBUZ_CREDENTIALS_FILE=/user/config/qobuz.txt
 HRA_CREDENTIALS_FILE=/user/config/hra.txt
 
 UPMPDCLI_ADDITIONAL_FILE=/user/config/upmpdcli-additional.txt
@@ -76,16 +75,6 @@ if [[ -n $ENABLE_UPRCL ]]; then
         echo "Setting UPRCL_ENABLE to ENABLE_UPRCL ($ENABLE_UPRCL) for you"
         UPRCL_ENABLE=$ENABLE_UPRCL
     fi
-fi
-
-if [[ -f "$QOBUZ_CREDENTIALS_FILE" ]]; then
-    echo "Reading $QOBUZ_CREDENTIALS_FILE"
-    read_file $QOBUZ_CREDENTIALS_FILE
-    QOBUZ_USERNAME=$(get_value "QOBUZ_USERNAME" $PARAMETER_PRIORITY)
-    QOBUZ_PASSWORD=$(get_value "QOBUZ_PASSWORD" $PARAMETER_PRIORITY)
-    QOBUZ_FORMAT_ID=$(get_value "QOBUZ_FORMAT_ID" $PARAMETER_PRIORITY)
-else
-    echo "File $QOBUZ_CREDENTIALS_FILE not found."
 fi
 
 if [[ -f "$HRA_CREDENTIALS_FILE" ]]; then
@@ -580,11 +569,11 @@ fi
 echo "Qobuz Enable [$QOBUZ_ENABLE]"
 if [[ "${QOBUZ_ENABLE^^}" == "YES" ]]; then
     echo "Processing Qobuz settings";
+    # creating bogus user to activate the qobuz media server
+    echo "qobuzuser = bogus" >> $CONFIG_FILE
     if [[ -n "${QOBUZ_TITLE}" ]]; then
         echo "qobuztitle = ${QOBUZ_TITLE}" >> $CONFIG_FILE
     fi
-    echo "qobuzuser = $QOBUZ_USERNAME" >> $CONFIG_FILE
-    echo "qobuzpass = $QOBUZ_PASSWORD" >> $CONFIG_FILE
     if [[ -n "${QOBUZ_FORMAT_ID}" ]]; then
         echo "qobuzformatid = $QOBUZ_FORMAT_ID" >> $CONFIG_FILE
     fi
