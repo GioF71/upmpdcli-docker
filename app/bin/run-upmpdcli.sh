@@ -570,7 +570,11 @@ echo "Qobuz Enable [$QOBUZ_ENABLE]"
 if [[ "${QOBUZ_ENABLE^^}" == "YES" ]]; then
     echo "Processing Qobuz settings";
     # creating bogus user to activate the qobuz media server
-    echo "qobuzuser = bogus" >> $CONFIG_FILE
+    echo "# qobuzuser is set to an arbitrary value" >> $CONFIG_FILE
+    echo "# Such value has nothing to do with your username" >> $CONFIG_FILE
+    echo "# It is just needed to activate the qobuz media server" >> $CONFIG_FILE
+    echo "# You will need to authenticate using the qobuz-init-auth.py script" >> $CONFIG_FILE
+    echo "qobuzuser = qobuz" >> $CONFIG_FILE
     if [[ -n "${QOBUZ_TITLE}" ]]; then
         echo "qobuztitle = ${QOBUZ_TITLE}" >> $CONFIG_FILE
     fi

@@ -23,6 +23,13 @@ Current version is `1.9.17`.
 
 ## News (newest first)
 
+### Support for the updated qobuz authentication method
+
+The former authentication method, based on username and password, doesn't work anymore.  
+So the variables `QOBUZ_USERNAME` and `QOBUZ_PASSWORD` have been removed.  
+By setting `QOBUZ_ENABLE` to `yes`, the initialization script will set the `qobuzuser` configuration key to `qobuz` just to enable the mediaserver.  
+You will need to run the `qobuz-init-auth.py` script from inside the container, as mentioned in the [Qobuz example configuration](./doc/example-configurations.md#qobuz).  
+
 ### Download variables deprecated
 
 We can now avoid to download plugin at runtime. Just use updated master/edge images (see below).  
