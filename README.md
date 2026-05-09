@@ -23,6 +23,13 @@ Current version is `1.9.17`.
 
 ## News (newest first)
 
+### Support for the updated qobuz authentication method
+
+The former authentication method, based on username and password, doesn't work anymore.  
+So the variables `QOBUZ_USERNAME` and `QOBUZ_PASSWORD` have been removed.  
+By setting `QOBUZ_ENABLE` to `yes`, the initialization script will set the `qobuzuser` configuration key to `qobuz` just to enable the mediaserver.  
+You will need to run the `qobuz-init-auth.py` script from inside the container, as mentioned in the [Qobuz example configuration](./doc/example-configurations.md#qobuz).  
+
 ### Download variables deprecated
 
 We can now avoid to download plugin at runtime. Just use updated master/edge images (see below).  
@@ -281,8 +288,6 @@ TIDAL_ALLOW_STATISTICS_ACTIONS|Allow the creation of entries that can remove ent
 TIDAL_ENABLE_USER_AGENT_WHITELIST|Enables the agent whitelist for hi-res support, default is `yes`
 QOBUZ_ENABLE|Set to `yes` to enable Qobuz support, defaults to `no`
 QOBUZ_TITLE|Set the title for Qobuz plugin, defaults to `Qobuz`
-QOBUZ_USERNAME|Your Qobuz account username
-QOBUZ_PASSWORD|Your Qobuz account password
 QOBUZ_FORMAT_ID|Qobuz format id: 5 for mp3/320, 6 for FLAC, 7 for FLAC 24/96, 27 for hi-res, defaults to `5`
 QOBUZ_RENUM_TRACKS|Renum tracks in albums and playlists, mostly for kodi compatibility, defaults to `1`
 QOBUZ_EXPLICIT_ITEM_NUMBERS|Adds numbers in square brackets in list items, mostly for kodi compatibility, defaults to `0`
@@ -323,11 +328,10 @@ FILE|DESCRIPTION
 :---|:---
 additional-radio-list.txt|Additional Radios
 recoll.conf.user|Recoll configuration (used by upcrl)
-qobuz.txt|Qobuz Credentials
 hra.txt|HRA Credentials, format is like a .env file. Make sure you include all the settings related the streaming service.
 upmpdcli-additional.txt|Configuration snippet, will be appended to upmpdcli.conf.
 
-For `qobuz.txt` and `hra.txt`, the format of the file must be like a `.env` file, where all the settings which are related to the service must be listed. Mixed configurations (so part in variables, part in these files) are not supported.  
+For `hra.txt`, the format of the file must be like a `.env` file, where all the settings which are related to the service must be listed. Mixed configurations (so part in variables, part in these files) are not supported.  
 The upmpdcli-additional.txt is a simple list of lines with a `key = value` synthax.
 
 ### Custom icon
