@@ -45,10 +45,10 @@ BUILD_TYPE|PLUGIN|VERSION
 release|subsonic|0.9.9
 release|tidal|0.8.12
 release|mother earth radio|0.0.5
-master|subsonic|0.9.14
+master|subsonic|0.9.15
 master|tidal|0.8.12
 master|mother earth radio|0.0.5
-edge|subsonic|0.9.14
+edge|subsonic|0.9.15
 edge|tidal|0.8.12
 edge|mother earth radio|0.0.5
 
@@ -384,7 +384,7 @@ Visit https://link.tidal.com/XXXXX to log in, the code will expire in 300 second
 
 Open the link in the browser, login to Tidal and authorize the application. Once that is done, you will be greeted with an output which include the contents of a json file, which should be stored in the tidal plugin cache directory with the name `oauth2.credentials.json`.  
 
-###### Create json file, a bit more advanced
+###### Create json file: a bit more advanced, and PKCE if needed
 
 The previous command will leave most settings of the get_tidal_credentials.py program to defaults, so the resulting file will be written to a `/tmp/oauth2.credentials.json` file.  
 If you mount the `/tmp` directory to some local directory, you can have the file written directly where you want (ideally directly to the `/cache/tidal` directory in the container).  
@@ -396,6 +396,19 @@ docker run --user 1000:1000 --rm -it -v $(pwd)/cache/tidal:/tmp --entrypoint /ap
 ```
 
 In any case, be sure to change the ownership of the copied file according to the uid/gid used to run the upmpdcli container.  
+
+If you need to specify arguments for the get_tidal_credentials.py script, like e.g. `-t pkce` to use PKCE authetication, you can also do the following, assuming a `tmp` directory available at the current path:
+
+```text
+# run the container interactively, mounting tmp as /tmp, your working directory will be /app/bin
+docker run -it --user 1000:1000 -v ${PWD}/tmp:/tmp --entrypoint /bin/bash giof71/upmpdcli
+# execute the script with arguments, e.g. pkce authentication mode
+./get_tidal_credentials.py -t pkce
+# follow the instruction on screen
+# your file is in /tmp/pkce.credentials.json, and of course available from ./tmp/pkce.credentials.json
+```
+
+Place that credentials file in the `/cache` volume under the `tidal` directory.  
 
 ##### OAUTH Challenge
 

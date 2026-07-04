@@ -2,6 +2,9 @@
 
 Change Date|Major Changes
 ---|---
+2026-07-04|Submodule `master` updated to Subsonic Plugin 0.9.15 (see [#678](https://github.com/GioF71/upmpdcli-docker/issues/678))
+2026-07-02|Submodule `edge` updated to Subsonic Plugin 0.9.15 (see [#676](https://github.com/GioF71/upmpdcli-docker/issues/676))
+2026-05-12|Information for retrieving a PKCE credentials file (see [#672](https://github.com/GioF71/upmpdcli-docker/issues/672))
 2026-05-09|Changes for new qobuz authentication method (see [#670](https://github.com/GioF71/upmpdcli-docker/issues/670))
 2026-05-04|Fix a bad substitution (see [#668](https://github.com/GioF71/upmpdcli-docker/issues/668))
 2026-05-04|Submodule `master` updated to Subsonic Plugin 0.9.14
