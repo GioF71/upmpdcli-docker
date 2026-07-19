@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2026-07-16|Submodule `edge` and `master` updated to Tidal Plugin 0.8.131 (see [this issue](https://github.com/GioF71/audio-tools/issues/4))
 2026-07-13|Submodule `master` updated to Tidal Plugin 0.8.13 (see [#680](https://github.com/GioF71/upmpdcli-docker/issues/680))
 2026-07-10|Submodule `edge` updated to Tidal Plugin 0.8.13 (see [#680](https://github.com/GioF71/upmpdcli-docker/issues/680))
 2026-07-04|Submodule `master` updated to Subsonic Plugin 0.9.15 (see [#678](https://github.com/GioF71/upmpdcli-docker/issues/678))
