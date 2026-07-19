@@ -48,8 +48,8 @@ release|mother earth radio|0.0.5
 master|subsonic|0.9.15
 master|tidal|0.8.13
 master|mother earth radio|0.0.5
-edge|subsonic|0.9.15
-edge|tidal|0.8.13
+edge|subsonic|0.9.15.1
+edge|tidal|0.8.13.1
 edge|mother earth radio|0.0.5
 
 ### Support for HiRes Tidal
