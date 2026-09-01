@@ -1,9 +1,16 @@
 #!/bin/bash
 
+# avoid silent failures
+set -e
+
 ## error codes
 # 1 Generic error
 # 2 Invalid RENDERER_MODE value
 # 3 Invalid argument
+
+# show how the image was built
+build_mode=`cat /app/conf/build_mode.txt`
+echo "Image build mode: [${build_mode}]"
 
 # display upmpdcli version.
 upmpdcli -v
@@ -17,6 +24,20 @@ if [[ "${current_user_id}" != "0" ]]; then
     echo "Not running as root, will not be able to create users" 
 fi
 
+DEFAULT_UID=1000
+DEFAULT_GID=1000
+
+if [[ -z "${PUID}" ]]; then
+    PUID=$DEFAULT_UID
+    echo "Setting default value for PUID: ["$PUID"]"
+fi
+if [[ -z "${PGID}" ]]; then
+    PGID=$DEFAULT_GID
+    echo "Setting default value for PGID: ["$PGID"]"
+fi
+
+echo "PUID=[${PUID}] PGID=[${PGID}]"
+
 if [[ -n "${RADIO_PARADISE_DOWNLOAD_PLUGIN}" ]] ||
     [[ -n "${TIDAL_DOWNLOAD_PLUGIN}" ]] ||
     [[ -n "${SUBSONIC_DOWNLOAD_PLUGIN}" ]] ||
@@ -27,7 +48,6 @@ fi
 SOURCE_CONFIG_FILE=/app/conf/upmpdcli.conf
 CONFIG_FILE=/tmp/current-upmpdcli.conf
 
-QOBUZ_CREDENTIALS_FILE=/user/config/qobuz.txt
 HRA_CREDENTIALS_FILE=/user/config/hra.txt
 
 UPMPDCLI_ADDITIONAL_FILE=/user/config/upmpdcli-additional.txt
@@ -55,16 +75,6 @@ if [[ -n $ENABLE_UPRCL ]]; then
         echo "Setting UPRCL_ENABLE to ENABLE_UPRCL ($ENABLE_UPRCL) for you"
         UPRCL_ENABLE=$ENABLE_UPRCL
     fi
-fi
-
-if [[ -f "$QOBUZ_CREDENTIALS_FILE" ]]; then
-    echo "Reading $QOBUZ_CREDENTIALS_FILE"
-    read_file $QOBUZ_CREDENTIALS_FILE
-    QOBUZ_USERNAME=$(get_value "QOBUZ_USERNAME" $PARAMETER_PRIORITY)
-    QOBUZ_PASSWORD=$(get_value "QOBUZ_PASSWORD" $PARAMETER_PRIORITY)
-    QOBUZ_FORMAT_ID=$(get_value "QOBUZ_FORMAT_ID" $PARAMETER_PRIORITY)
-else
-    echo "File $QOBUZ_CREDENTIALS_FILE not found."
 fi
 
 if [[ -f "$HRA_CREDENTIALS_FILE" ]]; then
@@ -278,7 +288,6 @@ set_parameter $CONFIG_FILE PLG_MICRO_HTTP_HOST "$PLG_MICRO_HTTP_HOST" plgmicroht
 set_parameter $CONFIG_FILE PLG_MICRO_HTTP_PORT "$PLG_MICRO_HTTP_PORT" plgmicrohttpport
 set_parameter $CONFIG_FILE PLG_PROXY_METHOD "$PLG_PROXY_METHOD" plgproxymethod
 
-
 echo "CHECK_CONTENT_FORMAT=[${CHECK_CONTENT_FORMAT}]"
 if [[ -n "${CHECK_CONTENT_FORMAT}" ]]; then
     if [[ "${CHECK_CONTENT_FORMAT^^}" == "YES" || "${CHECK_CONTENT_FORMAT^^}" == "Y" ]]; then
@@ -432,7 +441,7 @@ if [[ "${SUBSONIC_ENABLE^^}" == "YES" ]]; then
         echo "subsonicprependnumberinalbumlist = $prepend_number" >> $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_WHITELIST_CODECS}" ]]; then
-        echo "subsonicwhitelistcodecs = ${$SUBSONIC_WHITELIST_CODECS}" >> $CONFIG_FILE
+        echo "subsonicwhitelistcodecs = ${SUBSONIC_WHITELIST_CODECS}" >> $CONFIG_FILE
     fi
     if [[ -n "${SUBSONIC_TRANSCODE_CODEC}" ]]; then
         echo "subsonictranscodecodec = $SUBSONIC_TRANSCODE_CODEC" >> $CONFIG_FILE
@@ -560,11 +569,15 @@ fi
 echo "Qobuz Enable [$QOBUZ_ENABLE]"
 if [[ "${QOBUZ_ENABLE^^}" == "YES" ]]; then
     echo "Processing Qobuz settings";
+    # creating bogus user to activate the qobuz media server
+    echo "# qobuzuser is set to an arbitrary value" >> $CONFIG_FILE
+    echo "# Such value has nothing to do with your username" >> $CONFIG_FILE
+    echo "# It is just needed to activate the qobuz media server" >> $CONFIG_FILE
+    echo "# You will need to authenticate using the qobuz-init-auth.py script" >> $CONFIG_FILE
+    echo "qobuzuser = qobuz" >> $CONFIG_FILE
     if [[ -n "${QOBUZ_TITLE}" ]]; then
         echo "qobuztitle = ${QOBUZ_TITLE}" >> $CONFIG_FILE
     fi
-    echo "qobuzuser = $QOBUZ_USERNAME" >> $CONFIG_FILE
-    echo "qobuzpass = $QOBUZ_PASSWORD" >> $CONFIG_FILE
     if [[ -n "${QOBUZ_FORMAT_ID}" ]]; then
         echo "qobuzformatid = $QOBUZ_FORMAT_ID" >> $CONFIG_FILE
     fi
@@ -641,23 +654,45 @@ if [[ "${UPRCL_ENABLE^^}" == "YES" ]]; then
     fi
 fi
 
+cache_dir_created=0
 cache_directory=/cache
 if [[ ! -w "$cache_directory" ]]; then
     echo "Cache directory [${cache_directory}] is not writable"
     cache_directory="/tmp/cache"
+    echo "Creating cache directory [$cache_directory] ..."
     mkdir -p /tmp/cache
+    cache_dir_created=1
+    echo "Cache directory [$cache_directory] created successfully"
+    if [ $current_user_id -eq 0 ]; then
+        echo "Setting ownership to [$cache_directory] ..."
+        chown -R $PUID:$PGID $cache_directory
+        echo "Setting ownership to [$cache_directory] Done"
+    else
+        echo "Not setting ownership to [$cache_directory] (uid is [$current_user_id])."
+    fi
 else
-    echo "Cache directory [${cache_directory}] is writable"
+    echo "Cache directory [$cache_directory] is writable"
 fi
 echo "cachedir = $cache_directory" >> $CONFIG_FILE
 
+log_dir_created=0
 log_directory=/log
 if [[ ! -w "$log_directory" ]]; then
-    echo "Log directory [${log_directory}] is not writable"
+    echo "Log directory [$log_directory] is not writable"
+    echo "Creating log directory [$log_directory] ..."
     mkdir -p /tmp/log
+    log_dir_created=1
     log_directory="/tmp/log"
+    echo "Log directory [$log_directory] created successfully."
+    if [ $current_user_id -eq 0 ]; then
+        echo "Setting ownership to [$log_directory] ..."
+        chown -R $PUID:$PGID $log_directory
+        echo "Setting ownership to [$log_directory] Done"
+    else
+        echo "Not setting ownership to [$log_directory] (uid is [$current_user_id])."
+    fi
 else
-    echo "Log directory [${log_directory}] is writable"
+    echo "Log directory [$log_directory] is writable"
 fi
 
 # log file support
@@ -687,7 +722,9 @@ if [[ -f $UPMPDCLI_ADDITIONAL_FILE ]]; then
     echo "Done."
 fi
 
+echo "=== <Configuration file> [$CONFIG_FILE] ==="
 cat $CONFIG_FILE
+echo "=== EOF <Configuration file> [$CONFIG_FILE] EOF ==="
 
 if [[ $current_user_id == 0 ]]; then
 
@@ -698,16 +735,6 @@ if [[ $current_user_id == 0 ]]; then
         echo "Created directory [${WEBSERVER_DOCUMENT_ROOT}]."
     fi
 
-    DEFAULT_UID=1000
-    DEFAULT_GID=1000
-
-    if [[ -z "${PUID}" ]]; then
-        PUID=$DEFAULT_UID
-    fi
-    if [[ -z "${PGID}" ]]; then
-        PGID=$DEFAULT_GID
-    fi
-
     DEFAULT_USER_NAME=upmpd-user
     DEFAULT_GROUP_NAME=upmpd-user
     DEFAULT_HOME_DIR=/home/$DEFAULT_USER_NAME
@@ -715,16 +742,6 @@ if [[ $current_user_id == 0 ]]; then
     USER_NAME=$DEFAULT_USER_NAME
     GROUP_NAME=$DEFAULT_GROUP_NAME
     HOME_DIR=$DEFAULT_HOME_DIR
-
-    if [[ -z "${PUID}" ]]; then
-        PUID=$DEFAULT_UID;
-        echo "Setting default value for PUID: ["$PUID"]"
-    fi
-
-    if [[ -z "${PGID}" ]]; then
-        PGID=$DEFAULT_GID;
-        echo "Setting default value for PGID: ["$PGID"]"
-    fi
 
     echo "Ensuring user with uid:[$PUID] gid:[$PGID] exists ...";
 
@@ -795,8 +812,16 @@ if [[ $current_user_id == 0 ]]; then
     fi
     # uprcl and under
     chown -R $USER_NAME:$GROUP_NAME /uprcl/confdir
-    chown -R $USER_NAME:$GROUP_NAME /user/config
     chown -R $USER_NAME:$GROUP_NAME /log
+    if [[ $cache_dir_created -eq 1 ]]; then
+        echo "Changing ownership of /tmp/cache ..."
+        chown -R $USER_NAME:$GROUP_NAME /tmp/cache
+    fi
+    if [[ $log_dir_created -eq 1 ]]; then
+        echo "Changing ownership of /tmp/log ..."
+        chown -R $USER_NAME:$GROUP_NAME /tmp/log
+    fi
+
     echo ". done."
 
     # Correct permissions for WEBSERVER_DOCUMENT_ROOT if set
@@ -807,19 +832,19 @@ if [[ $current_user_id == 0 ]]; then
     fi
 fi
 
-build_mode=`cat /app/conf/build_mode.txt`
-
-echo "About to sleep for $STARTUP_DELAY_SEC second(s)"
-sleep $STARTUP_DELAY_SEC
-echo "Ready to start."
+if [[ -n "${STARTUP_DELAY_SEC}" ]] && [[ ${STARTUP_DELAY_SEC} != "0" ]]; then
+    echo "About to sleep for $STARTUP_DELAY_SEC second(s)"
+    sleep $STARTUP_DELAY_SEC
+    echo "Ready to start."
+fi
 
 CMD_LINE="/usr/bin/upmpdcli -c $CONFIG_FILE"
 echo "CMD_LINE=[${CMD_LINE}]"
 
 if [[ $current_user_id -eq 0 ]]; then
-    echo "USER MODE [$USER_NAME]"
+    echo "Running in USER MODE [$USER_NAME] ($PUID:$PGID) ..."
     exec su - $USER_NAME -c "$CMD_LINE"
 else
     echo "Running as current uid [$current_user_id] ..."
-    eval "exec $CMD_LINE"
+    exec $CMD_LINE
 fi

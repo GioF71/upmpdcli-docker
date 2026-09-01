@@ -265,18 +265,18 @@ services:
       - QOBUZ_ENABLE=yes
     volumes:
       - ./config/uprclconfdir:/uprcl/confdir
-      - ./config/credentials/qobuz.txt:/user/config/qobuz.txt:ro
     labels:
       - com.centurylinklabs.watchtower.enable=false
     restart: unless-stopped
 ```
 
-The `qobuz.txt` file should resemble the following:
+You will need to authenticate with qobuz. Assuming the service in compose file is named `upmpdcli` as in the previous example file, do the following:
 
 ```text
-QOBUZ_USERNAME=qobuz-username
-QOBUZ_PASSWORD=qobuz-password
-QOBUZ_FORMAT_ID=27
+# enter the container
+docker compose exec upmpdcli /bin/bash
+# cd to the qobuz plugin directory
+cd /usr/share/upmpdcli/cdplugins/qobuz
+# initiate the authentication (follow on-screen instructions)
+./qobuz-init-oauth.py
 ```
-
-Alternatively, those values can be passed as individual environment variables.  
