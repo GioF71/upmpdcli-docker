@@ -45,10 +45,10 @@ BUILD_TYPE|PLUGIN|VERSION
 release|subsonic|0.9.9
 release|tidal|0.8.12
 release|mother earth radio|0.0.5
-master|subsonic|0.9.15.1
+master|subsonic|0.9.16
 master|tidal|0.8.13.1
 master|mother earth radio|0.0.5
-edge|subsonic|0.9.15.1
+edge|subsonic|0.9.16
 edge|tidal|0.8.16
 edge|mother earth radio|0.0.5
 
