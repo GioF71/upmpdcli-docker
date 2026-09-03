@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2026-09-03|Submodule `master` updated to Tidal Plugin 0.8.16
 2026-09-03|Include latest commit from upstream (see [#696](https://github.com/GioF71/upmpdcli-docker/issues/696))
 2026-09-03|Fix pyradios installation (see [#694](https://github.com/GioF71/upmpdcli-docker/issues/694))
 2026-09-02|Submodule `edge` and `master` updated to Subsonic Plugin 0.9.16 (see [#692](https://github.com/GioF71/upmpdcli-docker/issues/692))
