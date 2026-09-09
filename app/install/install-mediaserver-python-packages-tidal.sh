@@ -10,4 +10,6 @@ if [[ "${BUILD_MODE}" = "full" ]]; then
     else
         pip install --break-system-packages tidalapi==0.8.11
     fi
+    # install aenum
+    pip install --break-system-packages aenum
 fi

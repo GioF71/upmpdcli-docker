@@ -10,4 +10,6 @@ if [[ "${BUILD_MODE}" = "full" ]]; then
     else
         pip install --break-system-packages subsonic-connector==0.3.12 python-dateutil python-dotenv
     fi
+    # install aenum
+    pip install --break-system-packages aenum
 fi
