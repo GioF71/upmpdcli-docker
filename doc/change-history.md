@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2026-09-28|Submodule `master` updated to Subsonic Plugin 0.9.16.1 (see [#703](https://github.com/GioF71/upmpdcli-docker/issues/703))
 2026-09-27|Submodule `edge` updated to Subsonic Plugin 0.9.16.1 (see [#703](https://github.com/GioF71/upmpdcli-docker/issues/703))
 2026-09-09|Update github action versions in workflows (see [#701](https://github.com/GioF71/upmpdcli-docker/issues/701))
 2026-09-09|Add aenum package for tidal and subsonic plugins (see [#699](https://github.com/GioF71/upmpdcli-docker/issues/699))
