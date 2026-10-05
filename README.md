@@ -1,13 +1,13 @@
 # upmpdcli-docker
 
-A Docker image for [upmpdcli](https://www.lesbonscomptes.com/upmpdcli/).  
-There is built-in support for [Tidal](https://tidal.com/), [Qobuz](https://www.qobuz.com/), [subsonic servers](https://github.com/navidrome/navidrome/discussions/2324), [RadioBrowser](https://www.radio-browser.info/), [Radio Paradise](https://radioparadise.com/), [Mother Earth Radio](https://motherearthradio.de/), and custom radios.  
-A few screenshots for the subsonic plugin on [Kazoo](https://github.com/GioF71/upmpdcli-docker/tree/main/doc/screenshots/kazoo) and [Upplay](https://github.com/GioF71/upmpdcli-docker/tree/main/doc/screenshots/upplay) are now available.  
+A Docker image for [upmpdcli](https://www.lesbonscomptes.com/upmpdcli/).
+There is built-in support for [Tidal](https://tidal.com/), [Qobuz](https://www.qobuz.com/), [subsonic servers](https://github.com/navidrome/navidrome/discussions/2324), [RadioBrowser](https://www.radio-browser.info/), [Radio Paradise](https://radioparadise.com/), [Mother Earth Radio](https://motherearthradio.de/), and custom radios.
+A few screenshots for the subsonic plugin on [Kazoo](https://github.com/GioF71/upmpdcli-docker/tree/main/doc/screenshots/kazoo) and [Upplay](https://github.com/GioF71/upmpdcli-docker/tree/main/doc/screenshots/upplay) are now available.
 
 ## Support
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H7UIN5D)  
-Please see the [Goal](https://ko-fi.com/giof71/goal?g=0).  
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H7UIN5D)
+Please see the [Goal](https://ko-fi.com/giof71/goal?g=0).
 Please note that support goal is limited to cover running costs for subscriptions to music services.
 
 ## Latest Build
@@ -18,26 +18,26 @@ Please note that support goal is limited to cover running costs for subscription
 
 First and foremost, the reference to the awesome project:
 
-[An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).  
-Current version is `1.9.17`.  
+[An UPnP Audio Media Renderer based on MPD](https://www.lesbonscomptes.com/upmpdcli/).
+Current version is `1.9.17`.
 
 ## News (newest first)
 
 ### Support for the updated qobuz authentication method
 
-The former authentication method, based on username and password, doesn't work anymore.  
-So the variables `QOBUZ_USERNAME` and `QOBUZ_PASSWORD` have been removed.  
-By setting `QOBUZ_ENABLE` to `yes`, the initialization script will set the `qobuzuser` configuration key to `qobuz` just to enable the mediaserver.  
-You will need to run the `qobuz-init-auth.py` script from inside the container, as mentioned in the [Qobuz example configuration](./doc/example-configurations.md#qobuz).  
+The former authentication method, based on username and password, doesn't work anymore.
+So the variables `QOBUZ_USERNAME` and `QOBUZ_PASSWORD` have been removed.
+By setting `QOBUZ_ENABLE` to `yes`, the initialization script will set the `qobuzuser` configuration key to `qobuz` just to enable the mediaserver.
+You will need to run the `qobuz-init-auth.py` script from inside the container, as mentioned in the [Qobuz example configuration](./doc/example-configurations.md#qobuz).
 
 ### Download variables deprecated
 
-We can now avoid to download plugin at runtime. Just use updated master/edge images (see below).  
+We can now avoid to download plugin at runtime. Just use updated master/edge images (see below).
 
 ### New 'master' and 'edge' builds
 
-As we are now building from source, it is easy to build images that are up-to-date with the upstream branches.  
-Links for those images: [master](https://hub.docker.com/r/giof71/upmpdcli/tags?name=master), [edge](https://hub.docker.com/r/giof71/upmpdcli/tags?name=edge).  
+As we are now building from source, it is easy to build images that are up-to-date with the upstream branches.
+Links for those images: [master](https://hub.docker.com/r/giof71/upmpdcli/tags?name=master), [edge](https://hub.docker.com/r/giof71/upmpdcli/tags?name=edge).
 See the following table for the versions of the plugins in the various images:
 
 BUILD_TYPE|PLUGIN|VERSION
@@ -48,44 +48,44 @@ release|mother earth radio|0.0.5
 master|subsonic|0.9.16.1
 master|tidal|0.8.16
 master|mother earth radio|0.0.5
-edge|subsonic|0.9.16.2
+edge|subsonic|0.9.17
 edge|tidal|0.8.16
 edge|mother earth radio|0.0.5
 
 ### Support for HiRes Tidal
 
-Good news, Tidal HiRes is now available.  
-You need to consider that there is a limitation: only the mpd/upmpdcli combination and gmrender-resurrect work properly as renderers with the Tidal plugin using HI_RES_LOSSLESS quality mode, AFAIK. Other players will still play, but will fallback to standard (LOSSLESS) quality. We are leveraging [this change](https://framagit.org/medoc92/upmpdcli/-/commit/2c742f13eb81c4fd1bf3270fa24877e04aadbaed) for the implementation of this feature.  
-With the latest `master` and `edge` images though, we should be able to stream Tidal in HiRes at least also to the WiiM Pro and WiiM Pro Plus.  
-If there are users, owning some other commercial streamers, who are willing to try the Tidal Plugin with user-agent whitelisting disabled `TIDAL_ENABLE_USER_AGENT_WHITELIST=no` and see if their devices are compliant, we might be able to find and properly whitelist such streamers.  
-A simple installation guide for a mediaserver upmpdcli instance for Tidal Hires is [here](https://github.com/GioF71/audio-tools/blob/main/media-servers/tidal-hires/README.md).  
+Good news, Tidal HiRes is now available.
+You need to consider that there is a limitation: only the mpd/upmpdcli combination and gmrender-resurrect work properly as renderers with the Tidal plugin using HI_RES_LOSSLESS quality mode, AFAIK. Other players will still play, but will fallback to standard (LOSSLESS) quality. We are leveraging [this change](https://framagit.org/medoc92/upmpdcli/-/commit/2c742f13eb81c4fd1bf3270fa24877e04aadbaed) for the implementation of this feature.
+With the latest `master` and `edge` images though, we should be able to stream Tidal in HiRes at least also to the WiiM Pro and WiiM Pro Plus.
+If there are users, owning some other commercial streamers, who are willing to try the Tidal Plugin with user-agent whitelisting disabled `TIDAL_ENABLE_USER_AGENT_WHITELIST=no` and see if their devices are compliant, we might be able to find and properly whitelist such streamers.
+A simple installation guide for a mediaserver upmpdcli instance for Tidal Hires is [here](https://github.com/GioF71/audio-tools/blob/main/media-servers/tidal-hires/README.md).
 
 ### Subsonic Plugin compatibility
 
-The `latest-subsonic` branch of the subsonic plugin, which is used with the recently updated [suggested configurations](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#subsonic-server), provides good compatibility with [Navidrome](https://github.com/navidrome/navidrome), [Lightweight Music Server](https://github.com/epoupon/lms) and [Gonic](https://github.com/sentriz/gonic).  
-Just a quick reminder, with Lightweight Media Server you will need to enable subsonic legacy authentication using the new variable `SUBSONIC_LEGACYAUTH`.  
+The `latest-subsonic` branch of the subsonic plugin, which is used with the recently updated [suggested configurations](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#subsonic-server), provides good compatibility with [Navidrome](https://github.com/navidrome/navidrome), [Lightweight Music Server](https://github.com/epoupon/lms) and [Gonic](https://github.com/sentriz/gonic).
+Just a quick reminder, with Lightweight Media Server you will need to enable subsonic legacy authentication using the new variable `SUBSONIC_LEGACYAUTH`.
 Thanks to the respective authors for having helped me integrating their servers more easily.
 
 ### Mother Earth Radio
 
-We have a new Mother Earth Radios plugin for upmpdcli. I have contributed it to upmpdcli. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).  
-This plugin has no additional dependencies. See the [configuration example](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#mother-earth-radio) for information on how to create a container which will run this plugin.  
+We have a new Mother Earth Radios plugin for upmpdcli. I have contributed it to upmpdcli. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).
+This plugin has no additional dependencies. See the [configuration example](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#mother-earth-radio) for information on how to create a container which will run this plugin.
 
 ### Radio Paradise
 
-We have a new Radio Paradise plugin for upmpdcli. I have contributed it to upmpdcli. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).  
-This plugin has no additional dependencies. See the [configuration example](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#radio-paradise) for information on how to create a container which will run this plugin.  
+We have a new Radio Paradise plugin for upmpdcli. I have contributed it to upmpdcli. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).
+This plugin has no additional dependencies. See the [configuration example](https://github.com/GioF71/upmpdcli-docker/blob/main/doc/example-configurations.md#radio-paradise) for information on how to create a container which will run this plugin.
 
 ### Tidal support is back
 
-We have a new, updated Tidal plugin for upmpdcli. I have contributed it to upmpdcli. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).  
-See the [news](https://www.lesbonscomptes.com/upmpdcli/#news) section in the upmpdcli main page.  
-The plugin is built around [python-tidal](https://github.com/tamland/python-tidal).  
-Building this plugin would not have been possible without this library, so a big thank you goes to [its author](https://github.com/tamland).  
-Also, once again, a big thank you to the upmpdcli author for the support he has provided to help me build this plugin.  
-Remember, this is not, in any way, supported by Tidal. It might stop working at any moment. Consider alternatives as [BubbleUPnP](https://play.google.com/store/apps/details?id=com.bubblesoft.android.bubbleupnp), [mConnect Lite](https://play.google.com/store/apps/details?id=com.conversdigital) (also available on iOS/iPadOS) or similar software which are, to my knowledge, officially supported by Tidal.  
-Thanks to the advancements in the underlying library, you will be able to generate your own set of credentials from a valid username/password combination.  
-A premium account of Tidal will be strictly required.  
+We have a new, updated Tidal plugin for upmpdcli. I have contributed it to upmpdcli. See the git repository forks [here](https://framagit.org/medoc92/upmpdcli) and [here](https://codeberg.org/GioF71/upmpdcli).
+See the [news](https://www.lesbonscomptes.com/upmpdcli/#news) section in the upmpdcli main page.
+The plugin is built around [python-tidal](https://github.com/tamland/python-tidal).
+Building this plugin would not have been possible without this library, so a big thank you goes to [its author](https://github.com/tamland).
+Also, once again, a big thank you to the upmpdcli author for the support he has provided to help me build this plugin.
+Remember, this is not, in any way, supported by Tidal. It might stop working at any moment. Consider alternatives as [BubbleUPnP](https://play.google.com/store/apps/details?id=com.bubblesoft.android.bubbleupnp), [mConnect Lite](https://play.google.com/store/apps/details?id=com.conversdigital) (also available on iOS/iPadOS) or similar software which are, to my knowledge, officially supported by Tidal.
+Thanks to the advancements in the underlying library, you will be able to generate your own set of credentials from a valid username/password combination.
+A premium account of Tidal will be strictly required.
 
 ### BBC
 
@@ -97,21 +97,21 @@ Since release 2023-07-05, support the upmpdcli [`Upradios radio list`](https://w
 
 ### Subsonic
 
-Since release 2023-04-19, support for the [`Subsonic plugin`](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#UPMPDCLI-MS-SUBSONIC) has been introduced.  
-I am now a contributor to upmpdcli for this plugin. See the [git repository](https://framagit.org/medoc92/upmpdcli) and [this fork](https://codeberg.org/GioF71/upmpdcli).  
-The plugin uses my [subsonic-connector](https://github.com/GioF71/subsonic-connector) library which in turn is built around [py-sonic](https://github.com/crustymonkey/py-sonic).  
-Everything has been developed and tested against [Navidrome](https://www.navidrome.org/) but should work with other servers hopefully.  
-See [this](https://github.com/navidrome/navidrome/discussions/2324) discussion on the Navidrome repo for updates and further information.  
-If you use upmpdcli as a renderer for this plugin, you might probably want to setup a scrobbler, so that the Subsonic server can keep track of what you are playing. See [this](https://github.com/GioF71/mpd-subsonic-scrobbler) repository for more details.  
+Since release 2023-04-19, support for the [`Subsonic plugin`](https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html#UPMPDCLI-MS-SUBSONIC) has been introduced.
+I am now a contributor to upmpdcli for this plugin. See the [git repository](https://framagit.org/medoc92/upmpdcli) and [this fork](https://codeberg.org/GioF71/upmpdcli).
+The plugin uses my [subsonic-connector](https://github.com/GioF71/subsonic-connector) library which in turn is built around [py-sonic](https://github.com/crustymonkey/py-sonic).
+Everything has been developed and tested against [Navidrome](https://www.navidrome.org/) but should work with other servers hopefully.
+See [this](https://github.com/navidrome/navidrome/discussions/2324) discussion on the Navidrome repo for updates and further information.
+If you use upmpdcli as a renderer for this plugin, you might probably want to setup a scrobbler, so that the Subsonic server can keep track of what you are playing. See [this](https://github.com/GioF71/mpd-subsonic-scrobbler) repository for more details.
 
 ### Scrobbling
 
-I have prepared a docker container for [Yams, Yet Another MPD Scrobbler](https://github.com/Berulacks/yams). [Here](https://github.com/GioF71/yams-docker/) is the repository.  
+I have prepared a docker container for [Yams, Yet Another MPD Scrobbler](https://github.com/Berulacks/yams). [Here](https://github.com/GioF71/yams-docker/) is the repository.
 This is the first scrobbler, to my knowledge, to be working correctly with upmpdcli.
 
 ### Support for Radio Browser
 
-Since `2023-02-26`, I have added support for the new Radio-Browser media server plugin.  
+Since `2023-02-26`, I have added support for the new Radio-Browser media server plugin.
 See [here](https://www.lesbonscomptes.com/upmpdcli/upmpdcli-manual.html#UPMPDCLI-MS-RADIO-BROWSER) for more details.
 
 ### Streaming to Kodi enhanced
@@ -143,15 +143,15 @@ This command will output one line if the current user does belong to the "docker
 
 ### MPD
 
-If you want to create a upnp/dlna renderer with upmpdcli, you will also need a running instance of `mpd` (Music Player Daemon) on your network.  
+If you want to create a upnp/dlna renderer with upmpdcli, you will also need a running instance of `mpd` (Music Player Daemon) on your network.
 You might consider using my `mpd-alsa` docker image, at the following links:
 
 Repository|Type|Link
 :---|:---|:---
-mpd-alsa-docker|Source Code|[GitHub](https://github.com/giof71/mpd-alsa-docker)  
+mpd-alsa-docker|Source Code|[GitHub](https://github.com/giof71/mpd-alsa-docker)
 mpd-alsa|Docker Images|[DockerHub](https://hub.docker.com/r/giof71/mpd-alsa)
 
-Of course the creation of a *media server only* instance of upmpdcli does not require a running instance of `mpd`.  
+Of course the creation of a *media server only* instance of upmpdcli does not require a running instance of `mpd`.
 
 ### Supported platforms
 
@@ -169,9 +169,9 @@ Getting the image from [Docker Hub](https://hub.docker.com/r/giof71/upmpdcli) is
 
 ### Image Versions
 
-Since version 2023-07-04, we have images for renderer-only mode.  
-Those images (which have `-renderer` appended to the tag) will not have support for mediaserver functionalities.  
-The `renderer` images are currently about 8x smaller in size.  
+Since version 2023-07-04, we have images for renderer-only mode.
+Those images (which have `-renderer` appended to the tag) will not have support for mediaserver functionalities.
+The `renderer` images are currently about 8x smaller in size.
 Please find a list of the currently built images in the following table.
 
 Base Image|Build Mode|Tags
@@ -197,14 +197,14 @@ You can display the version of the upmpdcli binary using the following command:
 docker run --rm -i --entrypoint /app/bin/get-version.sh giof71/upmpdcli:latest
 ```
 
-This will show the output of `upmpdcli -v`.  
+This will show the output of `upmpdcli -v`.
 You will get an output similar to the following:
 
 ```text
 Upmpdcli 1.8.1 libupnpp 0.23.0
 ```
 
-Replace `get-version.sh` with `get-version-ext.sh` for a more extended output.  
+Replace `get-version.sh` with `get-version-ext.sh` for a more extended output.
 
 ### Environment variables
 
@@ -306,11 +306,11 @@ STARTUP_DELAY_SEC|Delay before starting the application, defaults to `0`. This c
 
 #### About RENDERER_MODE
 
-I used to use `BOTH` for most of my configurations. However since a few weeks ago, I found that if one wants to use BubbleUPnP on a phone/tablet and also uses its cloud libraries, one choice is to use `UPNPAV` as the `RENDERER_MODE` and then create the OpenHome renderer on top on the av device using BubbleUPnP Server. This allows uninterrupted playback even if the mobile devices goes off, because the BubbleUPnP Server (which should be installed somewhere in your network) will act as a proxy between the control point (mobile) and the renderer.  
-See BubbleUPnP Server documentation [here](https://bubblesoftapps.com/bubbleupnpserver2/).  
-Alternatively, if you just need a OpenHome renderer, the best option is to use `OPENHOME`.  
-If you plan to use both OpenHome and non-OpenHome control points (like BubbleUPnP and mConnect) and decide to use `BOTH`, be careful: control points can start to fight each other if you switch from one to the other without stopping playback and/or clearing the playlists first.  
-Recently, for this purpose, I ended up creating two distinct pairs of mpd/upmpdcli, one configured as `OPENHOME` and one configured as `UPNPAV`, so opening mConnect would not destroy an existing playlist built on BubbleUPnp. Obviously in this case the synchronization object is the audio device, it this is shared by the two players.  
+I used to use `BOTH` for most of my configurations. However since a few weeks ago, I found that if one wants to use BubbleUPnP on a phone/tablet and also uses its cloud libraries, one choice is to use `UPNPAV` as the `RENDERER_MODE` and then create the OpenHome renderer on top on the av device using BubbleUPnP Server. This allows uninterrupted playback even if the mobile devices goes off, because the BubbleUPnP Server (which should be installed somewhere in your network) will act as a proxy between the control point (mobile) and the renderer.
+See BubbleUPnP Server documentation [here](https://bubblesoftapps.com/bubbleupnpserver2/).
+Alternatively, if you just need a OpenHome renderer, the best option is to use `OPENHOME`.
+If you plan to use both OpenHome and non-OpenHome control points (like BubbleUPnP and mConnect) and decide to use `BOTH`, be careful: control points can start to fight each other if you switch from one to the other without stopping playback and/or clearing the playlists first.
+Recently, for this purpose, I ended up creating two distinct pairs of mpd/upmpdcli, one configured as `OPENHOME` and one configured as `UPNPAV`, so opening mConnect would not destroy an existing playlist built on BubbleUPnp. Obviously in this case the synchronization object is the audio device, it this is shared by the two players.
 
 ### Volumes
 
@@ -331,7 +331,7 @@ recoll.conf.user|Recoll configuration (used by upcrl)
 hra.txt|HRA Credentials, format is like a .env file. Make sure you include all the settings related the streaming service.
 upmpdcli-additional.txt|Configuration snippet, will be appended to upmpdcli.conf.
 
-For `hra.txt`, the format of the file must be like a `.env` file, where all the settings which are related to the service must be listed. Mixed configurations (so part in variables, part in these files) are not supported.  
+For `hra.txt`, the format of the file must be like a `.env` file, where all the settings which are related to the service must be listed. Mixed configurations (so part in variables, part in these files) are not supported.
 The upmpdcli-additional.txt is a simple list of lines with a `key = value` synthax.
 
 ### Custom icon
@@ -343,13 +343,13 @@ It is possible to customize the server icon by mounting a local png file to the 
       - ./my-icon.png:/usr/share/upmpdcli/icon.png:ro
 ```
 
-A square image should be a good choice. Don't use a very big image, because the players which are able to show it, will show it as a small icon, afaik.  
+A square image should be a good choice. Don't use a very big image, because the players which are able to show it, will show it as a small icon, afaik.
 For example, I searched for a tidal png icon file my Tidal media server, so now BubbleUPnP shows a nice Tidal icon instead of the generic (although beloved) penguin icon.
 
 ### Additional Radio file
 
 You can add your custom radios to upmpdcli.
-Mount the volume `/user/config` and make a file named `additional-radio-list.txt` available.  
+Mount the volume `/user/config` and make a file named `additional-radio-list.txt` available.
 Each entry in the file must follow this schema:
 
 ```text
@@ -361,7 +361,7 @@ metaScript = /path/to/script/metadata-getter
 preferScript = 1
 ```
 
-Only the `url` line is mandatory.  
+Only the `url` line is mandatory.
 Refer to the file [radiolist.conf](https://github.com/GioF71/upmpdcli-docker/blob/main/app/reference/radiolist.conf) from the git repository for further details.
 
 ### Obtain Tidal credentials
@@ -382,20 +382,20 @@ You will be presented with an output similar to the following prompt:
 Visit https://link.tidal.com/XXXXX to log in, the code will expire in 300 seconds
 ```
 
-Open the link in the browser, login to Tidal and authorize the application. Once that is done, you will be greeted with an output which include the contents of a json file, which should be stored in the tidal plugin cache directory with the name `oauth2.credentials.json`.  
+Open the link in the browser, login to Tidal and authorize the application. Once that is done, you will be greeted with an output which include the contents of a json file, which should be stored in the tidal plugin cache directory with the name `oauth2.credentials.json`.
 
 ###### Create json file: a bit more advanced, and PKCE if needed
 
-The previous command will leave most settings of the get_tidal_credentials.py program to defaults, so the resulting file will be written to a `/tmp/oauth2.credentials.json` file.  
-If you mount the `/tmp` directory to some local directory, you can have the file written directly where you want (ideally directly to the `/cache/tidal` directory in the container).  
-Also, you can instruct the command to run in user mode by adding e.g. `--user 1000:1000`  but make sure you replace `1000:1000` with the preferred uid:gid.  
+The previous command will leave most settings of the get_tidal_credentials.py program to defaults, so the resulting file will be written to a `/tmp/oauth2.credentials.json` file.
+If you mount the `/tmp` directory to some local directory, you can have the file written directly where you want (ideally directly to the `/cache/tidal` directory in the container).
+Also, you can instruct the command to run in user mode by adding e.g. `--user 1000:1000`  but make sure you replace `1000:1000` with the preferred uid:gid.
 Example with user mode and using the `./cache/tidal` directory, provided that the directory exists:
 
 ```code
 docker run --user 1000:1000 --rm -it -v $(pwd)/cache/tidal:/tmp --entrypoint /app/bin/get_tidal_credentials.py giof71/upmpdcli
 ```
 
-In any case, be sure to change the ownership of the copied file according to the uid/gid used to run the upmpdcli container.  
+In any case, be sure to change the ownership of the copied file according to the uid/gid used to run the upmpdcli container.
 
 If you need to specify arguments for the get_tidal_credentials.py script, like e.g. `-t pkce` to use PKCE authetication, you can also do the following, assuming a `tmp` directory available at the current path:
 
@@ -408,17 +408,17 @@ docker run -it --user 1000:1000 -v ${PWD}/tmp:/tmp --entrypoint /bin/bash giof71
 # your file is in /tmp/pkce.credentials.json, and of course available from ./tmp/pkce.credentials.json
 ```
 
-Place that credentials file in the `/cache` volume under the `tidal` directory.  
+Place that credentials file in the `/cache` volume under the `tidal` directory.
 
 ##### OAUTH Challenge
 
-With the latest (branch: latest-tidal) version of the plugin, you can entirely skip the the step before, if you are able to monitor the application logs.  
-With docker, this should be as easy as using a `docker-compose logs -f`.  
-Open a control point an try to acccess the Tidal media server. The logs will present a link, and you will have to follow instructions, similarly to what is described in the previous paragraph.  
-After you will have granted authorization to the application, the plugin will store a `oauth2.credentials.json` file in the plugin cache directory. So be sure to use the `/cache` volume, or the credentials won't survive if the container is removed and created again.  
-Never share the tokens on the internet (and also on public git repositories).  
-Remember that currently, the Tidal Plugin actually starts when a control point (e.g. BubbleUPnP, mConnect) contacts upmpdcli asking for contents from the Tidal Plugin.  
-So, you will not see the prompt until you try to use the plugin itself.  
+With the latest (branch: latest-tidal) version of the plugin, you can entirely skip the the step before, if you are able to monitor the application logs.
+With docker, this should be as easy as using a `docker-compose logs -f`.
+Open a control point an try to acccess the Tidal media server. The logs will present a link, and you will have to follow instructions, similarly to what is described in the previous paragraph.
+After you will have granted authorization to the application, the plugin will store a `oauth2.credentials.json` file in the plugin cache directory. So be sure to use the `/cache` volume, or the credentials won't survive if the container is removed and created again.
+Never share the tokens on the internet (and also on public git repositories).
+Remember that currently, the Tidal Plugin actually starts when a control point (e.g. BubbleUPnP, mConnect) contacts upmpdcli asking for contents from the Tidal Plugin.
+So, you will not see the prompt until you try to use the plugin itself.
 
 ## Usage examples
 
@@ -430,7 +430,7 @@ You can build (or rebuild) the image by opening a terminal from the root of the 
 
 `docker build . -t giof71/upmpdcli`
 
-It will take very little time even on a Raspberry Pi. When it's finished, you can run the container following the previous instructions.  
+It will take very little time even on a Raspberry Pi. When it's finished, you can run the container following the previous instructions.
 Just be careful to use the tag you have built.
 
 ## Change History
