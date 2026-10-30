@@ -42,13 +42,13 @@ See the following table for the versions of the plugins in the various images:
 
 BUILD_TYPE|PLUGIN|VERSION
 :---|:---|:---
-release|subsonic|0.9.9
-release|tidal|0.8.12
+release|subsonic|0.9.16
+release|tidal|0.8.16
 release|mother earth radio|0.0.5
 master|subsonic|0.9.17
 master|tidal|0.8.16
 master|mother earth radio|0.0.5
-edge|subsonic|0.9.17
+edge|subsonic|0.9.18
 edge|tidal|0.8.16
 edge|mother earth radio|0.0.5
 
