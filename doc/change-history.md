@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2026-11-01|Submodule `master` updated to Subsonic Plugin 0.9.18
 2026-10-31|Submodule `edge` updated to Subsonic Plugin 0.9.18
 2026-10-06|Submodule `master` updated to Subsonic Plugin 0.9.17
 2026-10-05|Submodule `edge` updated to Subsonic Plugin 0.9.17
