@@ -21,7 +21,7 @@ current_user_id=$(id -u)
 echo "Current user id is [$current_user_id]"
 
 if [[ "${current_user_id}" != "0" ]]; then
-    echo "Not running as root, will not be able to create users" 
+    echo "Not running as root, will not be able to create users"
 fi
 
 DEFAULT_UID=1000
@@ -176,7 +176,7 @@ fi
 echo "UPNPIFACE=["$UPNPIFACE"]"
 if [[ -z "${UPNPIFACE}" ]]; then
     echo "UPNPIFACE not set"
-else 
+else
     echo "Setting UPNPIFACE to ["$UPNPIFACE"]"
     echo "upnpiface = $UPNPIFACE" >> $CONFIG_FILE
 fi
@@ -184,7 +184,7 @@ fi
 echo "UPNPIP=["$UPNPIP"]"
 if [[ -z "${UPNPIP}" ]]; then
     echo "UPNPIP not set"
-else 
+else
     echo "Setting UPNPIP to ["$UPNPIP"]"
     echo "upnpip = $UPNPIP" >> $CONFIG_FILE
 fi
@@ -217,8 +217,8 @@ if [[ -n "${FRIENDLY_NAME}" ]]; then
         UPMPD_FRIENDLY_NAME="${FRIENDLY_NAME}"
     fi
     echo "UPMPD_FRIENDLY_NAME=[${UPMPD_FRIENDLY_NAME}]"
-    if [[ -z "${UPNPAV_SKIP_NAME_POSTFIX}" || "${UPNPAV_SKIP_NAME_POSTFIX^^}" == "YES" ]] && 
-          [ "${OPENHOME}" -eq 0 ] && 
+    if [[ -z "${UPNPAV_SKIP_NAME_POSTFIX}" || "${UPNPAV_SKIP_NAME_POSTFIX^^}" == "YES" ]] &&
+          [ "${OPENHOME}" -eq 0 ] &&
           [ "${UPNPAV}" -eq 1 ]; then
         AV_FRIENDLY_NAME="${FRIENDLY_NAME}"
     else
@@ -309,7 +309,7 @@ if [[ -n "${WEBSERVER_DOCUMENT_ROOT}" ]]; then
 fi
 
 MEDIA_SERVER_ENABLED=0
-if [[ "${UPRCL_ENABLE^^}" == "YES" || 
+if [[ "${UPRCL_ENABLE^^}" == "YES" ||
       "${RADIO_BROWSER_ENABLE^^}" == "YES" ||
       "${RADIOS_ENABLE^^}" == "YES" ||
       "${BBC_ENABLE^^}" == "YES" ||
@@ -503,7 +503,7 @@ if [[ "${TIDAL_ENABLE^^}" == "YES" ]]; then
         echo "tidalautostart = $TIDAL_AUTOSTART" >> $CONFIG_FILE
     fi
     if [[ -z "$TIDAL_AUDIO_QUALITY" ]]; then
-        TIDAL_AUDIO_QUALITY="LOSSLESS"   
+        TIDAL_AUDIO_QUALITY="LOSSLESS"
     fi
     echo "Setting Audio Quality [$TIDAL_AUDIO_QUALITY]"
     echo "tidalaudioquality = $TIDAL_AUDIO_QUALITY" >> $CONFIG_FILE
@@ -615,7 +615,7 @@ if [[ "${HRA_ENABLE^^}" == "YES" ]]; then
     echo "Processing HRA settings";
     echo "hrauser = $HRA_USERNAME" >> $CONFIG_FILE
     echo "hrapass = $HRA_PASSWORD" >> $CONFIG_FILE
-    if [[ -n "${HRA_LANG}" ]]; then 
+    if [[ -n "${HRA_LANG}" ]]; then
         echo "hralang = $HRA_LANG" >> $CONFIG_FILE
     fi
 fi
@@ -663,7 +663,7 @@ if [[ ! -w "$cache_directory" ]]; then
     mkdir -p /tmp/cache
     cache_dir_created=1
     echo "Cache directory [$cache_directory] created successfully"
-    if [ $current_user_id -eq 0 ]; then
+    if [[ $current_user_id -eq 0 ]] && [[ $PUID -ne 0 ]]; then
         echo "Setting ownership to [$cache_directory] ..."
         chown -R $PUID:$PGID $cache_directory
         echo "Setting ownership to [$cache_directory] Done"
@@ -684,7 +684,7 @@ if [[ ! -w "$log_directory" ]]; then
     log_dir_created=1
     log_directory="/tmp/log"
     echo "Log directory [$log_directory] created successfully."
-    if [ $current_user_id -eq 0 ]; then
+    if [[ $current_user_id -eq 0 ]] && [[ $PUID -ne 0 ]]; then
         echo "Setting ownership to [$log_directory] ..."
         chown -R $PUID:$PGID $log_directory
         echo "Setting ownership to [$log_directory] Done"
@@ -841,7 +841,7 @@ fi
 CMD_LINE="/usr/bin/upmpdcli -c $CONFIG_FILE"
 echo "CMD_LINE=[${CMD_LINE}]"
 
-if [[ $current_user_id -eq 0 ]]; then
+if [[ $current_user_id -eq 0 ]] && [[ $PUID -ne 0 ]]; then
     echo "Running in USER MODE [$USER_NAME] ($PUID:$PGID) ..."
     exec su - $USER_NAME -c "$CMD_LINE"
 else
