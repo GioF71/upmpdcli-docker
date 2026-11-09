@@ -726,7 +726,7 @@ echo "=== <Configuration file> [$CONFIG_FILE] ==="
 cat $CONFIG_FILE
 echo "=== EOF <Configuration file> [$CONFIG_FILE] EOF ==="
 
-if [[ $current_user_id == 0 ]]; then
+if [[ $current_user_id -eq 0 ]] && [[ $PUID -ne 0 ]]; then
 
     # create directory as we are root
     if [[ -n "${WEBSERVER_DOCUMENT_ROOT}" ]]; then
