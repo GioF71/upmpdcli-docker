@@ -2,6 +2,7 @@
 
 Change Date|Major Changes
 ---|---
+2026-11-27|Submodule `edge` updated to Subsonic Plugin 0.10.0.rc1
 2026-11-10|Submodule `edge` and `master` updated with current upstream `master`
 2026-11-08|Avoid to create user and execute chown if uid is 0 but PUID is set to 0
 2026-11-01|Submodule `master` updated to Subsonic Plugin 0.9.18
